@@ -72,9 +72,17 @@ foreach ($currencies as $currency) {
                 secure($id, 'int')
             )
         );
+
+        $db->query(
+            sprintf(
+                "INSERT INTO exchange_rate_history (currency_id, exchange_rate) VALUES (%s, %s)",
+                secure($id),
+                secure($conversion_rates[$code], 'float')
+            )
+        );
     }
 }
 
 json_response("success", [
-    'message' => 'Successfully updated the conversion rates of the currencies',
+    'message' => 'Successfully updated the exchange rates of the currencies',
 ], 200);

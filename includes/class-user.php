@@ -465,7 +465,22 @@ class User
     return $get_currency->fetch_assoc();
   }
 
+  /* ------------------------------- */
+  /* System Exchange Rate History ✅ */
+  /* ------------------------------- */
 
+  public function get_exchange_rate_history()
+  {
+    global $db, $system;
+    $currencies = [];
+    $get_currencies = $db->query("SELECT crh.*, currency.code as currency_code FROM exchange_rate_history crh JOIN system_currencies currency ON crh.currency_id = currency.currency_id ORDER BY crh.retrieved_at ASC");
+    if ($get_currencies->num_rows > 0) {
+      while ($currency = $get_currencies->fetch_assoc()) {
+        $currencies[] = $currency;
+      }
+    }
+    return $currencies;
+  }
 
   /* ------------------------------- */
   /* System Genders ✅ */

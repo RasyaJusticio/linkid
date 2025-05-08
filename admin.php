@@ -395,9 +395,11 @@ try {
 
           // get data
           $rows = $user->get_currencies(true);
+          $history_rows = $user->get_exchange_rate_history();
 
           // assign variables
           $smarty->assign('rows', $rows);
+          $smarty->assign('history_rows', $history_rows);
           break;
 
         case 'edit':

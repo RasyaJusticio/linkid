@@ -35,6 +35,11 @@ define('URL_CHECK', 'true');
 // ** i18n settings ** //
 define('DEFAULT_LOCALE', 'en_us');
 
+// ** Exchange Rate API Key ** //
+define("EXCHANGE_RATE_API_KEY", '');
+
+// ** CRON Password //
+define("CRON_KEY", '');
 
 /**
  * For developers: Debugging mode.

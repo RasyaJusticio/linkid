@@ -4113,7 +4113,7 @@ function get_payment_fees_value($amount, $printed = false)
   if ($system['payment_fees_enabled']) {
     $fees = ($amount * $system['payment_fees_percentage']) / 100;
   }
-  return ($printed) ? html_entity_decode(print_money($fees), ENT_QUOTES) : $fees;
+  return ($printed) ? html_entity_decode(print_money(format_number($fees)), ENT_QUOTES) : $fees;
 }
 
 
@@ -4127,7 +4127,7 @@ function get_payment_total_value($amount, $printed = false)
 {
   $total = $amount + get_payment_vat_value($amount) + get_payment_fees_value($amount);
   $total = "" . round($total, 2);
-  return ($printed) ? html_entity_decode(print_money($total), ENT_QUOTES) : $total;
+  return ($printed) ? html_entity_decode(print_money(format_number($total)), ENT_QUOTES) : $total;
 }
 
 

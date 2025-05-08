@@ -52,7 +52,7 @@ try {
       }
 
       // return
-      modal("#payment", "{'handle': 'wallet', 'price': '" . $_POST['amount'] . "', 'vat': '" . get_payment_vat_value($_POST['amount']) . "', 'fees': '" . get_payment_fees_value($_POST['amount']) . "', 'total': '" . get_payment_total_value($_POST['amount']) . "', 'total_printed': '" . get_payment_total_value($_POST['amount'], true) . "'}");
+      modal("#payment", "{'handle': 'wallet', 'price': '" . print_money(format_number($_POST['amount'])) . "', 'vat': '" . get_payment_vat_value($_POST['amount']) . "', 'fees': '" . get_payment_fees_value($_POST['amount'], true) . "', 'total': '" . get_payment_total_value($_POST['amount']) . "', 'total_printed': '" . get_payment_total_value($_POST['amount'], true) . "'}");
       break;
 
     case 'wallet_withdraw_affiliates':

@@ -29,6 +29,7 @@
               <th>{__("Name")}</th>
               <th>{__("Code")}</th>
               <th>{__("Symbol")}</th>
+              <th>{__("Exchange Rate")}</th>
               <th>{__("Dir")}</th>
               <th>{__("Default")}</th>
               <th>{__("Enabled")}</th>
@@ -42,6 +43,7 @@
                 <td>{$row['name']}</td>
                 <td>{$row['code']}</td>
                 <td>{$row['symbol']}</td>
+                <td>{$row['exchange_rate']|format_number:3}</td>
                 <td>{$row['dir']}</td>
                 <td>
                   {if $row['default']}
@@ -128,6 +130,18 @@
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
+            {__("Currency Exchange Rate")}
+          </label>
+          <div class="col-md-9">
+            <input class="form-control" name="exchange_rate" value="{$data['exchange_rate']}">
+            <div class="form-text">
+              {__("Exchange rate of the currency from USD")}
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
             {__("Currency Symbol Direction")}
           </label>
           <div class="col-md-9">
@@ -204,6 +218,18 @@
             <input class="form-control" name="symbol">
             <div class="form-text">
               {__("Currency symbol, For Example: $, € or £")}
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            {__("Currency Exchange Rate")}
+          </label>
+          <div class="col-md-9">
+            <input class="form-control" name="exchange_rate">
+            <div class="form-text">
+              {__("Exchange rate of the currency from USD")}
             </div>
           </div>
         </div>

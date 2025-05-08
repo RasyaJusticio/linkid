@@ -1452,7 +1452,7 @@
             {if $system['wallet_max_transfer'] != "0"}
               <div class="alert alert-info mb20">
                 <i class="fas fa-info-circle mr5"></i>
-                {__("The maximum amount you can transfer is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer'])}</span>
+                {__("The maximum amount you can transfer is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer']|format_number)}</span>
               </div>
             {/if}
             <div class="form-group">

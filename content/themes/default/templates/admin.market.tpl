@@ -384,7 +384,7 @@
                     {/if}
                   </td>
                   <td>
-                    {print_money(number_format($row['sub_total'], 2))}
+                    {print_money(format_number($row['sub_total']))}
                   </td>
                   <td><span class="js_moment" data-time="{$row['insert_time']}">{$row['insert_time']}</span></td>
                   <td>
@@ -607,7 +607,7 @@
                     {if $system['show_usernames_enabled']}{$row['user_name']}{else}{$row['user_firstname']} {$row['user_lastname']}{/if}
                   </a>
                 </td>
-                <td>{print_money($row['amount']|number_format:2)}</td>
+                <td>{print_money($row['amount']|format_number)}</td>
                 <td>
                   <span class="badge rounded-pill badge-lg bg-{$row['method_color']}">
                     {$row['method']|ucfirst}

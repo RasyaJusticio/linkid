@@ -49,7 +49,7 @@
           <div class="stat-panel bg-gradient-primary">
             <div class="stat-cell narrow">
               <i class="fa fa-donate bg-icon"></i>
-              <span class="text-xxlg">{print_money($total_payin|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($total_payin|format_number)}</span><br>
               <span class="text-lg">{__("Total PayIn")}</span><br>
             </div>
           </div>
@@ -58,7 +58,7 @@
           <div class="stat-panel bg-gradient-info">
             <div class="stat-cell narrow">
               <i class="fa fa-donate bg-icon"></i>
-              <span class="text-xxlg">{print_money($month_payin|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($month_payin|format_number)}</span><br>
               <span class="text-lg">{__("This Month PayIn")}</span><br>
             </div>
           </div>
@@ -70,7 +70,7 @@
           <div class="stat-panel bg-gradient-red">
             <div class="stat-cell narrow">
               <i class="fa fa-hourglass-half bg-icon"></i>
-              <span class="text-xxlg">{print_money($total_pending_payout|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($total_pending_payout|format_number)}</span><br>
               <span class="text-lg">{__("Total Pending PayOut")}</span><br>
             </div>
           </div>
@@ -79,7 +79,7 @@
           <div class="stat-panel bg-gradient-warning">
             <div class="stat-cell narrow">
               <i class="fa fa-hourglass-half bg-icon"></i>
-              <span class="text-xxlg">{print_money($month_pending_payout|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($month_pending_payout|format_number)}</span><br>
               <span class="text-lg">{__("This Month Pending PayOut")}</span><br>
             </div>
           </div>
@@ -91,7 +91,7 @@
           <div class="stat-panel bg-gradient-cyan">
             <div class="stat-cell narrow">
               <i class="fa fa-money-bill-trend-up bg-icon"></i>
-              <span class="text-xxlg">{print_money($total_approved_payout|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($total_approved_payout|format_number)}</span><br>
               <span class="text-lg">{__("Total Approved PayOut")}</span><br>
             </div>
           </div>
@@ -100,7 +100,7 @@
           <div class="stat-panel bg-gradient-success">
             <div class="stat-cell narrow">
               <i class="fa fa-money-bill-trend-up bg-icon"></i>
-              <span class="text-xxlg">{print_money($month_approved_payout|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($month_approved_payout|format_number)}</span><br>
               <span class="text-lg">{__("This Month Approved PayOut")}</span><br>
             </div>
           </div>
@@ -131,7 +131,7 @@
                     </a>
                   </td>
                   <td>
-                    {print_money(number_format($row['amount']))}
+                    {print_money(format_number($row['amount']))}
                   </td>
                   <td>
                     <span class="badge rounded-pill badge-lg bg-primary">{$row['method']|capitalize}</span>
@@ -167,7 +167,7 @@
           <div class="stat-panel bg-gradient-primary">
             <div class="stat-cell narrow">
               <i class="fa fa-dollar-sign bg-icon"></i>
-              <span class="text-xxlg">{print_money($total_commissions|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($total_commissions|format_number)}</span><br>
               <span class="text-lg">{__("Total Commissions")}</span><br>
             </div>
           </div>
@@ -176,7 +176,7 @@
           <div class="stat-panel bg-gradient-info">
             <div class="stat-cell narrow">
               <i class="fa fa-dollar-sign bg-icon"></i>
-              <span class="text-xxlg">{print_money($month_commissions|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($month_commissions|format_number)}</span><br>
               <span class="text-lg">{__("This Month Commissions")}</span><br>
             </div>
           </div>
@@ -206,7 +206,7 @@
                     </a>
                   </td>
                   <td>
-                    {print_money(number_format($row['amount']))}
+                    {print_money(format_number($row['amount']))}
                   </td>
                   <td>
                     <span class="badge rounded-pill badge-lg bg-info">{$row['handle']|capitalize}</span>
@@ -239,7 +239,7 @@
           <div class="stat-panel bg-gradient-primary">
             <div class="stat-cell narrow">
               <i class="fa fa-dollar-sign bg-icon"></i>
-              <span class="text-xxlg">{print_money($total_earnings|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($total_earnings|format_number)}</span><br>
               <span class="text-lg">{__("Total Earnings")}</span><br>
             </div>
           </div>
@@ -248,7 +248,7 @@
           <div class="stat-panel bg-gradient-info">
             <div class="stat-cell narrow">
               <i class="fa fa-dollar-sign bg-icon"></i>
-              <span class="text-xxlg">{print_money($month_earnings|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($month_earnings|format_number)}</span><br>
               <span class="text-lg">{__("This Month Earnings")}</span><br>
             </div>
           </div>
@@ -269,7 +269,7 @@
               <tr>
                 <td>{$key}</td>
                 <td>{$value['sales']}</td>
-                <td>{print_money($value['earnings']|number_format:2)}</td>
+                <td>{print_money($value['earnings']|format_number)}</td>
               </tr>
             {/foreach}
           </tbody>
@@ -285,7 +285,7 @@
           <div class="stat-panel bg-gradient-primary">
             <div class="stat-cell narrow">
               <i class="fa fa-dollar-sign bg-icon"></i>
-              <span class="text-xxlg">{print_money($total_earnings|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($total_earnings|format_number)}</span><br>
               <span class="text-lg">{__("Total Earnings")}</span><br>
             </div>
           </div>
@@ -294,7 +294,7 @@
           <div class="stat-panel bg-gradient-info">
             <div class="stat-cell narrow">
               <i class="fa fa-dollar-sign bg-icon"></i>
-              <span class="text-xxlg">{print_money($month_earnings|number_format:2)}</span><br>
+              <span class="text-xxlg">{print_money($month_earnings|format_number)}</span><br>
               <span class="text-lg">{__("This Month Earnings")}</span><br>
             </div>
           </div>
@@ -329,7 +329,7 @@
                       {$row['title']}
                     </a>
                   </td>
-                  <td>{print_money(number_format($row['price']))}</td>
+                  <td>{print_money(format_number($row['price']))}</td>
                   <td>{$row['payment_time']}</td>
                 </tr>
               {/foreach}

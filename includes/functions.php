@@ -636,6 +636,7 @@ function init_smarty()
   $smarty->registerPlugin("modifier", "ucfirst", "ucfirst");
   $smarty->registerPlugin('modifier', '__', '__');
   $smarty->registerPlugin('modifier', 'print_money', 'print_money');
+  $smarty->registerPlugin('modifier', 'format_number', 'format_number');
   $smarty->registerPlugin('modifier', 'is_empty', 'is_empty');
   $smarty->registerPlugin('modifier', 'array_reverse', 'array_reverse');
   $smarty->registerPlugin('modifier', 'htmlentities', 'htmlentities');
@@ -649,7 +650,6 @@ function init_smarty()
   $smarty->registerPlugin('modifier', 'count', 'count');
   $smarty->registerPlugin('modifier', 'explode', 'explode');
   $smarty->registerPlugin('modifier', 'date', 'date');
-  $smarty->registerPlugin('modifier', 'number_format', 'number_format');
   $smarty->registerPlugin('modifier', 'strtolower', 'strtolower');
   $smarty->registerPlugin('modifier', 'get_payment_vat_value', 'get_payment_vat_value');
   $smarty->registerPlugin('modifier', 'get_payment_total_value', 'get_payment_total_value');
@@ -7832,3 +7832,18 @@ function abbreviate_count($count)
     return round($count / 1000000) . __('M');
   }
 }
+
+/**
+* format_number
+*
+* @param float $number
+* @param int $decimals = 0
+* @param string $decimal_separator = '.'
+* @param string $thousands_separator = ','
+* @return string
+*/
+function format_number(float $number, int $decimals = 0, string $decimal_separator = ",", string $thousands_separator = ".")
+{
+    return number_format($number, $decimals, ",", ".");
+}
+

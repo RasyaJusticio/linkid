@@ -1361,7 +1361,7 @@
             <div class="form-group">
                 <label class="form-label" for="amount">{__("Your Wallet Credit")}</label>
                 <div>
-                  <span class="badge badge-lg bg-info">{print_money($user->_data['user_wallet_balance']|number_format:2)}</span>
+                  <span class="badge badge-lg bg-info">{print_money($user->_data['user_wallet_balance']|format_number)}</span>
                 </div>
               </div>
               <div class="form-group">
@@ -1472,7 +1472,7 @@
             <div class="form-group">
               <label class="form-label" for="amount">{__("Your Affiliates Credit")}</label>
               <div>
-                <span class="badge badge-lg bg-info">{print_money($user->_data['user_affiliate_balance']|number_format:2)}</span>
+                <span class="badge badge-lg bg-info">{print_money($user->_data['user_affiliate_balance']|format_number)}</span>
               </div>
             </div>
             <div class="form-group">
@@ -1506,7 +1506,7 @@
               <label class="form-label" for="amount">{__("Your Points Credit")}</label>
               <div>
                 <span class="badge badge-lg bg-info">
-                  {if $system['points_per_currency'] == 0}0{else}{print_money((((1/$system['points_per_currency'])*$user->_data['user_points'])|number_format:2))}{/if}
+                  {if $system['points_per_currency'] == 0}0{else}{print_money((((1/$system['points_per_currency'])*$user->_data['user_points'])|format_number))}{/if}
                 </span>
               </div>
             </div>
@@ -1540,7 +1540,7 @@
             <div class="form-group">
               <label class="form-label" for="amount">{__("Your Funding Credit")}</label>
               <div>
-                <span class="badge badge-lg bg-info">{print_money($user->_data['user_market_balance']|number_format:2)}</span>
+                <span class="badge badge-lg bg-info">{print_money($user->_data['user_market_balance']|format_number)}</span>
               </div>
             </div>
             <div class="form-group">
@@ -1573,7 +1573,7 @@
             <div class="form-group">
               <label class="form-label" for="amount">{__("Your Funding Credit")}</label>
               <div>
-                <span class="badge badge-lg bg-info">{print_money($user->_data['user_funding_balance']|number_format:2)}</span>
+                <span class="badge badge-lg bg-info">{print_money($user->_data['user_funding_balance']|format_number)}</span>
               </div>
             </div>
             <div class="form-group">
@@ -1606,7 +1606,7 @@
             <div class="form-group">
               <label class="form-label" for="amount">{__("Your Monetization Credit")}</label>
               <div>
-                <span class="badge badge-lg bg-info">{print_money($user->_data['user_monetization_balance']|number_format:2)}</span>
+                <span class="badge badge-lg bg-info">{print_money($user->_data['user_monetization_balance']|format_number)}</span>
               </div>
             </div>
             <div class="form-group">

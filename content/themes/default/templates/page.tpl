@@ -286,7 +286,7 @@
         {if $system['pages_reviews_enabled']}
           <a href="{$system['system_url']}/pages/{$spage['page_name']}/reviews" {if $view == "reviews"}class="active" {/if}>
             {include file='__svg_icons.tpl' icon="star" class="main-icon mr5" width="24px" height="24px"}
-            <span class="ml5 d-none d-xl-inline-block">{__("Reviews")} {if $spage['page_rate']}<span class="badge bg-light text-primary">{$spage['page_rate']|number_format:1}</span>{/if}</span>
+            <span class="ml5 d-none d-xl-inline-block">{__("Reviews")} {if $spage['page_rate']}<span class="badge bg-light text-primary">{$spage['page_rate']|format_number}</span>{/if}</span>
           </a>
         {/if}
         {if $system['events_enabled'] && $system['pages_events_enabled']}
@@ -319,7 +319,7 @@
             {if $user->_logged_in && !$spage['i_admin'] && $spage['has_subscriptions_plans']}
               <div class="d-grid">
                 <button class="btn btn-primary rounded rounded-pill mb20" data-toggle="modal" data-url="monetization/controller.php?do=get_plans&node_id={$spage['page_id']}&node_type=page" data-size="large">
-                  <i class="fa fa-money-check-alt mr5"></i>{__("SUBSCRIBE")} {__("STARTING FROM")} ({print_money($spage['page_monetization_min_price']|number_format:2)})
+                  <i class="fa fa-money-check-alt mr5"></i>{__("SUBSCRIBE")} {__("STARTING FROM")} ({print_money($spage['page_monetization_min_price']|format_number)})
                 </button>
               </div>
             {/if}
@@ -405,7 +405,7 @@
                             <i class="fa fa-star {if $spage['page_rate'] >= 4}checked{/if}"></i>
                             <i class="fa fa-star {if $spage['page_rate'] >= 5}checked{/if}"></i>
                           </span>
-                          <span class="badge bg-light text-primary">{$spage['page_rate']|number_format:1}</span>
+                          <span class="badge bg-light text-primary">{$spage['page_rate']|format_number}</span>
                         {/if}
                       </div>
                     </li>
@@ -988,7 +988,7 @@
                       <i class="fa fa-star {if $spage['page_rate'] >= 4}checked{/if}"></i>
                       <i class="fa fa-star {if $spage['page_rate'] >= 5}checked{/if}"></i>
                     </span>
-                    <span class="badge bg-light text-primary">{$spage['page_rate']|number_format:1}</span>
+                    <span class="badge bg-light text-primary">{$spage['page_rate']|format_number}</span>
                   {/if}
                 </div>
                 <!-- panel title -->
@@ -1722,7 +1722,7 @@
                           <div class="stat-cell">
                             <i class="fa fa-donate bg-icon"></i>
                             <div class="h3 mtb10">
-                              {print_money($user->_data['user_monetization_balance']|number_format:2)}
+                              {print_money($user->_data['user_monetization_balance']|format_number)}
                             </div>
                           </div>
                         </div>

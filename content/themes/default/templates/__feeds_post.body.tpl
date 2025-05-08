@@ -578,7 +578,7 @@
             <i class="fa fa-star {if $_post['post_rate'] >= 4}checked{/if}"></i>
             <i class="fa fa-star {if $_post['post_rate'] >= 5}checked{/if}"></i>
           </span>
-          <span class="badge bg-light text-primary">{$_post['post_rate']|number_format:1}</span>
+          <span class="badge bg-light text-primary">{$_post['post_rate']|format_number}</span>
         {/if}
       {/if}
     </div>
@@ -802,7 +802,7 @@
                 <i class="fa fa-star {if $post['post_rate'] >= 4}checked{/if}"></i>
                 <i class="fa fa-star {if $post['post_rate'] >= 5}checked{/if}"></i>
               </span>
-              <span class="badge bg-light text-primary">{$post['post_rate']|number_format:1}</span>
+              <span class="badge bg-light text-primary">{$post['post_rate']|format_number}</span>
             {/if}
           </div>
         {/if}
@@ -1265,7 +1265,7 @@
           <div class="mt10">
             {if $_post['needs_payment']}
               <button class="btn btn-info btn-sm {if !$user->_logged_in}js_login{/if}" {if $user->_logged_in}data-toggle="modal" data-url="#payment" data-options='{ "handle": "paid_post", "paid_post": "true", "id": {$_post['post_id']}, "price": {$_post['post_price']}, "vat": "{get_payment_vat_value($_post['post_price'])}", "fees": "{get_payment_fees_value($_post['post_price'])}", "total": "{get_payment_total_value($_post['post_price'])}", "total_printed": "{get_payment_total_value($_post['post_price'], true)}" }' {/if}>
-                <i class="fa fa-money-check-alt mr5"></i>{__("PAY TO DOWNLOAD")} ({print_money($_post['post_price']|number_format:2)})
+                <i class="fa fa-money-check-alt mr5"></i>{__("PAY TO DOWNLOAD")} ({print_money($_post['post_price']|format_number)})
               </button>
             {else}
               <a class="btn btn-primary btn-sm" href="{if $system['mask_file_path_enabled']}{$system['system_url']}/downloads.php?id={$_post['post_id']}{else}{$system['system_uploads']}/{$_post['file']['source']}{/if}">{__("Download")}</a>

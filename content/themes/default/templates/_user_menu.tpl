@@ -24,13 +24,13 @@
     {if $system['points_enabled']}
       <a class="dropdown-item" href="{$system['system_url']}/settings/points">
         {include file='__svg_icons.tpl' icon="points" class="main-icon mr10" width="20px" height="20px"}
-        {__("Points")}: <span class="badge bg-light text-primary">{$user->_data['user_points']}</span>
+        {__("Points")}: <span class="badge bg-light text-primary">{$user->_data['user_points']|format_number:3}</span>
       </a>
     {/if}
     {if $system['wallet_enabled']}
       <a class="dropdown-item" href="{$system['system_url']}/wallet">
         {include file='__svg_icons.tpl' icon="wallet" class="main-icon mr10" width="20px" height="20px"}
-        {__("Wallet")}: <span class="badge bg-light text-primary">{print_money($user->_data['user_wallet_balance']|number_format:2)}</span>
+        {__("Wallet")}: <span class="badge bg-light text-primary">{print_money($user->_data['user_wallet_balance']|format_number)}</span>
       </a>
     {/if}
     <div class="dropdown-divider"></div>

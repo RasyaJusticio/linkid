@@ -242,7 +242,7 @@
           {if $system['events_reviews_enabled']}
             <a href="{$system['system_url']}/events/{$event['event_id']}/reviews" {if $view == "reviews"}class="active" {/if}>
               {include file='__svg_icons.tpl' icon="star" class="main-icon mr5" width="24px" height="24px"}
-              <span class="ml5 d-none d-xl-inline-block">{__("Reviews")} {if $event['event_rate']}<span class="badge bg-light text-primary">{$event['event_rate']|number_format:1}</span>{/if}</span>
+              <span class="ml5 d-none d-xl-inline-block">{__("Reviews")} {if $event['event_rate']}<span class="badge bg-light text-primary">{$event['event_rate']|format_number}</span>{/if}</span>
             </a>
           {/if}
           <a href="{$system['system_url']}/events/{$event['event_id']}/going" {if $view == "going" || $view == "interested" || $view == "invited" || $view == "invites"}class="active" {/if}>
@@ -355,7 +355,7 @@
                             <i class="fa fa-star {if $event['event_rate'] >= 4}checked{/if}"></i>
                             <i class="fa fa-star {if $event['event_rate'] >= 5}checked{/if}"></i>
                           </span>
-                          <span class="badge bg-light text-primary">{$event['event_rate']|number_format:1}</span>
+                          <span class="badge bg-light text-primary">{$event['event_rate']|format_number}</span>
                         {/if}
                       </div>
                     </li>
@@ -876,7 +876,7 @@
                       <i class="fa fa-star {if $event['event_rate'] >= 4}checked{/if}"></i>
                       <i class="fa fa-star {if $event['event_rate'] >= 5}checked{/if}"></i>
                     </span>
-                    <span class="badge bg-light text-primary">{$event['event_rate']|number_format:1}</span>
+                    <span class="badge bg-light text-primary">{$event['event_rate']|format_number}</span>
                   {/if}
                 </div>
                 <!-- panel title -->

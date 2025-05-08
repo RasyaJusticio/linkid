@@ -44,7 +44,6 @@ if (DEBUGGING) {
   error_reporting(0);
 }
 
-
 // configure localization
 $gettextLoader = new Gettext\Loader\PoLoader();
 $gettextTranslator = Gettext\Translations::create('default');

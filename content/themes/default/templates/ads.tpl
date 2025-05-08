@@ -81,8 +81,8 @@
                         <td>
                           {$campaign['campaign_start_date']|date_format:"%e/%m/%Y"} - {$campaign['campaign_end_date']|date_format:"%e/%m/%Y"}
                         </td>
-                        <td>{print_money($campaign['campaign_budget']|number_format:2)}</td>
-                        <td>{print_money($campaign['campaign_spend']|number_format:2)}</td>
+                        <td>{print_money($campaign['campaign_budget']|format_number)}</td>
+                        <td>{print_money($campaign['campaign_spend']|format_number)}</td>
                         <td>
                           <span class="badge bg-secondary">
                             {if $campaign['campaign_bidding'] == "click"}
@@ -164,7 +164,7 @@
             <div class="card-body">
               {if $user->_data['user_wallet_balance'] == 0}
                 <div class="bs-callout bs-callout-danger mt0">
-                  {__("Your current wallet credit is")}: <strong>{print_money($user->_data['user_wallet_balance']|number_format:2)}</strong> {__("You need to")} <a href="{$system['system_url']}/wallet">{__("Replenish your wallet credit")}</a>
+                  {__("Your current wallet credit is")}: <strong>{print_money($user->_data['user_wallet_balance']|format_number)}</strong> {__("You need to")} <a href="{$system['system_url']}/wallet">{__("Replenish your wallet credit")}</a>
                 </div>
               {/if}
 
@@ -410,7 +410,7 @@
             <div class="card-body">
               {if $user->_data['user_wallet_balance'] == 0}
                 <div class="bs-callout bs-callout-danger mt0">
-                  {__("Your current wallet credit is")}: <strong>{print_money($user->_data['user_wallet_balance']|number_format:2)}</strong> {__("You need to")} <a href="{$system['system_url']}/wallet">{__("Replenish your wallet credit")}</a>
+                  {__("Your current wallet credit is")}: <strong>{print_money($user->_data['user_wallet_balance']|format_number)}</strong> {__("You need to")} <a href="{$system['system_url']}/wallet">{__("Replenish your wallet credit")}</a>
                 </div>
               {/if}
 

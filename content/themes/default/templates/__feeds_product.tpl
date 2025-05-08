@@ -71,7 +71,7 @@
                 <i class="fa fa-star {if $post['post_rate'] >= 4}checked{/if}"></i>
                 <i class="fa fa-star {if $post['post_rate'] >= 5}checked{/if}"></i>
               </span>
-              <span class="badge bg-light text-primary">{$post['post_rate']|number_format:1}</span>
+              <span class="badge bg-light text-primary">{$post['post_rate']|format_number}</span>
             {/if}
           </div>
         {/if}

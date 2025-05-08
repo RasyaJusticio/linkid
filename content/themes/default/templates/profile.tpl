@@ -512,7 +512,7 @@
             {if $user->_logged_in && $user->_data['user_id'] != $profile['user_id'] && $profile['has_subscriptions_plans']}
               <div class="d-grid">
                 <button class="btn btn-primary rounded rounded-pill mb20" data-toggle="modal" data-url="monetization/controller.php?do=get_plans&node_id={$profile['user_id']}&node_type=profile" data-size="large">
-                  <i class="fa fa-money-check-alt mr5"></i>{__("SUBSCRIBE")} {__("STARTING FROM")} ({print_money($profile['user_monetization_min_price']|number_format:2)})
+                  <i class="fa fa-money-check-alt mr5"></i>{__("SUBSCRIBE")} {__("STARTING FROM")} ({print_money($profile['user_monetization_min_price']|format_number)})
                 </button>
               </div>
             {/if}

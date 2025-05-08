@@ -9,35 +9,35 @@
         <strong>{__("Affiliates System")}</strong><br>
         {__("Earn up to")}
         {if $system['affiliate_type'] == "registration"}
-          {print_money($system['affiliates_per_user']|number_format:2)} ({__("Level 1")})
+          {print_money($system['affiliates_per_user']|format_number)} ({__("Level 1")})
           {if $system['affiliates_levels'] >= 2}
-            , {print_money($system['affiliates_per_user_2']|number_format:2)} ({__("Level 2")})
+            , {print_money($system['affiliates_per_user_2']|format_number)} ({__("Level 2")})
           {/if}
           {if $system['affiliates_levels'] >= 3}
-            , {print_money($system['affiliates_per_user_3']|number_format:2)} ({__("Level 3")})
+            , {print_money($system['affiliates_per_user_3']|format_number)} ({__("Level 3")})
           {/if}
           {if $system['affiliates_levels'] >= 4}
-            , {print_money($system['affiliates_per_user_4']|number_format:2)} ({__("Level 4")})
+            , {print_money($system['affiliates_per_user_4']|format_number)} ({__("Level 4")})
           {/if}
           {if $system['affiliates_levels'] >= 5}
-            , {print_money($system['affiliates_per_user_5']|number_format:2)} ({__("Level 5")})
+            , {print_money($system['affiliates_per_user_5']|format_number)} ({__("Level 5")})
           {/if}
           {__("For each user you will refer")}.<br>
           {__("You will be paid when")} {__("new user registered")}
         {else}
           {if $system['affiliate_payment_type'] == "fixed"}
-            {print_money($system['affiliates_per_user']|number_format:2)} ({__("Level 1")})
+            {print_money($system['affiliates_per_user']|format_number)} ({__("Level 1")})
             {if $system['affiliates_levels'] >= 2}
-              , {print_money($system['affiliates_per_user_2']|number_format:2)} ({__("Level 2")})
+              , {print_money($system['affiliates_per_user_2']|format_number)} ({__("Level 2")})
             {/if}
             {if $system['affiliates_levels'] >= 3}
-              ,{print_money($system['affiliates_per_user_3']|number_format:2)} ({__("Level 3")})
+              ,{print_money($system['affiliates_per_user_3']|format_number)} ({__("Level 3")})
             {/if}
             {if $system['affiliates_levels'] >= 4}
-              , {print_money($system['affiliates_per_user_4']|number_format:2)} ({__("Level 4")})
+              , {print_money($system['affiliates_per_user_4']|format_number)} ({__("Level 4")})
             {/if}
             {if $system['affiliates_levels'] >= 5}
-              , {print_money($system['affiliates_per_user_5']|number_format:2)} ({__("Level 5")})
+              , {print_money($system['affiliates_per_user_5']|format_number)} ({__("Level 5")})
             {/if}
             {__("For each user you will refer")}.<br>
           {else}
@@ -93,7 +93,7 @@
           <div class="stat-cell">
             <i class="fa fas fa-donate bg-icon"></i>
             <div class="h3 mtb10">
-              {print_money($user->_data['user_affiliate_balance']|number_format:2)}
+              {print_money($user->_data['user_affiliate_balance']|format_number)}
             </div>
           </div>
         </div>
@@ -136,7 +136,7 @@
           <div class="col-md-9">
             <h6>
               <span class="badge badge-lg bg-info">
-                {print_money($user->_data['user_affiliate_balance']|number_format:2)}
+                {print_money($user->_data['user_affiliate_balance']|format_number)}
               </span>
             </h6>
           </div>
@@ -240,7 +240,7 @@
               {foreach $payments as $payment}
                 <tr>
                   <td>{$payment@iteration}</td>
-                  <td>{print_money($payment['amount']|number_format:2)}</td>
+                  <td>{print_money($payment['amount']|format_number)}</td>
                   <td>
                     {if $payment['method'] == "custom"}
                       {$system['affiliate_payment_method_custom']}

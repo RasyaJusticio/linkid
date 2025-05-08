@@ -128,7 +128,7 @@
           <!-- online users -->
           {if $system['forums_online_enabled']}
             <div class="forum-meta-head">
-              {__("Who's online")}<span class="badge badge-lg bg-secondary ml5">{count($online_users)|number_format:0}</span>
+              {__("Who's online")}<span class="badge badge-lg bg-secondary ml5">{count($online_users)|format_number}</span>
             </div>
             <div class="forum-meta-conent">
               {foreach $online_users as $_user}
@@ -150,9 +150,9 @@
               {__("Forum Statistics")}
             </div>
             <div class="forum-meta-conent">
-              <span class="pr10"><strong>{__("Threads")}</strong>: {$insights['threads']|number_format:0}</span>
-              <span class="pr10"><strong>{__("Replies")}</strong>: {$insights['replies']|number_format:0}</span>
-              <span class="pr10"><strong>{__("Members")}</strong>: {$insights['users']|number_format:0}</span>
+              <span class="pr10"><strong>{__("Threads")}</strong>: {$insights['threads']|format_number}</span>
+              <span class="pr10"><strong>{__("Replies")}</strong>: {$insights['replies']|format_number}</span>
+              <span class="pr10"><strong>{__("Members")}</strong>: {$insights['users']|format_number}</span>
             </div>
           {/if}
           <!-- statistics -->

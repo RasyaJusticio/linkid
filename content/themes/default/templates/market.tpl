@@ -339,7 +339,7 @@
               {__("Total Price")}
               <p>
                 <span class="text-xxlg">
-                  {print_money(number_format($cart['total'], 2))}
+                  {print_money(format_number($cart['total']))}
                 </span>
               </p>
             </div>
@@ -408,7 +408,7 @@
         <div class="stat-panel bg-gradient-info">
           <div class="stat-cell narrow">
             <i class="fa fa-dollar-sign bg-icon"></i>
-            <span class="text-xxlg">{print_money($monthly_sales|number_format:2)}</span><br>
+            <span class="text-xxlg">{print_money($monthly_sales|format_number)}</span><br>
             <span class="text-lg">{__("This Month Earnings")}</span><br>
           </div>
         </div>
@@ -417,7 +417,7 @@
         <div class="stat-panel bg-gradient-info">
           <div class="stat-cell narrow">
             <i class="fa fa-dollar-sign bg-icon"></i>
-            <span class="text-xxlg">{print_money($user->_data['user_market_balance']|number_format:2)}</span><br>
+            <span class="text-xxlg">{print_money($user->_data['user_market_balance']|format_number)}</span><br>
             <span class="text-lg">{__("Total Earnings")}</span><br>
           </div>
         </div>

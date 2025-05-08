@@ -1627,7 +1627,7 @@
                   <div class="col-md-9">
                     <h6>
                       <span class="badge badge-lg bg-light text-primary">
-                        {print_money($data['user_market_balance']|number_format:2)}
+                        {print_money($data['user_market_balance']|format_number)}
                       </span>
                     </h6>
                   </div>
@@ -1651,7 +1651,7 @@
                   <div class="col-md-9">
                     <h6>
                       <span class="badge badge-lg bg-light text-primary">
-                        {print_money($data['user_funding_balance']|number_format:2)}
+                        {print_money($data['user_funding_balance']|format_number)}
                       </span>
                     </h6>
                   </div>
@@ -1721,7 +1721,7 @@
                     <div class="col-md-9">
                       <h6>
                         <span class="badge badge-lg bg-light text-primary">
-                          {print_money($data['user_monetization_balance']|number_format:2)}
+                          {print_money($data['user_monetization_balance']|format_number)}
                         </span>
                       </h6>
                     </div>

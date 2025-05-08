@@ -1397,7 +1397,7 @@
           {include file='__svg_icons.tpl' icon="payments" class="main-icon mr10" width="24px" height="24px"}
           {__("Replenish Credit")}
           </h6>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
         </div>
       <form class="js_ajax-forms" data-url="payments/wallet.php?do=wallet_replenish">
           <div class="modal-body">
@@ -1405,7 +1405,17 @@
             <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0.00" min="1.00" max="1000" name="amount">
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              <div id="presetprices" class="w-100 mt-3" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.2rem;">
+                  <button type="button" class="col btn btn-primary" data-input="5000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">5K</button>
+                  <button type="button" class="col btn btn-primary" data-input="10000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">10K</button>
+                  <button type="button" class="col btn btn-primary" data-input="20000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">20K</button>
+                  <button type="button" class="col btn btn-primary" data-input="50000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">50K</button>
+                  <button type="button" class="col btn btn-primary" data-input="100000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">100K</button>
+                  <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
+                  <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
+                  <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
               </div>
             </div>
             <!-- error -->
@@ -1416,6 +1426,16 @@
           <button type="submit" class="btn btn-primary">{__("Continue")}</button>
           </div>
         </form>
+        <script>
+            var buttons = document.querySelectorAll("#presetprices .btn");
+            var input = document.querySelector("input[name='amount']");
+
+            buttons.forEach(btn => {
+              btn.addEventListener("click", () => {
+                input.value = btn.getAttribute("data-input");
+              });
+            });
+        </script>
       </script>
     
     {if $page == "wallet"}
@@ -1439,7 +1459,17 @@
               <label class="form-label">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0.00" min="1.00" max="1000" name="amount">
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              <div id="presetprices" class="w-100 mt-3" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.2rem;">
+                  <button type="button" class="col btn btn-primary" data-input="5000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">5K</button>
+                  <button type="button" class="col btn btn-primary" data-input="10000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">10K</button>
+                  <button type="button" class="col btn btn-primary" data-input="20000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">20K</button>
+                  <button type="button" class="col btn btn-primary" data-input="50000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">50K</button>
+                  <button type="button" class="col btn btn-primary" data-input="100000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">100K</button>
+                  <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
+                  <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
+                  <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
               </div>
             </div>
             <div class="form-group">
@@ -1457,6 +1487,16 @@
             <button type="submit" class="btn btn-primary">{__("Send")}</button>
           </div>
         </form>
+        <script>
+            var buttons = document.querySelectorAll("#presetprices .btn");
+            var input = document.querySelector("input[name='amount']");
+
+            buttons.forEach(btn => {
+              btn.addEventListener("click", () => {
+                input.value = btn.getAttribute("data-input");
+              });
+            });
+        </script>
       </script>
 
       <script id="wallet-withdraw-affiliates" type="text/template">
@@ -1479,7 +1519,17 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0.00" min="1.00" max="1000" name="amount">
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              <div id="presetprices" class="w-100 mt-3" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.2rem;">
+                  <button type="button" class="col btn btn-primary" data-input="5000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">5K</button>
+                  <button type="button" class="col btn btn-primary" data-input="10000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">10K</button>
+                  <button type="button" class="col btn btn-primary" data-input="20000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">20K</button>
+                  <button type="button" class="col btn btn-primary" data-input="50000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">50K</button>
+                  <button type="button" class="col btn btn-primary" data-input="100000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">100K</button>
+                  <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
+                  <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
+                  <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
               </div>
             </div>
             <!-- error -->
@@ -1490,6 +1540,16 @@
             <button type="submit" class="btn btn-primary">{__("Continue")}</button>
           </div>
         </form>
+        <script>
+            var buttons = document.querySelectorAll("#presetprices .btn");
+            var input = document.querySelector("input[name='amount']");
+
+            buttons.forEach(btn => {
+              btn.addEventListener("click", () => {
+                input.value = btn.getAttribute("data-input");
+              });
+            });
+        </script>
       </script>
 
       <script id="wallet-withdraw-points" type="text/template">
@@ -1514,7 +1574,17 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0.00" min="1.00" max="1000" name="amount">
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              <div id="presetprices" class="w-100 mt-3" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.2rem;">
+                  <button type="button" class="col btn btn-primary" data-input="5000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">5K</button>
+                  <button type="button" class="col btn btn-primary" data-input="10000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">10K</button>
+                  <button type="button" class="col btn btn-primary" data-input="20000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">20K</button>
+                  <button type="button" class="col btn btn-primary" data-input="50000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">50K</button>
+                  <button type="button" class="col btn btn-primary" data-input="100000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">100K</button>
+                  <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
+                  <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
+                  <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
               </div>
             </div>
             <!-- error -->
@@ -1525,6 +1595,16 @@
             <button type="submit" class="btn btn-primary">{__("Continue")}</button>
           </div>
         </form>
+        <script>
+            var buttons = document.querySelectorAll("#presetprices .btn");
+            var input = document.querySelector("input[name='amount']");
+
+            buttons.forEach(btn => {
+              btn.addEventListener("click", () => {
+                input.value = btn.getAttribute("data-input");
+              });
+            });
+        </script>
       </script>
 
       <script id="wallet-withdraw-market" type="text/template">
@@ -1547,7 +1627,17 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0.00" min="1.00" max="1000" name="amount">
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              <div id="presetprices" class="w-100 mt-3" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.2rem;">
+                  <button type="button" class="col btn btn-primary" data-input="5000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">5K</button>
+                  <button type="button" class="col btn btn-primary" data-input="10000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">10K</button>
+                  <button type="button" class="col btn btn-primary" data-input="20000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">20K</button>
+                  <button type="button" class="col btn btn-primary" data-input="50000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">50K</button>
+                  <button type="button" class="col btn btn-primary" data-input="100000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">100K</button>
+                  <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
+                  <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
+                  <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
               </div>
             </div>
             <!-- error -->
@@ -1558,6 +1648,16 @@
             <button type="submit" class="btn btn-primary">{__("Continue")}</button>
           </div>
         </form>
+        <script>
+            var buttons = document.querySelectorAll("#presetprices .btn");
+            var input = document.querySelector("input[name='amount']");
+
+            buttons.forEach(btn => {
+              btn.addEventListener("click", () => {
+                input.value = btn.getAttribute("data-input");
+              });
+            });
+        </script>
       </script>
 
       <script id="wallet-withdraw-funding" type="text/template">
@@ -1580,7 +1680,17 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0.00" min="1.00" max="1000" name="amount">
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              <div id="presetprices" class="w-100 mt-3" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.2rem;">
+                  <button type="button" class="col btn btn-primary" data-input="5000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">5K</button>
+                  <button type="button" class="col btn btn-primary" data-input="10000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">10K</button>
+                  <button type="button" class="col btn btn-primary" data-input="20000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">20K</button>
+                  <button type="button" class="col btn btn-primary" data-input="50000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">50K</button>
+                  <button type="button" class="col btn btn-primary" data-input="100000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">100K</button>
+                  <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
+                  <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
+                  <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
               </div>
             </div>
             <!-- error -->
@@ -1591,6 +1701,16 @@
             <button type="submit" class="btn btn-primary">{__("Continue")}</button>
           </div>
         </form>
+        <script>
+            var buttons = document.querySelectorAll("#presetprices .btn");
+            var input = document.querySelector("input[name='amount']");
+
+            buttons.forEach(btn => {
+              btn.addEventListener("click", () => {
+                input.value = btn.getAttribute("data-input");
+              });
+            });
+        </script>
       </script>
 
       <script id="wallet-withdraw-monetization" type="text/template">
@@ -1613,7 +1733,17 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0.00" min="1.00" max="1000" name="amount">
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              <div id="presetprices" class="w-100 mt-3" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.2rem;">
+                  <button type="button" class="col btn btn-primary" data-input="5000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">5K</button>
+                  <button type="button" class="col btn btn-primary" data-input="10000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">10K</button>
+                  <button type="button" class="col btn btn-primary" data-input="20000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">20K</button>
+                  <button type="button" class="col btn btn-primary" data-input="50000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">50K</button>
+                  <button type="button" class="col btn btn-primary" data-input="100000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">100K</button>
+                  <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
+                  <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
+                  <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
               </div>
             </div>
             <!-- error -->
@@ -1624,6 +1754,16 @@
             <button type="submit" class="btn btn-primary">{__("Continue")}</button>
           </div>
         </form>
+        <script>
+            var buttons = document.querySelectorAll("#presetprices .btn");
+            var input = document.querySelector("input[name='amount']");
+
+            buttons.forEach(btn => {
+              btn.addEventListener("click", () => {
+                input.value = btn.getAttribute("data-input");
+              });
+            });
+        </script>
       </script>
     {/if}
     <!-- Wallet -->

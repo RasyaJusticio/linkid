@@ -7034,7 +7034,7 @@
             <div>
               <div class="form-table-row">
                 <div class="avatar">
-                  {include file='__svg_icons.tpl' icon="xendit_mono" width="40px" height="40px"}
+                  {include file='__svg_icons.tpl' icon="xendit_monogram" width="40px" height="40px"}
                 </div>
                 <div>
                   <div class="form-label h6">{__("Xendit Enabled")}</div>

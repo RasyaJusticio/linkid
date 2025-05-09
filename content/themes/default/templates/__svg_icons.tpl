@@ -4,6 +4,14 @@
 
     {include file='../images/svg/2co.svg'}
 
+  {elseif $icon == "xendit_monogram"}
+
+    {include file='../images/svg/xendit_monogram.svg'}
+
+  {elseif $icon == "xendit_logo"}
+
+    {include file='../images/svg/xendit_logo.svg'}
+
   {elseif $icon == "paypal"}
 
     {include file='../images/svg/paypal.svg'}

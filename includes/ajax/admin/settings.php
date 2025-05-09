@@ -873,6 +873,7 @@ try {
 
     case 'payments_methods':
       /* prepare */
+      $_POST['xendit_enabled'] = (isset($_POST['xendit_enabled'])) ? '1' : '0';
       $_POST['paypal_enabled'] = (isset($_POST['paypal_enabled'])) ? '1' : '0';
       $_POST['paypal_payouts_enabled'] = (isset($_POST['paypal_payouts_enabled'])) ? '1' : '0';
       $_POST['creditcard_enabled'] = (isset($_POST['creditcard_enabled'])) ? '1' : '0';
@@ -895,6 +896,10 @@ try {
       $_POST['mercadopago_enabled'] = (isset($_POST['mercadopago_enabled'])) ? '1' : '0';
       /* update */
       update_system_options([
+        'xendit_enabled' => secure($_POST['xendit_enabled']),
+        'xendit_mode' => secure($_POST['xendit_mode']),
+        'xendit_live_key' => secure($_POST['xendit_live_key']),
+        'xendit_sandbox_key' => secure($_POST['xendit_sandbox_key']),
         'paypal_enabled' => secure($_POST['paypal_enabled']),
         'paypal_payouts_enabled' => secure($_POST['paypal_payouts_enabled']),
         'paypal_mode' => secure($_POST['paypal_mode']),

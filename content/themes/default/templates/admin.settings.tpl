@@ -7030,6 +7030,68 @@
       <div class="tab-pane" id="Payments">
         <form class="js_ajax-forms" data-url="admin/settings.php?edit=payments_methods">
           <div class="card-body">
+            <!-- Xendit -->
+            <div>
+              <div class="form-table-row">
+                <div class="avatar">
+                  {include file='__svg_icons.tpl' icon="xendit_mono" width="40px" height="40px"}
+                </div>
+                <div>
+                  <div class="form-label h6">{__("Xendit Enabled")}</div>
+                  <div class="form-text d-none d-sm-block">{__("Enable payments via Xendit")}</div>
+                </div>
+                <div class="text-end">
+                  <label class="switch" for="xendit_enabled">
+                    <input type="checkbox" name="xendit_enabled" id="xendit_enabled" {if $system['xendit_enabled']}checked{/if}>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Xendit Mode")}
+                </label>
+                <div class="col-md-9">
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="xendit_mode" id="xendit_live" value="live" class="form-check-input" {if $system['xendit_mode'] == "live"}checked{/if}>
+                    <label class="form-check-label" for="xendit_live">{__("Live")}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="xendit_mode" id="xendit_sandbox" value="sandbox" class="form-check-input" {if $system['xendit_mode'] == "sandbox"}checked{/if}>
+                    <label class="form-check-label" for="xendit_sandbox">{__("Sandbox")}</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Xendit Sandbox API Key")}
+                </label>
+                <div class="col-md-9">
+                  {if !$user->_data['user_demo']}
+                    <input type="text" class="form-control" name="xendit_sandbox_key" value="{$system['xendit_sandbox_key']}">
+                  {else}
+                    <input type="password" class="form-control" value="*********">
+                  {/if}
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Xendit Live API Key")}
+                </label>
+                <div class="col-md-9">
+                  {if !$user->_data['user_demo']}
+                    <input type="text" class="form-control" name="xendit_live_key" value="{$system['xendit_live_key']}">
+                  {else}
+                    <input type="password" class="form-control" value="*********">
+                  {/if}
+                </div>
+              </div>
+            <!-- Xendit -->
+
+            <div class="divider"></div>
 
             <!-- PayPal -->
             <div>

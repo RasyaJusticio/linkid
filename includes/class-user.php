@@ -18307,6 +18307,13 @@ class User
     if (!isset($period) || !in_array($period, ['minute', 'hour', 'day', 'week', 'month', 'year'])) {
       throw new ValidationException(__("Please enter a valid period"));
     }
+    /* Xendit billing plan */
+    $xendit_billing_plan = 'NULL';
+    $xendit_recurring_enabled = $system['xendit_enabled'];
+    if ($xendit_recurring_enabled && $price > 0 && !in_array($period, ['minute', 'hour'])) {
+      /* create Xendit billing plan */
+      $xendit_billing_plan = xendit_create_billing_plan($period_num, strtoupper($period), $price);
+    }
     /* PayPal billing plan */
     $paypal_billing_plan = '';
     $paypal_recurring_enabled = $system['paypal_enabled'] && !is_empty($system['paypal_webhook']);
@@ -18322,7 +18329,7 @@ class User
       $stripe_billing_plan = stripe_create_billing_plan($title, $custom_description, $period_num, $period, $price);
     }
     /* insert monetization plan */
-    $db->query(sprintf("INSERT INTO monetization_plans (node_id, node_type, title, price, period_num, period, custom_description, plan_order, paypal_billing_plan, stripe_billing_plan) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", secure($node_id, 'int'), secure($node_type), secure($title), secure($price, 'float'), secure($period_num), secure($period), secure($custom_description), secure($plan_order ?: '1'), secure($paypal_billing_plan), secure($stripe_billing_plan)));
+    $db->query(sprintf("INSERT INTO monetization_plans (node_id, node_type, title, price, period_num, period, custom_description, plan_order, paypal_billing_plan, stripe_billing_plan, xendit_billing_plan) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", secure($node_id, 'int'), secure($node_type), secure($title), secure($price, 'float'), secure($period_num), secure($period), secure($custom_description), secure($plan_order ?: '1'), secure($paypal_billing_plan), secure($stripe_billing_plan), secure($xendit_billing_plan)));
     $monetization_plan_id = $db->insert_id;
     /* update monetization plans */
     $this->update_monetization_plans($node_id, $node_type);
@@ -18389,6 +18396,28 @@ class User
         $billing_plan_id = "CP" . "-" . "G" . $monetization_plan['node_id'] . "-" . $price;
         break;
     }
+    /* Xendit billing plan */
+    $xendit_billing_plan = $monetization_plan['xendit_billing_plan'];
+    $xendit_recurring_enabled = $system['xendit_enabled'];
+    if ($xendit_recurring_enabled && $price > 0 && !in_array($period, ['minute', 'hour'])) {
+      /* check if Xendit billing plan is not created */
+      if (is_empty($xendit_billing_plan)) {
+        /* create Xendit billing plan */
+        $xendit_billing_plan = xendit_create_billing_plan($period_num, strtoupper($period), $price);
+      } else {
+        /* check if the (period || period_num || price) is edited */
+        if ($monetization_plan['period'] != $period || $monetization_plan['period_num'] != $period_num || $monetization_plan['price'] != $price) {
+          /* replace the plan */
+          $xendit_billing_plan = xendit_replace_billing_plan($monetization_plan['xendit_billing_plan'], $period_num, strtoupper($period), $price);
+        }
+      }
+    } else {
+      $xendit_billing_plan = 'NULL';
+      if ($xendit_recurring_enabled && $monetization_plan['xendit_billing_plan']) {
+        xendit_stop_billing_plan($monetization_plan['xendit_billing_plan']);
+      }
+    }
+    $xendit_billing_plan = isset($xendit_billing_plan) ? $xendit_billing_plan : 'NULL';
     /* PayPal billing plan */
     $paypal_billing_plan = $monetization_plan['paypal_billing_plan'];
     $paypal_recurring_enabled = $system['paypal_enabled'] && !is_empty($system['paypal_webhook']);
@@ -18432,11 +18461,11 @@ class User
       }
     }
     /* remove all users recurring payments */
-    if ($paypal_billing_plan == '' && $stripe_billing_plan == '') {
+    if ($paypal_billing_plan == '' && $stripe_billing_plan == '' && $xendit_billing_plan == '') {
       $db->query(sprintf("DELETE FROM users_recurring_payments WHERE handle = 'subscribe' AND handle_id = %s", secure($plan_id, 'int')));
     }
     /* update monetization plan */
-    $db->query(sprintf("UPDATE monetization_plans SET title = %s, price = %s, period_num = %s, period = %s, custom_description = %s, plan_order = %s, paypal_billing_plan = %s, stripe_billing_plan = %s WHERE plan_id = %s", secure($title), secure($price, 'float'), secure($period_num), secure($period), secure($custom_description), secure($plan_order), secure($paypal_billing_plan), secure($stripe_billing_plan), secure($plan_id, 'int')));
+    $db->query(sprintf("UPDATE monetization_plans SET title = %s, price = %s, period_num = %s, period = %s, custom_description = %s, plan_order = %s, paypal_billing_plan = %s, stripe_billing_plan = %s, xendit_billing_plan = %s WHERE plan_id = %s", secure($title), secure($price, 'float'), secure($period_num), secure($period), secure($custom_description), secure($plan_order), secure($paypal_billing_plan), secure($stripe_billing_plan), secure($xendit_billing_plan), secure($plan_id, 'int')));
     /* update monetization plans */
     $this->update_monetization_plans($monetization_plan['node_id'], $monetization_plan['node_type']);
     /* return updated plan */

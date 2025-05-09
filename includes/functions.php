@@ -4288,9 +4288,62 @@ function xendit_payment_check($external_id)
         return $result[0]['status'];
     }
 
-    return;
+    return $result;
 }
 
+function xendit_create_billing_plan($interval_count, $interval, $amount)
+{
+    global $system, $db;
+
+    xendit_setup_key();
+
+    $total = get_payment_total_value($amount);
+
+    $query = sprintf('INSERT INTO xendit_billing_plan (`interval`, interval_count, amount) VALUES (%s, %s, %s)', secure($interval), secure($interval_count), secure($amount));
+
+    if ($db->query($query)) {
+        return $db->insert_id;
+    } else {
+        return 'Database Error: ' . $db->error;
+    }
+}
+
+function xendit_get_billing_plan($billing_plan_id)
+{
+    global $system, $db;
+
+    $get_billing_plan = $db->query(sprintf("SELECT * FROM xendit_billing_plan WHERE id = %s", secure($billing_plan_id)));
+
+    if ($get_billing_plan->num_rows > 0) {
+        $plan = $get_billing_plan->fetch_assoc(); 
+        return $plan;
+    }
+
+    return null;
+}
+
+function xendit_stop_billing_plan($billing_plan_id)
+{
+    global $system, $db;
+
+    $query = sprintf(
+        "DELETE FROM xendit_billing_plan WHERE id=%d",
+        secure($billing_plan_id)
+    );
+
+    if ($db->query($query)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function xendit_replace_billing_plan($billing_plan_id, $interval_count, $interval, $amount)
+{
+    xendit_stop_billing_plan($billing_plan_id);
+    $new_plan_id = xendit_create_billing_plan($interval_count, $interval, $amount);
+    return $new_plan_id;
+}
 
 /* ------------------------------- */
 /* PayPal */

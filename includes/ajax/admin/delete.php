@@ -430,6 +430,10 @@ try {
       $db->query(sprintf("DELETE FROM users_recurring_payments WHERE handle = 'packages' AND handle_id = %s", secure($_POST['id'], 'int')));
       /* delete package */
       $db->query(sprintf("DELETE FROM packages WHERE package_id = %s", secure($_POST['id'], 'int')));
+      /* deactivate Xendit billing plan */
+      if ($package['xendit_billing_plan']) {
+        xendit_stop_billing_plan($package['xendit_billing_plan']);
+      }
       /* deactivate PayPal billing plan */
       if ($package['paypal_billing_plan']) {
         paypal_deactivate_billing_plan($package['paypal_billing_plan']);

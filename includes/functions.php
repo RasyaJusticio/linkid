@@ -4161,6 +4161,135 @@ function process_automatic_withdrawal($method, $amount, $email)
   }
 }
 
+/* ------------------------------- */
+/* Xendit */
+/* ------------------------------- */
+function xendit_setup_key()
+{
+    global $system;
+
+    if ($system['xendit_mode'] == 'live') {
+        \Xendit\Configuration::setXenditKey($system['xendit_live_key']);
+    } else {
+        \Xendit\Configuration::setXenditKey($system['xendit_sandbox_key']);
+    }
+}
+
+function xendit_payment_link($handle, $price, $id = null)
+{
+  global $system, $user;
+
+  /* prepare */
+  $total = get_payment_total_value($price); 
+  xendit_setup_key();
+
+  switch ($handle) {
+    case 'packages':
+      /* get package */
+      $package = $user->get_package($id);
+
+      $product = __($system['system_title']) . " " . __('Package') . " " . __($package['name']);
+      $description = __('Pay For') . " " . __($system['system_title']) . " " . __('Package') . " " . __($package['name']);
+      $URL['success'] = $system['system_url'] . "/webhooks/xendit.php?status=success&handle=packages&package_id=$id";
+      $URL['cancel'] = $system['system_url'] . "/webhooks/xendit.php?status=cancel";
+      break;
+
+    case 'subscribe':
+      /* get monetization plan */
+      $monetization_plan = $user->get_monetization_plan($id, true);
+      if (!$monetization_plan) {
+        throw new Exception(__("The monetization plan you're trying to subscribe to is not found"));
+      }
+
+      $product = __($system['system_title']) . " " . __('Monetization Plan') . " " . __($monetization_plan['name']);
+      $description = __('Pay For') . " " . __($system['system_title']) . " " . __('Monetization Plan') . " " . __($monetization_plan['name']);
+      $URL['success'] = $system['system_url'] . "/webhooks/xendit.php?status=success&handle=subscribe&plan_id=$id";
+      $URL['cancel'] = $system['system_url'] . "/webhooks/xendit.php?status=cancel";
+      break;
+
+    case 'wallet':
+      $product = __($system['system_title']) . " " . __('Wallet');
+      $description = __('Pay For') . " " . __($system['system_title']);
+      $URL['success'] = $system['system_url'] . "/webhooks/xendit.php?status=success&handle=wallet";
+      $URL['cancel'] = $system['system_url'] . "/webhooks/xendit.php?status=cancel";
+      $_SESSION['wallet_replenish_amount'] = $price;
+      break;
+
+    case 'donate':
+      $product = __($system['system_title']) . " " . __('Funding Donation');
+      $description = __('Pay For') . " " . __($system['system_title']);
+      $URL['success'] = $system['system_url'] . "/webhooks/xendit.php?status=success&handle=donate&post_id=$id";
+      $URL['cancel'] = $system['system_url'] . "/webhooks/xendit.php?status=cancel";
+      $_SESSION['donation_amount'] = $price;
+      break;
+
+    case 'paid_post':
+      $product = __($system['system_title']) . " " . __('Paid Post');
+      $description = __('Pay For') . " " . __($system['system_title']);
+      $URL['success'] = $system['system_url'] . "/webhooks/xendit.php?status=success&handle=paid_post&post_id=$id";
+      $URL['cancel'] = $system['system_url'] . "/webhooks/xendit.php?status=cancel";
+      break;
+
+    case 'movies':
+      $product = __($system['system_title']) . " " . __('Movies');
+      $description = __('Pay For') . " " . __($system['system_title']);
+      $URL['success'] = $system['system_url'] . "/webhooks/xendit.php?status=success&handle=movies&movie_id=$id";
+      $URL['cancel'] = $system['system_url'] . "/webhooks/xendit.php?status=cancel";
+      break;
+
+    case 'marketplace':
+      $product = __($system['system_title']) . " " . __('Marketplace');
+      $description = __('Pay For') . " " . __($system['system_title']);
+      $URL['success'] = $system['system_url'] . "/webhooks/xendit.php?status=success&handle=marketplace&orders_collection_id=$id";
+      $URL['cancel'] = $system['system_url'] . "/webhooks/xendit.php?status=cancel";
+      break;
+
+    default:
+      _error(400);
+      break;
+    }
+
+    $apiInstance = new \Xendit\Invoice\InvoiceApi();
+    
+    $externalId = uniqid();
+    $create_invoice_request = new \Xendit\Invoice\CreateInvoiceRequest([
+        'external_id' => $externalId,
+        'description' => $description,
+        'amount' => $total,
+        'invoice_duration' => 86400,
+        'currency' => 'IDR',
+        'success_redirect_url' => $URL['success'] . "&external_id=$externalId",
+        'failure_redirect_url' => $URL['cancel'],
+        'items' => [
+            [
+              'name' => $product,
+              'price' => $total,
+              'quantity' => 1,
+            ],
+        ],
+    ]);
+
+    $result = $apiInstance->createInvoice($create_invoice_request);
+
+    return $result['invoice_url'];
+}
+
+function xendit_payment_check($external_id)
+{
+    global $system;
+
+    xendit_setup_key();
+
+    $apiInstance = new \Xendit\Invoice\InvoiceApi();
+
+    $result = $apiInstance->getInvoices(null, $external_id);
+    
+    if (!empty($result)) {
+        return $result[0]['status'];
+    }
+
+    return;
+}
 
 
 /* ------------------------------- */

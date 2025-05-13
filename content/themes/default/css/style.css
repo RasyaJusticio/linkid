@@ -2065,13 +2065,6 @@ body.modal-open .top-bar {
 
 /* -- */
 @media (min-width: 1200px) {
-
-  .main-wrapper,
-  .top-bar,
-  .main-header {
-    padding-right: 75px;
-  }
-
   body.n_chat .main-wrapper,
   body.n_chat .top-bar,
   body.n_chat .main-header {

@@ -504,6 +504,14 @@
 
     {include file='../images/svg/money-bag.svg'}
 
+  {elseif $icon == "money_receive"}
+
+    {include file='../images/svg/money_receive.svg'}
+
+  {elseif $icon == "money_send"}
+
+    {include file='../images/svg/money_send.svg'}
+
   {elseif $icon == "transaction"}
 
     {include file='../images/svg/transaction.svg'}

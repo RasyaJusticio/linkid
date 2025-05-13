@@ -17728,7 +17728,18 @@ class User
     $db->query("TRUNCATE TABLE wallet_transactions");
   }
 
+  /* ------------------------------- */
+  /* Transfer */
+  /* ------------------------------- */
+  public function transfer_generate_token()
+  {
+    global $db;
 
+    $unique_token = $this->_data['user_id'] . uniqid();
+    $db->query(sprintf("UPDATE users SET user_transfer_token = %s WHERE user_id = %s", secure($unique_token), secure($this->_data['user_id'], 'int')));
+
+    return $unique_token;
+  }
 
   /* ------------------------------- */
   /* CoinPayments */

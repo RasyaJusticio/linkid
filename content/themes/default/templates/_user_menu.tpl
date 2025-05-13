@@ -33,6 +33,10 @@
         {__("Wallet")}: <span class="badge bg-light text-primary">{print_money($user->_data['user_wallet_balance']|format_number)}</span>
       </a>
     {/if}
+    <a class="dropdown-item" href="{$system['system_url']}/transfer">
+      {include file='__svg_icons.tpl' icon="wallet_transfer" class="main-icon mr10" width="20px" height="20px"}
+      {__("Transfer")}
+    </a>
     <div class="dropdown-divider"></div>
   {/if}
 

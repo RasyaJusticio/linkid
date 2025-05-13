@@ -162,6 +162,9 @@ RewriteRule ^ads/edit/([^/]+)/?$ ads.php?view=edit&campaign_id=$1 [L,QSA]
 RewriteRule ^wallet/?$ wallet.php [L,QSA]
 RewriteRule ^wallet/payments/?$ wallet.php?view=payments [L,QSA]
 
+# Wallet
+RewriteRule ^transfer/?$ transfer.php [L,QSA]
+
 # Boosted
 RewriteRule ^boosted/posts/?$ index.php?view=boosted_posts [L,QSA]
 RewriteRule ^boosted/pages/?$ index.php?view=boosted_pages [L,QSA]

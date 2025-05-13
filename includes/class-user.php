@@ -17740,6 +17740,61 @@ class User
 
     return $unique_token;
   }
+  
+  public function transfer_get_user($transfer_token)
+  {
+    global $db;
+    
+    $get_user = $db->query(sprintf("SELECT user_id, user_firstname, user_lastname, user_gender, user_picture FROM users WHERE user_transfer_token = %s", secure($transfer_token)));
+      
+    return $get_user->fetch_assoc();
+  }
+
+  public function transfer_money($user_id, $amount)
+  {
+    global $db, $system;
+    /* check if wallet enabled */
+    if (!$system['wallet_enabled']) {
+      throw new Exception(__("The wallet system has been disabled by the admin"));
+    }
+    /* check if wallet transfer enabled */
+    if (!$system['wallet_transfer_enabled']) {
+      throw new Exception(__("The wallet transfer feature has been disabled by the admin"));
+    }
+    /* validate amount */
+    if (is_empty($amount) || !is_numeric($amount) || $amount <= 0) {
+      throw new Exception(__("You must enter valid amount of money"));
+    }
+    if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
+      throw new Exception(__("You can't transfer more than") . " " . print_money($system['wallet_max_transfer']));
+    }
+    /* validate target user */
+    if (is_empty($user_id) || !is_numeric($user_id)) {
+      throw new Exception(__("You must search for a user to send money to"));
+    }
+    if ($this->_data['user_id'] == $user_id) {
+      throw new Exception(__("You can't send money to yourself!"));
+    }
+    $check_user = $db->query(sprintf("SELECT COUNT(*) as count FROM users WHERE user_id = %s", secure($user_id, 'int')));
+    if ($check_user->fetch_assoc()['count'] == 0) {
+      throw new Exception(__("You can't send money to this user!"));
+    }
+    /* check viewer balance */
+    if ($this->_data['user_wallet_balance'] < $amount) {
+      throw new Exception(__("There is no enough credit in your wallet, Recharge your wallet to continue"). " " ."<strong class='text-link' data-toggle='modal' data-url='#wallet-replenish'>". __("Recharge Now") . "</strong>");
+    }
+    /* decrease viewer user wallet balance */
+    $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($this->_data['user_id'], 'int')));
+    /* log this transaction */
+    $this->wallet_set_transaction($this->_data['user_id'], 'user', $user_id, $amount, 'out');
+    /* increase target user wallet balance */
+    $db->query(sprintf("UPDATE users SET user_wallet_balance = user_wallet_balance + %s WHERE user_id = %s", secure($amount), secure($user_id, 'int')));
+    /* send notification (money sent) to the target user */
+    $this->post_notification(['to_user_id' => $user_id, 'action' => 'money_sent', 'node_type' => $amount]);
+    /* wallet transaction */
+    $this->wallet_set_transaction($user_id, 'user', $this->_data['user_id'], $amount, 'in');
+    $_SESSION['transfer_send_amount'] = $amount;
+  }
 
   /* ------------------------------- */
   /* CoinPayments */

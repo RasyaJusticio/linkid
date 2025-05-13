@@ -1768,6 +1768,76 @@
     {/if}
     <!-- Wallet -->
 
+    <!-- Transfer -->
+    {if $page == "transfer"}
+      <script id="transfer_money" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="wallet_transfer" class="main-icon mr10" width="24px" height="24px"}
+            {__("Send Money")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="js_ajax-forms" data-url="payments/transfer.php?do=send_money">
+          <div class="modal-body">
+            {if $system['wallet_max_transfer'] != "0"}
+              <div class="alert alert-info mb20">
+                <i class="fas fa-info-circle mr5"></i>
+                {__("The maximum amount you can transfer is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer']|format_number)}</span>
+              </div>
+            {/if}
+            <div class="form-group">
+              <label class="form-label">{__("Amount")}</label>
+              <div class="input-money {$system['system_currency_dir']}">
+                <span>{$system['system_currency_symbol']}</span>
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              <div id="presetprices" class="w-100 mt-3" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.2rem;">
+                  <button type="button" class="col btn btn-primary" data-input="5000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">5K</button>
+                  <button type="button" class="col btn btn-primary" data-input="10000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">10K</button>
+                  <button type="button" class="col btn btn-primary" data-input="20000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">20K</button>
+                  <button type="button" class="col btn btn-primary" data-input="50000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">50K</button>
+                  <button type="button" class="col btn btn-primary" data-input="100000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">100K</button>
+                  <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
+                  <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
+                  <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="send_to">{__("Send To")}</label>
+              <div class="data-container small" style="display: flex; align-items: center; gap: 0.8rem; padding: .75rem 1.5rem; background-color: var(--card-dark-input); color: var(--card-dark-input-color); border-color: var(--card-dark-divider); border: var(--bs-border-width) solid var(--bs-border-color); border-radius: var(--bs-border-radius);">
+                <div class="data-avatar">
+                    <img class="data-avatar" src="{literal}{{user_picture}}{/literal}" alt="" >
+                </div>
+                <div class="data-content" style="font-size: 1rem; padding-left: 0;">
+                    {literal}{{user_fullname}}{/literal}
+                </div>
+              </div>
+
+              <input type="hidden" name="send_to_id" value="{literal}{{user_id}}{/literal}">
+            </div>
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Send")}</button>
+          </div>
+        </form>
+        <script>
+            var buttons = document.querySelectorAll("#presetprices .btn");
+            var input = document.querySelector("input[name='amount']");
+
+            buttons.forEach(btn => {
+              btn.addEventListener("click", () => {
+                input.value = btn.getAttribute("data-input");
+              });
+            });
+        </script>
+      </script>
+    {/if}
+    <!-- Transfer -->
+
     <!-- Crop Profile (Picture|Cover) -->
     {if in_array($page, ["started", "profile", "page", "group", "event"])}
       <script id="crop-profile-picture" type="text/template">

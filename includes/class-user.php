@@ -3398,13 +3398,13 @@ class User
           case 'money_sent':
             $notification['icon'] = "fa fa-gift";
             $notification['url'] = $system['system_url'] . '/wallet';
-            $notification['message'] = __("sent you") . " " . print_money($notification['node_type']);
+            $notification['message'] = __("sent you") . " " . print_money(format_number($notification['node_type']));
             break;
 
           case 'tip_sent':
             $notification['icon'] = "fa fa-dollar-sign";
             $notification['url'] = $system['system_url'] . '/wallet';
-            $notification['message'] = __("Tip you with") . " " . print_money($notification['node_type']);
+            $notification['message'] = __("Tip you with") . " " . print_money(format_number($notification['node_type']));
             break;
 
           case 'coinpayments_complete':
@@ -3625,7 +3625,7 @@ class User
           case 'funding_donation':
             $notification['icon'] = "fa fa-hand-holding-usd";
             $notification['url'] = $system['system_url'] . '/posts/' . $notification['node_url'];
-            $notification['message'] = __("donated to your funding request with") . " " . print_money($notification['node_type']);
+            $notification['message'] = __("donated to your funding request with") . " " . print_money(format_number($notification['node_type']));
             break;
 
           case 'monetization_withdrawal':
@@ -4171,12 +4171,12 @@ class User
 
         case 'money_sent':
           $notification['url'] = $system['system_url'] . '/wallet';
-          $notification['message'] = __("sent you") . " " . print_money($node_type);
+          $notification['message'] = __("sent you") . " " . print_money(format_number($node_type));
           break;
 
         case 'tip_sent':
           $notification['url'] = $system['system_url'] . '/wallet';
-          $notification['message'] = __("Tip you with") . " " . print_money($node_type);
+          $notification['message'] = __("Tip you with") . " " . print_money(format_number($node_type));
           break;
 
         case 'coinpayments_complete':
@@ -4321,7 +4321,7 @@ class User
 
         case 'funding_donation':
           $notification['url'] = $system['system_url'] . '/posts/' . $node_url;
-          $notification['message'] = __("donated to your funding request with") . " " . print_money($node_type);
+          $notification['message'] = __("donated to your funding request with") . " " . print_money(format_number($node_type));
           break;
 
         case 'monetization_withdrawal':

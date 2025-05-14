@@ -16,7 +16,12 @@
                 {__("Account Settings")}
               </a>
             </li>
-
+            <li {if $view == "qurani" && !$show_categories}class="active" {/if}>
+              <a href="{$system['system_url']}/settings/qurani">
+                <i class="fas fa-book fa-lg fa-fw main-icon mr10"></i>
+                {__("Qurani Settings")}
+              </a>
+            </li>
             <li {if $view == "profile"}class="active" {/if}>
               <a href="#info-settings" data-bs-toggle="collapse" {if $view == "profile"}aria-expanded="true" {/if}>
                 {include file='__svg_icons.tpl' icon="edit_profile" class="main-icon mr10" width="24px" height="24px"}
@@ -354,6 +359,8 @@
       <div class="card">
         {if $view == ""}
           {include file='settings.account.tpl'}
+        {elseif $view == "qurani"}
+          {include file='qurani/user_settings.tpl'}
         {elseif $view == "profile"}
           {include file='settings.profile.tpl'}
         {elseif $view == "security"}

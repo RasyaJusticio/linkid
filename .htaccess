@@ -326,6 +326,18 @@ RewriteRule ^admincp/([^/]+)/?$ admin.php?view=$1 [L,QSA]
 RewriteRule ^admincp/([^/]+)/([^/]+)/?$ admin.php?view=$1&sub_view=$2 [L,QSA]
 RewriteRule ^admincp/([^/]+)/([^/]+)/([^/]+)/?$ admin.php?view=$1&sub_view=$2&id=$3 [L,QSA]
 
+# Qurani
+RewriteRule ^qurani/?$ qurani/index.php [L,QSA]
+RewriteRule ^qurani/riwayat?$ qurani/riwayat.php [L,QSA]
+RewriteRule ^qurani/setoran/?$ qurani/setoran.php [L,QSA]
+RewriteRule ^qurani/setoran/surah/([^/]+)/?$ qurani/setoran.php?surah=$1 [L,QSA]
+RewriteRule ^qurani/setoran/juz/([^/]+)/?$ qurani/setoran.php?juz=$1 [L,QSA]
+RewriteRule ^qurani/setoran/page/([^/]+)/?$ qurani/setoran.php?page=$1 [L,QSA]
+RewriteRule ^qurani/setoran/new?$ qurani/setoran.php?view=new [L,QSA]
+RewriteRule ^qurani/setoran/edit/([^/]+)/?$ qurani/setoran.php?view=edit&campaign_id=$1 [L,QSA]
+RewriteRule ^qurani/rekapan/?$ qurani/rekapan.php [L,QSA]
+RewriteRule ^qurani/riwayat/([^/]+)/?$ qurani/rekapan.php?id=$1 [L,QSA]
+
 # Profile
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

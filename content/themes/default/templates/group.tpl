@@ -1570,9 +1570,12 @@
                   </div>
                 </div>
               {/if}
+
+              {if $sub_view == "qurani"}
+                {include file='qurani/group_settings.tpl'}
+              {/if}
             </div>
           </div>
-
         {/if}
         <!-- view content -->
       </div>

@@ -3856,8 +3856,12 @@
         <button type="submit" class="btn btn-primary">{__("Save Changes")}</button>
       </div>
     </form>
+  
+    <!-- Qurani Settings Start -->
+    {elseif $sub_view == "qurani"}
+      {include file='qurani/global_settings.tpl'}
 
-  {elseif $sub_view == "sms"}
+    {elseif $sub_view == "sms"}
 
     <!-- card-header -->
     <div class="card-header with-icon">

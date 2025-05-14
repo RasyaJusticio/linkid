@@ -199,6 +199,144 @@ try {
           page_header($control_panel['title'] . " &rsaquo; " . __("Analytics Settings"));
           break;
 
+        case 'qurani':
+            // Header halaman
+            page_header($control_panel['title'] . " › " . __("Pengaturan Qurani"));
+        
+            // Ambil semua pengaturan dari database
+            $get_settings = $db->query("SELECT * FROM qu_setting_global");
+            $settings = [];
+            if ($get_settings->num_rows > 0) {
+                while ($row = $get_settings->fetch_assoc()) {
+                    $settings[$row['key']] = $row;
+                }
+            }
+            $smarty->assign('qurani_settings', $settings);
+        
+            // Fungsi untuk mengembalikan respons JSON
+            function send_json_response($success, $message) {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => $success, 'message' => $message]);
+                exit;
+            }
+        
+            // Tangani pembaruan pengaturan
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_qurani_settings'])) {
+                // Log data POST untuk debug
+                error_log("POST settings: " . print_r($_POST['settings'], true));
+        
+                foreach ($_POST['settings'] as $key => $data) {
+                    // Gunakan nilai yang ada jika input kosong
+                    $value = !empty($data['value']) ? $data['value'] : ($settings[$key]['value'] ?? '');
+                    $status = isset($data['status']) ? 1 : 0;
+        
+                    // Validasi kunci
+                    $valid_keys = [
+                        'tata-letak', 'font', 'font-size', 'kesimpulan',
+                        'sa-1', 'sa-2', 'sa-3', 'sa-4', 'sa-5',
+                        'sk-1', 'sk-2', 'sk-3', 'sk-4', 'sk-5', 'sk-6', 'sk-7', 'sk-8', 'sk-9', 'sk-10', 'sk-11', 'sk-12', 'sk-13', 'sk-14'
+                    ];
+                    if (!in_array($key, $valid_keys)) {
+                        send_json_response(false, __("Kunci tidak valid: ") . $key);
+                    }
+        
+                    // Periksa apakah kunci ada di tabel
+                    $check_key = $db->query(sprintf("SELECT COUNT(*) as count FROM qu_setting_global WHERE `key` = %s", secure($key)));
+                    $key_exists = $check_key->fetch_assoc()['count'] > 0;
+        
+                    if ($key_exists) {
+                        // Update jika kunci ada
+                        $query = $db->query(sprintf(
+                            "UPDATE qu_setting_global SET value = %s, status = %s WHERE `key` = %s",
+                            secure($value),
+                            secure($status, 'int'),
+                            secure($key)
+                        ));
+                        if (!$query) {
+                            error_log("Query gagal untuk kunci $key: " . $db->error);
+                            send_json_response(false, __("Gagal menyimpan pengaturan untuk kunci: ") . $key);
+                        }
+                    } else {
+                        // Sisipkan kunci baru jika tidak ada
+                        $query = $db->query(sprintf(
+                            "INSERT INTO qu_setting_global (`key`, `value`, `status`) VALUES (%s, %s, %s)",
+                            secure($key),
+                            secure($value),
+                            secure($status, 'int')
+                        ));
+                        if (!$query) {
+                            error_log("Insert gagal untuk kunci $key: " . $db->error);
+                            send_json_response(false, __("Gagal menyisipkan kunci baru: ") . $key);
+                        }
+                    }
+                }
+        
+                send_json_response(true, __("Pengaturan berhasil diperbarui"));
+            }
+        
+            // Tangani reset pengaturan ke default
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reset_qurani_settings'])) {
+                $defaultSettings = [
+                    'tata-letak' => ['value' => 'fleksibel', 'status' => 1],
+                    'font' => ['value' => 'IndoPak', 'status' => 1],
+                    'font-size' => ['value' => '5', 'status' => 1],
+                    'kesimpulan' => ['value' => 'tampilkan', 'status' => 1],
+                    'sa-1' => ['value' => 'Ayat Lupa', 'status' => 1],
+                    'sa-2' => ['value' => 'Ayat Waqaf atau Washal', 'status' => 1],
+                    'sa-3' => ['value' => 'Ayat Waqaf dan Ibtida', 'status' => 1],
+                    'sa-4' => ['value' => 'Lainnya', 'status' => 1],
+                    'sa-5' => ['value' => 'Gharib', 'status' => 1],
+                    'sk-1' => ['value' => 'Ghunnah', 'status' => 1],
+                    'sk-2' => ['value' => 'Harakat Tertukar', 'status' => 1],
+                    'sk-3' => ['value' => 'Huruf Tambah Kurang', 'status' => 1],
+                    'sk-4' => ['value' => 'Lupa', 'status' => 1],
+                    'sk-5' => ['value' => 'Mad', 'status' => 1],
+                    'sk-6' => ['value' => 'Makhroj', 'status' => 1],
+                    'sk-7' => ['value' => 'Nun Mati Tanwin', 'status' => 1],
+                    'sk-8' => ['value' => 'Qalqalah', 'status' => 1],
+                    'sk-9' => ['value' => 'Tasydid', 'status' => 1],
+                    'sk-10' => ['value' => 'Urutan Huruf Kata', 'status' => 1],
+                    'sk-11' => ['value' => 'Waqof Washol', 'status' => 1],
+                    'sk-12' => ['value' => 'Waqof Ibtida', 'status' => 1],
+                    'sk-13' => ['value' => 'Kata Lainnya', 'status' => 1],
+                    'sk-14' => ['value' => 'a', 'status' => 1],
+                ];
+                foreach ($defaultSettings as $key => $values) {
+                    // Periksa apakah kunci ada
+                    $check_key = $db->query(sprintf("SELECT COUNT(*) as count FROM qu_setting_global WHERE `key` = %s", secure($key)));
+                    $key_exists = $check_key->fetch_assoc()['count'] > 0;
+        
+                    if ($key_exists) {
+                        // Update jika kunci ada
+                        $query = $db->query(sprintf(
+                            "UPDATE qu_setting_global SET value = %s, status = %s WHERE `key` = %s",
+                            secure($values['value']),
+                            secure($values['status'], 'int'),
+                            secure($key)
+                        ));
+                        if (!$query) {
+                            error_log("Reset query gagal untuk kunci $key: " . $db->error);
+                            send_json_response(false, __("Gagal mereset pengaturan untuk kunci: ") . $key);
+                        }
+                    } else {
+                        // Sisipkan kunci baru jika tidak ada
+                        $query = $db->query(sprintf(
+                            "INSERT INTO qu_setting_global (`key`, `value`, `status`) VALUES (%s, %s, %s)",
+                            secure($key),
+                            secure($values['value']),
+                            secure($values['status'], 'int')
+                        ));
+                        if (!$query) {
+                            error_log("Reset insert gagal untuk kunci $key: " . $db->error);
+                            send_json_response(false, __("Gagal menyisipkan kunci baru: ") . $key);
+                        }
+                    }
+                }
+        
+                send_json_response(true, __("Pengaturan telah direset ke default"));
+            }
+            break;
+
         default:
           _error(404);
           break;

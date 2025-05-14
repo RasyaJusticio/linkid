@@ -51,6 +51,11 @@
                         <i class="fa fa-users-cog fa-lg fa-fw mr10"></i>{__("Accounts Settings")}
                       </a>
                     </li>
+                    <li {if $view == "settings" && $sub_view == "qurani"}class="active" {/if}>
+                      <a href="{$system['system_url']}/{$control_panel['url']}/settings/qurani">
+                        <i class="fa fa-book-open fa-lg fa-fw mr10"></i>{__("Qurani Settings")}
+                      </a>
+                    </li>
                     <li {if $view == "settings" && $sub_view == "email"}class="active" {/if}>
                       <a href="{$system['system_url']}/{$control_panel['url']}/settings/email">
                         <i class="fa fa-envelope-open fa-lg fa-fw mr10"></i>{__("Email Settings")}

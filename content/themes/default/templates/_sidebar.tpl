@@ -1,6 +1,19 @@
 <div class="card main-side-nav-card">
   <div class="card-body with-nav">
     <ul class="main-side-nav">
+      <!-- islamic -->
+      {if $user->_logged_in}
+        <li class="ptb5 active">
+          <small class="text-muted">{("Aplikasi")|upper}</small>
+        </li>
+        <a href="{$system['system_url']}/qurani">
+          {include file='__svg_icons.tpl' icon="courses" class="main-icon mr10" width="24px" height="24px"}{("Qurani")}
+        </a>
+        <a href="{$system['system_url']}/mutabaah">
+          {include file='__svg_icons.tpl' icon="clock" class="main-icon mr10" width="24px" height="24px"}{__("Mutaba'ah")}
+        </a>
+      {/if}
+      <!-- islamic -->
 
       <!-- favorites -->
       <li {if $page == "index" && ($view == "" || $view == "discover" || $view == "popular")}class="active" {/if}>

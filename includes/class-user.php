@@ -17745,7 +17745,7 @@ class User
   {
     global $db;
     
-    $get_user = $db->query(sprintf("SELECT user_id, user_firstname, user_lastname, user_gender, user_picture FROM users WHERE user_transfer_token = %s", secure($transfer_token)));
+    $get_user = $db->query(sprintf("SELECT user_id, user_name, user_firstname, user_lastname, user_gender, user_picture FROM users WHERE user_transfer_token = %s", secure($transfer_token)));
       
     return $get_user->fetch_assoc();
   }

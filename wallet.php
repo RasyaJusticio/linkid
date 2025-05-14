@@ -99,11 +99,24 @@ try {
         /* unset session */
         unset($_SESSION['wallet_marketplace_amount']);
       }
+      if (isset($_GET['transfer_send_succeed']) && isset($_SESSION['transfer_send_amount'])) {
+        /* assign variables */
+        $smarty->assign('transfer_send_amount', $_SESSION['transfer_send_amount']);
+        /* unset session */
+        unset($_SESSION['transfer_send_amount']);
+      }
+
+      if (!isset($user->_data['user_transfer_token']) || $user->_data['user_transfer_token'] == "") {
+        $transfer_token = $user->transfer_generate_token();      
+      } else {
+        $transfer_token = $user->_data['user_transfer_token'];
+      }
 
       // get wallet transactions
       $transactions = $user->wallet_get_transactions();
       /* assign variables */
       $smarty->assign('transactions', $transactions);
+      $smarty->assign('transfer_token', $transfer_token);
       break;
 
     case 'payments':

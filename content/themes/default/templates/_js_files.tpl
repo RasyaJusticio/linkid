@@ -333,6 +333,12 @@
   <script src="{$system['system_url']}/node_modules/moment/min/moment-with-locales.min.js" {if !$user->_logged_in}defer{/if}>
     
   </script>
+  <script src="{$system['system_url']}/node_modules/qrcodejs/qrcode.min.js">
+
+  </script>
+  <script src="{$system['system_url']}/node_modules/qr-scanner/qr-scanner.umd.min.js">
+
+  </script>
   <script src="https://cdn.plyr.io/3.7.8/plyr.js" {if !$user->_logged_in}defer{/if}>
     
   </script>

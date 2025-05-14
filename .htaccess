@@ -10,15 +10,12 @@ Options -MultiViews
 	Order Allow,Deny
 	Deny from all
 </FilesMatch>
-<IfModule mod_security.c>
-	SecFilterScanPOST Off
-</IfModule>
 
 ## Cache Control ##
 <IfModule mod_headers.c>
-<FilesMatch "\.(jpg|jpeg|png|gif|svg|swf|css|js|webp)$">
-	Header set Cache-Control "max-age=31536000, public"
-</FilesMatch>
+  <FilesMatch "\.(jpg|jpeg|png|gif|svg|swf|css|js|webp)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
 </IfModule>
 
 ## Gzip Control ##
@@ -75,13 +72,11 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule .* - [L,QSA]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 
-# Installer ✅
+# Installer
 RewriteRule ^install/?$ install.php [L,QSA]
 
-# Sign(in|up|out) ✅
+# Sign(in|up|out)
 RewriteRule ^signin/?$  modules/sign.php?do=in [L,QSA]
 RewriteRule ^signup/?$  modules/sign.php?do=up [L,QSA]
 RewriteRule ^signout/?$  modules/sign.php?do=out [L,QSA]
@@ -92,14 +87,14 @@ RewriteRule ^activation/([^/]+)/?$ modules/activation.php?code=$1 [L,QSA]
 RewriteRule ^connect/([^/]+)/?$ modules/connect.php?do=connect&provider=$1 [L,QSA]
 RewriteRule ^revoke/([^/]+)/?$ modules/connect.php?do=revoke&provider=$1 [L,QSA]
 
-# Started ✅
+# Started
 RewriteRule ^started/?$ modules/started.php [L,QSA]
 RewriteRule ^started/finished?$ modules/started.php?finished=true [L,QSA]
 
-# Static Pages ✅
+# Static Pages
 RewriteRule ^static/([^/]+)/?$ modules/static.php?url=$1 [L,QSA]
 
-# Contacts ✅
+# Contacts
 RewriteRule ^contacts/?$ modules/contact.php [L,QSA]
 
 # Directory
@@ -126,6 +121,9 @@ RewriteRule ^messages/([^/]+)/?$ messages.php?cid=$1 [L,QSA]
 # Notifications
 RewriteRule ^notifications/?$ notifications.php [L,QSA]
 
+# Payment Status
+RewriteRule ^payment_status/([^/]+)/?$ payment_status.php?view=$1 [L,QSA]
+
 # Settings
 RewriteRule ^settings/?$ settings.php [L,QSA]
 RewriteRule ^settings/([^/]+)/?$ settings.php?view=$1 [L,QSA]
@@ -147,6 +145,9 @@ RewriteRule ^discover/?$ index.php?view=discover [L,QSA]
 # Saved
 RewriteRule ^saved/?$ index.php?view=saved [L,QSA]
 
+# Scheduled
+RewriteRule ^scheduled/?$ index.php?view=scheduled [L,QSA]
+
 # Memories
 RewriteRule ^memories/?$ index.php?view=memories [L,QSA]
 
@@ -161,10 +162,6 @@ RewriteRule ^ads/edit/([^/]+)/?$ ads.php?view=edit&campaign_id=$1 [L,QSA]
 # Wallet
 RewriteRule ^wallet/?$ wallet.php [L,QSA]
 RewriteRule ^wallet/payments/?$ wallet.php?view=payments [L,QSA]
-
-# Transfer
-RewriteRule ^transfer/?$ transfer.php [L,QSA]
-RewriteRule ^transfer/send?$ transfer.php?view=send [L,QSA]
 
 # Boosted
 RewriteRule ^boosted/posts/?$ index.php?view=boosted_posts [L,QSA]
@@ -238,11 +235,12 @@ RewriteRule ^market/category/([^/]+)/([^/]+)/([^/]+)/?$ market.php?view=category
 RewriteRule ^market/([^/]+)/?$ market.php?page=$1 [L,QSA]
 
 # Funding
-RewriteRule ^my/funding/?$ index.php?view=funding_requests [L,QSA]
+RewriteRule ^my/funding/?$ index.php?view=funding [L,QSA]
 RewriteRule ^funding/?$ funding.php [L,QSA]
 RewriteRule ^funding/([^/]+)/([^/]+)/?$ funding.php?view=funding_request&post_id=$1 [L,QSA]
 
 # Offers
+RewriteRule ^my/offers/?$ index.php?view=offers [L,QSA]
 RewriteRule ^offers/?$ offers.php [L,QSA]
 RewriteRule ^offers/search/?$ offers.php?view=search [L,QSA]
 RewriteRule ^offers/search/([^/]+)/?$ offers.php?view=search&query=$1 [B,L,QSA]
@@ -253,6 +251,7 @@ RewriteRule ^offers/category/([^/]+)/([^/]+)/([^/]+)/?$ offers.php?view=category
 RewriteRule ^offers/([^/]+)/?$ offers.php?page=$1 [L,QSA]
 
 # Jobs
+RewriteRule ^my/jobs/?$ index.php?view=jobs [L,QSA]
 RewriteRule ^jobs/?$ jobs.php [L,QSA]
 RewriteRule ^jobs/search/?$ jobs.php?view=search [L,QSA]
 RewriteRule ^jobs/search/([^/]+)/?$ jobs.php?view=search&query=$1 [B,L,QSA]
@@ -263,6 +262,7 @@ RewriteRule ^jobs/category/([^/]+)/([^/]+)/([^/]+)/?$ jobs.php?view=category&cat
 RewriteRule ^jobs/([^/]+)/?$ jobs.php?page=$1 [L,QSA]
 
 # Courses
+RewriteRule ^my/courses/?$ index.php?view=courses [L,QSA]
 RewriteRule ^courses/?$ courses.php [L,QSA]
 RewriteRule ^courses/search/?$ courses.php?view=search [L,QSA]
 RewriteRule ^courses/search/([^/]+)/?$ courses.php?view=search&query=$1 [B,L,QSA]
@@ -310,6 +310,9 @@ RewriteRule ^developers/?$ developers.php [L,QSA]
 RewriteRule ^developers/([^/]+)/?$ developers.php?view=$1 [L,QSA]
 RewriteRule ^developers/edit/([^/]+)/?$ developers.php?view=edit&app_auth_id=$1 [L,QSA]
 RewriteRule ^share/?$ share.php [L,QSA]
+
+# Merits
+RewriteRule ^merits/?$ merits.php [L,QSA]
 
 # Moderator Panel
 RewriteRule ^modcp/?$ moderator.php [L,QSA]

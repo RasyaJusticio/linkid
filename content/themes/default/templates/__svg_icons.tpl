@@ -1040,6 +1040,10 @@
 
     {include file='../images/svg/my-box.svg'}
 
+  {elseif $icon == "qr_scan"}
+
+    {include file='../images/svg/qr_scan.svg'}
+
   {/if}
 
 </div>

@@ -32,20 +32,20 @@ try {
         $user->transfer_money($target_user['user_id'], $_POST['amount']);
 
         // return
-        return_json(['callback' => 'window.location = site_path + "/transfer?transfer_send_succeed"']);
+        return_json(['callback' => 'window.location = site_path + "/wallet?transfer_send_succeed"']);
         break;
     case 'check_token':
         // valid inputs
         if (!isset($_POST['transfer_token'])) {
             $_SESSION['transfer_fail_message'] = "Scanned QR Code invalid";
-            return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/transfer/send?transfer_send_failed"']);
+            return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/wallet?transfer_send_failed"']);
             break;
         }
 
         $target_user = $user->transfer_get_user($_POST['transfer_token']);
         if (!isset($target_user)) {
             $_SESSION['transfer_fail_message'] = "Scanned QR Code invalid";
-            return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/transfer/send?transfer_send_failed"']);
+            return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/wallet?transfer_send_failed"']);
             break;
         }
         

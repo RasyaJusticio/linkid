@@ -1765,20 +1765,219 @@
             });
         </script>
       </script>
-    {/if}
-    <!-- Wallet -->
 
-    <!-- Transfer -->
-    {if $page == "transfer"}
-      <script id="transfer_money" type="text/template">
+      <script id="wallet-qr" type="text/template">
         <div class="modal-header">
           <h6 class="modal-title">
-            {include file='__svg_icons.tpl' icon="wallet_transfer" class="main-icon mr10" width="24px" height="24px"}
-            {__("Send Money")}
+            {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
+            {__("QR Request")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form class="js_ajax-forms" data-url="payments/transfer.php?do=send_money">
+        <div class="modal-body"> 
+          <div class="bg-gradient-info qr-container">
+            
+            <p class="logo">
+              {__($system['system_title'])}
+            </p>
+
+            <div class="qr-box shadow">
+              <div class="user-info">
+                <h5>
+                  {$user->_data['user_firstname']} {$user->_data['user_lastname']}
+                </h5>
+                <p>@{$user->_data['user_name']}</p>
+            </div>
+            <div class="qrcode-cell">
+              <div id="qrcode"></div>
+              <script type="text/javascript">
+                (function () {
+                  const token = "{{$transfer_token}}";
+                  new QRCode(document.getElementById("qrcode"), token);
+                })();
+              </script>
+            </div>
+          </div>
+        </div>
+        <style>
+            .qr-container {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin: 0;
+                        border-radius: var(--bs-border-radius);
+                        padding: 2rem 1rem;
+                        gap: 1rem;
+
+                        .logo {
+                            display: block;
+                            font-size: 32px;
+                            font-weight: 600;
+                            opacity: 1;
+                            margin: 0;
+                        }
+
+                        .qr-box {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 1rem;
+                            background: linear-gradient(230deg, #ffffff, #d9d9d9) !important;
+                            padding: 2rem;
+                            border-radius: var(--bs-border-radius);
+                            max-width: 100%;
+                        }
+
+                        .qrcode-cell {
+                            padding: 1rem;
+                            background: #FFFFFF;
+                        }
+
+                        .user-info {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            flex-direction: column;
+
+                            * {
+                                margin: 0;
+                                color: #000000;
+                                max-width: 100%;
+                                text-wrap: auto;
+                                text-align: center;
+                            }
+                        }
+                        
+                        #qrcode {
+                            aspect-ratio: 1 / 1;
+
+                            img, canvas {
+                                height: 100%;
+                                width: 100%;
+                                object-fit: contain;
+                            }
+                        }
+                    }
+          </style>
+        </div>
+      </script>
+
+      <script id="wallet-qr-scan" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="qr_scan" class="mr10" width="24px" height="24px"}
+            {__("QR Scan")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="video-container rounded">
+            <video id="reader"></video>
+          </div>
+        </div>
+
+        <style>
+            .modal-header {
+                align-items: center;
+            }
+
+            .video-container {
+                display: grid;
+                background: #000000;
+                width: 100%;
+                min-height: 35vh;
+                overflow: hidden;
+
+                #reader {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .scan-region-highlight-svg, .code-outline-highlight {
+                    stroke: #5e72e4 !important;
+                }
+            }
+            
+        </style>
+
+        <script>
+          (function () {
+            const modalElem = document.getElementById('modal');
+            const readerElem = document.getElementById('reader');
+              
+            let isSuccessfull = false;
+            let isProcessing = false;
+            const onSuccess = (result) => {
+              if (isSuccessfull || isProcessing) {
+                return;
+              }
+              isProcessing = true;
+
+              $.post(ajax_path + "payments/transfer.php?do=check_token", {
+                  transfer_token: result.data
+              }, function (response) {
+                  isProcessing = false;
+                  qrScanner.stop();
+
+                  if (response.result == "valid") {
+                      isSuccessfull = true;
+                          
+                      const user = response.user;
+
+                      modal("#wallet-qr-send", { 'user_id': user['user_id'], 'user_name': user['user_name'], 'user_fullname': user['user_firstname'] + " " + user['user_lastname'], 'user_picture': user['user_picture'] });
+                      cleanUp();
+                  }
+              }).fail(function() {
+                isProcessing = false;
+              });
+            }
+    
+            const qrScanner = new QrScanner(
+              readerElem,
+              onSuccess,
+              {
+                returnDetailedScanResult: true,
+                highlightScanRegion: true,
+                highlightCodeOutline: true
+              }
+            );
+
+            const observer = new MutationObserver((mutations) => {
+              mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                  if (!modalElem.classList.contains('show')) {
+                      cleanUp();
+                  }
+                }
+              });
+            });
+
+            observer.observe(modalElem, {
+              attributes: true,
+              attributeFilter: ['class'],
+            });
+            
+            function cleanUp() {
+              qrScanner.stop();
+              observer.disconnect();
+            }
+
+            qrScanner.start();
+          })();
+        </script>
+      </script>
+
+      <script id="wallet-qr-send" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {__("QR Send")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="walletQrSendForm">
           <div class="modal-body">
             {if $system['wallet_max_transfer'] != "0"}
               <div class="alert alert-info mb20">
@@ -1821,22 +2020,146 @@
             <!-- error -->
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">{__("Send")}</button>
+            <button type="submit" class="btn btn-primary">{__("Confirm")}</button>
           </div>
         </form>
         <script>
-            var buttons = document.querySelectorAll("#presetprices .btn");
-            var input = document.querySelector("input[name='amount']");
+          (function () {
+            const buttons = document.querySelectorAll("#presetprices .btn");
+            const input = document.querySelector("input[name='amount']");
 
             buttons.forEach(btn => {
               btn.addEventListener("click", () => {
                 input.value = btn.getAttribute("data-input");
               });
             });
+
+            const form = document.getElementById("walletQrSendForm");
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const amount = form.querySelector("input[name='amount']").value;
+                const userId = "{literal}{{user_id}}{/literal}";
+                const userName = "{literal}{{user_name}}{/literal}";
+                const userFullName = "{literal}{{user_fullname}}{/literal}";
+                const userPicture = "{literal}{{user_picture}}{/literal}";
+
+                const decodeUserPictureUrl = document.createElement('textarea');
+                decodeUserPictureUrl.innerHTML = userPicture;
+
+                modal("#wallet-qr-send-confirm", {
+                  'amount': amount,
+                  'user_id': userId,
+                  'user_name': userName,
+                  'user_fullname': userFullName,
+                  'user_picture': decodeUserPictureUrl.value,
+                });
+            });
+          })();
+        </script>
+      </script>
+
+      <script id="wallet-qr-send-confirm" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {__("QR Send")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="js_ajax-forms" data-url="payments/transfer.php?do=send_money">
+          <div class="modal-body">
+            <p class="sending-to">
+              {__("Sending To")}
+            </p>
+            <div class="target-user">
+                <img class="user-avatar" src="{literal}{{user_picture}}{/literal}" alt="">
+                <p class="user-fullname">
+                  {literal}{{user_fullname}}{/literal}
+                </p>
+                <p class="user-name">
+                  @{literal}{{user_name}}{/literal}
+                </p>
+            </div>
+
+            <span id="wallet-qr-total">Rp 0</span>
+            
+            <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
+            <input type="hidden" name="send_to_id" value="{literal}{{user_id}}{/literal}">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Send")}</button>
+          </div>
+        </form>
+        <style>
+            .sending-to {
+                width: 100%;
+                text-align: center;
+                margin-block: 0.2rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .target-user {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.2rem;
+
+                .user-avatar {
+                    border-radius: 100%;
+                    aspect-ratio: 1 / 1;
+                    width: 6rem;
+                }
+
+                .user-fullname, .user-name {
+                    margin: 0;
+                }
+
+                .user-fullname {
+                    font-size: 1.4rem;
+                    margin-bottom: -0.4rem;
+                    font-weight: bold;
+                }
+            }
+            
+            #wallet-qr-total {
+                margin-top: 1rem;
+                text-align: center;
+                font-size: 3rem;
+                font-weight: bolder;
+                color: rgb(94, 114, 228); 
+                width: 100%;
+                display: block;
+            }
+        </style>
+        <script>
+          (function () {
+            function formatNumber(amount) {
+              const formatter = new Intl.NumberFormat('de-DE', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              });
+
+              const formatted = formatter.format(amount);
+
+              return formatted;
+            }
+
+            function printMoney(amount, symbol = "Rp", dir = "left") {
+              const formatted = formatNumber(amount);
+              return dir === "right" ? formatted + ' ' + symbol : symbol + ' ' + formatted;
+            }
+
+            const amount = "{literal}{{amount}}{/literal}";
+            const walletQRTotal = document.getElementById('wallet-qr-total');
+
+            walletQRTotal.innerText = printMoney(Number(amount));
+          })();
         </script>
       </script>
     {/if}
-    <!-- Transfer -->
+    <!-- Wallet -->
 
     <!-- Crop Profile (Picture|Cover) -->
     {if in_array($page, ["started", "profile", "page", "group", "event"])}

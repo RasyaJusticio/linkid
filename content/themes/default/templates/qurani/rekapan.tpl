@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Tentukan URL iframe -->
-{assign var="iframe_url" value="http://localhost:5173/riwayat"}
+{assign var="iframe_url" value="{$system['qurani_url']}/riwayat"}
 
 <!-- page header -->
 <div class="circle-2"></div>
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Fungsi untuk mengirim postMessage
   const sendPostMessage = (data) => {
     try {
-      const targetOrigin = 'http://localhost:5173';
+      const targetOrigin = iframe.src;
       iframe.contentWindow.postMessage(data, targetOrigin);
       console.log('✅ postMessage dikirim ke iframe:', data, 'Waktu:', new Date().toISOString());
     } catch (error) {

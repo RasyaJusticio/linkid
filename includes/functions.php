@@ -455,6 +455,9 @@ function init_system(&$system)
   /* set system URL */
   $system['system_url'] = SYS_URL;
 
+  /* set Qurani URL */
+  $system['qurani_url'] = QURANI_URL;
+
   /* set system debugging */
   $system['DEBUGGING'] = DEBUGGING;
 

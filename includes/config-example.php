@@ -56,3 +56,6 @@ define('DEBUGGING', false);
  * A unique key for your licence.
  */
 define('LICENCE_KEY', '');
+
+// ** Qurani URL ** //
+define("QURANI_URL", 'https://example.com');

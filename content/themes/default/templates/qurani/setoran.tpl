@@ -2,19 +2,20 @@
 {include file='../_header.tpl'}
 
 <!-- Tentukan URL iframe berdasarkan parameter yang diterima -->
+{assign var="qurani_url" value="{$system['qurani_url']}"}
 {if $surah}
-    {assign var="iframe_url" value="http://localhost:5173/surah/$surah"}
+    {assign var="iframe_url" value="{$system['qurani_url']}/surah/$surah"}
 {elseif $juz}
-    {assign var="iframe_url" value="http://localhost:5173/juz/$juz"}
+    {assign var="iframe_url" value="{$system['qurani_url']}/juz/$juz"}
 {elseif $halaman}
     {if $halaman >= 1 && $halaman <= 604}
-        {assign var="iframe_url" value="http://localhost:5173/page/$halaman"}
+        {assign var="iframe_url" value="{$system['qurani_url']}/page/$halaman"}
     {else}
-        {assign var="iframe_url" value="http://localhost:5173/"}
+        {assign var="iframe_url" value="{$system['qurani_url']}/"}
         <div class="alert alert-danger">Nomor halaman tidak valid. Harus antara 1 dan 604 = {$halaman}.</div>
     {/if}
 {else}
-    {assign var="iframe_url" value="http://localhost:5173/"}
+    {assign var="iframe_url" value="{$system['qurani_url']}/"}
 {/if}
 
 
@@ -40,11 +41,10 @@
 </div>
 
 <script>
-{literal}
 document.addEventListener('DOMContentLoaded', function() {
   const iframe = document.getElementById('quranFrame');
-  console.log('Iframe URL:', iframe.src);
   const payload = localStorage.getItem('setoranPayload');
+  const quraniUrl = "{$qurani_url}";
   let hasSentMessage = false;
 
   // Fungsi untuk memvalidasi payload
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cek field yang wajib ada
     requiredFields.forEach(field => {
       if (!payload[field]) {
-        errors.push(`Field ${field} tidak boleh kosong`);
+        errors.push('Field ' + field + ' tidak boleh kosong');
       }
     });
 
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Parsed payload sebelum postMessage:', sanitizedPayload);
 
         // Kirim postMessage ke iframe
-        iframe.contentWindow.postMessage(sanitizedPayload, 'http://localhost:5173');
+        iframe.contentWindow.postMessage(sanitizedPayload, quraniUrl);
         console.log('✅ postMessage dikirim ke iframe:', sanitizedPayload);
         hasSentMessage = true;
         // Jangan hapus setoranPayload dari localStorage agar tetap tersedia jika diperlukan
@@ -150,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.warn('⚠️ Tidak ada payload atau iframe tidak ditemukan:', { payload, iframe });
   }
 });
-{/literal}
 </script>
 
 {include file='../_footer.tpl'}

@@ -2004,7 +2004,7 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="send_to">{__("Send To")}</label>
-              <div class="data-container small" style="display: flex; align-items: center; gap: 0.8rem; padding: .75rem 1.5rem; background-color: var(--card-dark-input); color: var(--card-dark-input-color); border-color: var(--card-dark-divider); border: var(--bs-border-width) solid var(--bs-border-color); border-radius: var(--bs-border-radius);">
+              <div class="data-container small send-to-container">
                 <div class="data-avatar">
                     <img class="data-avatar" src="{literal}{{user_picture}}{/literal}" alt="" >
                 </div>
@@ -2023,6 +2023,27 @@
             <button type="submit" class="btn btn-primary">{__("Confirm")}</button>
           </div>
         </form>
+        <style>
+            body.night-mode {
+                .send-to-container {
+                    background-color: var(--card-dark-input);
+                    color: var(--card-dark-input-color);
+                    border-color: var(--card-dark-divider);
+                    border: var(--bs-border-width) solid var(--bs-border-color);
+                    border-radius: var(--bs-border-radius);
+                }
+            }
+
+            .send-to-container {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                padding: .75rem 1.5rem;
+                border: var(--bs-border-width) solid var(--bs-border-color);
+                border-radius: var(--bs-border-radius);
+            }
+
+        </style>
         <script>
           (function () {
             const buttons = document.querySelectorAll("#presetprices .btn");

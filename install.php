@@ -21,10 +21,10 @@ require(ABSPATH . 'includes/exceptions.php');
 
 
 // check config file
-//if (file_exists(ABSPATH . 'includes/config.php')) {
+if (file_exists(ABSPATH . 'includes/config.php')) {
   /* the config file exist -> start the system */
-  //header('Location: ./');
-//}
+  header('Location: ./');
+}
 
 
 // set debugging settings

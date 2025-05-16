@@ -12,7 +12,7 @@ error_log('setoran.php accessed with URI: ' . $_SERVER['REQUEST_URI']);
 
 // Parse URL segments
 $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
-$base_path = 'sngine/Script/qurani'; // Adjust based on your base URL structure
+$base_path = 'qurani'; // Adjust based on your base URL structure
 $segments = array_slice($uri, array_search('setoran', $uri) + 1);
 
 error_log('Parsed segments: ' . print_r($segments, true));

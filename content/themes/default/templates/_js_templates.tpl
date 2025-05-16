@@ -1416,6 +1416,10 @@
                   <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
                   <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
                   <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
+                  <button type="button" class="col btn btn-primary" data-input="300000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">300K</button>
+                  <button type="button" class="col btn btn-primary" data-input="500000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">500K</button>
+                  <button type="button" class="col btn btn-primary" data-input="750000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">750K</button>
+                  <button type="button" class="col btn btn-primary" data-input="1000000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">1M</button>
               </div>
             </div>
             <!-- error -->
@@ -1470,6 +1474,10 @@
                   <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
                   <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
                   <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
+                  <button type="button" class="col btn btn-primary" data-input="300000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">300K</button>
+                  <button type="button" class="col btn btn-primary" data-input="500000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">500K</button>
+                  <button type="button" class="col btn btn-primary" data-input="750000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">750K</button>
+                  <button type="button" class="col btn btn-primary" data-input="1000000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">1M</button>
               </div>
             </div>
             <div class="form-group">
@@ -1530,6 +1538,10 @@
                   <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
                   <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
                   <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
+                  <button type="button" class="col btn btn-primary" data-input="300000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">300K</button>
+                  <button type="button" class="col btn btn-primary" data-input="500000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">500K</button>
+                  <button type="button" class="col btn btn-primary" data-input="750000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">750K</button>
+                  <button type="button" class="col btn btn-primary" data-input="1000000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">1M</button>
               </div>
             </div>
             <!-- error -->
@@ -1585,6 +1597,10 @@
                   <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
                   <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
                   <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
+                  <button type="button" class="col btn btn-primary" data-input="300000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">300K</button>
+                  <button type="button" class="col btn btn-primary" data-input="500000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">500K</button>
+                  <button type="button" class="col btn btn-primary" data-input="750000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">750K</button>
+                  <button type="button" class="col btn btn-primary" data-input="1000000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">1M</button>
               </div>
             </div>
             <!-- error -->
@@ -1638,6 +1654,10 @@
                   <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
                   <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
                   <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
+                  <button type="button" class="col btn btn-primary" data-input="300000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">300K</button>
+                  <button type="button" class="col btn btn-primary" data-input="500000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">500K</button>
+                  <button type="button" class="col btn btn-primary" data-input="750000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">750K</button>
+                  <button type="button" class="col btn btn-primary" data-input="1000000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">1M</button>
               </div>
             </div>
             <!-- error -->
@@ -1691,6 +1711,10 @@
                   <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
                   <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
                   <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
+                  <button type="button" class="col btn btn-primary" data-input="300000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">300K</button>
+                  <button type="button" class="col btn btn-primary" data-input="500000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">500K</button>
+                  <button type="button" class="col btn btn-primary" data-input="750000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">750K</button>
+                  <button type="button" class="col btn btn-primary" data-input="1000000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">1M</button>
               </div>
             </div>
             <!-- error -->
@@ -1744,6 +1768,10 @@
                   <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
                   <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
                   <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
+                  <button type="button" class="col btn btn-primary" data-input="300000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">300K</button>
+                  <button type="button" class="col btn btn-primary" data-input="500000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">500K</button>
+                  <button type="button" class="col btn btn-primary" data-input="750000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">750K</button>
+                  <button type="button" class="col btn btn-primary" data-input="1000000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">1M</button>
               </div>
             </div>
             <!-- error -->
@@ -2000,6 +2028,10 @@
                   <button type="button" class="col btn btn-primary" data-input="150000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">150K</button>
                   <button type="button" class="col btn btn-primary" data-input="200000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">200K</button>
                   <button type="button" class="col btn btn-primary" data-input="250000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">250K</button>
+                  <button type="button" class="col btn btn-primary" data-input="300000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">300K</button>
+                  <button type="button" class="col btn btn-primary" data-input="500000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">500K</button>
+                  <button type="button" class="col btn btn-primary" data-input="750000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">750K</button>
+                  <button type="button" class="col btn btn-primary" data-input="1000000" style="padding-inline: 0.3rem; padding-block: 0.6rem;">1M</button>
               </div>
             </div>
             <div class="form-group">

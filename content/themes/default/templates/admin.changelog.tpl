@@ -14,6 +14,17 @@
     </div>
 
     <!-- Changelog -->
+    <h3>Version <span class="badge bg-warning rounded-pill">4.0.3</span></h3>
+    <blockquote>Release Date: 8th May 2025</blockquote>
+    <ul class="change-log-list mb20">
+      <li>[Fixed] Uploading Performance (Loading Issue)</li>
+      <li>[Fixed] Delete Merits Category</li>
+      <li>[Fixed] Yandex Upload Issue</li>
+      <li>[Fixed] Backbalze Upload Issue</li>
+      <li>[Fixed] Installer Check Issue</li>
+      <li>[Fixed] Minor Bugs</li>
+    </ul>
+
     <h3>Version <span class="badge bg-warning rounded-pill">4.0.2</span></h3>
     <blockquote>Release Date: 5th May 2025</blockquote>
     <ul class="change-log-list mb20">

@@ -578,7 +578,7 @@
             <i class="fa fa-star {if $_post['post_rate'] >= 4}checked{/if}"></i>
             <i class="fa fa-star {if $_post['post_rate'] >= 5}checked{/if}"></i>
           </span>
-          <span class="badge bg-light text-primary">{$_post['post_rate']|format_number}</span>
+          <span class="badge bg-light text-primary">{$_post['post_rate']|format_number:1}</span>
         {/if}
       {/if}
     </div>
@@ -802,7 +802,7 @@
                 <i class="fa fa-star {if $post['post_rate'] >= 4}checked{/if}"></i>
                 <i class="fa fa-star {if $post['post_rate'] >= 5}checked{/if}"></i>
               </span>
-              <span class="badge bg-light text-primary">{$post['post_rate']|format_number}</span>
+              <span class="badge bg-light text-primary">{$post['post_rate']|format_number:1}</span>
             {/if}
           </div>
         {/if}
@@ -1169,7 +1169,7 @@
             <div class="poll-option js_poll-vote" data-id="{$option['option_id']}" data-option-votes="{$option['votes']}">
               <div class="percentage-bg" {if $_post['poll']['votes'] > 0} style="width: {($option['votes']/$_post['poll']['votes'])*100}%" {/if}></div>
               <div class="form-check form-check-inline">
-                <input type="radio" name="poll_{$_post['poll']['poll_id']}" id="option_{$option['option_id']}" class="form-check-input" {if $option['checked']}checked{/if}>
+                <input type="radio" name="poll_{if $boosted}boosted_{/if}_{$_post['poll']['poll_id']}" id="option_{$option['option_id']}" class="form-check-input" {if $option['checked']}checked{/if}>
                 <label class="form-check-label" for="option_{$option['option_id']}">{$option['text']}</label>
               </div>
             </div>

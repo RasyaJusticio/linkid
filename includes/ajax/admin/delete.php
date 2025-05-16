@@ -581,6 +581,14 @@ try {
       $db->query(sprintf("DELETE FROM announcements WHERE announcement_id = %s", secure($_POST['id'], 'int')));
       break;
 
+    case 'merit_category':
+      // check admin|moderator permission
+      if (!$user->_is_admin && ($user->_is_moderator && !$system['mods_merit_permission'])) {
+        modal("MESSAGE", __("System Message"), __("You don't have the right permission to access this"));
+      }
+      $user->delete_category("merits_categories", $_POST['id']);
+      break;
+
     default:
       _error(400);
       break;

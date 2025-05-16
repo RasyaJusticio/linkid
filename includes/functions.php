@@ -45,7 +45,7 @@ function check_system_requirements()
   }
   /* check if the mime_content_type function exists */
   if (!extension_loaded('fileinfo') || !function_exists('mime_content_type')) {
-    $errors['mime_content_type'] = true;
+    $errors['fileinfo'] = true;
   }
   /* check if zip enabled */
   if (!extension_loaded('zip')) {
@@ -1417,6 +1417,7 @@ function _email($email, $subject, $body_html, $body_plain, $is_html = true, $onl
     $mail = new PHPMailer\PHPMailer\PHPMailer;
     $mail->CharSet = "UTF-8";
     $mail->isSMTP();
+    $mail->XMailer = $system['system_title'];
     $mail->Host = $system['email_smtp_server'];
     $mail->SMTPAuth = ($system['email_smtp_authentication']) ? true : false;
     $mail->Username = $system['email_smtp_username'];
@@ -2157,15 +2158,8 @@ function upload_file($from_web = false)
         $final_file_name = $directory . $prefix . '.' . $extension;
         $final_file_path = ABSPATH . $system['uploads_directory'] . '/' . $final_file_name;
 
-        // write the final file
-        $final_file = fopen($final_file_path, 'wb');
-        for ($i = 0; $i < $totalChunks; $i++) {
-          $chunk_file = $temp_directory . $file_guid . '_' . $file_name . ".part-" . $i;
-          $chunk_data = file_get_contents($chunk_file);
-          fwrite($final_file, $chunk_data);
-          unlink($chunk_file);
-        }
-        fclose($final_file);
+        // reassemble the chunks into the final file
+        reassemble_file_chunks($temp_directory, $file_guid, $file_name, $totalChunks, $final_file_path);
 
         // check file size
         $final_file_size = filesize($final_file_path);
@@ -2189,11 +2183,13 @@ function upload_file($from_web = false)
         // check image resolution
         if (in_array($_POST['handle'], ['picture-user', 'picture-page', 'picture-group'])) {
           if ($image->getWidth() < 150 || $image->getHeight() < 150) {
+            unlink($final_file_path);
             throw new ValidationException(__("Please choose an image that's at least 150 pixels wide and at least 150 pixels tall"));
           }
         } elseif (in_array($_POST['handle'], ['cover-user', 'cover-page', 'cover-group'])) {
           if ($system['limit_cover_photo']) {
             if ($image->getWidth() < 1296 || $image->getHeight() < 360) {
+              unlink($final_file_path);
               throw new ValidationException(__("Please choose an image that's at least 1296 pixels wide and at least 360 pixels tall"));
             }
           }
@@ -2559,20 +2555,13 @@ function upload_file($from_web = false)
       // if this is the last chunk, reassemble the file
       if ($chunkIndex + 1 === $totalChunks) {
 
-        // write final file name & path
+        // prepare final file name & path
         $prefix = $system['uploads_prefix'] . '_' . get_hash_token();
         $final_file_name = $directory . $prefix . '.' . $extension;
         $final_file_path = ABSPATH . $system['uploads_directory'] . '/' . $final_file_name;
 
-        // open the final file
-        $final_file = fopen($final_file_path, 'wb');
-        for ($i = 0; $i < $totalChunks; $i++) {
-          $chunk_file = $temp_directory . $file_guid . '_' . $file_name . ".part-" . $i;
-          $chunk_data = file_get_contents($chunk_file);
-          fwrite($final_file, $chunk_data);
-          unlink($chunk_file);
-        }
-        fclose($final_file);
+        // reassemble the chunks into the final file
+        reassemble_file_chunks($temp_directory, $file_guid, $file_name, $totalChunks, $final_file_path);
 
         // check file size
         $final_file_size = filesize($final_file_path);
@@ -2662,15 +2651,8 @@ function upload_file($from_web = false)
         $final_file_name = $directory . $prefix . '.' . $extension;
         $final_file_path = ABSPATH . $system['uploads_directory'] . '/' . $final_file_name;
 
-        // write the final file
-        $final_file = fopen($final_file_path, 'wb');
-        for ($i = 0; $i < $totalChunks; $i++) {
-          $chunk_file = $temp_directory . $file_guid . '_' . $file_name . ".part-" . $i;
-          $chunk_data = file_get_contents($chunk_file);
-          fwrite($final_file, $chunk_data);
-          unlink($chunk_file);
-        }
-        fclose($final_file);
+        // reassemble the chunks into the final file
+        reassemble_file_chunks($temp_directory, $file_guid, $file_name, $totalChunks, $final_file_path);
 
         // check file size
         $final_file_size = filesize($final_file_path);
@@ -2760,15 +2742,8 @@ function upload_file($from_web = false)
         $final_file_name = $directory . $prefix . '.' . $extension;
         $final_file_path = ABSPATH . $system['uploads_directory'] . '/' . $final_file_name;
 
-        // write the final file
-        $final_file = fopen($final_file_path, 'wb');
-        for ($i = 0; $i < $totalChunks; $i++) {
-          $chunk_file = $temp_directory . $file_guid . '_' . $file_name . ".part-" . $i;
-          $chunk_data = file_get_contents($chunk_file);
-          fwrite($final_file, $chunk_data);
-          unlink($chunk_file);
-        }
-        fclose($final_file);
+        // reassemble the chunks into the final file
+        reassemble_file_chunks($temp_directory, $file_guid, $file_name, $totalChunks, $final_file_path);
 
         // check file size
         $final_file_size = filesize($final_file_path);
@@ -2858,15 +2833,8 @@ function upload_file($from_web = false)
         $final_file_name = $directory . $prefix . '.' . $extension;
         $final_file_path = ABSPATH . $system['uploads_directory'] . '/' . $final_file_name;
 
-        // write the final file
-        $final_file = fopen($final_file_path, 'wb');
-        for ($i = 0; $i < $totalChunks; $i++) {
-          $chunk_file = $temp_directory . $file_guid . '_' . $file_name . ".part-" . $i;
-          $chunk_data = file_get_contents($chunk_file);
-          fwrite($final_file, $chunk_data);
-          unlink($chunk_file);
-        }
-        fclose($final_file);
+        // reassemble the chunks into the final file
+        reassemble_file_chunks($temp_directory, $file_guid, $file_name, $totalChunks, $final_file_path);
 
         // check file size
         $final_file_size = filesize($final_file_path);
@@ -3423,7 +3391,7 @@ function yandex_cloud_test()
   try {
     $s3Client = Aws\S3\S3Client::factory(array(
       'version'     => 'latest',
-      'endpoint'    => 'https://s3.yandexcloud.net/' . $system['yandex_cloud_bucket'] . '/uploads/',
+      'endpoint'    => 'https://s3.yandexcloud.net/',
       'region'      => $system['yandex_cloud_region'],
       'credentials' => array(
         'key'     => $system['yandex_cloud_key'],
@@ -7423,6 +7391,49 @@ function get_picture($picture, $type)
   return $picture;
 }
 
+/**
+ * reassemble_file_chunks
+ * 
+ * @param string $temp_directory
+ * @param string $file_guid
+ * @param string $file_name
+ * @param int $totalChunks
+ * @param string $final_file_path
+ * @return void
+ */
+function reassemble_file_chunks($temp_directory, $file_guid, $file_name, $totalChunks, $final_file_path)
+{
+  $final_file = fopen($final_file_path, 'wb');
+  if ($final_file === false) {
+    throw new Exception(__("Could not create final file"));
+  }
+  for ($i = 0; $i < $totalChunks; $i++) {
+    $chunk_file = $temp_directory . $file_guid . '_' . $file_name . ".part-" . $i;
+    if (!file_exists($chunk_file)) {
+      fclose($final_file);
+      throw new Exception(__("Missing chunk file"));
+    }
+    $chunk_handle = fopen($chunk_file, 'rb');
+    if ($chunk_handle === false) {
+      fclose($final_file);
+    }
+    while (!feof($chunk_handle)) {
+      $buffer = fread($chunk_handle, 8192); // Read in 8KB chunks
+      if ($buffer === false) {
+        fclose($chunk_handle);
+        throw new Exception(__("Error reading chunk file"));
+      }
+      if (fwrite($final_file, $buffer) === false) {
+        fclose($chunk_handle);
+        fclose($final_file);
+        throw new Exception(__("Error writing to final file"));
+      }
+    }
+    fclose($chunk_handle);
+    unlink($chunk_file);
+  }
+  fclose($final_file);
+}
 
 /**
  * save_picture_from_url

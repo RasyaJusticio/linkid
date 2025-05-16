@@ -136,7 +136,7 @@
 
       <!-- advertising -->
       {if $user->_logged_in}
-        {if $user->_data['can_create_ads'] || $system['wallet_enabled'] || $system['packages_enabled']}
+        {if $user->_data['can_create_ads'] || $system['wallet_enabled'] || $user->_data['can_boost_posts'] || $user->_data['can_boost_pages']}
           <li class="ptb5">
             <small class="text-muted">{__("Advertising")|upper}</small>
           </li>
@@ -157,7 +157,7 @@
             </li>
           {/if}
 
-          {if $system['packages_enabled']}
+          {if $user->_data['can_boost_posts'] || $user->_data['can_boost_pages']}
             <a href="#boosted" data-bs-toggle="collapse" {if $page == "index" && ($view == "boosted_posts" || $view == "boosted_pages")}aria-expanded="true" {/if}>
               {include file='__svg_icons.tpl' icon="boosted" class="main-icon mr10" width="24px" height="24px"}{__("Boosted")}
             </a>

@@ -339,9 +339,9 @@ try {
         }
 
         // page header
-        page_header(__("My Offers"));
+        page_header(__("My Jobs"));
 
-        // get posts (offers)
+        // get posts (jobs)
         $posts = $user->get_posts(['get' => 'posts_profile', 'id' => $user->_data['user_id'], 'filter' => 'job']);
         /* assign variables */
         $smarty->assign('posts', $posts);

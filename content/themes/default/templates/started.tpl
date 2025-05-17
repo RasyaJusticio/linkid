@@ -104,7 +104,16 @@
                   <select class="form-select" name="country" id="country">
                     <option value="none">{__("Select Country")}</option>
                     {foreach $countries as $country}
-                      <option {if $user->_data['user_country'] == $country['country_id']}selected{/if} value="{$country['country_id']}">{$country['country_name']}</option>
+                      <option
+                        {if $user->_data['user_country'] == $country['country_id']}
+                          selected
+                        {elseif !$user->_data['user_country'] && $country['country_id'] == 101}
+                          selected
+                        {/if}
+                        value="{$country['country_id']}"
+                      >
+                        {$country['country_name']}
+                      </option>
                     {/foreach}
                   </select>
                 </div>

@@ -2422,7 +2422,7 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0.00" min="1.00" max="1000" name="amount" />
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount" />
               </div>
             </div>
             <!-- error -->
@@ -2449,18 +2449,33 @@
           <div class="plr20 text-start">
             <div class="mb15">
               <span>{__("Amount")}</span>
-              <span class="float-end">{literal}{{price}}{/literal}</span>
+              <span class="float-end">
+                {literal}
+                  {{#price_printed}}{{price_printed}}{{/price_printed}}
+                  {{^price_printed}}{{price}}{{/price_printed}}
+                {/literal}
+              </span>
             </div>
             {if $system['payment_vat_enabled']}
             <div class="mb15">
               <span>{__("VAT")} +%{get_payment_vat_percentage()}</span>
-              <span class="float-end">{literal}{{vat}}{/literal}</span>
+              <span class="float-end">
+                {literal}
+                  {{#vat_printed}}{{vat_printed}}{{/vat_printed}}
+                  {{^vat_printed}}{{vat}}{{/vat_printed}}
+                {/literal}
+              </span>
             </div>
             {/if}
             {if $system['payment_fees_enabled']}
               <div class="mb15">
                 <span>{__("Fees")} +%{$system['payment_fees_percentage']}</span>
-                <span class="float-end">{literal}{{fees}}{/literal}</span>
+                <span class="float-end">
+                  {literal}
+                    {{#fees_printed}}{{fees_printed}}{{/fees_printed}}
+                    {{^fees_printed}}{{fees}}{{/fees_printed}}
+                  {/literal}
+                </span>
               </div>
             {/if}
             <div class="divider mtb15"></div>

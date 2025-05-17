@@ -127,7 +127,7 @@ try {
       }
 
       // return
-      modal("#payment", "{'handle': 'donate',  'donate': 'true', 'id': '" . $_GET['post_id'] . "', 'price': '" . $_POST['amount'] . "', 'vat': '" . get_payment_vat_value($_POST['amount']) . "', 'fees': '" . get_payment_fees_value($_POST['amount']) . "', 'total': '" . get_payment_total_value($_POST['amount']) . "', 'total_printed': '" . get_payment_total_value($_POST['amount'], true) . "'}");
+      modal("#payment", "{'handle': 'donate',  'donate': 'true', 'id': '" . $_GET['post_id'] . "', 'price': '" . $_POST['amount'] . "', 'price_printed': '" . print_money(format_number($_POST['amount'])) . "', 'vat': '" . get_payment_vat_value($_POST['amount']) . "', 'vat_printed': '" . print_money(format_number(get_payment_vat_value($_POST['amount']))) . "', 'fees': '" . get_payment_fees_value($_POST['amount']) . "', 'fees_printed': '" . print_money(format_number(get_payment_fees_value($_POST['amount']))) . "', 'total': '" . get_payment_total_value($_POST['amount']) . "', 'total_printed': '" . get_payment_total_value($_POST['amount'], true) . "'}");
       break;
 
     default:

@@ -57,7 +57,7 @@ try {
         /* redirect */
         $return['callback'] = 'window.location.href = "' . $system['system_url'] . '/market/orders/"';
       } else {
-        modal("#payment", "{'handle': 'marketplace', 'marketplace': 'true', 'id': '" . $orders_collection['orders_collection_id'] . "', 'price': '" . $orders_collection['total'] . "', 'vat': '" . get_payment_vat_value($orders_collection['total']) . "', 'fees': '" . get_payment_fees_value($orders_collection['total']) . "', 'total': '" . get_payment_total_value($orders_collection['total']) . "', 'total_printed': '" . get_payment_total_value($orders_collection['total'], true) . "'}");
+        modal("#payment", "{'handle': 'marketplace', 'marketplace': 'true', 'id': '" . $orders_collection['orders_collection_id'] . "', 'price': '" . $orders_collection['total'] . "', 'price_printed': '" . print_money(format_number($orders_collection['total'])) . "', 'vat': '" . get_payment_vat_value($orders_collection['total']) . "', 'vat_printed': '" . print_money(format_number(get_payment_vat_value($orders_collection['total']))) . "', 'fees': '" . get_payment_fees_value($orders_collection['total']) . "', 'fees_printed': '" . print_money(format_number(get_payment_fees_value($orders_collection['total']))) . "', 'total': '" . get_payment_total_value($orders_collection['total']) . "', 'total_printed': '" . get_payment_total_value($orders_collection['total'], true) . "'}");
       }
       break;
 

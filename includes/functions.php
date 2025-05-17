@@ -8153,16 +8153,22 @@ function abbreviate_count($count)
 }
 
 /**
-* format_number
-*
-* @param float $number
-* @param int $decimals = 0
-* @param string $decimal_separator = '.'
-* @param string $thousands_separator = ','
-* @return string
-*/
-function format_number(float $number, int $decimals = 0, string $decimal_separator = ",", string $thousands_separator = ".")
+ * format_number
+ *
+ * Safely formats a number with optional decimal and thousand separators.
+ *
+ * @param float|int|string|null $number
+ * @param int $decimals Number of decimal places
+ * @param string $decimal_separator Character for decimal point
+ * @param string $thousands_separator Character for thousands separator
+ * @return string Formatted number or '0' if invalid input
+ */
+function format_number($number, int $decimals = 0, string $decimal_separator = ",", string $thousands_separator = "."): string
 {
-    return number_format($number, $decimals, ",", ".");
+    if (!is_numeric($number)) {
+        return '0';
+    }
+
+    return number_format((float)$number, $decimals, $decimal_separator, $thousands_separator);
 }
 

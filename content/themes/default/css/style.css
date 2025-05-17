@@ -8020,6 +8020,14 @@ body.night-mode .notfound h2 {
   z-index: 1003;
 }
 
+#midtrans-snap-embed {
+    overflow: hidden;
+}
+
+#midtrans-snap-embed iframe {
+    width: 100% !important;
+}
+
 /* -- */
 
 /* PAGE = [INDEX] */

@@ -478,7 +478,7 @@ function init_system(&$system)
       $endpoint = "https://" . $system['digitalocean_space_name'] . "." . $system['digitalocean_space_region'] . ".digitaloceanspaces.com";
       $system['system_uploads'] = $endpoint . "/uploads";
     } elseif ($system['wasabi_enabled']) {
-      $endpoint = "https://s3." . $system['wasabi_region'] . ".wasabisys.com/" . $system['wasabi_bucket'];
+      $endpoint = "https://" . $system['wasabi_region'] . ".link.id/" . $system['wasabi_bucket'];
       $system['system_uploads'] = $endpoint . "/uploads";
     } elseif ($system['backblaze_enabled']) {
       $endpoint = "https://s3." . $system['backblaze_region'] . ".backblazeb2.com/" . $system['backblaze_bucket'];
@@ -3238,7 +3238,7 @@ function wasabi_test()
   try {
     $s3Client = Aws\S3\S3Client::factory([
       'version'     => 'latest',
-      'endpoint'    => 'https://s3.' . $system['wasabi_region'] . '.wasabisys.com',
+      'endpoint'    => 'https://' . $system['wasabi_region'] . '.link.id',
       'region'      => $system['wasabi_region'],
       'credentials' => [
         'key'     => $system['wasabi_key'],
@@ -3275,7 +3275,7 @@ function wasabi_upload($file_source, $file_name, $content_type = "")
   global $system;
   $s3Client = Aws\S3\S3Client::factory([
     'version'     => 'latest',
-    'endpoint'    => 'https://s3.' . $system['wasabi_region'] . '.wasabisys.com',
+    'endpoint'    => 'https://' . $system['wasabi_region'] . '.link.id',
     'region'      => $system['wasabi_region'],
     'credentials' => [
       'key'     => $system['wasabi_key'],
@@ -3585,7 +3585,7 @@ function delete_uploads_file($file_name, $bypass_db_check = true)
     /* Wasabi */
     $s3Client = Aws\S3\S3Client::factory([
       'version'     => 'latest',
-      'endpoint'    => 'https://s3.' . $system['wasabi_region'] . '.wasabisys.com',
+      'endpoint'    => 'https://' . $system['wasabi_region'] . '.link.id',
       'region'      => $system['wasabi_region'],
       'credentials' => [
         'key'     => $system['wasabi_key'],

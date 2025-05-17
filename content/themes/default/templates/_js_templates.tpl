@@ -2516,6 +2516,15 @@
         </div>
         <div id="payment-methods" class="x-hidden">
           <div class="row justify-content-center text-center">
+            {if $system['midtrans_enabled']}
+              <div class="col-12 col-sm-6 mb10">
+                <div class="d-grid">
+                  <button class="js_payment-midtrans btn btn-md btn-payment" data-handle="{literal}{{handle}}{/literal}" {literal}{{#id}}{/literal} data-id="{literal}{{id}}{/literal}" {literal}{{/id}}{/literal} {literal}{{#price}}{/literal} data-price="{literal}{{price}}{/literal}" {literal}{{/price}}{/literal}>
+                    {include file='__svg_icons.tpl' icon="midtrans" class="main-icon" width="100px" height="20px"}
+                  </button>
+                </div>
+              </div>
+            {/if}
             {if $system['xendit_enabled']}
               <div class="col-12 col-sm-6 mb10">
                 <div class="d-grid">
@@ -2758,6 +2767,14 @@
       </div>
     </script>
     <!-- Payment -->
+    
+    <!-- Midtrans Snap Embed -->
+    {if $system['midtrans_enabled']}
+      <script id="midtrans" type="text/template">
+        <div id="midtrans-snap-embed"></div>
+      </script>
+    {/if}
+    <!-- Midtrans Snap Embed -->
 
     <!-- Stripe Payment Element -->
     {if $system['stripe_payment_element_enabled']}

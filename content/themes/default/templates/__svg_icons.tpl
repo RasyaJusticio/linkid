@@ -4,6 +4,10 @@
 
     {include file='../images/svg/2co.svg'}
 
+  {elseif $icon == "midtrans"}
+
+    {include file='../images/svg/midtrans.svg'}
+
   {elseif $icon == "xendit_monogram"}
 
     {include file='../images/svg/xendit_monogram.svg'}

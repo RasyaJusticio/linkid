@@ -7034,6 +7034,96 @@
       <div class="tab-pane" id="Payments">
         <form class="js_ajax-forms" data-url="admin/settings.php?edit=payments_methods">
           <div class="card-body">
+            <!-- Midtrans -->
+            <div>
+              <div class="form-table-row">
+                <div class="avatar">
+                  {include file='__svg_icons.tpl' icon="midtrans" width="40px" height="40px"}
+                </div>
+                <div>
+                  <div class="form-label h6">{__("Midtrans Enabled")}</div>
+                  <div class="form-text d-none d-sm-block">{__("Enable payments via Midtrans")}</div>
+                </div>
+                <div class="text-end">
+                  <label class="switch" for="midtrans_enabled">
+                    <input type="checkbox" name="midtrans_enabled" id="midtrans_enabled" {if $system['midtrans_enabled']}checked{/if}>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Midtrans Mode")}
+                </label>
+                <div class="col-md-9">
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="midtrans_mode" id="midtrans_live" value="live" class="form-check-input" {if $system['midtrans_mode'] == "live"}checked{/if}>
+                    <label class="form-check-label" for="midtrans_live">{__("Live")}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="midtrans_mode" id="midtrans_sandbox" value="sandbox" class="form-check-input" {if $system['midtrans_mode'] == "sandbox"}checked{/if}>
+                    <label class="form-check-label" for="midtrans_sandbox">{__("Sandbox")}</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Midtrans Sandbox Client Key")}
+                </label>
+                <div class="col-md-9">
+                  {if !$user->_data['user_demo']}
+                    <input type="text" class="form-control" name="midtrans_sandbox_client" value="{$system['midtrans_sandbox_client']}">
+                  {else}
+                    <input type="password" class="form-control" value="*********">
+                  {/if}
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Midtrans Sandbox Server Key")}
+                </label>
+                <div class="col-md-9">
+                  {if !$user->_data['user_demo']}
+                    <input type="text" class="form-control" name="midtrans_sandbox_server" value="{$system['midtrans_sandbox_server']}">
+                  {else}
+                    <input type="password" class="form-control" value="*********">
+                  {/if}
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Midtrans Live Client Key")}
+                </label>
+                <div class="col-md-9">
+                  {if !$user->_data['user_demo']}
+                    <input type="text" class="form-control" name="midtrans_live_client" value="{$system['midtrans_live_client']}">
+                  {else}
+                    <input type="password" class="form-control" value="*********">
+                  {/if}
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Midtrans Live Server Key")}
+                </label>
+                <div class="col-md-9">
+                  {if !$user->_data['user_demo']}
+                    <input type="text" class="form-control" name="midtrans_live_server" value="{$system['midtrans_live_server']}">
+                  {else}
+                    <input type="password" class="form-control" value="*********">
+                  {/if}
+                </div>
+              </div>
+            </div>
+            <!-- Midtrans -->
+
+            <div class="divider"></div>
+
             <!-- Xendit -->
             <div>
               <div class="form-table-row">

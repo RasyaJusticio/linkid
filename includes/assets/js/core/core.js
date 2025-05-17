@@ -15,6 +15,7 @@ api['data/search'] = ajax_path + "data/search.php";
 /* posts */
 api['posts/lightbox'] = ajax_path + "posts/lightbox.php";
 /* payments */
+api['payments/midtrans'] = ajax_path + "payments/midtrans.php";
 api['payments/xendit'] = ajax_path + "payments/xendit.php";
 api['payments/paypal'] = ajax_path + "payments/paypal.php";
 api['payments/paystack'] = ajax_path + "payments/paystack.php";
@@ -1243,7 +1244,68 @@ $(function () {
     /* show payment-methods */
     $('#payment-methods').fadeIn();
   });
-    /* Xendit */
+  /* Midtrans */
+  $("body").on("click", ".js_payment-midtrans", function () {
+    var _this = $(this);
+    var data = {};
+    data["handle"] = _this.data("handle");
+    if (data["handle"] == "packages") {
+      data["package_id"] = _this.data("id");
+    }
+    if (data["handle"] == "wallet") {
+      data["price"] = _this.data("price");
+    }
+    if (data["handle"] == "donate") {
+      data["post_id"] = _this.data("id");
+      data["price"] = _this.data("price");
+    }
+    if (data["handle"] == "subscribe") {
+      data["plan_id"] = _this.data("id");
+    }
+    if (data["handle"] == "paid_post") {
+      data["post_id"] = _this.data("id");
+    }
+    if (data["handle"] == "movies") {
+      data["movie_id"] = _this.data("id");
+    }
+    if (data["handle"] == "marketplace") {
+      data["orders_collection_id"] = _this.data("id");
+    }
+    /* button loading */
+    button_status(_this, "loading");
+    /* post the request */
+    $.post(
+      api["payments/midtrans"],
+      data,
+      function (response) {
+        /* button reset */
+        button_status(_this, "reset");
+        /* check the response */
+        if (!response) return;
+
+        const snapToken = response.snap_token;
+
+        modal("#midtrans");
+
+        snap.embed(snapToken, {
+          embedId: "midtrans-snap-embed",
+          onSuccess: function (result) {
+            window.location.href = response.redirects.success;
+          },
+        });
+      },
+      "json",
+    ).fail(function () {
+      /* button reset */
+      button_status(_this, "reset");
+      /* handle error */
+      modal("#modal-message", {
+        title: __["Error"],
+        message: __["There is something that went wrong!"],
+      });
+    });
+  });
+  /* Xendit */
   $("body").on("click", ".js_payment-xendit", function () {
     var _this = $(this);
     var data = {};

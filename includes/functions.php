@@ -4133,6 +4133,111 @@ function process_automatic_withdrawal($method, $amount, $email)
 }
 
 /* ------------------------------- */
+/* Midtrans */
+/* ------------------------------- */
+function midtrans_setup_keys()
+{
+    global $system;
+
+    if ($system['midtrans_mode'] == 'live') {
+        \Midtrans\Config::$serverKey = $system["midtrans_live_server"];
+        \Midtrans\Config::$isProduction = true;
+    } else {
+        \Midtrans\Config::$serverKey = $system["midtrans_sandbox_server"];
+        \Midtrans\Config::$isProduction = false;
+    }
+}
+
+function midtrans_payment_token($handle, $price, $id = null)
+{
+    global $system, $user;
+
+    midtrans_setup_keys();
+
+    /* prepare */
+    $order_id = uniqid($handle . '-');
+    $total = get_payment_total_value($price);
+
+    switch ($handle) {
+        case 'packages':
+            $redirects['success'] = $system['system_url'] . "/webhooks/midtrans.php?status=success&handle=packages&package_id=$id&order_id=$order_id";
+            $redirects['cancel'] = $system['system_url'] . "/webhooks/midtrans.php?status=cancel";
+            break;
+
+        case 'wallet':
+            $_SESSION['wallet_replenish_amount'] = $price;
+            $redirects['success'] = $system['system_url'] . "/webhooks/midtrans.php?status=success&handle=wallet&order_id=$order_id";
+            $redirects['cancel'] = $system['system_url'] . "/webhooks/midtrans.php?status=cancel";
+            break;
+
+        case 'donate':
+            $redirects['success'] = $system['system_url'] . "/webhooks/midtrans.php?status=success&handle=donate&post_id=$id&order_id=$order_id";
+            $redirects['cancel'] = $system['system_url'] . "/webhooks/midtrans.php?status=cancel";
+            $_SESSION['donation_amount'] = $price;
+            break;
+
+        case 'subscribe':
+            $redirects['success'] = $system['system_url'] . "/webhooks/midtrans.php?status=success&handle=subscribe&plan_id=$id&order_id=$order_id";
+            $redirects['cancel'] = $system['system_url'] . "/webhooks/midtrans.php?status=cancel";
+            break;
+
+        case 'paid_post':
+            $redirects['success'] = $system['system_url'] . "/webhooks/midtrans.php?status=success&handle=paid_post&post_id=$id&order_id=$order_id";
+            $redirects['cancel'] = $system['system_url'] . "/webhooks/midtrans.php?status=cancel";
+            break;
+
+        case 'movies':
+            $redirects['success'] = $system['system_url'] . "/webhooks/midtrans.php?status=success&handle=movies&movie_id=$id&order_id=$order_id";
+            $redirects['cancel'] = $system['system_url'] . "/webhooks/midtrans.php?status=cancel";
+            break;
+
+        case 'marketplace':
+            $redirects['success'] = $system['system_url'] . "/webhooks/midtrans.php?status=success&handle=marketplace&orders_collection_id=$id&order_id=$order_id";
+            $redirects['cancel'] = $system['system_url'] . "/webhooks/midtrans.php?status=cancel";
+            break;
+    }
+
+    $params = [
+        'transaction_details' => [
+            'order_id' => $order_id,
+            'gross_amount' => (int) $total,
+        ],
+        'customer_details' => [
+            'first_name' => $user->_data['user_name'],
+            'email' => $user->_data['user_email'],
+        ],
+        'item_details' => [[
+            'id' => $handle,
+            'price' => (int) $total,
+            'quantity' => 1,
+            'name' => "Payment for $handle",
+        ]],
+    ];
+
+    $snap_token = \Midtrans\Snap::getSnapToken($params);
+
+    return [
+        'snap_token' => $snap_token,
+        'redirects' => $redirects,
+    ];
+}
+
+/**
+ * midtrans_payment_check
+ *
+ * @param string $order_id
+ * @return string
+ */
+function midtrans_payment_check($order_id)
+{
+    midtrans_setup_keys();
+
+    $status = \Midtrans\Transaction::status($order_id);
+    
+    return $status;
+}
+
+/* ------------------------------- */
 /* Xendit */
 /* ------------------------------- */
 function xendit_setup_key()

@@ -1211,6 +1211,7 @@ body.night-mode .btn-secondary {
 
 .btn-payment {
   background: #f7f7f7;
+  height: 2.8rem;
 }
 
 .btn-payment:hover {

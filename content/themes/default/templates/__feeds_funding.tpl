@@ -9,7 +9,7 @@
         <img src="{$system['system_uploads']}/{$funding['funding']['cover_image']}">
       </div>
       <div class="blog-source">
-        <strong>{print_money($funding['funding']['raised_amount'])} {__("Raised of")} {print_money($funding['funding']['amount'])}</strong>
+        <strong>{print_money($funding['funding']['raised_amount']|format_number)} {__("Raised of")} {print_money($funding['funding']['amount']|format_number)}</strong>
       </div>
       <div class="blog-content">
         <h3>{$funding['funding']['title']}</h3>

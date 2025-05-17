@@ -15,7 +15,7 @@
       <div class="product-image">
         <div class="product-price">
           {if $post['product']['price'] > 0}
-            {print_money($post['product']['price'])}
+            {print_money($post['product']['price']|format_number)}
           {else}
             {__("Free")}
           {/if}

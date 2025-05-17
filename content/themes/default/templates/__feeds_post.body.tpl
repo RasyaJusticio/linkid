@@ -760,7 +760,7 @@
         <div class="mb20 text-lg text-success">
           <strong>
             {if $_post['product']['price'] > 0}
-              {print_money($_post['product']['price'])}
+              {print_money($_post['product']['price']|format_number)}
             {else}
               {__("Free")}
             {/if}
@@ -888,7 +888,7 @@
           </div>
           <div class="funding-completion mb10 mt20">
             <span class="float-end">{$_post['funding']['funding_completion']}%</span>
-            <strong>{print_money($_post['funding']['raised_amount'])} {__("Raised of")} {print_money($_post['funding']['amount'])}</strong>
+            <strong>{print_money($_post['funding']['raised_amount']|format_number)} {__("Raised of")} {print_money($_post['funding']['amount']|format_number)}</strong>
             <div class="progress mt5">
               <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="{$_post['funding']['funding_completion']}" aria-valuemin="0" aria-valuemax="100" style="width: {$_post['funding']['funding_completion']}%"></div>
             </div>
@@ -936,7 +936,7 @@
             <span class="title text-active mb5 mt20">{$_post['offer']['meta_title']}</span>
             {if $_post['offer']['price']}
               <div class="text-success mtb5">
-                {__("From")} <strong>{print_money($_post['offer']['price'])}</strong>
+                {__("From")} <strong>{print_money($_post['offer']['price']|format_number)}</strong>
               </div>
             {/if}
             <!-- post text -->
@@ -978,7 +978,7 @@
           <a class="post-media-image" href="{$system['system_url']}/posts/{$_post['post_id']}" target="_blank">
             <div class="image" style="background-image:url('{$system['system_uploads']}/{$_post['job']['cover_image']}');"></div>
             <div class="source">
-              <strong>{print_money($_post['job']['salary_minimum'], $_post['job']['salary_minimum_currency']['symbol'], $_post['job']['salary_minimum_currency']['dir'])} - {print_money($_post['job']['salary_maximum'], $_post['job']['salary_maximum_currency']['symbol'], $_post['job']['salary_maximum_currency']['dir'])} / {$_post['job']['pay_salary_per_meta']}</strong>
+              <strong>{print_money($_post['job']['salary_minimum']|format_number, $_post['job']['salary_minimum_currency']['symbol'], $_post['job']['salary_minimum_currency']['dir'])} - {print_money($_post['job']['salary_maximum']|format_number, $_post['job']['salary_maximum_currency']['symbol'], $_post['job']['salary_maximum_currency']['dir'])} / {$_post['job']['pay_salary_per_meta']}</strong>
             </div>
             <div class="icon">
               {include file='__svg_icons.tpl' icon="jobs" width="32px" height="32px"}
@@ -1073,7 +1073,7 @@
           <a class="post-media-image" href="{$system['system_url']}/posts/{$_post['post_id']}" target="_blank">
             <div class="image" style="background-image:url('{$system['system_uploads']}/{$_post['course']['cover_image']}');"></div>
             <div class="source">
-              <strong>{print_money($_post['course']['fees'], $_post['course']['fees_currency']['symbol'], $_post['course']['fees_currency']['dir'])}</strong>
+              <strong>{print_money($_post['course']['fees']|format_number, $_post['course']['fees_currency']['symbol'], $_post['course']['fees_currency']['dir'])}</strong>
             </div>
             <div class="icon">
               {include file='__svg_icons.tpl' icon="courses" width="32px" height="32px"}

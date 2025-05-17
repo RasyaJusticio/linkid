@@ -255,7 +255,7 @@
                         <div class="product-image">
                           <div class="product-price">
                             {if $cart_item['post']['product']['price'] > 0}
-                              {print_money($cart_item['post']['product']['price'])}
+                              {print_money($cart_item['post']['product']['price']|format_number)}
                             {else}
                               {__("Free")}
                             {/if}

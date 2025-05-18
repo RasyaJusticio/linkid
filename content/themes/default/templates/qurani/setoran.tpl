@@ -1,27 +1,23 @@
-{include file='../_head.tpl'}
-{include file='../_header.tpl'}
-
 <!-- Tentukan URL iframe berdasarkan parameter yang diterima -->
-{assign var="qurani_url" value="{$system['qurani_url']}"}
 {if $surah}
-    {assign var="iframe_url" value="{$system['qurani_url']}/surah/$surah"}
+    {assign var="iframe_url" value="http://localhost:5173/surah/$surah"}
 {elseif $juz}
-    {assign var="iframe_url" value="{$system['qurani_url']}/juz/$juz"}
+    {assign var="iframe_url" value="http://localhost:5173/juz/$juz"}
 {elseif $halaman}
     {if $halaman >= 1 && $halaman <= 604}
-        {assign var="iframe_url" value="{$system['qurani_url']}/page/$halaman"}
+        {assign var="iframe_url" value="http://localhost:5173/page/$halaman"}
     {else}
-        {assign var="iframe_url" value="{$system['qurani_url']}/"}
+        {assign var="iframe_url" value="http://localhost:5173/"}
         <div class="alert alert-danger">Nomor halaman tidak valid. Harus antara 1 dan 604 = {$halaman}.</div>
     {/if}
 {else}
-    {assign var="iframe_url" value="{$system['qurani_url']}/"}
+    {assign var="iframe_url" value="http://localhost:5173/"}
 {/if}
 
 
 <div class="iframe-container" style="position: relative; width: 100%; min-height: calc(100vh - 20px); margin: 0; padding: 0; overflow: hidden;">
   <iframe id="quranFrame" src="{$iframe_url}" 
-          style="position: absolute; top: -56px; left: 0; width: 100%; height: calc(100% + 20px); border: none;"
+          style="position: absolute; top: 0px; left: 0; width: 100%; height: calc(100% + 20px); border: none;"
           frameborder="0"
           allowfullscreen
           allow="geolocation; microphone; camera"
@@ -29,22 +25,12 @@
   </iframe>
 </div>
 
-<!-- page content -->
-<div class="{if $system['fluid_design']}container-fluid{else}container{/if} sg-offcanvas mt-3">
-  <div class="row">
-    <div class="col-lg-12 -12 col-md-12">
-      <div class="card shadow-lg p-4 rounded">
-        <a href="{$system['system_url']|escape:'html'}/qurani" class="btn btn-primary">{__("Kembali ke Form")}</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
+{literal}
 document.addEventListener('DOMContentLoaded', function() {
   const iframe = document.getElementById('quranFrame');
+  console.log('Iframe URL:', iframe.src);
   const payload = localStorage.getItem('setoranPayload');
-  const quraniUrl = "{$qurani_url}";
   let hasSentMessage = false;
 
   // Fungsi untuk memvalidasi payload
@@ -58,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cek field yang wajib ada
     requiredFields.forEach(field => {
       if (!payload[field]) {
-        errors.push('Field ' + field + ' tidak boleh kosong');
+        errors.push(`Field ${field} tidak boleh kosong`);
       }
     });
 
@@ -138,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Parsed payload sebelum postMessage:', sanitizedPayload);
 
         // Kirim postMessage ke iframe
-        iframe.contentWindow.postMessage(sanitizedPayload, quraniUrl);
+        iframe.contentWindow.postMessage(sanitizedPayload, 'http://localhost:5173');
         console.log('✅ postMessage dikirim ke iframe:', sanitizedPayload);
         hasSentMessage = true;
         // Jangan hapus setoranPayload dari localStorage agar tetap tersedia jika diperlukan
@@ -150,6 +136,5 @@ document.addEventListener('DOMContentLoaded', function() {
     console.warn('⚠️ Tidak ada payload atau iframe tidak ditemukan:', { payload, iframe });
   }
 });
+{/literal}
 </script>
-
-{include file='../_footer.tpl'}

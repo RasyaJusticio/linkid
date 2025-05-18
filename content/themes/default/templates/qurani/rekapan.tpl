@@ -1,11 +1,8 @@
-{include file='_head.tpl'}
-{include file='_header.tpl'}
-
 <!-- Load SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Tentukan URL iframe -->
-{assign var="iframe_url" value="{$system['qurani_url']}/riwayat"}
+{assign var="iframe_url" value="`$qurani_url`riwayat"}
 
 <!-- page header -->
 <div class="circle-2"></div>
@@ -20,17 +17,6 @@
           allow="geolocation; microphone; camera"
           scrolling="auto">
   </iframe>
-</div>
-
-<!-- page content -->
-<div class="{if $system['fluid_design']}container-fluid{else}container{/if} sg-offcanvas mt-3">
-  <div class="row">
-    <div class="col-lg-12 col-md-12">
-      <div class="card shadow-lg p-4 rounded">
-        <a href="{$system['system_url']|escape:'html'}/qurani" class="btn btn-primary">{__("Kembali ke Form")}</a>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -49,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Fungsi untuk mengirim postMessage
   const sendPostMessage = (data) => {
     try {
-      const targetOrigin = iframe.src;
+      const targetOrigin = `{/literal}{$qurani_url}{literal}`;
       iframe.contentWindow.postMessage(data, targetOrigin);
       console.log('✅ postMessage dikirim ke iframe:', data, 'Waktu:', new Date().toISOString());
     } catch (error) {
@@ -130,5 +116,3 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 {/literal}
 </script>
-
-{include file='_footer.tpl'}

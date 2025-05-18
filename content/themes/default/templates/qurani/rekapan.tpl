@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Fungsi untuk mengirim postMessage
   const sendPostMessage = (data) => {
     try {
-      const targetOrigin = `{/literal}{$qurani_url}{literal}`;
+      const targetOrigin = iframe.src;
       iframe.contentWindow.postMessage(data, targetOrigin);
       console.log('✅ postMessage dikirim ke iframe:', data, 'Waktu:', new Date().toISOString());
     } catch (error) {

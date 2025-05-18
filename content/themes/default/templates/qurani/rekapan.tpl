@@ -2,7 +2,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Tentukan URL iframe -->
-{assign var="iframe_url" value="`$qurani_url`riwayat"}
+{assign var="iframe_url" value="{$system['qurani_url']}/riwayat"}
 
 <!-- page header -->
 <div class="circle-2"></div>

@@ -1,8 +1,4 @@
-<!-- Load SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<!-- Tentukan URL iframe -->
-{assign var="iframe_url" value="{$system['qurani_url']}/riwayat"}
+{assign var="iframe_url" value="`$qurani_url`riwayat"}
 
 <!-- page header -->
 <div class="circle-2"></div>
@@ -25,6 +21,49 @@ document.addEventListener("DOMContentLoaded", function() {
   const iframe = document.getElementById('rekapanFrame');
   console.log('Iframe URL:', iframe.src);
 
+  // Fungsi untuk mengatur title dengan format [Spesifik Title] | Link.id - Sosmed Islami
+  function setPageTitleFromData(data) {
+    try {
+      let baseTitle = 'Riwayat Setoran';
+      if (data && data.setoran_id) {
+        baseTitle = `Setoran #${data.setoran_id}`; // Misalnya, "Setoran #123"
+      }
+      const fullTitle = `${baseTitle} | Link.id - Sosmed Islami`;
+      document.title = fullTitle;
+      console.log('✅ Title diperbarui dari data:', fullTitle);
+    } catch (error) {
+      console.error('❌ Gagal mengatur title:', error);
+      document.title = 'Riwayat Setoran | Link.id - Sosmed Islami';
+    }
+  }
+
+  // Fungsi untuk mengatur favicon dengan URL yang diberikan
+  function setFavicon() {
+    try {
+      // Hapus favicon yang ada
+      const existingFavicons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
+      existingFavicons.forEach(favicon => favicon.remove());
+
+      // Buat favicon baru dengan URL yang diberikan
+      const newFavicon = document.createElement('link');
+      newFavicon.rel = 'icon';
+      newFavicon.type = 'image/png';
+      // Gunakan URL favicon yang sama seperti di kode kedua
+      newFavicon.href = '{/literal}{$system['system_url']|escape:'javascript'}{literal}/content/themes/default/images/LinkId-Icon.png';
+      
+      // Fallback jika file tidak ditemukan
+      newFavicon.onerror = () => {
+        console.warn('⚠️ Gagal memuat favicon, menggunakan favicon default.');
+        newFavicon.href = '/favicon.ico'; // Favicon default Sngine
+      };
+      
+      document.head.appendChild(newFavicon);
+      console.log('✅ Favicon diperbarui:', newFavicon.href);
+    } catch (error) {
+      console.error('❌ Gagal mengatur favicon:', error);
+    }
+  }
+
   // Fungsi untuk mengambil setoranId dari URL
   const getSetoranId = () => {
     const pathSegments = window.location.pathname.split('/');
@@ -35,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Fungsi untuk mengirim postMessage
   const sendPostMessage = (data) => {
     try {
-      const targetOrigin = iframe.src;
+      const targetOrigin = `{/literal}{$qurani_url}{literal}`;
       iframe.contentWindow.postMessage(data, targetOrigin);
       console.log('✅ postMessage dikirim ke iframe:', data, 'Waktu:', new Date().toISOString());
     } catch (error) {
@@ -74,6 +113,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         return;
       }
+      // Atur title berdasarkan data setoran
+      setPageTitleFromData(data);
       sendPostMessage(data);
     })
     .catch(error => {
@@ -83,8 +124,13 @@ document.addEventListener("DOMContentLoaded", function() {
         title: 'Kesalahan',
         text: 'Gagal mengambil data setoran: ' + error.message,
       });
+      // Set title default jika gagal
+      setPageTitleFromData(null);
     });
   };
+
+  // Set favicon segera saat halaman dimuat
+  setFavicon();
 
   // Ambil setoranId awal
   const initialSetoranId = getSetoranId();
@@ -95,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
       title: 'Kesalahan',
       text: 'ID setoran tidak valid. Silakan kembali ke halaman riwayat.',
     });
+    document.title = 'Riwayat Setoran | Link.id - Sosmed Islami';
     return;
   }
 
@@ -111,6 +158,25 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log('URL berubah, mengambil data untuk setoranId:', currentSetoranId);
       fetchSetoranData(currentSetoranId);
       lastSetoranId = currentSetoranId;
+    }
+  });
+
+  // Listener untuk menerima metadata dari iframe (opsional, untuk konsistensi)
+  window.addEventListener('message', (event) => {
+    if (event.origin !== `{/literal}{$qurani_url}{literal}`) {
+      console.warn('⚠️ Pesan dari origin tidak dikenal:', event.origin);
+      return;
+    }
+
+    const data = event.data;
+    if (data.type === 'updateMetadata' && data.title) {
+      const fullTitle = data.title.includes('| Link.id - Sosmed Islami') 
+        ? data.title 
+        : `${data.title} | Link.id - Sosmed Islami`;
+      document.title = fullTitle;
+      console.log('✅ Title diperbarui via postMessage:', fullTitle);
+      // Abaikan favicon dari iframe, gunakan yang sudah ditentukan
+      console.log('ℹ️ Mengabaikan favicon dari iframe, menggunakan favicon yang ditentukan');
     }
   });
 });

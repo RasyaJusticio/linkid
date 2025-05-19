@@ -7,6 +7,8 @@
  */
 
 require('../bootloader.php');
+$user_id = $_SESSION['user_id'];
+
 
 // Set timezone
 date_default_timezone_set('Asia/Jakarta');
@@ -212,12 +214,20 @@ $current_user = [
     'user_name' => $user_data['user_name']
 ];
 
-// Get all groups with members
+
 $all_groups = [];
-$get_groups = $db->query("SELECT group_id, group_title FROM `groups` ORDER BY group_title");
+$get_groups = $db->query("
+    SELECT g.group_id, g.group_title
+    FROM `groups` g
+    INNER JOIN `groups_members` gm ON g.group_id = gm.group_id
+    WHERE gm.user_id = {$current_user['user_id']}
+    ORDER BY g.group_title
+");
+
 if ($db->error) {
     _error('Database Error', 'Group query error: ' . $db->error);
 }
+
 while ($group = $get_groups->fetch_assoc()) {
     $group_members = [];
     $get_members = $db->query(sprintf(
@@ -228,19 +238,37 @@ while ($group = $get_groups->fetch_assoc()) {
          ORDER BY u.user_name",
         $group['group_id']
     ));
+
     if ($db->error) {
         _error('Database Error', 'Members query error: ' . $db->error);
     }
+
     while ($member = $get_members->fetch_assoc()) {
+        // Lewati user yang sedang login
+        if ($member['user_id'] == $current_user['user_id']) {
+            continue;
+        }
         $group_members[] = $member;
     }
+
     $group['members'] = $group_members;
     $all_groups[] = $group;
 }
 
+
+
 // Get all users for select options
 $all_users = [];
-$get_users = $db->query("SELECT user_id, user_name FROM `users` ORDER BY user_name");
+$get_users = $db->query("
+    SELECT u.user_id, u.user_name
+    FROM friends f
+    JOIN users u 
+        ON (u.user_id = f.user_one_id AND f.user_two_id = {$current_user['user_id']})
+        OR (u.user_id = f.user_two_id AND f.user_one_id = {$current_user['user_id']})
+    WHERE f.status = 1 AND u.user_id != {$current_user['user_id']}
+    ORDER BY u.user_name
+");
+
 if ($db->error) {
     _error('Database Error', 'Users query error: ' . $db->error);
 }
@@ -259,25 +287,26 @@ $get_history = $db->query(
     u2.user_id AS penerima_id,
     u2.user_name AS penerima_name,
     CONCAT(
-        qs.setoran,
-        ' ',
-        qs.tampilan,
-        CASE 
-            WHEN qs.tampilan = 'juz' AND qs.nomor IS NOT NULL AND qs.nomor != '' THEN CONCAT(' ', qs.nomor)
-            WHEN qs.tampilan = 'surat' AND qs.info IS NOT NULL AND qs.info != '' THEN CONCAT(' ', qs.info)
-            ELSE ''
-        END,
-        CASE 
-            WHEN qs.tampilan != 'juz' AND qs.perhalaman IS NOT NULL AND JSON_VALID(qs.perhalaman) THEN
-                CONCAT(' Ayat ', JSON_UNQUOTE(JSON_EXTRACT(qs.perhalaman, '$.ayat.awal')), '-', JSON_UNQUOTE(JSON_EXTRACT(qs.perhalaman, '$.ayat.akhir')))
-            ELSE ''
-        END
-    ) AS setoran,
+    CONCAT(UPPER(LEFT(qs.setoran, 1)), LOWER(SUBSTRING(qs.setoran, 2))),
+    ' ',
+    qs.tampilan,
+    CASE 
+        WHEN qs.tampilan = 'juz' AND qs.nomor IS NOT NULL AND qs.nomor != '' THEN CONCAT(' ', qs.nomor)
+        WHEN qs.tampilan = 'surat' AND qs.info IS NOT NULL AND qs.info != '' THEN CONCAT(' ', qs.info)
+        ELSE ''
+    END,
+    CASE 
+        WHEN qs.tampilan != 'juz' AND qs.perhalaman IS NOT NULL AND JSON_VALID(qs.perhalaman) THEN
+            CONCAT(' Ayat ', JSON_UNQUOTE(JSON_EXTRACT(qs.perhalaman, '$.ayat.awal')), '-', JSON_UNQUOTE(JSON_EXTRACT(qs.perhalaman, '$.ayat.akhir')))
+        ELSE ''
+    END
+) AS setoran,
     qs.hasil,
     qs.paraf
 FROM qu_setoran qs
 JOIN users u1 ON qs.penyetor = u1.user_id
 JOIN users u2 ON qs.penerima = u2.user_id
+WHERE qs.penyetor = {$current_user['user_id']} OR qs.penerima = {$current_user['user_id']}
 ORDER BY qs.tgl DESC
 LIMIT 10
 "

@@ -1,6 +1,6 @@
 <?php
 /**
- * Rekapan Page
+ * Islamic Page
  * 
  * @package Sngine
  * @author Dimas
@@ -8,111 +8,48 @@
 
 require('../bootloader.php');
 
-// Cek apakah pengguna sudah login
-if (!$user->_logged_in) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Anda harus login untuk mengakses halaman ini.']);
-    exit;
+error_log('setoran.php accessed with URI: ' . $_SERVER['REQUEST_URI']);
+
+$uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+$base_path = 'sngine/Script/qurani';
+$segments = array_slice($uri, array_search('setoran', $uri) + 1);
+
+error_log('Parsed segments: ' . print_r($segments, true));
+
+
+$surah = null;
+$juz = null;
+$halaman = null;
+
+if (!empty($segments)) {
+    switch ($segments[0]) {
+        case 'surah':
+            $surah = isset($segments[1]) && is_numeric($segments[1]) ? intval($segments[1]) : null;
+            error_log('Surah value: ' . $surah);
+            break;
+        case 'juz':
+            $juz = isset($segments[1]) && is_numeric($segments[1]) ? intval($segments[1]) : null;
+            error_log('Juz value: ' . $juz);
+            break;
+        case 'page':
+            $halaman = isset($segments[1]) && is_numeric($segments[1]) ? intval($segments[1]) : null;
+            error_log('Page value: ' . $halaman);
+            break;
+        default:
+            error_log('Unknown segment type: ' . $segments[0]);
+            break;
+    }
 }
 
-// Periksa apakah permintaan adalah POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('Content-Type: application/json');
-    // Ambil data dari body JSON
-    $input = json_decode(file_get_contents('php://input'), true);
-    $setoran_id = isset($input['id']) ? intval($input['id']) : null;
-
-    if ($setoran_id) {
-        // Query untuk mengambil data setoran berdasarkan ID
-        $query = $db->prepare(
-            "SELECT 
-                qs.id,
-                DATE_FORMAT(qs.tgl, '%d %b %Y, %H:%i') AS formatted_date,
-                u1.user_name AS penyetor_name,
-                u2.user_name AS penerima_name,
-                qs.setoran,
-                qs.info,
-                qs.hasil,
-                qs.paraf,
-                qs.tampilan,
-                qs.nomor,
-                qs.ket,
-                qs.kesalahan,
-                qs.perhalaman
-            FROM qu_setoran qs
-            JOIN users u1 ON qs.penyetor = u1.user_id
-            JOIN users u2 ON qs.penerima = u2.user_id
-            WHERE qs.id = ?"
-        );
-        $query->bind_param('i', $setoran_id);
-        $query->execute();
-        $result = $query->get_result();
-        $setoran_data = $result->fetch_assoc();
-
-        if ($setoran_data) {
-            echo json_encode($setoran_data);
-        } else {
-            http_response_code(404);
-            echo json_encode(['error' => 'Data setoran tidak ditemukan']);
-        }
-    } else {
-        http_response_code(400);
-        echo json_encode(['error' => 'ID setoran tidak diberikan']);
-    }
-    exit;
+if ($halaman !== null && ($halaman < 1 || $halaman > 604)) {
+    error_log("Invalid page number: $halaman");
+    _error(404, 'Nomor halaman tidak valid. Harus antara 1 dan 604.');
 }
 
-// Jika GET, render halaman
-$setoran_id = isset($_GET['id']) ? intval($_GET['id']) : null;
+$smarty->assign('surah', $surah);
+$smarty->assign('juz', $juz);
+$smarty->assign('halaman', $halaman);
 
-if ($setoran_id) {
-    $query = $db->prepare(
-        "SELECT 
-            qs.id,
-            DATE_FORMAT(qs.tgl, '%d %b %Y, %H:%i') AS formatted_date,
-            u1.user_id AS penyetor,
-            u1.user_name AS penyetor_name,
-            u2.user_id AS penerima,
-            u2.user_name AS penerima_name,
-            qs.setoran,
-            qs.info,
-            qs.hasil,
-            qs.paraf,
-            qs.tampilan,
-            qs.nomor,
-            qs.ket,
-            qs.kesalahan,
-            qs.perhalaman,
-            (SELECT COUNT(*) FROM groups_members gm WHERE gm.user_id = u2.user_id AND gm.group_id IN (SELECT group_id FROM groups_members WHERE user_id = u1.user_id)) AS is_group_member
-        FROM qu_setoran qs
-        JOIN users u1 ON qs.penyetor = u1.user_id
-        JOIN users u2 ON qs.penerima = u2.user_id
-        WHERE qs.id = ?"
-    );
-    $query->bind_param('i', $setoran_id);
-    $query->execute();
-    if ($query->error) {
-        error_log("Database error in rekapan.php: " . $query->error);
-        _error(500, 'Gagal mengambil data setoran');
-    }
-    $result = $query->get_result();
-    $setoran_data = $result->fetch_assoc();
-
-    if (!$setoran_data) {
-        error_log("Data setoran tidak ditemukan untuk ID: $setoran_id");
-        _error(404, 'Data setoran tidak ditemukan');
-    }
-
-    // Tentukan penyimak_type
-    $setoran_data['penyimak_type'] = $setoran_data['is_group_member'] > 0 ? 'grup' : 'teman';
-
-    $smarty->assign('setoran_data', $setoran_data);
-} else {
-    error_log("ID setoran tidak diberikan di rekapan.php");
-    _error(400, 'ID setoran tidak diberikan');
-}
-
-error_log("Rendering qurani_rekapan.tpl untuk setoran_id: $setoran_id");
-page_header("Rekapan Setoran");
-page_footer('qurani/rekapan');
+page_header("Qurani Page");
+page_footer('qurani/setoran');
 ?>

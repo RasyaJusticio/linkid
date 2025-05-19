@@ -87,7 +87,7 @@ body {
   right: 0;
   bottom: 0;
   z-index: 10000;
-  background: #f8f9fa; /* Sesuai dengan body background */
+  background: #f8f9fa;
   margin: 0;
   padding: 0;
   box-shadow: none;
@@ -100,9 +100,9 @@ body {
 
 .map-card.fullscreen .map-header {
   padding: 1rem;
-  color: white; /* Teks putih untuk kontras */
+  color: white;
   border-bottom: none;
-  z-index: 10001; /* Pastikan di atas peta */
+  z-index: 10001;
 }
 
 .map-card.fullscreen #map {
@@ -123,6 +123,39 @@ body.map-fullscreen .js_sticky-header {
   
   .map-card.fullscreen #map {
     height: calc(100vh - 50px);
+  }
+
+  .map-card {
+    padding: 1rem;
+    min-height: 200px;
+  }
+
+  #map {
+    height: 200px;
+    min-height: 150px;
+  }
+
+  #map p {
+    font-size: 14px;
+    color: #dc3545;
+    text-align: center;
+    margin: 0;
+    padding: 1rem;
+    background-color: #f8d7da;
+    border-radius: 4px;
+  }
+
+  .map-controls {
+    gap: 6px;
+  }
+
+  .btn-sm.btn-outline-secondary {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+
+  .fas {
+    font-size: 14px;
   }
 }
 
@@ -281,20 +314,20 @@ body.map-fullscreen .js_sticky-header {
 /* Responsive table styles */
 .table-responsive {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+  -webkit-overflow-scrolling: touch;
 }
 
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  font-size: 16px; /* Default font size */
+  font-size: 16px;
 }
 
 .table th,
 .table td {
-  padding: 12px 8px; /* Default padding */
+  padding: 12px 8px;
   vertical-align: middle;
-  white-space: nowrap; /* Prevent text wrapping in cells */
+  white-space: nowrap;
 }
 
 .table thead th {
@@ -302,13 +335,13 @@ body.map-fullscreen .js_sticky-header {
 }
 .surah-quick-select {
   margin-top: 0.5rem;
-  margin-left: 126px; /* Aligns with input field, accounting for label (110px) + margin-right (16px) */
+  margin-left: 126px;
 }
 
 .surah-quick-btn {
   padding: 6px 12px;
   font-size: 14px;
-  border-radius: 12px; /* Rounded corners for a chip-like look */
+  border-radius: 12px;
   transition: all 0.2s ease;
   white-space: nowrap;
 }
@@ -329,32 +362,135 @@ body.map-fullscreen .js_sticky-header {
 /* Medium screens (tablets, 768px and below) */
 @media (max-width: 768px) {
   .table {
-    font-size: 14px; /* Smaller font size */
+    font-size: 14px;
   }
   
   .table th,
   .table td {
-    padding: 8px 6px; /* Reduced padding */
+    padding: 8px 6px;
   }
-}
 
-/* Small screens (mobile, 576px and below) */
-@media (max-width: 576px) {
+  .form-group.d-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .form-group .form-label {
+    min-width: 100%;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+
+  .input-dropdown-container {
+    width: 100%;
+  }
+
+  .input-dropdown {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-left: 0;
+  }
+
+  .radio-option {
+    margin-bottom: 0;
+    font-size: 14px;
+  }
+
+  .radio-option input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+  }
+
+  .surah-quick-select {
+    margin-left: 0;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .surah-quick-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-left: 0;
+    padding: 0 0.5rem;
+  }
+
+  .action-buttons button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .card {
+    padding: 1rem;
+    margin: 0 0.5rem;
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+  .map-header {
+    flex-direction: row; /* Tetap horizontal */
+    justify-content: space-between; /* Memisahkan tulisan dan ikon */
+    align-items: center; /* Rata tengah vertikal */
+    gap: 0.5rem; /* Jarak antar elemen */
+  }
+
+  .map-header h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0;
+    margin-right: auto; /* Membuat tulisan menempel ke kiri */
+  }
+
+  .map-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-sm.btn-outline-secondary {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+
+  .fas {
+    font-size: 14px;
+  }
+
+  .container, .container-fluid {
+    padding: 0 0.5rem;
+  }
+
   .table-responsive {
-    border: none; /* Remove border for cleaner look */
+    border: none;
   }
 
   .table {
-    font-size: 13px; /* Even smaller font size */
-    border-collapse: collapse; /* Ensure consistent rendering */
+    font-size: 13px;
+    border-collapse: collapse;
   }
 
   .table thead {
-    display: none; /* Hide headers on very small screens */
+    display: none;
   }
 
   .table tbody tr {
-    display: block; /* Stack rows */
+    display: block;
     margin-bottom: 1rem;
     border: 1px solid #dee2e6;
     border-radius: 4px;
@@ -370,14 +506,13 @@ body.map-fullscreen .js_sticky-header {
     border: none;
     border-bottom: 1px solid #dee2e6;
     text-align: left;
-    white-space: normal; /* Allow text wrapping */
+    white-space: normal;
   }
 
   .table tbody td:last-child {
-    border-bottom: none; /* Remove border for last cell */
+    border-bottom: none;
   }
 
-  /* Add pseudo-elements for labels */
   .table tbody td:before {
     content: attr(data-label);
     font-weight: 600;
@@ -386,22 +521,18 @@ body.map-fullscreen .js_sticky-header {
     padding-right: 10px;
   }
 
-  /* Hide less critical columns (e.g., Penerima, Hasil) on very small screens */
   .table tbody td:nth-child(3),
   .table tbody td:nth-child(6) {
     display: none;
   }
-  .surah-quick-select {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+}
 
-  .surah-quick-btn {
-    width: 100%; /* Full-width buttons on small screens */
-    text-align: left;
+/* Small screens (mobile, 576px and below) */
+@media (max-width: 576px) {
+  .table {
     font-size: 13px;
-    padding: 8px 10px;
   }
+}
 }
 </style>
 
@@ -417,8 +548,8 @@ body.map-fullscreen .js_sticky-header {
 <div class="{if $system['fluid_design']}container-fluid{else}container{/if} sg-offcanvas mt-3">
   <div class="row">
     <!-- Form Qurani -->
-    <div class="col-lg-6 col-md-12 mb-3">
-      <div class="card shadow-lg p-4 rounded h-100">
+    <div class="col-lg-6 col-md-12 col-12 mb-3">
+      <div class="card shadow-lg p-3 rounded h-100">
         <div class="map-header">
           <h3 class="text-start mb-0">{__("Qurani")}</h3>
           <div class="map-controls">
@@ -434,7 +565,7 @@ body.map-fullscreen .js_sticky-header {
   <div class="radio-group">
     <div class="radio-option">
       <input type="radio" id="grup" name="penyetor" value="grup" checked autocomplete="off" spellcheck="false">
-      <label for="grup">Grup   </label>
+      <label for="grup">Grup</label>
     </div>
     <div class="radio-option">
       <input type="radio" id="teman" name="penyetor" value="teman" autocomplete="off" spellcheck="false">
@@ -445,22 +576,26 @@ body.map-fullscreen .js_sticky-header {
 
 <!-- Grup-anggota section -->
 <div class="mb-3" id="grup-anggota">
-  <div class="form-group d-flex align-items-center">
-    <label class="form-label fw-bold me-3" style="min-width: 110px;">Grup</label>
-    <div class="input-dropdown-container">
-      <input type="text" id="groupInput" class="input-dropdown form-control" placeholder="Pilih Grup" autocomplete="off" spellcheck="false">
+  <div class="radio-group-container">
+    <label class="form-label fw-bold">Grup</label>
+    <div class="input-dropdown-container w-100">
+      <input type="text" id="groupInput" class="input-dropdown form-control" placeholder="Pilih Grup" autocomplete="off" spellcheck="false" {if isset($all_groups.no_groups)}disabled{/if}>
       <div id="groupDropdown" class="dropdown-menu">
-        {foreach $all_groups as $group}
-          <div class="dropdown-item" data-value="{$group.group_id|escape:'html'}">{$group.group_title|escape:'html'}</div>
-        {/foreach}
+        {if isset($all_groups.no_groups)}
+          <div class="dropdown-item" data-value="0">Bergabung dengan grup terlebih dahulu</div>
+        {else}
+          {foreach $all_groups as $group}
+            <div class="dropdown-item" data-value="{$group.group_id|escape:'html'}">{$group.group_title|escape:'html'}</div>
+          {/foreach}
+        {/if}
       </div>
       <input type="hidden" id="selectedGroup" name="grup">
     </div>
   </div>
-  <div class="form-group d-flex align-items-center mt-3">
-    <label class="form-label fw-bold me-3" style="min-width: 110px;">Anggota</label>
-    <div class="input-dropdown-container">
-      <input type="text" id="memberInput" class="input-dropdown form-control" placeholder="Pilih grup terlebih dahulu" disabled autocomplete="off" spellcheck="false">
+  <div class="radio-group-container">
+    <label class="form-label fw-bold">Anggota</label>
+    <div class="input-dropdown-container w-100">
+      <input type="text" id="memberInput" class="input-dropdown form-control" placeholder="{if isset($all_groups.no_groups)}Bergabung dengan grup terlebih dahulu{else}Pilih grup terlebih dahulu{/if}" disabled autocomplete="off" spellcheck="false">
       <div id="memberDropdown" class="dropdown-menu"></div>
       <input type="hidden" id="selectedMember" name="anggota">
     </div>
@@ -469,9 +604,9 @@ body.map-fullscreen .js_sticky-header {
 
 <!-- Teman select -->
 <div class="mb-3" id="teman-select" style="display: none;">
-  <div class="form-group d-flex align-items-center">
-    <label class="form-label fw-bold me-3" style="min-width: 110px;">Teman</label>
-    <div class="input-dropdown-container">
+  <div class="radio-group-container">
+    <label class="form-label fw-bold">Teman</label>
+    <div class="input-dropdown-container w-100">
       <input type="text" id="temanInput" class="input-dropdown form-control" placeholder="Pilih teman" autocomplete="off" spellcheck="false">
       <div id="temanDropdown" class="dropdown-menu">
         {foreach $all_users as $user}
@@ -504,7 +639,7 @@ body.map-fullscreen .js_sticky-header {
             <div class="radio-group">
               <div class="radio-option">
                 <input type="radio" id="surat" name="tampilkan" value="surat" checked>
-                <label for="surat">Surat  </label>
+                <label for="surat">Surat</label>
               </div>
               <div class="radio-option">
                 <input type="radio" id="juz" name="tampilkan" value="juz">
@@ -519,9 +654,9 @@ body.map-fullscreen .js_sticky-header {
 
           <!-- Surat select -->
           <div class="mb-3" id="surat-select">
-  <div class="form-group d-flex align-items-center">
-    <label class="form-label fw-bold me-3" style="min-width: 110px;">Surat</label>
-    <div class="input-dropdown-container">
+  <div class="radio-group-container">
+    <label class="form-label fw-bold">Surat</label>
+    <div class="input-dropdown-container w-100">
       <input type="text" id="suratInput" class="input-dropdown form-control" placeholder="Pilih Surat" autocomplete="off" spellcheck="false">
       <div id="suratDropdown" class="dropdown-menu">
         <div class="dropdown-item" data-value="1">Al-Fatihah</div>
@@ -643,7 +778,7 @@ body.map-fullscreen .js_sticky-header {
     </div>
   </div>
   <!-- Quick select boxes for popular surahs -->
-  <div class="surah-quick-select mt-2 d-flex flex-wrap gap-2">
+  <div class="surah-quick-select mt-2 d-flex flex-wrap gap-1">
     <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="1" data-name="Al-Fatihah">Al-Fatihah</button>
     <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="36" data-name="Yasin">Yasin</button>
     <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="112" data-name="Al-Ikhlas">Al-Ikhlas</button>
@@ -653,9 +788,9 @@ body.map-fullscreen .js_sticky-header {
 
           <!-- Juz select -->
           <div class="mb-3" id="juz-select" style="display: none;">
-            <div class="form-group d-flex align-items-center">
-              <label class="form-label fw-bold me-3" style="min-width: 110px;">Juz</label>
-              <div class="input-dropdown-container">
+            <div class="radio-group-container">
+              <label class="form-label fw-bold">Juz</label>
+              <div class="input-dropdown-container w-100">
                 <input type="text" id="juzInput" class="input-dropdown form-control" placeholder="Pilih Juz" autocomplete="off" spellcheck="false">
                 <div id="juzDropdown" class="dropdown-menu">
                   <div class="dropdown-item" data-value="1">Juz 1</div>
@@ -696,9 +831,9 @@ body.map-fullscreen .js_sticky-header {
 
           <!-- Halaman select -->
           <div class="mb-3" id="halaman-select" style="display: none;">
-            <div class="form-group d-flex align-items-center">
-              <label class="form-label fw-bold me-3" style="min-width: 110px;">Halaman</label>
-              <div class="input-dropdown-container">
+            <div class="radio-group-container">
+              <label class="form-label fw-bold">Halaman</label>
+              <div class="input-dropdown-container w-100">
                 <input type="text" id="halamanInput" class="input-dropdown form-control" placeholder="Pilih Halaman" autocomplete="off" spellcheck="false">
                 <div id="halamanDropdown" class="dropdown-menu">
                   {for $i=1 to 604}
@@ -711,17 +846,17 @@ body.map-fullscreen .js_sticky-header {
           </div>
 
           <!-- Buttons -->
-          <div class="action-buttons">
-            <button type="submit" class="btn btn-primary">Mulai</button>
-            <button type="button" id="resetButton" class="btn btn-outline-danger">Reset</button>
+          <div class="action-buttons d-flex justify-content-center flex-column flex-md-row gap-2">
+            <button type="submit" class="btn btn-primary w-100 w-md-auto">Mulai</button>
+            <button type="button" id="resetButton" class="btn btn-outline-danger w-100 w-md-auto">Reset</button>
           </div>
         </form>
       </div>
     </div>
     
     <!-- Peta -->
-    <div class="col-lg-6 col-md-12 mb-3">
-      <div class="card shadow-lg p-4 rounded h-100 map-card" id="mapCard">
+    <div class="col-lg-6 col-md-12 col-12 mb-3">
+      <div class="card shadow-lg p-3 rounded h-100 map-card" id="mapCard">
         <div class="map-header">
           <h3 class="text-start">{__("Riwayat Qurani")}</h3>
           <div class="map-controls">
@@ -751,7 +886,7 @@ body.map-fullscreen .js_sticky-header {
               <button class="btn btn-sm btn-outline-secondary me-2" onclick="window.location.href='{$system['system_url']}/qurani/riwayat'">
                 <i class="fas fa-table"></i>
               </button>
-              <button class="btn btn-sm btn-outline-secondary" id="settingsBtnHistory" title="Pengaturan Qurani" onclick="window.location.href='{$system['system_url']}/settings/qurani'">
+              <button class="btn btn-sm btn-outline-secondary" id="settingsBtnHistory" title="Pengaturan Qurani" onclick="localStorage.setItem('activeTab', 'statistics'); window.location.href='{$system['system_url']}/qurani/riwayat';">
                 <i class="fas fa-chart-line"></i>
               </button>
             </div>
@@ -882,82 +1017,80 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Handle clickable paraf
-  // Handle clickable paraf
-document.querySelectorAll('.paraf-clickable').forEach(span => {
-  span.addEventListener('click', function() {
-    const setoranId = this.getAttribute('data-id');
-    const penyetorId = this.getAttribute('data-penyetor-id');
-    const penerimaId = this.getAttribute('data-penerima-id');
-    const currentUserId = {/literal}{$user->_data['user_id']|escape:'javascript'}{literal};
+  document.querySelectorAll('.paraf-clickable').forEach(span => {
+    span.addEventListener('click', function() {
+      const setoranId = this.getAttribute('data-id');
+      const penyetorId = this.getAttribute('data-penyetor-id');
+      const penerimaId = this.getAttribute('data-penerima-id');
+      const currentUserId = {/literal}{$user->_data['user_id']|escape:'javascript'}{literal};
 
-    // Check if user is authorized to paraf
-    if (currentUserId != penyetorId && currentUserId != penerimaId) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Tidak Diizinkan',
-        text: 'Hanya penyetor atau penerima yang dapat menambahkan paraf.',
-      });
-      return;
-    }
-
-    Swal.fire({
-      title: 'Konfirmasi Pariraf',
-      text: 'Apakah Anda yakin ingin menandai setoran ini sebagai diparaf?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Ya, Paraf',
-      cancelButtonText: 'Batal',
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`{/literal}{$system['system_url']|escape:'javascript'}{literal}/qurani/index.php?action=update_paraf`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ 
-            id: parseInt(setoranId),
-            user_id: parseInt(currentUserId)
-          })
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Gagal memperbarui paraf: ' + response.status);
-          }
-          return response.json();
-        })
-        .then(data => {
-          if (data.success) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Berhasil',
-              text: 'Paraf telah ditambahkan.',
-              timer: 1500,
-              showConfirmButton: false
-            }).then(() => {
-              const icon = span.querySelector('i');
-              icon.classList.remove('text-gray');
-              icon.classList.add('text-success');
-              span.classList.remove('paraf-clickable');
-              span.style.cursor = 'default';
-            });
-          } else {
-            throw new Error(data.error || 'Gagal menambahkan paraf.');
-          }
-        })
-        .catch(error => {
-          console.error('Error updating paraf:', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Kesalahan',
-            text: 'Gagal memperbarui paraf: ' + error.message,
-          });
+      if (currentUserId != penyetorId && currentUserId != penerimaId) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Tidak Diizinkan',
+          text: 'Hanya penyetor atau penerima yang dapat menambahkan paraf.',
         });
+        return;
       }
+
+      Swal.fire({
+        title: 'Konfirmasi Paraf',
+        text: 'Apakah Anda yakin ingin menandai setoran ini sebagai diparaf?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Paraf',
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`{/literal}{$system['system_url']|escape:'javascript'}{literal}/qurani/index.php?action=update_paraf`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+              id: parseInt(setoranId),
+              user_id: parseInt(currentUserId)
+            })
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Gagal memperbarui paraf: ' + response.status);
+            }
+            return response.json();
+          })
+          .then(data => {
+            if (data.success) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: 'Paraf telah ditambahkan.',
+                timer: 1500,
+                showConfirmButton: false
+              }).then(() => {
+                const icon = span.querySelector('i');
+                icon.classList.remove('text-gray');
+                icon.classList.add('text-success');
+                span.classList.remove('paraf-clickable');
+                span.style.cursor = 'default';
+              });
+            } else {
+              throw new Error(data.error || 'Gagal menambahkan paraf.');
+            }
+          })
+          .catch(error => {
+            console.error('Error updating paraf:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Kesalahan',
+              text: 'Gagal memperbarui paraf: ' + error.message,
+            });
+          });
+        }
+      });
     });
   });
-});
 
   function enableMemberInput(groupId) {
     const memberInput = document.getElementById('memberInput');
@@ -994,24 +1127,38 @@ document.querySelectorAll('.paraf-clickable').forEach(span => {
     });
   });
 
-  document.querySelectorAll('input[name="penyimak"]').forEach(radio => {
-    radio.addEventListener("change", function() {
-      document.getElementById('grup-anggota').style.display = (this.value === "grup") ? 'block' : 'none';
-      document.getElementById('teman-select').style.display = (this.value === "teman") ? 'block' : 'none';
-    });
+  document.querySelectorAll('input[name="penyetor"]').forEach(radio => {
+  radio.addEventListener("change", function() {
+    const grupSection = document.getElementById('grup-anggota');
+    const temanSection = document.getElementById('teman-select');
+    
+    if (this.value === "grup") {
+      grupSection.style.display = 'block';
+      temanSection.style.display = 'none';
+      document.getElementById('temanInput').value = '';
+      document.getElementById('selectedTeman').value = '';
+    } else if (this.value === "teman") {
+      grupSection.style.display = 'none';
+      temanSection.style.display = 'block';
+      document.getElementById('groupInput').value = '';
+      document.getElementById('selectedGroup').value = '';
+      document.getElementById('memberInput').value = '';
+      document.getElementById('selectedMember').value = '';
+      document.getElementById('memberInput').disabled = true;
+      document.getElementById('memberInput').placeholder = "Pilih grup terlebih dahulu";
+    }
   });
+});
   document.querySelectorAll('.surah-quick-btn').forEach(button => {
   button.addEventListener('click', function() {
     const surahValue = this.getAttribute('data-value');
     const surahName = this.getAttribute('data-name');
     
-    // Update input and hidden field
     const suratInput = document.getElementById('suratInput');
     const selectedSurat = document.getElementById('selectedSurat');
     suratInput.value = surahName;
     selectedSurat.value = surahValue;
     
-    // Update dropdown selection
     const dropdownItems = document.querySelectorAll('#suratDropdown .dropdown-item');
     dropdownItems.forEach(item => {
       item.classList.remove('selected');
@@ -1020,10 +1167,8 @@ document.querySelectorAll('.paraf-clickable').forEach(span => {
       }
     });
     
-    // Hide dropdown
     document.getElementById('suratDropdown').style.display = 'none';
     
-    // Highlight active button
     document.querySelectorAll('.surah-quick-btn').forEach(btn => {
       btn.classList.remove('active');
     });
@@ -1157,7 +1302,7 @@ document.querySelectorAll('.paraf-clickable').forEach(span => {
   localStorage.removeItem('lastSelectedSurah');
   localStorage.removeItem('lastSelectedJuz');
   localStorage.removeItem('lastSelectedPage');
-  localStorage.removeItem('lastPenyetorType'); // Diubah dari lastPenyimakType
+  localStorage.removeItem('lastPenyetorType');
   localStorage.removeItem('lastTampilkanType');
   localStorage.removeItem('currentUserId');
   localStorage.removeItem('theme');
@@ -1332,10 +1477,10 @@ document.querySelectorAll('.paraf-clickable').forEach(span => {
     }
     
     const payload = {
-      user_id: Number(currentUserId), // Penerima (current user)
+      user_id: Number(currentUserId),
       user_name: currentUserName,
       penyetor_type: penyetorType,
-      penyetor_id: Number(penyetorId), // Penyetor dari pilihan
+      penyetor_id: Number(penyetorId),
       penyetor_name: penyetorName,
       setoran_type: setoranType,
       tampilkan_type: tampilkanType,
@@ -1420,12 +1565,12 @@ document.querySelectorAll('.paraf-clickable').forEach(span => {
 
     fetch('/qurani/?action=get_cities')
       .then(response => {
-        if (!response.ok) throw new Error('Gagal mengambil data kota: ' + response.status);
+        if (!response.ok) throw new Error('Gagal mengambil data kota. Silakan coba lagi nanti.');
         return response.json();
       })
       .then(cityData => {
         if (!Array.isArray(cityData) || cityData.length === 0) {
-          document.getElementById('map').innerHTML = '<p>Tidak ada data kota untuk ditampilkan.</p>';
+          document.getElementById('map').innerHTML = '<p>Tidak ada data kota untuk ditampilkan saat ini.</p>';
           return;
         }
 
@@ -1470,7 +1615,7 @@ document.querySelectorAll('.paraf-clickable').forEach(span => {
             toggleIcon.classList.remove('fa-expand');
             toggleIcon.classList.add('fa-compress');
             document.body.style.overflow = 'hidden';
-            document.body.classList.add('map-fullscreen'); // Tambah kelas untuk sembunyikan header
+            document.body.classList.add('map-fullscreen');
             mapCard.style.height = '100vh';
             mapCard.style.width = '100vw';
           } else {
@@ -1478,7 +1623,7 @@ document.querySelectorAll('.paraf-clickable').forEach(span => {
             toggleIcon.classList.remove('fa-compress');
             toggleIcon.classList.add('fa-expand');
             document.body.style.overflow = '';
-            document.body.classList.remove('map-fullscreen'); // Hapus kelas untuk tampilkan header
+            document.body.classList.remove('map-fullscreen');
             mapCard.style.height = '';
             mapCard.style.width = '';
           }
@@ -1511,7 +1656,7 @@ document.querySelectorAll('.paraf-clickable').forEach(span => {
       })
       .catch(error => {
         console.error('Error mengambil data kota dari API:', error);
-        document.getElementById('map').innerHTML = '<p>Error: Tidak dapat mengambil data kota.</p>';
+        document.getElementById('map').innerHTML = `<p>${error.message}</p>`;
       });
   } catch (error) {
     console.error('Error inisialisasi peta:', error);

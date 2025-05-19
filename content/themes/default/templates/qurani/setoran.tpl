@@ -1,20 +1,17 @@
-<!-- Tentukan URL iframe berdasarkan parameter yang diterima -->
-{assign var="qurani_url" value="{$system['qurani_url']}"}
 {if $surah}
-    {assign var="iframe_url" value="{$system['qurani_url']}/surah/$surah"}
+    {assign var="iframe_url" value="http://localhost:5173/surah/$surah"}
 {elseif $juz}
-    {assign var="iframe_url" value="{$system['qurani_url']}/juz/$juz"}
+    {assign var="iframe_url" value="http://localhost:5173/juz/$juz"}
 {elseif $halaman}
     {if $halaman >= 1 && $halaman <= 604}
-        {assign var="iframe_url" value="{$system['qurani_url']}/page/$halaman"}
+        {assign var="iframe_url" value="http://localhost:5173/page/$halaman"}
     {else}
-        {assign var="iframe_url" value="{$system['qurani_url']}/"}
+        {assign var="iframe_url" value="http://localhost:5173/"}
         <div class="alert alert-danger">Nomor halaman tidak valid. Harus antara 1 dan 604 = {$halaman}.</div>
     {/if}
 {else}
-    {assign var="iframe_url" value="{$system['qurani_url']}/"}
+    {assign var="iframe_url" value="http://localhost:5173/"}
 {/if}
-
 
 <div class="iframe-container" style="position: relative; width: 100%; min-height: calc(100vh - 20px); margin: 0; padding: 0; overflow: hidden;">
   <iframe id="quranFrame" src="{$iframe_url}" 
@@ -27,10 +24,60 @@
 </div>
 
 <script>
+{literal}
 document.addEventListener('DOMContentLoaded', function() {
   const iframe = document.getElementById('quranFrame');
+  console.log('Iframe URL:', iframe.src);
+
+  // Fungsi untuk mengatur title dengan format [Spesifik Title] | Link.id - Sosmed Islami
+  function setPageTitleFromPayload(payload) {
+    try {
+      let baseTitle = 'Quran';
+      if (payload.tampilkan_type === 'surat' && payload.surat_name) {
+        baseTitle = payload.surat_name; // Misalnya, "Al-Fatihah"
+      } else if (payload.tampilkan_type === 'juz' && payload.juz_name) {
+        baseTitle = payload.juz_name; // Misalnya, "Juz 2"
+      } else if (payload.tampilkan_type === 'halaman' && payload.halaman) {
+        baseTitle = `Halaman ${payload.halaman}`; // Misalnya, "Halaman 34"
+      }
+      const fullTitle = `${baseTitle} | Link.id - Sosmed Islami`;
+      document.title = fullTitle;
+      console.log('✅ Title diperbarui dari payload:', fullTitle);
+    } catch (error) {
+      console.error('❌ Gagal mengatur title dari payload:', error);
+      document.title = 'Quran | Link.id - Sosmed Islami';
+    }
+  }
+
+  // Fungsi untuk mengatur favicon dengan URL yang diberikan
+  function setFavicon() {
+    try {
+      // Hapus favicon yang ada
+      const existingFavicons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
+      existingFavicons.forEach(favicon => favicon.remove());
+
+      // Buat favicon baru dengan URL yang diberikan
+      const newFavicon = document.createElement('link');
+      newFavicon.rel = 'icon';
+      newFavicon.type = 'image/png';
+      // Gunakan URL favicon yang diberikan
+      newFavicon.href = "{/literal}{$system['system_url']|escape:'javascript'}{literal}/content/themes/default/images/LinkId-Icon.png";
+      
+      // Fallback jika file tidak ditemukan
+      newFavicon.onerror = () => {
+        console.warn('⚠️ Gagal memuat favicon, menggunakan favicon default.');
+        newFavicon.href = '/favicon.ico'; // Favicon default Sngine
+      };
+      
+      document.head.appendChild(newFavicon);
+      console.log('✅ Favicon diperbarui:', newFavicon.href);
+    } catch (error) {
+      console.error('❌ Gagal mengatur favicon:', error);
+    }
+  }
+
+  // Tangani payload
   const payload = localStorage.getItem('setoranPayload');
-  const quraniUrl = "{$qurani_url}";
   let hasSentMessage = false;
 
   // Fungsi untuk memvalidasi payload
@@ -41,24 +88,19 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     const errors = [];
 
-    // Cek field yang wajib ada
     requiredFields.forEach(field => {
       if (!payload[field]) {
-        errors.push('Field ' + field + ' tidak boleh kosong');
-      }
+        errors.push(`Field ${field} tidak boleh kosong`); }
     });
 
-    // Validasi penyetor_type
     if (!['grup', 'teman'].includes(payload.penyetor_type)) {
       errors.push('penyetor_type harus "grup" atau "teman"');
     }
 
-    // Validasi setoran_type
     if (!['tahsin', 'tahfidz'].includes(payload.setoran_type)) {
-      errors.push('setoran_type harus "tahsin" atau "tahfidz"');
+      errors.push('set Favicon harus "tahsin" atau "tahfidz"');
     }
 
-    // Validasi tampilkan_type dan field terkait
     if (!['surat', 'juz', 'halaman'].includes(payload.tampilkan_type)) {
       errors.push('tampilkan_type harus "surat", "juz", atau "halaman"');
     } else {
@@ -73,12 +115,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    // Validasi group_id untuk penyetor_type 'grup'
     if (payload.penyetor_type === 'grup' && !payload.group_id) {
       errors.push('group_id diperlukan untuk penyetor_type "grup"');
     }
 
-    // Validasi bahwa penyetor_id tidak sama dengan user_id
     if (payload.penyetor_id === payload.user_id) {
       errors.push('penyetor_id tidak boleh sama dengan user_id');
     }
@@ -86,54 +126,90 @@ document.addEventListener('DOMContentLoaded', function() {
     return errors;
   }
 
-  if (payload && iframe && !hasSentMessage) {
+  // Set favicon segera saat halaman dimuat
+  setFavicon();
+
+  if (iframe) {
     iframe.onload = () => {
       if (hasSentMessage) {
         console.log('⚠️ postMessage sudah dikirim, melewati pengiriman ulang');
         return;
       }
 
-      try {
-        const parsedPayload = JSON.parse(payload);
+      if (payload) {
+        try {
+          const parsedPayload = JSON.parse(payload);
 
-        // Sanitasi dan default values
-        const sanitizedPayload = {
-          user_id: Number(parsedPayload.user_id) || 0, // Penerima (current user)
-          user_name: parsedPayload.user_name || '',
-          penyimak_type: ['grup', 'teman'].includes(parsedPayload.penyetor_type) ? parsedPayload.penyetor_type : 'teman',
-          penyimak_id: Number(parsedPayload.penyetor_id) || 0, // Penyetor (peserta yang dipilih)
-          penyimak_name: parsedPayload.penyetor_name || '',
-          setoran_type: ['tahsin', 'tahfidz'].includes(parsedPayload.setoran_type) ? parsedPayload.setoran_type : 'tahfidz',
-          tampilkan_type: ['surat', 'juz', 'halaman'].includes(parsedPayload.tampilkan_type) ? parsedPayload.tampilkan_type : 'surat',
-          surat_id: parsedPayload.surat_id ? Number(parsedPayload.surat_id) : null,
-          surat_name: parsedPayload.surat_name || '',
-          juz_id: parsedPayload.juz_id ? Number(parsedPayload.juz_id) : null,
-          juz_name: parsedPayload.juz_name || '',
-          halaman: parsedPayload.halaman ? Number(parsedPayload.halaman) : null,
-          group_id: parsedPayload.penyetor_type === 'grup' ? (Number(parsedPayload.group_id) || null) : null
-        };
+          // Sanitasi dan default values
+          const sanitizedPayload = {
+            user_id: Number(parsedPayload.user_id) || 0,
+            user_name: parsedPayload.user_name || '',
+            penyimak_type: ['grup', 'teman'].includes(parsedPayload.penyetor_type) ? parsedPayload.penyetor_type : 'teman',
+            penyimak_id: Number(parsedPayload.penyetor_id) || 0,
+            penyimak_name: parsedPayload.penyetor_name || '',
+            setoran_type: ['tahsin', 'tahfidz'].includes(parsedPayload.setoran_type) ? parsedPayload.setoran_type : 'tahfidz',
+            tampilkan_type: ['surat', 'juz', 'halaman'].includes(parsedPayload.tampilkan_type) ? parsedPayload.tampilkan_type : 'surat',
+            surat_id: parsedPayload.surat_id ? Number(parsedPayload.surat_id) : null,
+            surat_name: parsedPayload.surat_name || '',
+            juz_id: parsedPayload.juz_id ? Number(parsedPayload.juz_id) : null,
+            juz_name: parsedPayload.juz_name || '',
+            halaman: parsedPayload.halaman ? Number(parsedPayload.halaman) : null,
+            group_id: parsedPayload.penyetor_type === 'grup' ? (Number(parsedPayload.group_id) || null) : null
+          };
 
-        // Validasi payload
-        const validationErrors = validatePayload(parsedPayload);
-        if (validationErrors.length > 0) {
-          console.error('❌ Validasi payload gagal:', validationErrors);
-          return;
+          // Validasi payload
+          const validationErrors = validatePayload(parsedPayload);
+          if (validationErrors.length > 0) {
+            console.error('❌ Validasi payload gagal:', validationErrors);
+            return;
+          }
+
+          // Atur title berdasarkan payload
+          setPageTitleFromPayload(sanitizedPayload);
+
+          // Kirim postMessage ke iframe
+          iframe.contentWindow.postMessage(sanitizedPayload, 'http://localhost:5173');
+          console.log('✅ postMessage dikirim ke iframe:', sanitizedPayload);
+          hasSentMessage = true;
+        } catch (error) {
+          console.error('Gagal mengirim postMessage:', error);
+          document.title = 'Quran | Link.id - Sosmed Islami';
         }
-
-        // Log untuk debugging
-        console.log('Parsed payload sebelum postMessage:', sanitizedPayload);
-
-        // Kirim postMessage ke iframe
-        iframe.contentWindow.postMessage(sanitizedPayload, quraniUrl);
-        console.log('✅ postMessage dikirim ke iframe:', sanitizedPayload);
-        hasSentMessage = true;
-        // Jangan hapus setoranPayload dari localStorage agar tetap tersedia jika diperlukan
-      } catch (error) {
-        console.error('Gagal mengirim postMessage:', error);
+      } else {
+        console.warn('⚠️ Tidak ada payload.');
+        document.title = 'Quran | Link.id - Sosmed Islami';
       }
     };
   } else {
-    console.warn('⚠️ Tidak ada payload atau iframe tidak ditemukan:', { payload, iframe });
+    console.warn('⚠️ Iframe tidak ditemukan.');
+    document.title = 'Quran | Link.id - Sosmed Islami';
   }
 });
+
+// Listener untuk menerima metadata dari iframe (fallback)
+window.addEventListener('message', (event) => {
+  if (event.origin !== 'http://localhost:5173') {
+    console.warn('⚠️ Pesan dari origin tidak dikenal:', event.origin);
+    return;
+  }
+
+  const data = event.data;
+  if (data.type === 'updateMetadata') {
+    if (data.title) {
+      // Pastikan title sudah dalam format yang benar, jika tidak tambahkan akhiran
+      const fullTitle = data.title.includes('| Link.id - Sosmed Islami') 
+        ? data.title 
+        : `${data.title} | Link.id - Sosmed Islami`;
+      document.title = fullTitle;
+      console.log('✅ Title diperbarui via postMessage:', fullTitle);
+    } else {
+      console.warn('⚠️ Title tidak ditemukan di postMessage.');
+      document.title = 'Quran | Link.id - Sosmed Islami';
+    }
+
+    // Untuk metadata dari iframe, tetap gunakan favicon yang ditentukan
+    console.log('ℹ️ Mengabaikan favicon dari iframe, menggunakan favicon yang ditentukan');
+  }
+});
+{/literal}
 </script>

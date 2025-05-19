@@ -17728,6 +17728,15 @@ class User
     $db->query("TRUNCATE TABLE wallet_transactions");
   }
 
+  public function wallet_get_user($user_id)
+  {
+    global $db;
+    
+    $get_user = $db->query(sprintf("SELECT user_id, user_name, user_firstname, user_lastname, user_gender, user_picture FROM users WHERE user_id = %s", secure($user_id)));
+      
+    return $get_user->fetch_assoc();
+  }
+
   /* ------------------------------- */
   /* Transfer */
   /* ------------------------------- */

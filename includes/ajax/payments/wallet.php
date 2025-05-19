@@ -165,6 +165,24 @@ try {
       return_json(['callback' => 'window.location = site_path + "/wallet?wallet_marketplace_succeed"']);
       break;
 
+    case 'get_user_info':
+      // valid inputs
+      if (!isset($_POST['user_id']) || !is_numeric($_POST['user_id']) || $_POST['user_id'] < 0) {
+        throw new Exception(__("Enter valid user id"));
+      }
+
+      $target_user = $user->wallet_get_user($_POST['user_id']);
+      if (!isset($target_user)) {
+            $_SESSION['transfer_fail_message'] = "Scanned QR Code invalid";
+            return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/wallet?transfer_send_failed"']);
+            break;
+      }
+        
+      $target_user['user_picture'] = get_picture($target_user['user_picture'], $target_user['user_gender']);
+
+      return_json(['result' => 'valid', 'user' => $target_user]);
+      break;
+      
     default:
       _error(400);
       break;

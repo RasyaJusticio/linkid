@@ -1451,7 +1451,7 @@
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form class="js_ajax-forms" data-url="payments/wallet.php?do=wallet_transfer">
+        <form onsubmit="openConfirmationModal(event)">
           <div class="modal-body">
             {if $system['wallet_max_transfer'] != "0"}
               <div class="alert alert-info mb20">
@@ -1498,12 +1498,146 @@
         <script>
             var buttons = document.querySelectorAll("#presetprices .btn");
             var input = document.querySelector("input[name='amount']");
-
-            buttons.forEach(btn => {
-              btn.addEventListener("click", () => {
+            
+            buttons.forEach(function(btn) {
+              btn.addEventListener("click", function() {
                 input.value = btn.getAttribute("data-input");
               });
             });
+            
+            function openConfirmationModal(event) {
+              event.preventDefault();
+            
+              var form = event.target;
+              var formData = new FormData(form);
+            
+              var data = {};
+              formData.forEach(function(value, key) {
+                data[key] = value;
+              });
+            
+              var user = {
+                'user_id': "{$user->_data['user_id']}",
+                'user_name': "{$user->_data['user_name']}",
+                'user_firstname': "{$user->_data['user_firstname']}",
+                'user_lastname': "{$user->_data['user_lastname']}",
+                'user_picture': "{$user->_data['user_picture']}"
+              };
+
+              $.post(ajax_path + "payments/wallet.php?do=get_user_info", {
+                  user_id: data.send_to_id
+              }, function (response) {
+                  if (response.result == "valid") {
+                      isSuccessfull = true;
+                          
+                      const user = response.user;
+
+                      modal("#wallet-transfer-confirm", { 'amount': data.amount, 'user_id': user['user_id'], 'user_name': user['user_name'], 'user_fullname': user['user_firstname'] + " " + user['user_lastname'], 'user_picture': user['user_picture'] });
+                  }
+              });
+
+              return false;
+            }
+        </script>
+      </script>
+
+      <script id="wallet-transfer-confirm" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {__("Send Money")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="js_ajax-forms" data-url="payments/wallet.php?do=wallet_transfer">
+          <div class="modal-body">
+            <p class="sending-to">
+              {__("Sending To")}
+            </p>
+            <div class="target-user">
+                <img class="user-avatar" src="{literal}{{user_picture}}{/literal}" alt="">
+                <p class="user-fullname">
+                  {literal}{{user_fullname}}{/literal}
+                </p>
+                <p class="user-name">
+                  @{literal}{{user_name}}{/literal}
+                </p>
+            </div>
+
+            <span id="send-money-total">Rp 0</span>
+            
+            <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
+            <input type="hidden" name="send_to_id" value="{literal}{{user_id}}{/literal}">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Send")}</button>
+          </div>
+        </form>
+        <style>
+            .sending-to {
+                width: 100%;
+                text-align: center;
+                margin-block: 0.2rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .target-user {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.2rem;
+
+                .user-avatar {
+                    border-radius: 100%;
+                    aspect-ratio: 1 / 1;
+                    width: 6rem;
+                }
+
+                .user-fullname, .user-name {
+                    margin: 0;
+                }
+
+                .user-fullname {
+                    font-size: 1.4rem;
+                    margin-bottom: -0.4rem;
+                    font-weight: bold;
+                }
+            }
+            
+            #send-money-total {
+                margin-top: 1rem;
+                text-align: center;
+                font-size: 3rem;
+                font-weight: bolder;
+                color: rgb(94, 114, 228); 
+                width: 100%;
+                display: block;
+            }
+        </style>
+        <script>
+          (function () {
+            function formatNumber(amount) {
+              const formatter = new Intl.NumberFormat('de-DE', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              });
+
+              const formatted = formatter.format(amount);
+
+              return formatted;
+            }
+
+            function printMoney(amount, symbol = "Rp", dir = "left") {
+              const formatted = formatNumber(amount);
+              return dir === "right" ? formatted + ' ' + symbol : symbol + ' ' + formatted;
+            }
+
+            const amount = "{literal}{{amount}}{/literal}";
+            const sendMoneyTotal = document.getElementById('send-money-total');
+
+            sendMoneyTotal.innerText = printMoney(Number(amount));
+          })();
         </script>
       </script>
 

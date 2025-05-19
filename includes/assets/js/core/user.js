@@ -493,6 +493,41 @@ $(function () {
     });
   }
 
+  if ($(".js_walletHistoryTable").length > 0) {
+    $('.js_walletHistoryTable').DataTable({
+      order: [[0, 'desc']],
+      columnDefs: [
+        {
+          targets: 0,
+          visible: false,
+          searchable: false
+        }
+      ],
+      language: {
+        processing: __['Processing...'],
+        search: __['Search:'],
+        lengthMenu: __['Show _MENU_ entries'],
+        info: __['Showing _START_ to _END_ of _TOTAL_ entries'],
+        infoEmpty: __['Showing 0 to 0 of 0 entries'],
+        infoFiltered: __['(filtered from _MAX_ total entries)'],
+        infoPostFix: "",
+        loadingRecords: __['Loading...'],
+        zeroRecords: __['No matching records found'],
+        emptyTable: __['No data available in table'],
+        paginate: {
+          first: __['First'],
+          previous: __['Previous'],
+          next: __['Next'],
+          last: __['Last']
+        },
+        aria: {
+          sortAscending: __[': activate to sort column ascending'],
+          sortDescending: __[': activate to sort column descending']
+        }
+      }
+    });
+  }
+
 
   // run Clipboard
   if ($(".js_clipboard").length > 0) {

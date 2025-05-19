@@ -248,28 +248,19 @@
                 </div>
                 {if $transactions}
                   <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover js_dataTable">
+                    <table class="table table-striped table-bordered table-hover js_walletHistoryTable">
                       <thead>
                         <tr>
-                          <th>{__("ID")}</th>
-                          <th>{__("Amount")}</th>
+                          <th style="display: none;">{__("ID")}</th>
                           <th>{__("From / To")}</th>
+                          <th>{__("Amount")}</th>
                           <th>{__("Time")}</th>
                         </tr>
                       </thead>
                       <tbody>
                         {foreach $transactions as $transaction}
                           <tr>
-                            <td>{$transaction['transaction_id']}</td>
-                            <td>
-                              {if $transaction['type'] == "out"}
-                                <span class="badge rounded-pill badge-lg bg-danger mr5"><i class="far fa-arrow-alt-circle-down"></i></span>
-                                <strong class="text-danger">{if $transaction['amount']}{print_money($transaction['amount']|format_number)}{/if}</strong>
-                              {else}
-                                <span class="badge rounded-pill badge-lg bg-success mr5"><i class="far fa-arrow-alt-circle-up"></i></span>
-                                <strong class="text-success">{if $transaction['amount']}{print_money($transaction['amount']|format_number)}{/if}</strong>
-                              {/if}
-                            </td>
+                            <td style="display: none;">{$transaction['transaction_id']}</td>
                             <td>
                               {if $transaction['type'] == "out"}
                                 <span class="badge rounded-pill badge-lg bg-danger mr10">{__("To")}</span>
@@ -320,6 +311,15 @@
                                 {__("Paid Chat Message")}
                               {elseif $transaction['node_type'] == "paid_call"}
                                 {__("Paid Call")}
+                              {/if}
+                            </td>
+                            <td>
+                              {if $transaction['type'] == "out"}
+                                <span class="badge rounded-pill badge-lg bg-danger mr5"><i class="far fa-arrow-alt-circle-down"></i></span>
+                                <strong class="text-danger">{if $transaction['amount']}{print_money($transaction['amount']|format_number)}{/if}</strong>
+                              {else}
+                                <span class="badge rounded-pill badge-lg bg-success mr5"><i class="far fa-arrow-alt-circle-up"></i></span>
+                                <strong class="text-success">{if $transaction['amount']}{print_money($transaction['amount']|format_number)}{/if}</strong>
                               {/if}
                             </td>
                             <td><span class="js_moment" data-time="{$transaction['date']}">{$transaction['date']}</span></td>

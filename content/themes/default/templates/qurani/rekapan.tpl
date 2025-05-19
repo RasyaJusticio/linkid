@@ -1,4 +1,4 @@
-{assign var="iframe_url" value="`$qurani_url`riwayat"}
+{assign var="iframe_url" value="{$system['qurani_url']}/riwayat"}
 
 <!-- page header -->
 <div class="circle-2"></div>
@@ -19,6 +19,7 @@
 {literal}
 document.addEventListener("DOMContentLoaded", function() {
   const iframe = document.getElementById('rekapanFrame');
+  const quraniUrl = "{/literal}{$system['qurani_url']}{literal}";
   console.log('Iframe URL:', iframe.src);
 
   // Fungsi untuk mengatur title dengan format [Spesifik Title] | Link.id - Sosmed Islami
@@ -74,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Fungsi untuk mengirim postMessage
   const sendPostMessage = (data) => {
     try {
-      const targetOrigin = `{/literal}{$qurani_url}{literal}`;
+      const targetOrigin = quraniUrl;
       iframe.contentWindow.postMessage(data, targetOrigin);
       console.log('✅ postMessage dikirim ke iframe:', data, 'Waktu:', new Date().toISOString());
     } catch (error) {
@@ -163,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Listener untuk menerima metadata dari iframe (opsional, untuk konsistensi)
   window.addEventListener('message', (event) => {
-    if (event.origin !== `{/literal}{$qurani_url}{literal}`) {
+    if (event.origin !== quraniUrl) {
       console.warn('⚠️ Pesan dari origin tidak dikenal:', event.origin);
       return;
     }

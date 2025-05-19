@@ -1,16 +1,17 @@
+{assign var="qurani_url" value="{$system['qurani_url']}"}
 {if $surah}
-    {assign var="iframe_url" value="http://localhost:5173/surah/$surah"}
+    {assign var="iframe_url" value="{$system['qurani_url']}/surah/$surah"}
 {elseif $juz}
-    {assign var="iframe_url" value="http://localhost:5173/juz/$juz"}
+    {assign var="iframe_url" value="{$system['qurani_url']}/juz/$juz"}
 {elseif $halaman}
     {if $halaman >= 1 && $halaman <= 604}
-        {assign var="iframe_url" value="http://localhost:5173/page/$halaman"}
+        {assign var="iframe_url" value="{$system['qurani_url']}/page/$halaman"}
     {else}
-        {assign var="iframe_url" value="http://localhost:5173/"}
+        {assign var="iframe_url" value="{$system['qurani_url']}/"}
         <div class="alert alert-danger">Nomor halaman tidak valid. Harus antara 1 dan 604 = {$halaman}.</div>
     {/if}
 {else}
-    {assign var="iframe_url" value="http://localhost:5173/"}
+    {assign var="iframe_url" value="{$system['qurani_url']}/"}
 {/if}
 
 <div class="iframe-container" style="position: relative; width: 100%; min-height: calc(100vh - 20px); margin: 0; padding: 0; overflow: hidden;">
@@ -27,6 +28,7 @@
 {literal}
 document.addEventListener('DOMContentLoaded', function() {
   const iframe = document.getElementById('quranFrame');
+  const quraniUrl = "{/literal}{$system['qurani_url']}{literal}";
   console.log('Iframe URL:', iframe.src);
 
   // Fungsi untuk mengatur title dengan format [Spesifik Title] | Link.id - Sosmed Islami
@@ -168,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
           setPageTitleFromPayload(sanitizedPayload);
 
           // Kirim postMessage ke iframe
-          iframe.contentWindow.postMessage(sanitizedPayload, 'http://localhost:5173');
+          iframe.contentWindow.postMessage(sanitizedPayload, quraniUrl);
           console.log('✅ postMessage dikirim ke iframe:', sanitizedPayload);
           hasSentMessage = true;
         } catch (error) {
@@ -188,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Listener untuk menerima metadata dari iframe (fallback)
 window.addEventListener('message', (event) => {
-  if (event.origin !== 'http://localhost:5173') {
+  if (event.origin !== quraniUrl) {
     console.warn('⚠️ Pesan dari origin tidak dikenal:', event.origin);
     return;
   }

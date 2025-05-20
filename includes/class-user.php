@@ -17752,6 +17752,24 @@ class User
     return $token;
   }
   
+  public function transfer_generate_qrcode()
+  {
+    if (!isset($this->_data['user_transfer_token']) || $this->_data['user_transfer_token'] == "") {
+      return;
+    }
+
+    $builder = new \Endroid\QrCode\Builder\Builder(
+      writer: new \Endroid\QrCode\Writer\PngWriter(),
+      data: $this->_data['user_transfer_token'],
+      encoding: new \Endroid\QrCode\Encoding\Encoding('UTF-8'),
+      errorCorrectionLevel: \Endroid\QrCode\ErrorCorrectionLevel::High,
+    );
+    
+    $result = $builder->build();
+
+    return $result->getDataUri();
+  }
+  
   public function transfer_get_user($transfer_token)
   {
     global $db;

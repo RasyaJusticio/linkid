@@ -934,6 +934,12 @@
     <!-- Admin Code Editor -->
   {/if}
 
+  <!-- QRCode -->
+  {if $page == "wallet"}
+    <script src="{$system['system_url']}/includes/assets/js/core/qrcode.js"></script>
+  {/if}
+  <!-- QRCode -->
+
   <!-- Cookies Policy -->
   {if $system['cookie_consent_enabled']}
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js" {if !$user->_logged_in}defer{/if}>

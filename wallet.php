@@ -112,11 +112,15 @@ try {
         $transfer_token = $user->_data['user_transfer_token'];
       }
 
+      // get qrcode image
+      $qrcode = $user->transfer_generate_qrcode();
+
       // get wallet transactions
       $transactions = $user->wallet_get_transactions();
+
       /* assign variables */
       $smarty->assign('transactions', $transactions);
-      $smarty->assign('transfer_token', $transfer_token);
+      $smarty->assign('qrcode_uri', $qrcode);
       break;
 
     case 'payments':

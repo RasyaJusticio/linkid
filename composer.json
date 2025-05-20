@@ -26,7 +26,8 @@
   "fakerphp/faker": "^1.24",
   "agence104/livekit-server-sdk": "^1.2",
   "xendit/xendit-php": "^6.3",
-  "midtrans/midtrans-php": "^2.6"
+  "midtrans/midtrans-php": "^2.6",
+  "endroid/qr-code": "^6.0"
  },
  "config": {
   "allow-plugins": {

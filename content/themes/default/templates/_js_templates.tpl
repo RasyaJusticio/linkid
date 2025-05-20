@@ -1929,93 +1929,95 @@
       </script>
 
       <script id="wallet-qr" type="text/template">
-        <div class="modal-header">
-          <h6 class="modal-title">
-            {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
-            {__("QR Request")}
-          </h6>
-          <button type="button" class="btn-download">
-            <i class="fas fa-download"></i>
-          </button>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body"> 
-          <div class="spinner-grow"></div>
-          <canvas id="qrcode"></canvas>
-            <script type="text/javascript">
-              (function () {
-                const qrCodeUri = "{{$qrcode_uri}}";
+        <div class="modal-wallet-qr">
+          <div class="modal-header">
+            <h6 class="modal-title">
+              {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
+              {__("QR Request")}
+            </h6>
+            <button type="button" class="btn-download">
+              <i class="fas fa-download"></i>
+            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+          </div>
+          <div class="modal-body"> 
+            <div class="spinner-grow"></div>
+            <canvas id="qrcode"></canvas>
+              <script type="text/javascript">
+                (function () {
+                  const qrcodeUri = "{{$qrcode_uri}}";
 
-                drawQRToCanvas("qrcode", qrCodeUri);
-                
-              })();
-            </script>
+                  drawQRToCanvas("qrcode", qrcodeUri);
+                })();
+              </script>
+          </div>
         </div>
         <style>
-            .modal-body {
-                position: relative;
+            .modal-wallet-qr {
+                .modal-body {
+                    position: relative;
 
-                .spinner-grow {
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
+                    .spinner-grow {
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
 
-                    margin: auto;
+                        margin: auto;
 
-                    z-index: 1;
-                }
-            }
-            
-            .modal-header {
-                .btn-download {
-                    --bs-btn-close-color: #000;
-                    --bs-btn-close-opacity: 0.5;
-                    --bs-btn-close-hover-opacity: 0.75;
-                    --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-                    --bs-btn-close-focus-opacity: 1;
-                    --bs-btn-close-disabled-opacity: 0.25;
-
-                    padding: calc(var(--bs-modal-header-padding-y)* .5) calc(var(--bs-modal-header-padding-x)* .5);
-                    margin-top: calc(-.5* var(--bs-modal-header-padding-y));
-                    margin-right: calc(.6 * var(--bs-modal-header-padding-x));
-                    margin-bottom: calc(-.5* var(--bs-modal-header-padding-y));
-                    margin-left: auto;
-
-                    box-sizing: content-box;
-                    background: transparent;
-                    border: 0;
-                    border-radius: .375rem;
-                    opacity: var(--bs-btn-close-opacity);
-
-                    &:hover {
-                        color: var(--bs-btn-close-color);
-                        text-decoration: none;
-                        opacity: var(--bs-btn-close-hover-opacity);
-                    }
-
-                    &:focus {
-                        outline: 0;
-                        box-shadow: var(--bs-btn-close-focus-shadow);
-                        opacity: var(--bs-btn-close-focus-opacity);
+                        z-index: 1;
                     }
                 }
             
-                .btn-close {
-                    margin-left: calc(-.5 * var(--bs-modal-header-padding-x));
+                .modal-header {
+                    .btn-download {
+                        --bs-btn-close-color: #000;
+                        --bs-btn-close-opacity: 0.5;
+                        --bs-btn-close-hover-opacity: 0.75;
+                        --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+                        --bs-btn-close-focus-opacity: 1;
+                        --bs-btn-close-disabled-opacity: 0.25;
+
+                        padding: calc(var(--bs-modal-header-padding-y)* .5) calc(var(--bs-modal-header-padding-x)* .5);
+                        margin-top: calc(-.5* var(--bs-modal-header-padding-y));
+                        margin-right: calc(.6 * var(--bs-modal-header-padding-x));
+                        margin-bottom: calc(-.5* var(--bs-modal-header-padding-y));
+                        margin-left: auto;
+
+                        box-sizing: content-box;
+                        background: transparent;
+                        border: 0;
+                        border-radius: .375rem;
+                        opacity: var(--bs-btn-close-opacity);
+
+                        &:hover {
+                            color: var(--bs-btn-close-color);
+                            text-decoration: none;
+                            opacity: var(--bs-btn-close-hover-opacity);
+                        }
+
+                        &:focus {
+                            outline: 0;
+                            box-shadow: var(--bs-btn-close-focus-shadow);
+                            opacity: var(--bs-btn-close-focus-opacity);
+                        }
+                    }
+            
+                    .btn-close {
+                        margin-left: calc(-.5 * var(--bs-modal-header-padding-x));
+                    }
+                }
+
+                #qrcode {
+                  position: relative;
+                  aspect-ratio: 1240 / 1748;
+                  width: 100%;
+                  border-radius: var(--bs-border-radius);
+                  z-index: 2;
                 }
             }
-
-            #qrcode {
-              position: relative;
-              aspect-ratio: 1240 / 1748;
-              width: 100%;
-              border-radius: var(--bs-border-radius);
-              z-index: 2;
-            }
-          </style>
-        </div>
+        </style>
       </script>
 
       <script id="wallet-qr-scan" type="text/template">

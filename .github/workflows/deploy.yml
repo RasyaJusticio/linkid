@@ -2,7 +2,7 @@ name: Deploy on Push to Main
 
 on:
   push:
-    branches: [dev]
+    branches: [main]
 
 jobs:
   deploy:
@@ -23,20 +23,20 @@ jobs:
           cd /www/wwwroot/link.id
 
           echo "[github-actions] >> Pulling latest changes from main branch..."
-          echo "Would run: git pull origin dev"
+          git pull origin main
 
           echo "[github-actions] >> Checking for dependency changes..."
 
           if git diff --name-only HEAD~1 HEAD | grep -qE 'package(-lock)?\.json'; then
             echo "[github-actions] >> Installing Node.js dependencies..."
-            echo "Would run: npm install"
+            npm install
           else
             echo "[github-actions] >> No changes in Node.js dependencies."
           fi
 
           if git diff --name-only HEAD~1 HEAD | grep -qE 'composer\.(json|lock)'; then
             echo "[github-actions] >> Installing updated PHP dependencies..."
-            echo "Would run: composer install"
+            composer install --no-dev --optimize-autoloader
           else
             echo "[github-actions] >> No changes in PHP dependencies."
           fi

@@ -1934,94 +1934,86 @@
             {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
             {__("QR Request")}
           </h6>
+          <button type="button" class="btn-download">
+            <i class="fas fa-download"></i>
+          </button>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body"> 
-          <div class="bg-gradient-info qr-container">
-            
-            <p class="logo">
-              {__($system['system_title'])}
-            </p>
+          <div class="spinner-grow"></div>
+          <canvas id="qrcode"></canvas>
+            <script type="text/javascript">
+              (function () {
+                const qrCodeUri = "{{$qrcode_uri}}";
 
-            <div class="qr-box shadow">
-              <div class="user-info">
-                <h5>
-                  {$user->_data['user_firstname']} {$user->_data['user_lastname']}
-                </h5>
-                <p>@{$user->_data['user_name']}</p>
-            </div>
-            <div class="qrcode-cell">
-              <div id="qrcode"></div>
-              <script type="text/javascript">
-                (function () {
-                  const token = "{{$transfer_token}}";
-                  new QRCode(document.getElementById("qrcode"), token);
-                })();
-              </script>
-            </div>
-          </div>
+                drawQRToCanvas("qrcode", qrCodeUri);
+                
+              })();
+            </script>
         </div>
         <style>
-            .qr-container {
+            .modal-body {
                 position: relative;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                margin: 0;
-                        border-radius: var(--bs-border-radius);
-                        padding: 2rem 1rem;
-                        gap: 1rem;
 
-                        .logo {
-                            display: block;
-                            font-size: 32px;
-                            font-weight: 600;
-                            opacity: 1;
-                            margin: 0;
-                        }
+                .spinner-grow {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
 
-                        .qr-box {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 1rem;
-                            background: linear-gradient(230deg, #ffffff, #d9d9d9) !important;
-                            padding: 2rem;
-                            border-radius: var(--bs-border-radius);
-                            max-width: 100%;
-                        }
+                    margin: auto;
 
-                        .qrcode-cell {
-                            padding: 1rem;
-                            background: #FFFFFF;
-                        }
+                    z-index: 1;
+                }
+            }
+            
+            .modal-header {
+                .btn-download {
+                    --bs-btn-close-color: #000;
+                    --bs-btn-close-opacity: 0.5;
+                    --bs-btn-close-hover-opacity: 0.75;
+                    --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+                    --bs-btn-close-focus-opacity: 1;
+                    --bs-btn-close-disabled-opacity: 0.25;
 
-                        .user-info {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            flex-direction: column;
+                    padding: calc(var(--bs-modal-header-padding-y)* .5) calc(var(--bs-modal-header-padding-x)* .5);
+                    margin-top: calc(-.5* var(--bs-modal-header-padding-y));
+                    margin-right: calc(.6 * var(--bs-modal-header-padding-x));
+                    margin-bottom: calc(-.5* var(--bs-modal-header-padding-y));
+                    margin-left: auto;
 
-                            * {
-                                margin: 0;
-                                color: #000000;
-                                max-width: 100%;
-                                text-wrap: auto;
-                                text-align: center;
-                            }
-                        }
-                        
-                        #qrcode {
-                            aspect-ratio: 1 / 1;
+                    box-sizing: content-box;
+                    background: transparent;
+                    border: 0;
+                    border-radius: .375rem;
+                    opacity: var(--bs-btn-close-opacity);
 
-                            img, canvas {
-                                height: 100%;
-                                width: 100%;
-                                object-fit: contain;
-                            }
-                        }
+                    &:hover {
+                        color: var(--bs-btn-close-color);
+                        text-decoration: none;
+                        opacity: var(--bs-btn-close-hover-opacity);
                     }
+
+                    &:focus {
+                        outline: 0;
+                        box-shadow: var(--bs-btn-close-focus-shadow);
+                        opacity: var(--bs-btn-close-focus-opacity);
+                    }
+                }
+            
+                .btn-close {
+                    margin-left: calc(-.5 * var(--bs-modal-header-padding-x));
+                }
+            }
+
+            #qrcode {
+              position: relative;
+              aspect-ratio: 1240 / 1748;
+              width: 100%;
+              border-radius: var(--bs-border-radius);
+              z-index: 2;
+            }
           </style>
         </div>
       </script>

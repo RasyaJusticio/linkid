@@ -333,9 +333,6 @@
   <script src="{$system['system_url']}/node_modules/moment/min/moment-with-locales.min.js" {if !$user->_logged_in}defer{/if}>
     
   </script>
-  <script src="{$system['system_url']}/node_modules/qrcodejs/qrcode.min.js">
-
-  </script>
   <script src="{$system['system_url']}/node_modules/qr-scanner/qr-scanner.umd.min.js">
 
   </script>
@@ -933,6 +930,12 @@
     {/if}
     <!-- Admin Code Editor -->
   {/if}
+
+  <!-- QRCode -->
+  {if $page == "wallet"}
+    <script src="{$system['system_url']}/includes/assets/js/core/qrcode.js"></script>
+  {/if}
+  <!-- QRCode -->
 
   <!-- Cookies Policy -->
   {if $system['cookie_consent_enabled']}

@@ -53,6 +53,16 @@ try {
 
         return_json(['result' => 'valid', 'user' => $target_user]);
         break;
+    case 'get_qr_info':
+        $data = [
+            'full_name' => $user->_data['user_firstname'] . " " . $user->_data['user_lastname'],
+            'username' => $user->_data['user_name'],
+            'transfer_token' => $user->_data['user_transfer_token'],
+            'created_at' => date('d-m-Y H:i'),    
+        ];
+
+        return_json(['data' => $data]);
+        break;
     default:
         _error(400);
         break;

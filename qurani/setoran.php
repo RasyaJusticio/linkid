@@ -54,4 +54,3 @@ $smarty->assign('halaman', $halaman);
 page_header("Qurani Page");
 page_footer('qurani/setoran');
 ?>
->

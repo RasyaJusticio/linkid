@@ -1,5 +1,5 @@
-{include file='../_head.tpl'}
-{include file='../_header.tpl'}
+{include file='_head.tpl'}
+{include file='_header.tpl'}
 
 <!-- Add Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -346,18 +346,6 @@ body.map-fullscreen .js_sticky-header {
   white-space: nowrap;
 }
 
-.surah-quick-btn:hover {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
-}
-
-.surah-quick-btn.active {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
-  font-weight: 500;
-}
 
 /* Medium screens (tablets, 768px and below) */
 @media (max-width: 768px) {
@@ -527,6 +515,51 @@ body.map-fullscreen .js_sticky-header {
   }
 }
 
+.tooltip-inner {
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: #007bff;
+}
+
+.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: #007bff;
+}
+
+.bs-tooltip-start .tooltip-arrow::before {
+  border-left-color: #007bff;
+}
+
+.bs-tooltip-end .tooltip-arrow::before {
+  border-right-color: #007bff;
+}
+
+.surah-quick-btn:active {
+  transform: scale(0.95); /* Efek sedikit mengecil saat diklik */
+  transition: transform 0.1s ease;
+}
+
+/* Hapus efek klik yang menyebabkan warna tetap */
+  .surah-quick-btn:focus,
+  .surah-quick-btn:active,
+  .surah-quick-btn.active {
+    background-color: transparent !important;
+    color: #0d6efd !important;
+    border-color: #0d6efd !important;
+    box-shadow: none !important;
+  }
+
+  /* Warna hanya saat hover */
+  .surah-quick-btn:hover {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+  }
+
 /* Small screens (mobile, 576px and below) */
 @media (max-width: 576px) {
   .table {
@@ -659,130 +692,130 @@ body.map-fullscreen .js_sticky-header {
     <div class="input-dropdown-container w-100">
       <input type="text" id="suratInput" class="input-dropdown form-control" placeholder="Pilih Surat" autocomplete="off" spellcheck="false">
       <div id="suratDropdown" class="dropdown-menu">
-        <div class="dropdown-item" data-value="1">Al-Fatihah</div>
-        <div class="dropdown-item" data-value="2">Al-Baqarah</div>
-        <div class="dropdown-item" data-value="3">Ali 'Imran</div>
-        <div class="dropdown-item" data-value="4">An-Nisa</div>
-        <div class="dropdown-item" data-value="5">Al-Ma'idah</div>
-        <div class="dropdown-item" data-value="6">Al-An'am</div>
-        <div class="dropdown-item" data-value="7">Al-A'raf</div>
-        <div class="dropdown-item" data-value="8">Al-Anfal</div>
-        <div class="dropdown-item" data-value="9">At-Taubah</div>
-        <div class="dropdown-item" data-value="10">Yunus</div>
-        <div class="dropdown-item" data-value="11">Hud</div>
-        <div class="dropdown-item" data-value="12">Yusuf</div>
-        <div class="dropdown-item" data-value="13">Ar-Ra'd</div>
-        <div class="dropdown-item" data-value="14">Ibrahim</div>
-        <div class="dropdown-item" data-value="15">Al-Hijr</div>
-        <div class="dropdown-item" data-value="16">An-Nahl</div>
-        <div class="dropdown-item" data-value="17">Al-Isra</div>
-        <div class="dropdown-item" data-value="18">Al-Kahf</div>
-        <div class="dropdown-item" data-value="19">Maryam</div>
-        <div class="dropdown-item" data-value="20">Ta-Ha</div>
-        <div class="dropdown-item" data-value="21">Al-Anbiya</div>
-        <div class="dropdown-item" data-value="22">Al-Hajj</div>
-        <div class="dropdown-item" data-value="23">Al-Mu'minun</div>
-        <div class="dropdown-item" data-value="24">An-Nur</div>
-        <div class="dropdown-item" data-value="25">Al-Furqan</div>
-        <div class="dropdown-item" data-value="26">Asy-Syu'ara</div>
-        <div class="dropdown-item" data-value="27">An-Naml</div>
-        <div class="dropdown-item" data-value="28">Al-Qasas</div>
-        <div class="dropdown-item" data-value="29">Al-Ankabut</div>
-        <div class="dropdown-item" data-value="30">Ar-Rum</div>
-        <div class="dropdown-item" data-value="31">Luqman</div>
-        <div class="dropdown-item" data-value="32">As-Sajdah</div>
-        <div class="dropdown-item" data-value="33">Al-Ahzab</div>
-        <div class="dropdown-item" data-value="34">Saba'</div>
-        <div class="dropdown-item" data-value="35">Fatir</div>
-        <div class="dropdown-item" data-value="36">Yasin</div>
-        <div class="dropdown-item" data-value="37">As-Saffat</div>
-        <div class="dropdown-item" data-value="38">Sad</div>
-        <div class="dropdown-item" data-value="39">Az-Zumar</div>
-        <div class="dropdown-item" data-value="40">Ghafir</div>
-        <div class="dropdown-item" data-value="41">Fussilat</div>
-        <div class="dropdown-item" data-value="42">Asy-Syura</div>
-        <div class="dropdown-item" data-value="43">Az-Zukhruf</div>
-        <div class="dropdown-item" data-value="44">Ad-Dukhan</div>
-        <div class="dropdown-item" data-value="45">Al-Jasiyah</div>
-        <div class="dropdown-item" data-value="46">Al-Ahqaf</div>
-        <div class="dropdown-item" data-value="47">Muhammad</div>
-        <div class="dropdown-item" data-value="48">Al-Fath</div>
-        <div class="dropdown-item" data-value="49">Al-Hujurat</div>
-        <div class="dropdown-item" data-value="50">Qaf</div>
-        <div class="dropdown-item" data-value="51">Adz-Dzariyat</div>
-        <div class="dropdown-item" data-value="52">At-Tur</div>
-        <div class="dropdown-item" data-value="53">An-Najm</div>
-        <div class="dropdown-item" data-value="54">Al-Qamar</div>
-        <div class="dropdown-item" data-value="55">Ar-Rahman</div>
-        <div class="dropdown-item" data-value="56">Al-Waqi'ah</div>
-        <div class="dropdown-item" data-value="57">Al-Hadid</div>
-        <div class="dropdown-item" data-value="58">Al-Mujadilah</div>
-        <div class="dropdown-item" data-value="59">Al-Hasyr</div>
-        <div class="dropdown-item" data-value="60">Al-Mumtahanah</div>
-        <div class="dropdown-item" data-value="61">As-Saff</div>
-        <div class="dropdown-item" data-value="62">Al-Jumu'ah</div>
-        <div class="dropdown-item" data-value="63">Al-Munafiqun</div>
-        <div class="dropdown-item" data-value="64">At-Taghabun</div>
-        <div class="dropdown-item" data-value="65">At-Talaq</div>
-        <div class="dropdown-item" data-value="66">At-Tahrim</div>
-        <div class="dropdown-item" data-value="67">Al-Mulk</div>
-        <div class="dropdown-item" data-value="68">Al-Qalam</div>
-        <div class="dropdown-item" data-value="69">Al-Haqqah</div>
-        <div class="dropdown-item" data-value="70">Al-Ma'arij</div>
-        <div class="dropdown-item" data-value="71">Nuh</div>
-        <div class="dropdown-item" data-value="72">Al-Jinn</div>
-        <div class="dropdown-item" data-value="73">Al-Muzzammil</div>
-        <div class="dropdown-item" data-value="74">Al-Muddaththir</div>
-        <div class="dropdown-item" data-value="75">Al-Qiyamah</div>
-        <div class="dropdown-item" data-value="76">Al-Insan</div>
-        <div class="dropdown-item" data-value="77">Al-Mursalat</div>
-        <div class="dropdown-item" data-value="78">An-Naba'</div>
-        <div class="dropdown-item" data-value="79">An-Nazi'at</div>
-        <div class="dropdown-item" data-value="80">'Abasa</div>
-        <div class="dropdown-item" data-value="81">At-Takwir</div>
-        <div class="dropdown-item" data-value="82">Al-Infitar</div>
-        <div class="dropdown-item" data-value="83">Al-Mutaffifin</div>
-        <div class="dropdown-item" data-value="84">Al-Insyiqaq</div>
-        <div class="dropdown-item" data-value="85">Al-Buruj</div>
-        <div class="dropdown-item" data-value="86">At-Tariq</div>
-        <div class="dropdown-item" data-value="87">Al-A'la</div>
-        <div class="dropdown-item" data-value="88">Al-Ghasyiyah</div>
-        <div class="dropdown-item" data-value="89">Al-Fajr</div>
-        <div class="dropdown-item" data-value="90">Al-Balad</div>
-        <div class="dropdown-item" data-value="91">Asy-Syams</div>
-        <div class="dropdown-item" data-value="92">Al-Lail</div>
-        <div class="dropdown-item" data-value="93">Ad-Duha</div>
-        <div class="dropdown-item" data-value="94">Al-Insyirah</div>
-        <div class="dropdown-item" data-value="95">At-Tin</div>
-        <div class="dropdown-item" data-value="96">Al-'Alaq</div>
-        <div class="dropdown-item" data-value="97">Al-Qadr</div>
-        <div class="dropdown-item" data-value="98">Al-Bayyinah</div>
-        <div class="dropdown-item" data-value="99">Az-Zalzalah</div>
-        <div class="dropdown-item" data-value="100">Al-'Adiyat</div>
-        <div class="dropdown-item" data-value="101">Al-Qari'ah</div>
-        <div class="dropdown-item" data-value="102">At-Takathur</div>
-        <div class="dropdown-item" data-value="103">Al-'Asr</div>
-        <div class="dropdown-item" data-value="104">Al-Humazah</div>
-        <div class="dropdown-item" data-value="105">Al-Fil</div>
-        <div class="dropdown-item" data-value="106">Quraisy</div>
-        <div class="dropdown-item" data-value="107">Al-Ma'un</div>
-        <div class="dropdown-item" data-value="108">Al-Kautsar</div>
-        <div class="dropdown-item" data-value="109">Al-Kafirun</div>
-        <div class="dropdown-item" data-value="110">An-Nasr</div>
-        <div class="dropdown-item" data-value="111">Al-Lahab</div>
-        <div class="dropdown-item" data-value="112">Al-Ikhlas</div>
-        <div class="dropdown-item" data-value="113">Al-Falaq</div>
-        <div class="dropdown-item" data-value="114">An-Nas</div>
+        <div class="dropdown-item" data-value="1">Al-Fatihah (1)</div>
+<div class="dropdown-item" data-value="2">Al-Baqarah (2)</div>
+<div class="dropdown-item" data-value="3">Ali 'Imran (3)</div>
+<div class="dropdown-item" data-value="4">An-Nisa (4)</div>
+<div class="dropdown-item" data-value="5">Al-Ma'idah (5)</div>
+<div class="dropdown-item" data-value="6">Al-An'am (6)</div>
+<div class="dropdown-item" data-value="7">Al-A'raf (7)</div>
+<div class="dropdown-item" data-value="8">Al-Anfal (8)</div>
+<div class="dropdown-item" data-value="9">At-Taubah (9)</div>
+<div class="dropdown-item" data-value="10">Yunus (10)</div>
+<div class="dropdown-item" data-value="11">Hud (11)</div>
+<div class="dropdown-item" data-value="12">Yusuf (12)</div>
+<div class="dropdown-item" data-value="13">Ar-Ra'd (13)</div>
+<div class="dropdown-item" data-value="14">Ibrahim (14)</div>
+<div class="dropdown-item" data-value="15">Al-Hijr (15)</div>
+<div class="dropdown-item" data-value="16">An-Nahl (16)</div>
+<div class="dropdown-item" data-value="17">Al-Isra (17)</div>
+<div class="dropdown-item" data-value="18">Al-Kahf (18)</div>
+<div class="dropdown-item" data-value="19">Maryam (19)</div>
+<div class="dropdown-item" data-value="20">Ta-Ha (20)</div>
+<div class="dropdown-item" data-value="21">Al-Anbiya (21)</div>
+<div class="dropdown-item" data-value="22">Al-Hajj (22)</div>
+<div class="dropdown-item" data-value="23">Al-Mu'minun (23)</div>
+<div class="dropdown-item" data-value="24">An-Nur (24)</div>
+<div class="dropdown-item" data-value="25">Al-Furqan (25)</div>
+<div class="dropdown-item" data-value="26">Asy-Syu'ara (26)</div>
+<div class="dropdown-item" data-value="27">An-Naml (27)</div>
+<div class="dropdown-item" data-value="28">Al-Qasas (28)</div>
+<div class="dropdown-item" data-value="29">Al-Ankabut (29)</div>
+<div class="dropdown-item" data-value="30">Ar-Rum (30)</div>
+<div class="dropdown-item" data-value="31">Luqman (31)</div>
+<div class="dropdown-item" data-value="32">As-Sajdah (32)</div>
+<div class="dropdown-item" data-value="33">Al-Ahzab (33)</div>
+<div class="dropdown-item" data-value="34">Saba' (34)</div>
+<div class="dropdown-item" data-value="35">Fatir (35)</div>
+<div class="dropdown-item" data-value="36">Yasin (36)</div>
+<div class="dropdown-item" data-value="37">As-Saffat (37)</div>
+<div class="dropdown-item" data-value="38">Sad (38)</div>
+<div class="dropdown-item" data-value="39">Az-Zumar (39)</div>
+<div class="dropdown-item" data-value="40">Ghafir (40)</div>
+<div class="dropdown-item" data-value="41">Fussilat (41)</div>
+<div class="dropdown-item" data-value="42">Asy-Syura (42)</div>
+<div class="dropdown-item" data-value="43">Az-Zukhruf (43)</div>
+<div class="dropdown-item" data-value="44">Ad-Dukhan (44)</div>
+<div class="dropdown-item" data-value="45">Al-Jasiyah (45)</div>
+<div class="dropdown-item" data-value="46">Al-Ahqaf (46)</div>
+<div class="dropdown-item" data-value="47">Muhammad (47)</div>
+<div class="dropdown-item" data-value="48">Al-Fath (48)</div>
+<div class="dropdown-item" data-value="49">Al-Hujurat (49)</div>
+<div class="dropdown-item" data-value="50">Qaf (50)</div>
+<div class="dropdown-item" data-value="51">Adz-Dzariyat (51)</div>
+<div class="dropdown-item" data-value="52">At-Tur (52)</div>
+<div class="dropdown-item" data-value="53">An-Najm (53)</div>
+<div class="dropdown-item" data-value="54">Al-Qamar (54)</div>
+<div class="dropdown-item" data-value="55">Ar-Rahman (55)</div>
+<div class="dropdown-item" data-value="56">Al-Waqi'ah (56)</div>
+<div class="dropdown-item" data-value="57">Al-Hadid (57)</div>
+<div class="dropdown-item" data-value="58">Al-Mujadilah (58)</div>
+<div class="dropdown-item" data-value="59">Al-Hasyr (59)</div>
+<div class="dropdown-item" data-value="60">Al-Mumtahanah (60)</div>
+<div class="dropdown-item" data-value="61">As-Saff (61)</div>
+<div class="dropdown-item" data-value="62">Al-Jumu'ah (62)</div>
+<div class="dropdown-item" data-value="63">Al-Munafiqun (63)</div>
+<div class="dropdown-item" data-value="64">At-Taghabun (64)</div>
+<div class="dropdown-item" data-value="65">At-Talaq (65)</div>
+<div class="dropdown-item" data-value="66">At-Tahrim (66)</div>
+<div class="dropdown-item" data-value="67">Al-Mulk (67)</div>
+<div class="dropdown-item" data-value="68">Al-Qalam (68)</div>
+<div class="dropdown-item" data-value="69">Al-Haqqah (69)</div>
+<div class="dropdown-item" data-value="70">Al-Ma'arij (70)</div>
+<div class="dropdown-item" data-value="71">Nuh (71)</div>
+<div class="dropdown-item" data-value="72">Al-Jinn (72)</div>
+<div class="dropdown-item" data-value="73">Al-Muzzammil (73)</div>
+<div class="dropdown-item" data-value="74">Al-Muddaththir (74)</div>
+<div class="dropdown-item" data-value="75">Al-Qiyamah (75)</div>
+<div class="dropdown-item" data-value="76">Al-Insan (76)</div>
+<div class="dropdown-item" data-value="77">Al-Mursalat (77)</div>
+<div class="dropdown-item" data-value="78">An-Naba' (78)</div>
+<div class="dropdown-item" data-value="79">An-Nazi'at (79)</div>
+<div class="dropdown-item" data-value="80">'Abasa (80)</div>
+<div class="dropdown-item" data-value="81">At-Takwir (81)</div>
+<div class="dropdown-item" data-value="82">Al-Infitar (82)</div>
+<div class="dropdown-item" data-value="83">Al-Mutaffifin (83)</div>
+<div class="dropdown-item" data-value="84">Al-Insyiqaq (84)</div>
+<div class="dropdown-item" data-value="85">Al-Buruj (85)</div>
+<div class="dropdown-item" data-value="86">At-Tariq (86)</div>
+<div class="dropdown-item" data-value="87">Al-A'la (87)</div>
+<div class="dropdown-item" data-value="88">Al-Ghasyiyah (88)</div>
+<div class="dropdown-item" data-value="89">Al-Fajr (89)</div>
+<div class="dropdown-item" data-value="90">Al-Balad (90)</div>
+<div class="dropdown-item" data-value="91">Asy-Syams (91)</div>
+<div class="dropdown-item" data-value="92">Al-Lail (92)</div>
+<div class="dropdown-item" data-value="93">Ad-Duha (93)</div>
+<div class="dropdown-item" data-value="94">Al-Insyirah (94)</div>
+<div class="dropdown-item" data-value="95">At-Tin (95)</div>
+<div class="dropdown-item" data-value="96">Al-'Alaq (96)</div>
+<div class="dropdown-item" data-value="97">Al-Qadr (97)</div>
+<div class="dropdown-item" data-value="98">Al-Bayyinah (98)</div>
+<div class="dropdown-item" data-value="99">Az-Zalzalah (99)</div>
+<div class="dropdown-item" data-value="100">Al-'Adiyat (100)</div>
+<div class="dropdown-item" data-value="101">Al-Qari'ah (101)</div>
+<div class="dropdown-item" data-value="102">At-Takathur (102)</div>
+<div class="dropdown-item" data-value="103">Al-'Asr (103)</div>
+<div class="dropdown-item" data-value="104">Al-Humazah (104)</div>
+<div class="dropdown-item" data-value="105">Al-Fil (105)</div>
+<div class="dropdown-item" data-value="106">Quraisy (106)</div>
+<div class="dropdown-item" data-value="107">Al-Ma'un (107)</div>
+<div class="dropdown-item" data-value="108">Al-Kautsar (108)</div>
+<div class="dropdown-item" data-value="109">Al-Kafirun (109)</div>
+<div class="dropdown-item" data-value="110">An-Nasr (110)</div>
+<div class="dropdown-item" data-value="111">Al-Lahab (111)</div>
+<div class="dropdown-item" data-value="112">Al-Ikhlas (112)</div>
+<div class="dropdown-item" data-value="113">Al-Falaq (113)</div>
+<div class="dropdown-item" data-value="114">An-Nas (114)</div>
       </div>
       <input type="hidden" id="selectedSurat" name="surat">
     </div>
   </div>
   <!-- Quick select boxes for popular surahs -->
   <div class="surah-quick-select mt-2 d-flex flex-wrap gap-1">
-    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="1" data-name="Al-Fatihah">Al-Fatihah</button>
-    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="36" data-name="Yasin">Yasin</button>
-    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="112" data-name="Al-Ikhlas">Al-Ikhlas</button>
-    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="113" data-name="Al-Falaq">Al-Falaq</button>
+    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="1" data-name="Al-Fatihah (1)">Al-Fatihah (1)</button>
+    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="36" data-name="Yasin (36)">Yasin (36)</button>
+    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="112" data-name="Al-Ikhlas (112)">Al-Ikhlas (112)</button>
+    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="113" data-name="Al-Falaq (113)">Al-Falaq (113)</button>
   </div>
 </div>
 
@@ -793,36 +826,36 @@ body.map-fullscreen .js_sticky-header {
               <div class="input-dropdown-container w-100">
                 <input type="text" id="juzInput" class="input-dropdown form-control" placeholder="Pilih Juz" autocomplete="off" spellcheck="false">
                 <div id="juzDropdown" class="dropdown-menu">
-                  <div class="dropdown-item" data-value="1">Juz 1</div>
-                  <div class="dropdown-item" data-value="2">Juz 2</div>
-                  <div class="dropdown-item" data-value="3">Juz 3</div>
-                  <div class="dropdown-item" data-value="4">Juz 4</div>
-                  <div class="dropdown-item" data-value="5">Juz 5</div>
-                  <div class="dropdown-item" data-value="6">Juz 6</div>
-                  <div class="dropdown-item" data-value="7">Juz 7</div>
-                  <div class="dropdown-item" data-value="8">Juz 8</div>
-                  <div class="dropdown-item" data-value="9">Juz 9</div>
-                  <div class="dropdown-item" data-value="10">Juz 10</div>
-                  <div class="dropdown-item" data-value="11">Juz 11</div>
-                  <div class="dropdown-item" data-value="12">Juz 12</div>
-                  <div class="dropdown-item" data-value="13">Juz 13</div>
-                  <div class="dropdown-item" data-value="14">Juz 14</div>
-                  <div class="dropdown-item" data-value="15">Juz 15</div>
-                  <div class="dropdown-item" data-value="16">Juz 16</div>
-                  <div class="dropdown-item" data-value="17">Juz 17</div>
-                  <div class="dropdown-item" data-value="18">Juz 18</div>
-                  <div class="dropdown-item" data-value="19">Juz 19</div>
-                  <div class="dropdown-item" data-value="20">Juz 20</div>
-                  <div class="dropdown-item" data-value="21">Juz 21</div>
-                  <div class="dropdown-item" data-value="22">Juz 22</div>
-                  <div class="dropdown-item" data-value="23">Juz 23</div>
-                  <div class="dropdown-item" data-value="24">Juz 24</div>
-                  <div class="dropdown-item" data-value="25">Juz 25</div>
-                  <div class="dropdown-item" data-value="26">Juz 26</div>
-                  <div class="dropdown-item" data-value="27">Juz 27</div>
-                  <div class="dropdown-item" data-value="28">Juz 28</div>
-                  <div class="dropdown-item" data-value="29">Juz 29</div>
-                  <div class="dropdown-item" data-value="30">Juz 30</div>
+                  <div class="dropdown-item" data-value="1">1</div>
+                  <div class="dropdown-item" data-value="2">2</div>
+                  <div class="dropdown-item" data-value="3">3</div>
+                  <div class="dropdown-item" data-value="4">4</div>
+                  <div class="dropdown-item" data-value="5">5</div>
+                  <div class="dropdown-item" data-value="6">6</div>
+                  <div class="dropdown-item" data-value="7">7</div>
+                  <div class="dropdown-item" data-value="8">8</div>
+                  <div class="dropdown-item" data-value="9">9</div>
+                  <div class="dropdown-item" data-value="10">10</div>
+                  <div class="dropdown-item" data-value="11">11</div>
+                  <div class="dropdown-item" data-value="12">12</div>
+                  <div class="dropdown-item" data-value="13">13</div>
+                  <div class="dropdown-item" data-value="14">14</div>
+                  <div class="dropdown-item" data-value="15">15</div>
+                  <div class="dropdown-item" data-value="16">16</div>
+                  <div class="dropdown-item" data-value="17">17</div>
+                  <div class="dropdown-item" data-value="18">18</div>
+                  <div class="dropdown-item" data-value="19">19</div>
+                  <div class="dropdown-item" data-value="20">20</div>
+                  <div class="dropdown-item" data-value="21">21</div>
+                  <div class="dropdown-item" data-value="22">22</div>
+                  <div class="dropdown-item" data-value="23">23</div>
+                  <div class="dropdown-item" data-value="24">24</div>
+                  <div class="dropdown-item" data-value="25">25</div>
+                  <div class="dropdown-item" data-value="26">26</div>
+                  <div class="dropdown-item" data-value="27">27</div>
+                  <div class="dropdown-item" data-value="28">28</div>
+                  <div class="dropdown-item" data-value="29">29</div>
+                  <div class="dropdown-item" data-value="30">30</div>
                 </div>
                 <input type="hidden" id="selectedJuz" name="juz">
               </div>
@@ -830,20 +863,20 @@ body.map-fullscreen .js_sticky-header {
           </div>
 
           <!-- Halaman select -->
-          <div class="mb-3" id="halaman-select" style="display: none;">
-            <div class="radio-group-container">
-              <label class="form-label fw-bold">Halaman</label>
-              <div class="input-dropdown-container w-100">
-                <input type="text" id="halamanInput" class="input-dropdown form-control" placeholder="Pilih Halaman" autocomplete="off" spellcheck="false">
-                <div id="halamanDropdown" class="dropdown-menu">
-                  {for $i=1 to 604}
-                    <div class="dropdown-item" data-value="{$i|escape:'html'}">Halaman {$i|escape:'html'}</div>
-                  {/for}
-                </div>
-                <input type="hidden" id="selectedHalaman" name="halaman">
-              </div>
-            </div>
-          </div>
+<div class="mb-3" id="halaman-select" style="display: none;">
+  <div class="radio-group-container">
+    <label class="form-label fw-bold">Halaman</label>
+    <div class="input-dropdown-container w-100">
+      <input type="text" id="halamanInput" class="input-dropdown form-control" placeholder="Pilih Halaman" autocomplete="off" spellcheck="false">
+      <div id="halamanDropdown" class="dropdown-menu">
+        {for $i=1 to 604}
+          <div class="dropdown-item" data-value="{$i|escape:'html'}">{$i|escape:'html'}</div>
+        {/for}
+      </div>
+      <input type="hidden" id="selectedHalaman" name="halaman">
+    </div>
+  </div>
+</div>
 
           <!-- Buttons -->
           <div class="action-buttons d-flex justify-content-center flex-column flex-md-row gap-2">
@@ -910,8 +943,20 @@ body.map-fullscreen .js_sticky-header {
             {$setoran.formatted_date|escape:'html'}
           </a>
         </td>
-        <td data-label="Penyetor"><a href="{$system['system_url']|escape:'html'}/{$setoran.penyetor_name|escape:'url'}">{$setoran.penyetor_name|escape:'html'}</a></td>
-        <td data-label="Penerima"><a href="{$system['system_url']|escape:'html'}/{$setoran.penerima_name|escape:'url'}">{$setoran.penerima_name|escape:'html'}</a></td>
+        <td data-label="Penerima">
+          <a href="{$system['system_url']|escape:'html'}/{$setoran.penyetor_name|escape:'url'}"
+             data-bs-toggle="tooltip"
+             title="{if $setoran.penyetor_fullname}{$setoran.penyetor_fullname|escape:'html'}{else}{$setoran.penyetor_name|escape:'html'}{/if}">
+            {$setoran.penyetor_name|escape:'html'}
+          </a>
+        </td>
+        <td data-label="Penyetor">
+          <a href="{$system['system_url']|escape:'html'}/{$setoran.penerima_name|escape:'url'}"
+             data-bs-toggle="tooltip"
+             title="{if $setoran.penerima_fullname}{$setoran.penerima_fullname|escape:'html'}{else}{$setoran.penerima_name|escape:'html'}{/if}">
+            {$setoran.penerima_name|escape:'html'}
+          </a>
+        </td>
         <td data-label="Setoran">
           <a href="{$system['system_url']|escape:'html'}/qurani/riwayat/{$setoran.id|escape:'html'}" class="cursor-pointer rekapan-link" data-id="{$setoran.id|escape:'html'}">
             {$setoran.setoran|escape:'html'}
@@ -939,6 +984,7 @@ body.map-fullscreen .js_sticky-header {
     {/foreach}
   </tbody>
 </table>
+
         </div>
       </div>
     </div>
@@ -948,7 +994,6 @@ body.map-fullscreen .js_sticky-header {
 <script>
 {literal}
 document.addEventListener("DOMContentLoaded", function() {
-  localStorage.clear();
   console.log(window.location.href);
 
   // Setup dropdowns
@@ -1168,11 +1213,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     document.getElementById('suratDropdown').style.display = 'none';
-    
-    document.querySelectorAll('.surah-quick-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    this.classList.add('active');
   });
 });
 
@@ -1666,4 +1706,4 @@ document.addEventListener("DOMContentLoaded", function() {
 {/literal}
 </script>
 
-{include file='../_footer.tpl'}
+{include file='_footer.tpl'}

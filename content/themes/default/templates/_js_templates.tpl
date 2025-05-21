@@ -1938,18 +1938,26 @@
             <button type="button" class="btn-download">
               <i class="fas fa-download"></i>
             </button>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body"> 
             <div class="spinner-grow"></div>
             <canvas id="qrcode"></canvas>
-              <script type="text/javascript">
-                (function () {
-                  const qrcodeUri = "{{$qrcode_uri}}";
+            <script type="text/javascript">
+              (function () {
+                const userFullname = "{$user->_data['user_firstname']} {$user->_data['user_lastname']}";
+                const userName = "{$user->_data['user_name']}";
+                const transferToken = "{$user->_data['user_transfer_token']}";
+                const qrCodeUri = "{{$qrcode_uri}}";
 
-                  drawQRToCanvas("qrcode", qrcodeUri);
-                })();
-              </script>
+                drawQRToCanvas("qrcode", {
+                    qrCodeURI: qrCodeUri,
+                    transferToken,
+                    fullName: userFullname,
+                    userName
+                });
+              })();
+            </script>
           </div>
         </div>
         <style>

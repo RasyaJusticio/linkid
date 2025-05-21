@@ -2454,4 +2454,22 @@ $(function () {
     }
   });
 
+  // amounts template 
+  $('body').on('click', '.amounts-template .btn', function () {
+    const input = $(this)
+        .closest('.amounts-template')
+        .prevAll('div')
+        .first()
+        .find('input');
+
+    if (!input) {
+        console.error("[Event][click][.amounts-template .btn] >> Unable to find the target input | >>", this, "<<");
+        return;
+    }
+
+    const setAmount = $(this).data("amount"); 
+
+    input.val(setAmount);
+  });
+
 });

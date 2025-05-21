@@ -11395,3 +11395,19 @@ body.night-mode .pwa_install_banner {
     left: 100%;
   }
 }
+
+/* -- */
+
+/* AMOUNTS TEMPLATE */
+/* ------------------------------- */
+
+.amounts-template {
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 0.2rem;
+}
+
+.amounts-template .btn {
+    padding-inline: 0.3rem;
+    padding-block: 0.6rem;
+}

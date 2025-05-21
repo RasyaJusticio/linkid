@@ -6,7 +6,7 @@
  * @author Dimas
  */
 
-require('bootloader.php');
+require('../bootloader.php');
 $user_id = $_SESSION['user_id'];
 
 

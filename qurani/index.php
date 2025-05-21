@@ -363,5 +363,5 @@ $smarty->assign('city_data', $city_data);
 
 // Display page
 page_header("Qurani Page");
-page_footer('qurani-form');
+page_footer('qurani/index');
 ?>

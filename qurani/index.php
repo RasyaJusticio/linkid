@@ -280,35 +280,37 @@ while ($u = $get_users->fetch_assoc()) {
 $riwayat_setoran = [];
 $get_history = $db->query(
     "SELECT 
-    qs.id,
-    DATE_FORMAT(qs.tgl, '%d-%b %H:%i') AS formatted_date,
-    u1.user_id AS penyetor_id,
-    u1.user_name AS penyetor_name,
-    u2.user_id AS penerima_id,
-    u2.user_name AS penerima_name,
-    CONCAT(
-    CONCAT(UPPER(LEFT(qs.setoran, 1)), LOWER(SUBSTRING(qs.setoran, 2))),
-    ' ',
-    qs.tampilan,
-    CASE 
-        WHEN qs.tampilan = 'juz' AND qs.nomor IS NOT NULL AND qs.nomor != '' THEN CONCAT(' ', qs.nomor)
-        WHEN qs.tampilan = 'surat' AND qs.info IS NOT NULL AND qs.info != '' THEN CONCAT(' ', qs.info)
-        ELSE ''
-    END,
-    CASE 
-        WHEN qs.tampilan != 'juz' AND qs.perhalaman IS NOT NULL AND JSON_VALID(qs.perhalaman) THEN
-            CONCAT(' Ayat ', JSON_UNQUOTE(JSON_EXTRACT(qs.perhalaman, '$.ayat.awal')), '-', JSON_UNQUOTE(JSON_EXTRACT(qs.perhalaman, '$.ayat.akhir')))
-        ELSE ''
-    END
-) AS setoran,
-    qs.hasil,
-    qs.paraf
-FROM qu_setoran qs
-JOIN users u1 ON qs.penyetor = u1.user_id
-JOIN users u2 ON qs.penerima = u2.user_id
-WHERE qs.penyetor = {$current_user['user_id']} OR qs.penerima = {$current_user['user_id']}
-ORDER BY qs.tgl DESC
-LIMIT 10
+        qs.id,
+        DATE_FORMAT(qs.tgl, '%d-%b %H:%i') AS formatted_date,
+        u1.user_id AS penyetor_id,
+        u1.user_name AS penyetor_name,
+        CONCAT(u1.user_firstname, ' ', u1.user_lastname) AS penyetor_fullname,
+        u2.user_id AS penerima_id,
+        u2.user_name AS penerima_name,
+        CONCAT(u2.user_firstname, ' ', u2.user_lastname) AS penerima_fullname,
+        CONCAT(
+            CONCAT(UPPER(LEFT(qs.setoran, 1)), LOWER(SUBSTRING(qs.setoran, 2))),
+            ' ',
+            qs.tampilan,
+            CASE 
+                WHEN qs.tampilan = 'juz' AND qs.nomor IS NOT NULL AND qs.nomor != '' THEN CONCAT(' ', qs.nomor)
+                WHEN qs.tampilan = 'surat' AND qs.info IS NOT NULL AND qs.info != '' THEN CONCAT(' ', qs.info)
+                ELSE ''
+            END,
+            CASE 
+                WHEN qs.tampilan != 'juz' AND qs.perhalaman IS NOT NULL AND JSON_VALID(qs.perhalaman) THEN
+                    CONCAT(' Ayat ', JSON_UNQUOTE(JSON_EXTRACT(qs.perhalaman, '$.ayat.awal')), '-', JSON_UNQUOTE(JSON_EXTRACT(qs.perhalaman, '$.ayat.akhir')))
+                ELSE ''
+            END
+        ) AS setoran,
+        qs.hasil,
+        qs.paraf
+    FROM qu_setoran qs
+    JOIN users u1 ON qs.penyetor = u1.user_id
+    JOIN users u2 ON qs.penerima = u2.user_id
+    WHERE qs.penyetor = {$current_user['user_id']} OR qs.penerima = {$current_user['user_id']}
+    ORDER BY qs.tgl DESC
+    LIMIT 10
 "
 );
 if ($db->error) {

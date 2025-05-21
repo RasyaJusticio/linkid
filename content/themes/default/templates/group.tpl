@@ -1162,6 +1162,12 @@
                       {__("Group Settings")}
                     </a>
                   </li>
+                  <li {if $sub_view == "qurani"}class="active"{/if}>
+                    <a href="{$system['system_url']}/groups/{$group['group_name']}/settings/qurani">
+                      <i class="fa fa-book fa-lg fa-fw main-icon mr10"></i>
+                      {__("Qurani Settings")}
+                    </a>
+                  </li>
                   {if $group['group_privacy'] != "public"}
                     <li {if $sub_view == "requests"}class="active" {/if}>
                       <a href="{$system['system_url']}/groups/{$group['group_name']}/settings/requests">

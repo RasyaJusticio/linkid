@@ -6,8 +6,28 @@
 
 const QR_CANVAS_WIDTH = 1240;
 const QR_CANVAS_HEIGHT = 1748;
+let bgImage = new Image();
+let containerImage = new Image();
+let logoImage = new Image(); 
 
-async function drawQRToCanvas(canvasId, qrImageUri) {
+/**
+ * Asynchronously draws a QR code image onto a canvas element.
+ *
+ * @async
+ * @function drawQRToCanvas
+ * @param {string} canvasId - The ID of the `<canvas>` element to draw the QR code onto.
+ * @param {Object} options - An object containing data for generating the QR code (currently unused in this function, but may be used by `getQRCodeImage` or future enhancements).
+ * @param {string} options.qrCodeURI - The URI used to generate the QR code image.
+ * @param {string} options.transferToken - The token associated with the transfer (potentially encoded in the QR).
+ * @param {string} options.fullName - The full name of the user (for display or encoding).
+ * @param {string} options.userName - The username of the user (for display or encoding).
+ *
+ * @returns {Promise<void>} Resolves when the QR code has been successfully drawn to the canvas.
+ *
+ * @throws Will log an error to the console if the canvas element with the specified ID cannot be found.
+ *
+ */
+async function drawQRToCanvas(canvasId, options) {
     const canvas = document.getElementById(canvasId);
 
     if (!canvas) {
@@ -20,22 +40,36 @@ async function drawQRToCanvas(canvasId, qrImageUri) {
     canvas.width = QR_CANVAS_WIDTH;
     canvas.height = QR_CANVAS_HEIGHT;
 
-    const qrImage = await getQRCodeImage(qrImageUri);
+    const qrImage = await getQRCodeImage(options.qrCodeURI);
 
-    drawQR(context, canvas, qrImage);
+    drawQR(context, canvas, qrImage, options);
 }
 
-async function drawQR(context, canvas, qrImage) {
+/**
+ * Draws a stylized QR code onto a canvas with branding and user information.
+ *
+ * This includes background, logo, container, user details (full name, username, transfer token),
+ * creation timestamp, and the QR code itself. It uses several preloaded images such as `bgImage`, 
+ * `logoImage`, and `containerImage`, and assumes canvas dimensions are already set.
+ *
+ * @function drawQR
+ * @param {CanvasRenderingContext2D} context - The 2D rendering context of the target canvas.
+ * @param {HTMLCanvasElement} canvas - The canvas element on which to draw the QR code and surrounding visuals.
+ * @param {HTMLImageElement} qrImage - The QR code image element to be drawn onto the canvas.
+ * @param {Object} options - Data used to personalize the QR code with user-specific info.
+ * @param {string} options.fullName - The full name of the user to display above the QR code.
+ * @param {string} options.userName - The username of the user, displayed with an `@` prefix.
+ * @param {string} options.transferToken - A token identifying the QR code, shown beneath the username.
+ *
+ * @returns {void}
+ *
+ * @throws Will log a warning if any error occurs during the drawing process.
+ */
+function drawQR(context, canvas, qrImage, options) {
     try {
-        // Getting QR Data
-        const response = await $.get(ajax_path + "payments/transfer.php?do=get_qr_info");
-        const data = response.data;
+        // Generate created at datetime
+        const dateTime = generateQRCreatedTime();
 
-        // Getting Images
-        const bgImage = await loadImage('qr-gradient.jpeg');
-        const containerImage = await loadImage('qr-gradient-2.png');
-        const logoImage = await loadImage('linkid_full_logo_white.png');
-    
         // Draw Background Image
         context.drawImage(bgImage, 0, 0, QR_CANVAS_WIDTH, QR_CANVAS_HEIGHT);
     
@@ -66,7 +100,7 @@ async function drawQR(context, canvas, qrImage) {
 
             context.font = "bold 64px Poppins";
             context.textAlign = "center";
-            context.fillText(data.full_name, HALF_WIDTH, 470);
+            context.fillText(options.fullName, HALF_WIDTH, 470);
 
             context.restore();
 
@@ -75,7 +109,7 @@ async function drawQR(context, canvas, qrImage) {
 
             context.font = "42px Poppins";
             context.textAlign = "center";
-            context.fillText(`@${data.username}`, HALF_WIDTH, 520);
+            context.fillText(`@${options.userName}`, HALF_WIDTH, 520);
 
             context.restore();
 
@@ -84,7 +118,7 @@ async function drawQR(context, canvas, qrImage) {
 
             context.font = "42px Poppins";
             context.textAlign = "center";
-            context.fillText(`ID: ${data.transfer_token}`, HALF_WIDTH, 630);
+            context.fillText(`ID: ${options.transferToken}`, HALF_WIDTH, 630);
 
             context.restore();
 
@@ -93,7 +127,7 @@ async function drawQR(context, canvas, qrImage) {
 
             context.font = "42px Poppins";
             context.textAlign = "center";
-            context.fillText(`Dibuat: ${data.created_at}`, HALF_WIDTH, QR_CANVAS_HEIGHT - 130);
+            context.fillText(`Dibuat: ${dateTime}`, HALF_WIDTH, QR_CANVAS_HEIGHT - 130);
 
             context.restore();
         })();
@@ -112,7 +146,7 @@ async function drawQR(context, canvas, qrImage) {
             context.restore();
         })();
 
-        canvas.dataset.transferToken = data.transfer_token;
+        canvas.dataset.transferToken = options.transferToken;
         canvas.dataset.isReady = "true";
     } catch (error) {
         console.warn("[drawQR]: Failed to draw QR. Error:", error);
@@ -129,6 +163,12 @@ function getQRCodeImage(uri) {
     });
 }
 
+async function loadImages() {
+    bgImage = await loadImage('qr-gradient.jpeg');
+    containerImage = await loadImage('qr-gradient-2.png');
+    logoImage = await loadImage('linkid_full_logo_white.png');
+}
+
 function loadImage(imagePath) {
     return new Promise((resolve, reject) => {
         const image = new Image();
@@ -138,6 +178,21 @@ function loadImage(imagePath) {
         image.onerror = reject;
     });
 }
+
+function generateQRCreatedTime() {
+  const now = new Date();
+
+  const dd = String(now.getUTCDate()).padStart(2, '0');
+  const MM = String(now.getUTCMonth() + 1).padStart(2, '0');
+  const yyyy = now.getUTCFullYear();
+
+  let hh = String(now.getUTCHours()).padStart(2, '0');
+  let mm = String(now.getUTCMinutes()).padStart(2, '0');
+
+  return `${dd}-${MM}-${yyyy} ${hh}:${mm}`;
+}
+
+loadImages();
 
 $(function () {
     $('body').on('click', '.btn-download', function (e) {

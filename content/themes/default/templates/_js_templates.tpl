@@ -1944,10 +1944,17 @@
           <canvas id="qrcode"></canvas>
             <script type="text/javascript">
               (function () {
+                const userFullname = "{$user->_data['user_firstname']} {$user->_data['user_lastname']}";
+                const userName = "{$user->_data['user_name']}";
+                const transferToken = "{$user->_data['user_transfer_token']}";
                 const qrCodeUri = "{{$qrcode_uri}}";
 
-                drawQRToCanvas("qrcode", qrCodeUri);
-                
+                drawQRToCanvas("qrcode", {
+                    qrCodeURI: qrCodeUri,
+                    transferToken,
+                    fullName: userFullname,
+                    userName
+                });
               })();
             </script>
         </div>

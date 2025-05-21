@@ -9,6 +9,7 @@ const QR_CANVAS_HEIGHT = 1748;
 let bgImage = new Image();
 let containerImage = new Image();
 let logoImage = new Image(); 
+let isImagesReady = false;
 
 /**
  * Asynchronously draws a QR code image onto a canvas element.
@@ -65,7 +66,11 @@ async function drawQRToCanvas(canvasId, options) {
  *
  * @throws Will log a warning if any error occurs during the drawing process.
  */
-function drawQR(context, canvas, qrImage, options) {
+async function drawQR(context, canvas, qrImage, options) {
+    while (!isImagesReady) {
+        await new Promise(resolve => setTimeout(resolve, 50));
+    }
+
     try {
         // Generate created at datetime
         const dateTime = generateQRCreatedTime();
@@ -167,6 +172,8 @@ async function loadImages() {
     bgImage = await loadImage('qr-gradient.jpeg');
     containerImage = await loadImage('qr-gradient-2.png');
     logoImage = await loadImage('linkid_full_logo_white.png');
+
+    isImagesReady = true;
 }
 
 function loadImage(imagePath) {

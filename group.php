@@ -351,10 +351,6 @@ try {
           break;
 
         case 'qurani':
-            if ($user->_data['user_id'] != $group['group_admin']) {
-                _error(404);
-            }
-        
             // Pemetaan kunci dari qu_setting_global ke nama yang diharapkan di template
             $key_mapping = [
                 'tata-letak' => 'quran_layout',

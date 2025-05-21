@@ -75,7 +75,14 @@
       <select class="form-select" name="country">
         <option value="none">{__("Select Country")}</option>
         {foreach $countries as $country}
-          <option value="{$country['country_id']}">{$country['country_name']}</option>
+          <option
+            value="{$country['country_id']}"
+            {if $country['country_id'] == 101}
+              selected
+            {/if}
+          >
+            {$country['country_name']}
+          </option>
         {/foreach}
       </select>
     </div>

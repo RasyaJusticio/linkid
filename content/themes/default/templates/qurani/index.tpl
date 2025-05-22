@@ -643,7 +643,7 @@ body.map-fullscreen .js_sticky-header {
       <input type="text" id="temanInput" class="input-dropdown form-control" placeholder="Pilih teman" autocomplete="off" spellcheck="false">
       <div id="temanDropdown" class="dropdown-menu">
         {foreach $all_users as $user}
-          <div class="dropdown-item" data-value="{$user.user_id|escape:'html'}">{$user.user_name|escape:'html'}</div>
+          <div class="dropdown-item" data-value="{$user.user_id|escape:'html'}">{$user.fullname|escape:'html'}</div>
         {/foreach}
       </div>
       <input type="hidden" id="selectedTeman" name="teman">
@@ -812,10 +812,10 @@ body.map-fullscreen .js_sticky-header {
   </div>
   <!-- Quick select boxes for popular surahs -->
   <div class="surah-quick-select mt-2 d-flex flex-wrap gap-1">
-    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="1" data-name="Al-Fatihah (1)">Al-Fatihah (1)</button>
-    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="36" data-name="Yasin (36)">Yasin (36)</button>
-    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="112" data-name="Al-Ikhlas (112)">Al-Ikhlas (112)</button>
-    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="113" data-name="Al-Falaq (113)">Al-Falaq (113)</button>
+    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="1" data-name="Al-Fatihah (1)">Al-Fatihah</button>
+    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="36" data-name="Yasin (36)">Yasin</button>
+    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="112" data-name="Al-Ikhlas (112)">Al-Ikhlas</button>
+    <button type="button" class="btn btn-outline-primary btn-sm surah-quick-btn" data-value="113" data-name="Al-Falaq (113)">Al-Falaq</button>
   </div>
 </div>
 
@@ -928,8 +928,8 @@ body.map-fullscreen .js_sticky-header {
   <thead>
     <tr>
       <th>Waktu</th>
-      <th>Penyetor</th>
       <th>Penerima</th>
+      <th>Penyetor</th>
       <th>Setoran</th>
       <th>Hasil</th>
       <th class="text-center">Paraf</th>
@@ -994,6 +994,7 @@ body.map-fullscreen .js_sticky-header {
 <script>
 {literal}
 document.addEventListener("DOMContentLoaded", function() {
+
   console.log(window.location.href);
 
   // Setup dropdowns

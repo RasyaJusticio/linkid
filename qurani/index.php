@@ -6,7 +6,7 @@
  * @author Dimas
  */
 
-require('../bootloader.php');
+require('bootloader.php');
 $user_id = $_SESSION['user_id'];
 
 
@@ -231,11 +231,11 @@ if ($db->error) {
 while ($group = $get_groups->fetch_assoc()) {
     $group_members = [];
     $get_members = $db->query(sprintf(
-        "SELECT u.user_id, u.user_name 
-         FROM `groups_members` gm
-         JOIN `users` u ON gm.user_id = u.user_id
-         WHERE gm.group_id = %d
-         ORDER BY u.user_name",
+        "SELECT u.user_id, CONCAT(u.user_firstname, ' ', u.user_lastname) AS user_name 
+        FROM `groups_members` gm
+        JOIN `users` u ON gm.user_id = u.user_id
+        WHERE gm.group_id = %d
+        ORDER BY u.user_firstname, u.user_lastname",
         $group['group_id']
     ));
 
@@ -260,13 +260,15 @@ while ($group = $get_groups->fetch_assoc()) {
 // Get all users for select options
 $all_users = [];
 $get_users = $db->query("
-    SELECT u.user_id, u.user_name
+    SELECT 
+        u.user_id,
+        CONCAT(u.user_firstname, ' ', u.user_lastname) AS fullname
     FROM friends f
     JOIN users u 
         ON (u.user_id = f.user_one_id AND f.user_two_id = {$current_user['user_id']})
         OR (u.user_id = f.user_two_id AND f.user_one_id = {$current_user['user_id']})
     WHERE f.status = 1 AND u.user_id != {$current_user['user_id']}
-    ORDER BY u.user_name
+    ORDER BY fullname
 ");
 
 if ($db->error) {
@@ -350,6 +352,8 @@ while ($city = $get_cities->fetch_assoc()) {
     ];
 }
 
+// Settings Grup 
+
 // Assign data to template
 $smarty->assign('current_user', $current_user);
 $smarty->assign('all_groups', $all_groups);
@@ -359,5 +363,5 @@ $smarty->assign('city_data', $city_data);
 
 // Display page
 page_header("Qurani Page");
-page_footer('qurani/index');
+page_footer('qurani-form');
 ?>

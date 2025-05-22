@@ -14,6 +14,7 @@
     /* language */
     var system_langauge_dir = "{strtolower($system['language']['dir'])}";
     var system_langauge_code = "{substr($system['language']['code'], 0, -3)}";
+    localStorage.setItem('language',"{$system['language']['code']}");
     /* datetime */
     var system_datetime_format = {if $system['system_datetime_format'] == "m/d/Y H:i"}'MM/DD/YYYY HH:mm'{else}'DD/MM/YYYY HH:mm'{/if};
     /* timezone */

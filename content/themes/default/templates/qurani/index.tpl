@@ -964,7 +964,7 @@ body.map-fullscreen .js_sticky-header {
         </td>
         <td data-label="Hasil">
           <a href="{$system['system_url']|escape:'html'}/qurani/riwayat/{$setoran.id|escape:'html'}" class="cursor-pointer rekapan-link" data-id="{$setoran.id|escape:'html'}">
-            {$setoran.hasil|escape:'html'}
+            {__($setoran.hasil)}
           </a>
         </td>
         <td data-label="Paraf" class="text-center">

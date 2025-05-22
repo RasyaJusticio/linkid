@@ -59,6 +59,14 @@ try {
       $db->query(sprintf("DELETE FROM system_countries WHERE country_id = %s", secure($_POST['id'], 'int')));
       break;
 
+    case 'timezone':
+      // check admin|moderator permission
+      if (!$user->_is_admin) {
+        modal("MESSAGE", __("System Message"), __("You don't have the right permission to access this"));
+      }
+      $db->query(sprintf("DELETE FROM system_time_zones WHERE time_zone_id = %s", secure($_POST['id'], 'int')));
+      break;
+
     case 'currency':
       // check admin|moderator permission
       if (!$user->_is_admin) {

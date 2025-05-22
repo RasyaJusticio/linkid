@@ -143,6 +143,14 @@
               </li>
               <!-- Countries -->
 
+              <!-- Time Zones -->
+              <li {if $view == "timezones"}class="active" {/if}>
+                <a href="{$system['system_url']}/{$control_panel['url']}/timezones">
+                  <i class="fa fa-clock fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Timezones")}
+                </a>
+              </li>
+              <!-- Time Zones -->
+
               <!-- Currencies -->
               <li {if $view == "currencies"}class="active" {/if}>
                 <a href="{$system['system_url']}/{$control_panel['url']}/currencies">

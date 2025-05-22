@@ -20,6 +20,8 @@ jobs:
     - name: Deploy to Server
       run: |
         ssh -o StrictHostKeyChecking=no root@51.79.181.234 << 'EOF'
+          set -e
+
           cd /www/wwwroot/link.id
 
           echo "[github-actions] >> Pulling latest changes from main branch..."

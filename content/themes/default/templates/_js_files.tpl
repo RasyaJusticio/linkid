@@ -16,6 +16,8 @@
     var system_langauge_code = "{substr($system['language']['code'], 0, -3)}";
     /* datetime */
     var system_datetime_format = {if $system['system_datetime_format'] == "m/d/Y H:i"}'MM/DD/YYYY HH:mm'{else}'DD/MM/YYYY HH:mm'{/if};
+    /* timezone */
+    var local_timezone = "{$local_tz}";
     /* theme */
     var theme_mode_night = {if $system['theme_mode_night']}true{else}false{/if};
     var theme_dir_rtl = {if $system['language']['dir'] == "LTR"}false{else}true{/if};

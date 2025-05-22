@@ -662,9 +662,7 @@ function init_smarty()
   $smarty->registerPlugin('modifier', 'trim', 'trim');
 
   $smarty->registerPlugin("modifier", "to_local_timezone", function($value) use ($user) {
-      $timezone = get_user_timezone();
-
-      return convert_timezone($value, "UTC", $timezone['time_zone_name']);
+      return convert_timezone($value, "UTC", get_user_timezone());
   });
   return $smarty;
 }
@@ -7912,7 +7910,7 @@ function get_user_timezone()
 
     $timezone = $user->get_timezone_by_city($user_city_id);
 
-    return $timezone;
+    return $timezone['time_zone_name'];
 }
 
   /**

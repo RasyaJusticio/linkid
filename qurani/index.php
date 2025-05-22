@@ -6,7 +6,7 @@
  * @author Dimas
  */
 
-require('bootloader.php');
+require('../bootloader.php');
 $user_id = $_SESSION['user_id'];
 
 
@@ -363,5 +363,5 @@ $smarty->assign('city_data', $city_data);
 
 // Display page
 page_header("Qurani Page");
-page_footer('qurani-form');
+page_footer('qurani/index');
 ?>

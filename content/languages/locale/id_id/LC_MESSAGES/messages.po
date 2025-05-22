@@ -25204,6 +25204,8 @@ msgstr "Paypal"
 msgid "Transaction complete successfully"
 msgstr "Transaksi berhasil lengkap"
 
+# \---------------- #
+# QRCode
 msgid "QR Request"
 msgstr "QR Terima"
 
@@ -25215,6 +25217,34 @@ msgstr "QR Kirim"
 
 msgid "QR Scan"
 msgstr "QR Pindai"
+# ----------------\ #
+
+# \---------------- #
+# Timezone
+msgid "Timezones"
+msgstr "Zona Waktu"
+
+msgid "Timezone"
+msgstr "Zona Waktu"
+
+msgid "Add New Timezones"
+msgstr "Tambahkan Zona Waktu Baru"
+
+msgid "Add New Timezone"
+msgstr "Tambahkan Zona Waktu Baru"
+
+msgid "Timezone Name"
+msgstr "Nama Zona Waktu"
+
+msgid "UTC Offset"
+msgstr "Pergerseran UTC"
+
+msgid "UTC Offset, for example: 7.00, -7.00, 12.30"
+msgstr "Pergerseran UTC, contoh: 7.00, -7.00, 12.30"
+
+msgid "Timezone info have been updated"
+msgstr "Informasi tentang zona waktu ini telah diperbarui"
+# ----------------\ #
 
 #~ msgid "Friend Suggestions"
 #~ msgstr "Предложения друзей"

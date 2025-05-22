@@ -1000,7 +1000,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Setup dropdowns
   setupDropdown('groupInput', 'groupDropdown', 'selectedGroup', enableMemberInput);
   setupDropdown('memberInput', 'memberDropdown', 'selectedMember');
-  setupDropdown('temanInput', 'temanDropdown', 'selectedTeman');
+  setupDropdown('temanInput', 'temanDropdown', 'selectedTeman', undefined, true);
   setupDropdown('suratInput', 'suratDropdown', 'selectedSurat');
   setupDropdown('juzInput', 'juzDropdown', 'selectedJuz');
   setupDropdown('halamanInput', 'halamanDropdown', 'selectedHalaman');
@@ -1010,7 +1010,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {foreach $all_groups as $group}
     '{$group.group_id|escape:'javascript'}': [
       {foreach $group.members as $member}
-      { id: '{$member.user_id|escape:'javascript'}', name: '{$member.user_name|escape:'javascript'}' },
+      { id: '{$member.user_id|escape:'javascript'}', name: '{$member.user_name|escape:'javascript'}', fullname: '{$member.user_fullname|escape:'javascript'}' },
       {/foreach}
     ],
     {/foreach}
@@ -1149,14 +1149,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (groupId && groupsData[groupId]) {
       groupsData[groupId].forEach(member => {
+        console.log(member);
         const div = document.createElement('div');
         div.className = 'dropdown-item';
         div.setAttribute('data-value', member.id);
-        div.textContent = member.name;
+        div.setAttribute('data-username', member.name);
+        div.textContent = member.fullname;
         memberDropdown.appendChild(div);
       });
 
-      setupDropdown('memberInput', 'memberDropdown', 'selectedMember');
+      setupDropdown('memberInput', 'memberDropdown', 'selectedMember', undefined, true);
     } else {
       memberInput.disabled = true;
       memberInput.placeholder = "Pilih grup terlebih dahulu";
@@ -1217,7 +1219,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-  function setupDropdown(inputId, dropdownId, hiddenInputId, callback) {
+  function setupDropdown(inputId, dropdownId, hiddenInputId, callback, isPersonDropdown) {
     const inputElement = document.getElementById(inputId);
     const dropdownElement = document.getElementById(dropdownId);
     const hiddenInput = document.getElementById(hiddenInputId);
@@ -1228,6 +1230,11 @@ document.addEventListener("DOMContentLoaded", function() {
       items.forEach(item => {
         item.addEventListener('click', function() {
           inputElement.value = this.textContent;
+
+          if (isPersonDropdown) {
+            inputElement.setAttribute('data-username', this.getAttribute('data-username'));
+          }
+
           const selectedValue = this.getAttribute('data-value');
           hiddenInput.value = selectedValue;
           dropdownElement.style.display = 'none';
@@ -1377,6 +1384,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const tampilkanType = document.querySelector('input[name="tampilkan"]:checked')?.value;
     let penyetorId = null;
     let penyetorName = null;
+    let penyetorFullname = null;
     let groupId = null;
     
     if (!penyetorType) {
@@ -1395,7 +1403,8 @@ document.addEventListener("DOMContentLoaded", function() {
     if (penyetorType === 'grup') {
       groupId = document.getElementById('selectedGroup').value;
       penyetorId = document.getElementById('selectedMember').value;
-      penyetorName = document.getElementById('memberInput').value;
+      penyetorFullname = document.getElementById('memberInput').value;
+      penyetorName = document.getElementById('memberInput').getAttribute('data-username');
       
       if (!groupId) {
         isValid = false;
@@ -1422,7 +1431,8 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     } else if (penyetorType === 'teman') {
       penyetorId = document.getElementById('selectedTeman').value;
-      penyetorName = document.getElementById('temanInput').value;
+      penyetorFullname = document.getElementById('temanInput').value;
+      penyetorName = document.getElementById('temanInput').getAttribute('data-username');
       
       if (!penyetorId) {
         isValid = false;
@@ -1523,6 +1533,7 @@ document.addEventListener("DOMContentLoaded", function() {
       penyetor_type: penyetorType,
       penyetor_id: Number(penyetorId),
       penyetor_name: penyetorName,
+      penyetor_fullname: penyetorFullname,
       setoran_type: setoranType,
       tampilkan_type: tampilkanType,
       surat_id: suratId ? Number(suratId) : null,

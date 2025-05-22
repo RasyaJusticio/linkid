@@ -660,6 +660,12 @@ function init_smarty()
   $smarty->registerPlugin('modifier', 'get_payment_vat_percentage', 'get_payment_vat_percentage');
   $smarty->registerPlugin('modifier', 'implode', 'implode');
   $smarty->registerPlugin('modifier', 'trim', 'trim');
+
+  $smarty->registerPlugin("modifier", "to_local_timezone", function($value) use ($user) {
+      $timezone = get_user_timezone();
+
+      return convert_timezone($value, "UTC", $timezone['time_zone_name']);
+  });
   return $smarty;
 }
 
@@ -7893,6 +7899,41 @@ function get_user_age($birthdate)
   $age = $today->diff($birthdate)->y;
   return $age;
 }
+
+function get_user_timezone()
+{
+    global $user;
+
+    $user_city_id = $user->_data['user_city'];
+
+    if (empty($user_city_id)) {
+        return null;
+    }
+
+    $timezone = $user->get_timezone_by_city($user_city_id);
+
+    return $timezone;
+}
+
+  /**
+   * convert_timezone
+   * 
+   * @param string $datetime    Datetime string (e.g., "2025-04-07 15:00:00")
+   * @param string $from_tz     Source timezone (e.g., "Asia/Jakarta")
+   * @param string $to_tz       Target timezone (e.g., "America/New_York")
+   * @param string $format      Output format (default: "Y-m-d H:i:s")
+   * @return string             Converted datetime string
+   */
+  function convert_timezone($datetime, $from_tz, $to_tz, $format = 'Y-m-d H:i:s')
+  {
+    try {
+      $date = new DateTime($datetime, new DateTimeZone($from_tz));
+      $date->setTimezone(new DateTimeZone($to_tz));
+      return $date->format($format);
+    } catch (Exception $e) {
+      return false;
+    }
+  }
 
 
 /**

@@ -18,7 +18,6 @@ if (!$user->_logged_in) {
 // Periksa apakah permintaan adalah POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
-    // Ambil data dari body JSON
     $input = json_decode(file_get_contents('php://input'), true);
     $setoran_id = isset($input['id']) ? intval($input['id']) : null;
 
@@ -57,13 +56,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         http_response_code(400);
-        echo json_encode(['error' => 'ID setoran tidak diberikan']);
+        echo json_encode(['error' => 'ID setoran tidak ada']);
     }
     exit;
 }
 
-// Jika GET, render halaman
-$setoran_id = isset($_GET['id']) ? intval($_GET['id']) : null;
+// Jika GET, ambil ID dari URL (baik dari query parameter atau path)
+$setoran_id = null;
+if (isset($_GET['id'])) {
+    $setoran_id = intval($_GET['id']);
+} elseif (preg_match('/\/riwayat\/(\d+)$/', $_SERVER['REQUEST_URI'], $matches)) {
+    $setoran_id = intval($matches[1]);
+}
 
 if ($setoran_id) {
     $query = $db->prepare(
@@ -93,14 +97,20 @@ if ($setoran_id) {
     $query->execute();
     if ($query->error) {
         error_log("Database error in rekapan.php: " . $query->error);
-        _error(500, 'Gagal mengambil data setoran');
+        $smarty->assign('error_message', 'Gagal mengambil data setoran');
+        page_header("Error - Halaman Tidak Ditemukan");
+        $smarty->display('qurani/notFound.tpl');
+        exit;
     }
     $result = $query->get_result();
     $setoran_data = $result->fetch_assoc();
 
     if (!$setoran_data) {
         error_log("Data setoran tidak ditemukan untuk ID: $setoran_id");
-        _error(404, 'Data setoran tidak ditemukan');
+        $smarty->assign('error_message', 'Data setoran tidak ada');
+        page_header("Error - Halaman Tidak Ditemukan");
+        $smarty->display('qurani/notFound.tpl');
+        exit;
     }
 
     // Tentukan penyimak_type
@@ -108,11 +118,13 @@ if ($setoran_id) {
 
     $smarty->assign('setoran_data', $setoran_data);
 } else {
-    error_log("ID setoran tidak diberikan di rekapan.php");
-    _error(400, 'ID setoran tidak diberikan');
+    error_log("ID setoran tidak ada di rekapan.php");
+    $smarty->assign('error_message', 'ID setoran tidak ada');
+    page_header("Error - Halaman Tidak Ditemukan");
+    $smarty->display('qurani/notFound.tpl');
+    exit;
 }
 
-error_log("Rendering qurani_rekapan.tpl untuk setoran_id: $setoran_id");
 page_header("Rekapan Setoran");
 page_footer('qurani/rekapan');
 ?>

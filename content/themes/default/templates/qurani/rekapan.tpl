@@ -19,15 +19,15 @@
 {literal}
 document.addEventListener("DOMContentLoaded", function() {
   const iframe = document.getElementById('rekapanFrame');
-  const quraniUrl = "{/literal}{$system['qurani_url']}{literal}";
   console.log('Iframe URL:', iframe.src);
+  const quraniUrl = "{/literal}{$system['qurani_url']}{literal}";
 
   // Fungsi untuk mengatur title dengan format [Spesifik Title] | Link.id - Sosmed Islami
   function setPageTitleFromData(data) {
     try {
       let baseTitle = 'Riwayat Setoran';
-      if (data && data.setoran_id) {
-        baseTitle = `Setoran #${data.setoran_id}`; // Misalnya, "Setoran #123"
+      if (data && data.id) {
+        baseTitle = `Setoran #${data.id}`; // Gunakan data.id alih-alih setoran_id
       }
       const fullTitle = `${baseTitle} | Link.id - Sosmed Islami`;
       document.title = fullTitle;
@@ -41,21 +41,17 @@ document.addEventListener("DOMContentLoaded", function() {
   // Fungsi untuk mengatur favicon dengan URL yang diberikan
   function setFavicon() {
     try {
-      // Hapus favicon yang ada
       const existingFavicons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
       existingFavicons.forEach(favicon => favicon.remove());
 
-      // Buat favicon baru dengan URL yang diberikan
       const newFavicon = document.createElement('link');
       newFavicon.rel = 'icon';
       newFavicon.type = 'image/png';
-      // Gunakan URL favicon yang sama seperti di kode kedua
-      newFavicon.href = '{/literal}{$system['system_url']|escape:'javascript'}{literal}/content/themes/default/images/LinkId-Icon.png';
+      newFavicon.href = '{/literal}{$system['system_url']}{literal}/content/themes/default/images/LinkId-Icon.png';
       
-      // Fallback jika file tidak ditemukan
       newFavicon.onerror = () => {
         console.warn('⚠️ Gagal memuat favicon, menggunakan favicon default.');
-        newFavicon.href = '/favicon.ico'; // Favicon default Sngine
+        newFavicon.href = '/favicon.ico';
       };
       
       document.head.appendChild(newFavicon);
@@ -65,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Fungsi untuk mengambil setoranId dari URL
+  // Fungsi untuk mengambil setoranId dari URL (mendukung /riwayat/265)
   const getSetoranId = () => {
     const pathSegments = window.location.pathname.split('/');
     const setoranId = pathSegments[pathSegments.length - 1];
@@ -80,12 +76,13 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log('✅ postMessage dikirim ke iframe:', data, 'Waktu:', new Date().toISOString());
     } catch (error) {
       console.error('Gagal mengirim postMessage:', error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Kesalahan',
-        text: 'Gagal mengirim data ke iframe: ' + error.message,
-      });
+      window.location.href = '{/literal}{$system['system_url']}{literal}/qurani/notFound';
     }
+  };
+
+  // Fungsi untuk mengalihkan ke halaman notFound
+  const redirectToNotFound = () => {
+    window.location.href = '{/literal}{$system['system_url']}{literal}/qurani/notFound';
   };
 
   // Fungsi untuk mengambil data setoran
@@ -99,34 +96,22 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error('Gagal mengambil data setoran: ' + response.status);
+        redirectToNotFound(); // Langsung redirect tanpa pesan
+        return null;
       }
       return response.json();
     })
     .then(data => {
-      console.log('Data setoran diterima:', data);
+      if (!data) return; // Jika redirect sudah dipanggil, skip
       if (data.error) {
-        console.error('Error dari server:', data.error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Kesalahan',
-          text: data.error,
-        });
+        redirectToNotFound(); // Langsung redirect tanpa pesan
         return;
       }
-      // Atur title berdasarkan data setoran
       setPageTitleFromData(data);
       sendPostMessage(data);
     })
-    .catch(error => {
-      console.error('Error mengambil data setoran:', error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Kesalahan',
-        text: 'Gagal mengambil data setoran: ' + error.message,
-      });
-      // Set title default jika gagal
-      setPageTitleFromData(null);
+    .catch(() => {
+      redirectToNotFound(); // Langsung redirect tanpa pesan
     });
   };
 
@@ -136,13 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Ambil setoranId awal
   const initialSetoranId = getSetoranId();
   if (!initialSetoranId) {
-    console.error("ID setoran tidak valid di URL:", window.location.pathname);
-    Swal.fire({
-      icon: 'error',
-      title: 'Kesalahan',
-      text: 'ID setoran tidak valid. Silakan kembali ke halaman riwayat.',
-    });
-    document.title = 'Riwayat Setoran | Link.id - Sosmed Islami';
+    redirectToNotFound(); // Langsung redirect tanpa pesan
     return;
   }
 
@@ -159,10 +138,12 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log('URL berubah, mengambil data untuk setoranId:', currentSetoranId);
       fetchSetoranData(currentSetoranId);
       lastSetoranId = currentSetoranId;
+    } else if (!currentSetoranId) {
+      redirectToNotFound(); // Langsung redirect tanpa pesan
     }
   });
 
-  // Listener untuk menerima metadata dari iframe (opsional, untuk konsistensi)
+  // Listener untuk menerima metadata dari iframe
   window.addEventListener('message', (event) => {
     if (event.origin !== quraniUrl) {
       console.warn('⚠️ Pesan dari origin tidak dikenal:', event.origin);
@@ -176,7 +157,6 @@ document.addEventListener("DOMContentLoaded", function() {
         : `${data.title} | Link.id - Sosmed Islami`;
       document.title = fullTitle;
       console.log('✅ Title diperbarui via postMessage:', fullTitle);
-      // Abaikan favicon dari iframe, gunakan yang sudah ditentukan
       console.log('ℹ️ Mengabaikan favicon dari iframe, menggunakan favicon yang ditentukan');
     }
   });

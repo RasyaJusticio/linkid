@@ -262,6 +262,7 @@ $all_users = [];
 $get_users = $db->query("
     SELECT 
         u.user_id,
+        u.user_name,
         CONCAT(u.user_firstname, ' ', u.user_lastname) AS fullname
     FROM friends f
     JOIN users u 

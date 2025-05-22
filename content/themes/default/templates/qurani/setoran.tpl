@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const iframe = document.getElementById('quranFrame');
   const quraniUrl = "{/literal}{$system['qurani_url']}{literal}";
   console.log('Iframe URL:', iframe.src);
-
   // Fungsi untuk mengatur title dengan format [Spesifik Title] | Link.id - Sosmed Islami
   function setPageTitleFromPayload(payload) {
     try {
@@ -156,7 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
             juz_id: parsedPayload.juz_id ? Number(parsedPayload.juz_id) : null,
             juz_name: parsedPayload.juz_name || '',
             halaman: parsedPayload.halaman ? Number(parsedPayload.halaman) : null,
-            group_id: parsedPayload.penyetor_type === 'grup' ? (Number(parsedPayload.group_id) || null) : null
+            group_id: parsedPayload.penyetor_type === 'grup' ? (Number(parsedPayload.group_id) || null) : null,
+            penyetor_fullname : parsedPayload.penyetor_fullname || '',
           };
 
           // Validasi payload

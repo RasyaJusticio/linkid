@@ -146,6 +146,7 @@ $smarty->assign('secret', $_SESSION['secret']);
 $smarty->assign('session_hash', $session_hash);
 $smarty->assign('date', $date);
 $smarty->assign('system', $system);
+$smarty->assign('local_tz', get_user_timezone());
 $smarty->assign('user', $user);
 $smarty->assign('emojis', $emojis);
 $smarty->assign('reactions', $user->get_reactions());

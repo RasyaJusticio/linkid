@@ -405,6 +405,46 @@ class User
     return $get_country->fetch_assoc();
   }
 
+  /* ------------------------------- */
+  /* System City */
+  /* ------------------------------- */
+  public function get_city($city_id)
+  {
+    global $db;
+    $get_city = $db->query(sprintf("SELECT * FROM kota WHERE id = %s", secure($city_id, 'int')));
+    if ($get_city->num_rows == 0) {
+      return null;
+    }
+    return $get_city->fetch_assoc();
+  }
+
+  /* ------------------------------- */
+  /* System Timezones */
+  /* ------------------------------- */
+  public function get_timezone($timezone_id)
+  {
+    global $db;
+    $get_timezone = $db->query(sprintf("SELECT * FROM system_time_zones WHERE time_zone_id = %s", secure($timezone_id, 'int')));
+    if ($get_timezone->num_rows == 0) {
+      return null;
+    }
+    return $get_timezone->fetch_assoc();
+  }
+  
+  public function get_timezone_by_city($city_id)
+  {
+    global $db;
+
+    $get_city = $db->query(sprintf("SELECT time_zone_id FROM kota WHERE id = %s", secure($city_id, 'int')));
+    if ($get_city->num_rows == 0) {
+      return null;
+    }
+
+    $city_data = $get_city->fetch_assoc();
+    $timezone_id = $city_data['time_zone_id'];
+
+    return $this->get_timezone($timezone_id);   
+  }
 
 
   /* ------------------------------- */

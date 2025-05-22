@@ -519,6 +519,61 @@ try {
       }
       break;
 
+    case 'timezones':
+      // check admin|moderator permission
+      if ($user->_is_moderator) {
+        _error(__('System Message'), __("You don't have the right permission to access this"));
+      }
+
+      // get nested view content
+      switch ($_GET['sub_view']) {
+        case '':
+          // page header
+          page_header($control_panel['title'] . " &rsaquo; " . __("Timezones"));
+
+          // get data
+          $get_rows = $db->query("SELECT * FROM system_time_zones");
+          if ($get_rows->num_rows > 0) {
+            while ($row = $get_rows->fetch_assoc()) {
+              $rows[] = $row;
+            }
+          }
+
+          // assign variables
+          $smarty->assign('rows', $rows);
+          break;
+
+        case 'edit':
+          // valid inputs
+          if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+            _error(404);
+          }
+
+          // get data
+          $get_data = $db->query(sprintf("SELECT * FROM system_time_zones WHERE time_zone_id = %s", secure($_GET['id'], 'int')));
+          if ($get_data->num_rows == 0) {
+            _error(404);
+          }
+          $data = $get_data->fetch_assoc();
+
+          // assign variables
+          $smarty->assign('data', $data);
+
+          // page header
+          page_header($control_panel['title'] . " &rsaquo; " . __("Timezones") . " &rsaquo; " . $data['time_zone_name']);
+          break;
+
+        case 'add':
+          // page header
+          page_header($control_panel['title'] . " &rsaquo; " . __("Timezones") . " &rsaquo; " . __("Add New"));
+          break;
+
+        default:
+          _error(404);
+          break;
+      }
+      break;
+
     case 'currencies':
       // check admin|moderator permission
       if ($user->_is_moderator) {

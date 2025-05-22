@@ -189,14 +189,22 @@ function loadImage(imagePath) {
 function generateQRCreatedTime() {
   const now = new Date();
 
-  const dd = String(now.getUTCDate()).padStart(2, '0');
-  const MM = String(now.getUTCMonth() + 1).padStart(2, '0');
-  const yyyy = now.getUTCFullYear();
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    timeZone: local_timezone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
 
-  let hh = String(now.getUTCHours()).padStart(2, '0');
-  let mm = String(now.getUTCMinutes()).padStart(2, '0');
+  const parts = formatter.formatToParts(now);
+  const partMap = Object.fromEntries(parts.map(p => [p.type, p.value]));
 
-  return `${dd}-${MM}-${yyyy} ${hh}:${mm}`;
+  const formatted = `${partMap.day}-${partMap.month}-${partMap.year} ${partMap.hour}:${partMap.minute}`;
+
+  return formatted;
 }
 
 loadImages();

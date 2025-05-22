@@ -231,7 +231,7 @@ if ($db->error) {
 while ($group = $get_groups->fetch_assoc()) {
     $group_members = [];
     $get_members = $db->query(sprintf(
-        "SELECT u.user_id, CONCAT(u.user_firstname, ' ', u.user_lastname) AS user_name 
+        "SELECT u.user_id, u.user_name, CONCAT(u.user_firstname, ' ', u.user_lastname) AS user_fullname 
         FROM `groups_members` gm
         JOIN `users` u ON gm.user_id = u.user_id
         WHERE gm.group_id = %d
@@ -262,6 +262,7 @@ $all_users = [];
 $get_users = $db->query("
     SELECT 
         u.user_id,
+        u.user_name,
         CONCAT(u.user_firstname, ' ', u.user_lastname) AS fullname
     FROM friends f
     JOIN users u 

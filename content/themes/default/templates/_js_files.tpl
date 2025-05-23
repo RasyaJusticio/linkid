@@ -459,7 +459,7 @@
     <!-- Easytimer -->
 
     <!-- Datatables -->
-    {if in_array($page, ["admin", "ads", "wallet", "developers", "settings"])}
+    {if in_array($page, ["admin", "ads", "wallet", "developers", "settings", "transfer"])}
       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.min.css" defer />
       <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js" defer></script>
       <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js" defer></script>

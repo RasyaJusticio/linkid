@@ -22321,8 +22321,18 @@ class User
       case 'location':
         /* set custom fields */
         $this->set_custom_fields($args, "user", "settings", $this->_data['user_id']);
+        
+        /* validate city */
+        if ($args['city'] == "none") {
+          throw new Exception(__("You must select valid city"));
+        } else {
+          if (!$this->check_city($args['city'])) {
+            throw new Exception(__("You must select valid city"));
+          }
+        }
+
         /* update user */
-        $db->query(sprintf("UPDATE users SET user_current_city = %s, user_hometown = %s WHERE user_id = %s", secure($args['city']), secure($args['hometown']), secure($this->_data['user_id'], 'int')));
+        $db->query(sprintf("UPDATE users SET user_city = %s, user_hometown = %s WHERE user_id = %s", secure($args['city']), secure($args['hometown']), secure($this->_data['user_id'], 'int')));
         break;
 
       case 'education':

@@ -738,6 +738,89 @@ $(function () {
     }, 200);
   });
 
+  // run combobox
+  $('.combobox').each(function() {
+    const $input = $(this);
+    const $parent = $input.parents('.combobox-container');
+    const optionsSelector = $parent.data('options');
+    const hiddenSelector = $parent.data('hidden');
+
+    if (!optionsSelector || !hiddenSelector) {
+      console.error("Unable to find:", optionsSelector, hiddenSelector, ">>", $parent[0]);
+      return;
+    };
+
+    const $options = $(optionsSelector);
+    const $hiddenInput = $(hiddenSelector);
+
+    function bindItems() {
+      $options.find('.combobox-option').off('click').on('click', function() {
+        const $item = $(this);
+        const value = $item.data('value');
+        const text = $item.text();
+
+        $input.val(text);
+        $hiddenInput.val(value);
+
+        $options.hide();
+        $options.find('.combobox-option').removeClass('selected');
+        $item.addClass('selected');
+
+        $input.trigger('combobox:selected', {
+          value: value,
+          label: text,
+          extra: $item.data()
+        });
+      });
+
+      const defaultValue = $parent.data('default');
+      if (defaultValue !== undefined) {
+        const $defaultItem = $options.find(`.combobox-option[data-value="${defaultValue}"]`);
+        if ($defaultItem.length >= 1) {
+          $defaultItem.trigger('click');
+        }
+      }
+    }
+
+    bindItems();
+
+    $input.on('focus input', function() {
+      const filter = $input.val().toLowerCase();
+      $options.find('.combobox-option').each(function() {
+        const $item = $(this);
+        const text = $item.text().toLowerCase();
+        $item.toggle(text.includes(filter));
+      });
+      $options.show();
+    });
+
+    $(document).on('click', function(e) {
+      if (!$(e.target).closest($input).length && !$(e.target).closest($options).length) {
+        $options.hide();
+      }
+    });
+
+    $input.on('keydown', function(e) {
+      const $visibleItems = $options.find('.combobox-option:visible');
+      let $focused = $options.find('.combobox-option:focus');
+
+      if (e.key === 'Escape') {
+        $options.hide();
+      } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        let index = $visibleItems.index($focused);
+        index = (e.key === 'ArrowDown') ? index + 1 : index - 1;
+        index = (index + $visibleItems.length) % $visibleItems.length;
+        $visibleItems.eq(index).focus();
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if ($focused.length) $focused.click();
+      }
+    });
+
+    new MutationObserver(bindItems).observe($options[0], { childList: true });
+  });
+
 
   // run autocomplete
   /* focus the input */

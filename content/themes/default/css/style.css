@@ -377,6 +377,79 @@ body.night-mode .dropdown-divider {
 
 /* == */
 
+/* == Combobox == */
+.combobox-container {
+  position: relative;
+  width: 100%;
+}
+
+.combobox {
+  outline: none;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.combobox:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+.combobox-option.active,
+.combobox-option:active {
+  background-color: var(--link-color);
+}
+
+.combobox-options {
+  min-width: 260px;
+  border: 0;
+  box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px,
+    rgb(0 0 0 / 10%) 0px 4px 6px -4px;
+}
+
+body.night-mode .combobox-options {
+  color: var(--body-color-dark);
+  background: var(--header-bg-color-dark);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+.combobox-options .combobox-option {
+  font-size: 15px;
+  padding: 12px 26px;
+}
+
+body.night-mode .combobox-option {
+  color: var(--body-color-dark);
+}
+
+body.night-mode .combobox-option:focus,
+body.night-mode .combobox-option:hover {
+  color: var(--body-color-dark);
+  background-color: var(--card-dark-hover);
+}
+
+body.night-mode .combobox-options {
+  border: 1px solid var(--card-dark-divider);
+}
+
+.combobox-options {
+  display: none;
+  position: absolute;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  border-radius: 6px;
+  z-index: 1000;
+  margin-top: 2px;
+}
+
+/* == */
+
 /* == Modal == */
 .modal {
   z-index: 99999;
@@ -11461,6 +11534,10 @@ body.night-mode .pwa_install_banner {
   }
 }
 
+/* -- */
+
+/* COMBOBOX */
+/* ------------------------------- */
 
 /* -- */
 

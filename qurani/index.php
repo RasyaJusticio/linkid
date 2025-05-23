@@ -169,11 +169,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'update_paraf') {
     exit;
 }
 
-// Handle AJAX request for city data
 if (isset($_GET['action']) && $_GET['action'] === 'get_cities') {
     header('Content-Type: application/json; charset=UTF-8');
 
-    // Query untuk mengambil data kota
     $query = $db->query(
         "SELECT 
             kota,
@@ -207,7 +205,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_cities') {
     exit;
 }
 
-// Get logged in user data
+
+
 $user_data = $user->_data;
 $current_user = [
     'user_id' => $user_data['user_id'],
@@ -257,7 +256,6 @@ while ($group = $get_groups->fetch_assoc()) {
 
 
 
-// Get all users for select options
 $all_users = [];
 $get_users = $db->query("
     SELECT 
@@ -279,7 +277,6 @@ while ($u = $get_users->fetch_assoc()) {
     $all_users[] = $u;
 }
 
-
 $riwayat_setoran = [];
 $get_history = $db->query(
     "SELECT 
@@ -297,7 +294,7 @@ $get_history = $db->query(
             qs.tampilan,
             CASE 
                 WHEN qs.tampilan = 'juz' AND qs.nomor IS NOT NULL AND qs.nomor != '' THEN CONCAT(' ', qs.nomor)
-                WHEN qs.tampilan = 'surat' AND qs.info IS NOT NULL AND qs.info != '' THEN CONCAT(' ', qs.info)
+                WHEN qs.tampilan = 'surah' AND qs.info IS NOT NULL AND qs.info != '' THEN CONCAT(' ', qs.info)
                 ELSE ''
             END,
             CASE 
@@ -323,7 +320,6 @@ while ($history = $get_history->fetch_assoc()) {
     $riwayat_setoran[] = $history;
 }
 
-// Get city data for map
 $city_data = [];
 $get_cities = $db->query(
     "SELECT 
@@ -353,14 +349,90 @@ while ($city = $get_cities->fetch_assoc()) {
     ];
 }
 
-// Settings Grup 
+$sql_user_setting = "
+        SELECT
+            g.id,
+            g.`key`,
+            COALESCE(u.`value`, g.`value`) AS `value`,
+            g.color,
+            g.status
+        FROM qu_setting_global AS g
+        LEFT JOIN qu_setting_user AS u
+          ON u.setting = g.id
+         AND u.user    = ?
+        ORDER BY g.id
+    ";
+    
+$query = $db->prepare($sql_user_setting);
+$query->bind_param('i', $current_user['user_id']);
+$query->execute();
+$result = $query->get_result();
+$user_settings = [];
+while ($row = $result->fetch_assoc()) {
+    $user_settings[] = $row;
+}
 
-// Assign data to template
+// group settings
+if (isset($_GET['action']) && $_GET['action'] === 'get_group_settings') {
+    header('Content-Type: application/json; charset=UTF-8');
+
+    try {
+        $group_id = isset($_GET['group_id']) ? (int)$_GET['group_id'] : 0;
+        
+        if ($group_id <= 0) {
+            http_response_code(400);
+            echo json_encode(['error' => 'ID grup tidak valid']);
+            exit;
+        }
+        $query = $db->prepare("SELECT 1 FROM groups_members WHERE group_id = ? AND user_id = ?");
+        $query->bind_param('ii', $group_id, $current_user['user_id']);
+        $query->execute();
+        $is_member = $query->get_result()->fetch_assoc();
+
+        if (!$is_member) {
+            http_response_code(403);
+            echo json_encode(['error' => 'Anda bukan anggota grup ini']);
+            exit;
+        }
+
+        $query = $db->prepare(
+            "SELECT
+                g.id,
+                g.`key`,
+                COALESCE(gu.`value`, g.`value`) AS `value`,
+                g.color,
+                g.status
+            FROM qu_setting_global AS g
+            LEFT JOIN qu_setting_group AS gu
+                ON gu.setting = g.id
+                AND gu.group = ?  
+            ORDER BY g.id"
+        );
+        $query->bind_param('i', $group_id);
+        $query->execute();
+        $result = $query->get_result();
+        
+        $settings = [];
+        while ($row = $result->fetch_assoc()) {
+            $settings[] = $row;
+        }
+
+        echo json_encode($settings);
+        exit;
+        
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['error' => $e->getMessage()]);
+        exit;
+    }
+}
+
 $smarty->assign('current_user', $current_user);
 $smarty->assign('all_groups', $all_groups);
 $smarty->assign('all_users', $all_users);
 $smarty->assign('riwayat_setoran', $riwayat_setoran);
 $smarty->assign('city_data', $city_data);
+$smarty->assign('user_settings', json_encode($user_settings));
 
 // Display page
 page_header("Qurani Page");

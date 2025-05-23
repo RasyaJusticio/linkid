@@ -13,7 +13,7 @@
 <!-- Load SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<style>
+<style><style>
 /* Styling untuk peta dan kontrol */
 body {
   background-color: #f8f9fa;
@@ -36,18 +36,22 @@ body {
   font-size: 14px;
   line-height: 1.5;
   border-radius: 4px;
-  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  background-color: #6c757d; /* Abu-abu, sesuai dengan tema Bootstrap untuk secondary */
+  border-color: #6c757d; /* Border sama dengan background agar terlihat menyatu */
+  transition: none; /* Hapus transisi agar tidak ada animasi saat hover */
+}
+
+.btn-sm.btn-outline-secondary:hover {
+  background-color: #6c757d; /* Pastikan background tetap abu-abu saat hover */
+  border-color: #ffffff; /* Border tetap sama */
 }
 
 .fas {
   font-size: 16px;
-  color: white;
+  color: #ffffff; /* Putih */
   vertical-align: middle;
 }
 
-.btn-outline-secondary:hover .fas {
-  color: #fff;
-}
 
 #userTable {
   display: none;
@@ -212,15 +216,6 @@ body.map-fullscreen .js_sticky-header {
   font-size: 15px;
   color: #333;
   transition: background-color 0.2s;
-}
-
-.dropdown-item:hover {
-  background-color: #f8f9fa;
-}
-
-.dropdown-item.selected {
-  background-color: #e9ecef;
-  font-weight: 500;
 }
 
 .form-group.d-flex {
@@ -544,6 +539,14 @@ body.map-fullscreen .js_sticky-header {
   transition: transform 0.1s ease;
 }
 
+body.light-mode .fa-cog {
+  color: #333;
+}
+
+body.dark-mode .fa-cog {
+  color: #fff;
+}
+
 /* Hapus efek klik yang menyebabkan warna tetap */
   .surah-quick-btn:focus,
   .surah-quick-btn:active,
@@ -586,23 +589,23 @@ body.map-fullscreen .js_sticky-header {
         <div class="map-header">
           <h3 class="text-start mb-0">{__("Qurani")}</h3>
           <div class="map-controls">
-            <button class="btn btn-sm btn-outline-secondary" id="settingsBtn" title="Pengaturan Qurani" onclick="window.location.href='{$system['system_url']}/settings/qurani'">
-              <i class="fas fa-cog"></i>
+            <button class="btn btn-sm btn-outline-secondary" id="settingsBtn" title="{__("Qurani Setting")}" onclick="window.location.href='{$system['system_url']}/settings/qurani'">
+              <i class="fas fa-cog text-gray-800 dark:text-white"></i>
             </button>
           </div>
         </div>
         <form method="POST" id="setoranForm">
           <!-- Penyetor -->
 <div class="radio-group-container">
-  <label class="form-label fw-bold">Penyetor</label>
+  <label class="form-label fw-bold">{__("Reciter")}</label>
   <div class="radio-group">
     <div class="radio-option">
       <input type="radio" id="grup" name="penyetor" value="grup" checked autocomplete="off" spellcheck="false">
-      <label for="grup">Grup</label>
+      <label for="grup">{__("Group")}</label>
     </div>
     <div class="radio-option">
       <input type="radio" id="teman" name="penyetor" value="teman" autocomplete="off" spellcheck="false">
-      <label for="teman">Teman</label>
+      <label for="teman">{__("Friend")}</label>
     </div>
   </div>
 </div>
@@ -610,12 +613,12 @@ body.map-fullscreen .js_sticky-header {
 <!-- Grup-anggota section -->
 <div class="mb-3" id="grup-anggota">
   <div class="radio-group-container">
-    <label class="form-label fw-bold">Grup</label>
+    <label class="form-label fw-bold">{__("Group")}</label>
     <div class="input-dropdown-container w-100">
-      <input type="text" id="groupInput" class="input-dropdown form-control" placeholder="Pilih Grup" autocomplete="off" spellcheck="false" {if isset($all_groups.no_groups)}disabled{/if}>
+      <input type="text" id="groupInput" class="input-dropdown form-control" placeholder="{__("Select Group")}" autocomplete="off" spellcheck="false" {if isset($all_groups.no_groups)}disabled{/if}>
       <div id="groupDropdown" class="dropdown-menu">
         {if isset($all_groups.no_groups)}
-          <div class="dropdown-item" data-value="0">Bergabung dengan grup terlebih dahulu</div>
+          <div class="dropdown-item" data-value="0">{__("Join a group first")}</div>
         {else}
           {foreach $all_groups as $group}
             <div class="dropdown-item" data-value="{$group.group_id|escape:'html'}">{$group.group_title|escape:'html'}</div>
@@ -626,9 +629,10 @@ body.map-fullscreen .js_sticky-header {
     </div>
   </div>
   <div class="radio-group-container">
-    <label class="form-label fw-bold">Anggota</label>
+    <label class="form-label fw-bold">{__("Member")}</label>
     <div class="input-dropdown-container w-100">
-      <input type="text" id="memberInput" class="input-dropdown form-control" placeholder="{if isset($all_groups.no_groups)}Bergabung dengan grup terlebih dahulu{else}Pilih grup terlebih dahulu{/if}" disabled autocomplete="off" spellcheck="false">
+      <input type="text" 
+              id="memberInput" class="input-dropdown form-control" placeholder="{if isset($all_groups.no_groups)}{__("Join a group first")}{else}{__("Select a group first")}{/if}" disabled autocomplete="off" spellcheck="false">
       <div id="memberDropdown" class="dropdown-menu"></div>
       <input type="hidden" id="selectedMember" name="anggota">
     </div>
@@ -643,7 +647,7 @@ body.map-fullscreen .js_sticky-header {
       <input type="text" id="temanInput" class="input-dropdown form-control" placeholder="Pilih teman" autocomplete="off" spellcheck="false">
       <div id="temanDropdown" class="dropdown-menu">
         {foreach $all_users as $user}
-          <div class="dropdown-item" data-value="{$user.user_id|escape:'html'}" data-username="{$user.user_name|escape:'html'}">{$user.fullname|escape:'html'}</div>
+          <div class="dropdown-item" data-value="{$user.user_id|escape:'html'}">{$user.fullname|escape:'html'}</div>
         {/foreach}
       </div>
       <input type="hidden" id="selectedTeman" name="teman">
@@ -653,7 +657,7 @@ body.map-fullscreen .js_sticky-header {
 
           <!-- Setoran -->
           <div class="radio-group-container">
-            <label class="form-label fw-bold">Setoran</label>
+            <label class="form-label fw-bold">{__("Recite")}</label>
             <div class="radio-group">
               <div class="radio-option">
                 <input type="radio" id="tahsin" name="setoran" value="tahsin" checked>
@@ -668,7 +672,7 @@ body.map-fullscreen .js_sticky-header {
 
           <!-- Tampilkan -->
           <div class="radio-group-container">
-            <label class="form-label fw-bold">Tampilkan</label>
+            <label class="form-label fw-bold">{__("Display")}</label>
             <div class="radio-group">
               <div class="radio-option">
                 <input type="radio" id="surat" name="tampilkan" value="surat" checked>
@@ -688,9 +692,9 @@ body.map-fullscreen .js_sticky-header {
           <!-- Surat select -->
           <div class="mb-3" id="surat-select">
   <div class="radio-group-container">
-    <label class="form-label fw-bold">Surat</label>
+    <label class="form-label fw-bold">{__("Surah")}</label>
     <div class="input-dropdown-container w-100">
-      <input type="text" id="suratInput" class="input-dropdown form-control" placeholder="Pilih Surat" autocomplete="off" spellcheck="false">
+      <input type="text" id="suratInput" class="input-dropdown form-control" placeholder="{__("Select Surah")}" autocomplete="off" spellcheck="false">
       <div id="suratDropdown" class="dropdown-menu">
         <div class="dropdown-item" data-value="1">Al-Fatihah (1)</div>
 <div class="dropdown-item" data-value="2">Al-Baqarah (2)</div>
@@ -880,8 +884,8 @@ body.map-fullscreen .js_sticky-header {
 
           <!-- Buttons -->
           <div class="action-buttons d-flex justify-content-center flex-column flex-md-row gap-2">
-            <button type="submit" class="btn btn-primary w-100 w-md-auto">Mulai</button>
-            <button type="button" id="resetButton" class="btn btn-outline-danger w-100 w-md-auto">Reset</button>
+            <button type="submit" class="btn btn-primary w-100 w-md-auto">{__("Start")}</button>
+            <button type="button" id="resetButton" class="btn btn-outline-danger w-100 w-md-auto">{__("Reset")}</button>
           </div>
         </form>
       </div>
@@ -891,7 +895,7 @@ body.map-fullscreen .js_sticky-header {
     <div class="col-lg-6 col-md-12 col-12 mb-3">
       <div class="card shadow-lg p-3 rounded h-100 map-card" id="mapCard">
         <div class="map-header">
-          <h3 class="text-start">{__("Riwayat Qurani")}</h3>
+          <h3 class="text-start">{__("Qurani History")}</h3>
           <div class="map-controls">
             <button class="btn btn-sm btn-outline-secondary me-2" id="showTableBtn" title="Show Location Data" onclick="localStorage.setItem('activeTab', 'locations'); window.location.href='{$system['system_url']}/qurani/riwayat';">
                 <i class="fas fa-table"></i>
@@ -914,12 +918,12 @@ body.map-fullscreen .js_sticky-header {
       <div class="col-lg-12 col-md-12">
         <div class="card shadow-lg p-4 rounded history-card">
           <div class="d-flex justify-content-between align-items-center mb-3">
-            <a href='{$system['system_url']|escape:'html'}'><h3 class="text-start mb-0 cursor-pointer">{__("Riwayat")}</h3></a>
+            <a href='{$system['system_url']|escape:'html'}'><h3 class="text-start mb-0 cursor-pointer">{__("History")}</h3></a>
             <div>
               <button class="btn btn-sm btn-outline-secondary me-2" onclick="window.location.href='{$system['system_url']}/qurani/riwayat'">
                 <i class="fas fa-table"></i>
               </button>
-              <button class="btn btn-sm btn-outline-secondary" id="settingsBtnHistory" title="Pengaturan Qurani" onclick="localStorage.setItem('activeTab', 'statistics'); window.location.href='{$system['system_url']}/qurani/riwayat';">
+              <button class="btn btn-sm btn-outline-secondary" id="settingsBtnHistory" title="{__("Qurani Setting")}" onclick="localStorage.setItem('activeTab', 'statistics'); window.location.href='{$system['system_url']}/qurani/riwayat';">
                 <i class="fas fa-chart-line"></i>
               </button>
             </div>
@@ -927,36 +931,43 @@ body.map-fullscreen .js_sticky-header {
           <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th>Waktu</th>
-      <th>Penerima</th>
-      <th>Penyetor</th>
-      <th>Setoran</th>
-      <th>Hasil</th>
-      <th class="text-center">Paraf</th>
+      <th>{__("Time")}</th>
+      <th>{__("Reciter")}</th>
+      <th>{__("Recipient")}</th>
+      <th>{__("Recite")}</th>
+      <th>{__("Results")}</th>
+      <th class="text-center">{__("Signature")}</th>
     </tr>
   </thead>
   <tbody>
     {foreach $riwayat_setoran as $setoran}
       <tr>
-        <td data-label="Waktu">
+        <td data-label="{__("Time")}">
           <a href="{$system['system_url']|escape:'html'}/qurani/riwayat/{$setoran.id|escape:'html'}" class="cursor-pointer rekapan-link" data-id="{$setoran.id|escape:'html'}">
             {$setoran.formatted_date|escape:'html'}
           </a>
         </td>
-        <td data-label="Penerima">
-          <a href="{$system['system_url']|escape:'html'}/{$setoran.penyetor_name|escape:'url'}"
-             data-bs-toggle="tooltip"
-             title="{if $setoran.penyetor_fullname}{$setoran.penyetor_fullname|escape:'html'}{else}{$setoran.penyetor_name|escape:'html'}{/if}">
-            {$setoran.penyetor_name|escape:'html'}
-          </a>
-        </td>
-        <td data-label="Penyetor">
-          <a href="{$system['system_url']|escape:'html'}/{$setoran.penerima_name|escape:'url'}"
-             data-bs-toggle="tooltip"
-             title="{if $setoran.penerima_fullname}{$setoran.penerima_fullname|escape:'html'}{else}{$setoran.penerima_name|escape:'html'}{/if}">
-            {$setoran.penerima_name|escape:'html'}
-          </a>
-        </td>
+<td data-label="Penyetor">
+  <span class="js_user-popover" data-uid="{$history.penyetor_id}">
+  <a href="{$system['system_url']|escape:'html'}/{$setoran.penyetor_name|escape:'url'}"
+     target="_blank"
+     rel="noopener noreferrer"
+     data-bs-toggle="tooltip"
+     title="{if $setoran.penyetor_fullname}{$setoran.penyetor_fullname|escape:'html'}{else}{$setoran.penyetor_name|escape:'html'}{/if}">
+    {$setoran.penyetor_name|escape:'html'}
+  </a>
+  </span>
+</td>
+<td data-label="Penerima">
+  <a href="{$system['system_url']|escape:'html'}/{$setoran.penerima_name|escape:'url'}"
+     target="_blank"
+     rel="noopener noreferrer"
+     data-bs-toggle="tooltip"
+     title="{if $setoran.penerima_fullname}{$setoran.penerima_fullname|escape:'html'}{else}{$setoran.penerima_name|escape:'html'}{/if}">
+    {$setoran.penerima_name|escape:'html'}
+  </a>
+</td>
+
         <td data-label="Setoran">
           <a href="{$system['system_url']|escape:'html'}/qurani/riwayat/{$setoran.id|escape:'html'}" class="cursor-pointer rekapan-link" data-id="{$setoran.id|escape:'html'}">
             {$setoran.setoran|escape:'html'}
@@ -979,7 +990,7 @@ body.map-fullscreen .js_sticky-header {
       </tr>
     {foreachelse}
       <tr>
-        <td colspan="6" class="text-center" data-label="Pesan">Tidak ada riwayat setoran</td>
+        <td colspan="6" class="text-center" data-label="Pesan">{__("doesnt recite history")}</td>
       </tr>
     {/foreach}
   </tbody>
@@ -996,9 +1007,15 @@ body.map-fullscreen .js_sticky-header {
 document.addEventListener("DOMContentLoaded", function() {
 
   console.log(window.location.href);
+  const user_settings = JSON.parse('{/literal}{$user_settings}{literal}');
+  localStorage.setItem('qu_user_setting', JSON.stringify(user_settings));
 
   // Setup dropdowns
-  setupDropdown('groupInput', 'groupDropdown', 'selectedGroup', enableMemberInput);
+  setupDropdown('groupInput', 'groupDropdown', 'selectedGroup', function(groupId) {
+    console.log('Selected group_id:', groupId); 
+    fetchGroupSettings(groupId); 
+    enableMemberInput(groupId);
+  });
   setupDropdown('memberInput', 'memberDropdown', 'selectedMember');
   setupDropdown('temanInput', 'temanDropdown', 'selectedTeman', undefined, true);
   setupDropdown('suratInput', 'suratDropdown', 'selectedSurat');
@@ -1016,6 +1033,38 @@ document.addEventListener("DOMContentLoaded", function() {
     {/foreach}
     {literal}
   };
+
+    function fetchGroupSettings(groupId) {
+    if (!groupId || groupId === '0') {
+      console.log('No valid group_id selected');
+      return;
+    }
+
+    fetch(`{/literal}{$system['system_url']|escape:'javascript'}{literal}/qurani/?action=get_group_settings&group_id=${groupId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      return response.json();
+    })
+    .then(data => {
+      if (data.error) {
+        console.error('Error fetching group settings:', data.error);
+        return;
+      }
+      console.log('Group settings for group_id', groupId, ':', data);
+      localStorage.setItem('qu_setting_group',JSON.stringify(data));
+    })
+    .catch(error => {
+      console.error('Error fetching group settings:', error.message);
+    });
+  }
 
   // Handle rekapan links
   document.querySelectorAll('.rekapan-link').forEach(link => {
@@ -1240,7 +1289,12 @@ document.addEventListener("DOMContentLoaded", function() {
           dropdownElement.style.display = 'none';
           items.forEach(i => i.classList.remove('selected'));
           this.classList.add('selected');
-          
+
+          // Log group_id jika ini adalah dropdown groupInput
+          if (inputId === 'groupInput') {
+            console.log('Selected group_id:', selectedValue);
+          }
+
           if (inputId === 'halamanInput') {
             const pageNumber = parseInt(selectedValue, 10);
             if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= 604) {
@@ -1249,7 +1303,7 @@ document.addEventListener("DOMContentLoaded", function() {
               console.error('Invalid page value selected:', selectedValue);
             }
           }
-          
+
           if (callback && inputId === 'groupInput') {
             callback(selectedValue);
           }
@@ -1366,216 +1420,237 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
   document.getElementById('setoranForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+  e.preventDefault();
+  
+  let isValid = true;
+  let errorMessages = [];
+  
+  const currentUserId = {/literal}{$user->_data['user_id']|escape:'javascript'}{literal};
+  const currentUserName = {/literal}"{$user->_data['user_name']|escape:'javascript'}"{literal};
+  
+  // Retrieve settings from localStorage
+  const qu_setting_user = JSON.parse(localStorage.getItem('qu_user_setting') || '{}');
+  const qu_setting_group = JSON.parse(localStorage.getItem('qu_setting_group') || '{}');
+  
+  const penyetorType = document.querySelector('input[name="penyetor"]:checked')?.value;
+  const setoranType = document.querySelector('input[name="setoran"]:checked')?.value;
+  const tampilkanType = document.querySelector('input[name="tampilkan"]:checked')?.value;
+  let penyetorId = null;
+  let penyetorName = null;
+  let penyetorFullname = null;
+  let groupId = null;
+  let qu_setting = null; // Initialize qu_setting
+  
+  // Validation for penyetorType
+  if (!penyetorType) {
+    isValid = false;
+    errorMessages.push("Silakan pilih jenis penyetor (Grup atau Teman)");
+  }
+  if (!setoranType) {
+    isValid = false;
+    errorMessages.push("Silakan pilih jenis setoran (Tahsin atau Tahfidz)");
+  }
+  if (!tampilkanType) {
+    isValid = false;
+    errorMessages.push("Silakan pilih jenis tampilan (Surat, Juz, atau Halaman)");
+  }
+  
+  // Handle penyetor type
+  if (penyetorType === 'grup') {
+    groupId = document.getElementById('selectedGroup').value;
+    penyetorId = document.getElementById('selectedMember').value;
+    penyetorFullname = document.getElementById('memberInput').value;
+    penyetorName = document.getElementById('memberInput').getAttribute('data-username');
     
-    let isValid = true;
-    let errorMessages = [];
-    
-    const currentUserId = {/literal}{$user->_data['user_id']|escape:'javascript'}{literal};
-    const currentUserName = {/literal}"{$user->_data['user_name']|escape:'javascript'}"{literal};
-    
-    localStorage.setItem('currentUserId', JSON.stringify({
-      id: currentUserId,
-      name: currentUserName
-    }));
-    
-    const penyetorType = document.querySelector('input[name="penyetor"]:checked')?.value;
-    const setoranType = document.querySelector('input[name="setoran"]:checked')?.value;
-    const tampilkanType = document.querySelector('input[name="tampilkan"]:checked')?.value;
-    let penyetorId = null;
-    let penyetorName = null;
-    let penyetorFullname = null;
-    let groupId = null;
-    
-    if (!penyetorType) {
+    if (!groupId) {
       isValid = false;
-      errorMessages.push("Silakan pilih jenis penyetor (Grup atau Teman)");
+      errorMessages.push("Silakan pilih Grup terlebih dahulu");
     }
-    if (!setoranType) {
+    if (!penyetorId) {
       isValid = false;
-      errorMessages.push("Silakan pilih jenis setoran (Tahsin atau Tahfidz)");
+      errorMessages.push("Silakan pilih Anggota terlebih dahulu");
     }
-    if (!tampilkanType) {
+    if (penyetorId == currentUserId) {
       isValid = false;
-      errorMessages.push("Silakan pilih jenis tampilan (Surat, Juz, atau Halaman)");
+      errorMessages.push("Anda tidak dapat memilih diri sendiri sebagai penyetor");
     }
     
-    if (penyetorType === 'grup') {
-      groupId = document.getElementById('selectedGroup').value;
-      penyetorId = document.getElementById('selectedMember').value;
-      penyetorFullname = document.getElementById('memberInput').value;
-      penyetorName = document.getElementById('memberInput').getAttribute('data-username');
-      
-      if (!groupId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Grup terlebih dahulu");
-      }
-      if (!penyetorId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Anggota terlebih dahulu");
-      }
-      if (penyetorId == currentUserId) {
-        isValid = false;
-        errorMessages.push("Anda tidak dapat memilih diri sendiri sebagai penyetor");
-      }
-      
-      if (isValid) {
-        localStorage.setItem('lastSelectedGroup', JSON.stringify({
-          id: groupId,
-          name: document.getElementById('groupInput').value
-        }));
-        localStorage.setItem('lastSelectedMember', JSON.stringify({
-          id: penyetorId,
-          name: penyetorName
-        }));
-      }
-    } else if (penyetorType === 'teman') {
-      penyetorId = document.getElementById('selectedTeman').value;
-      penyetorFullname = document.getElementById('temanInput').value;
-      penyetorName = document.getElementById('temanInput').getAttribute('data-username');
-      
-      if (!penyetorId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Teman terlebih dahulu");
-      }
-      if (penyetorId == currentUserId) {
-        isValid = false;
-        errorMessages.push("Anda tidak dapat memilih diri sendiri sebagai penyetor");
-      }
-      
-      if (isValid) {
-        localStorage.setItem('lastSelectedFriend', JSON.stringify({
-          id: penyetorId,
-          name: penyetorName
-        }));
-      }
+    // Assign qu_setting_group to qu_setting
+    if (isValid && Object.keys(qu_setting_group).length > 0) {
+      qu_setting = qu_setting_group;
+    } else {
+      isValid = false;
+      errorMessages.push("Pengaturan grup tidak ditemukan. Silakan pilih grup yang valid.");
     }
     
-    let suratId = null;
-    let suratName = null;
-    let juzId = null;
-    let juzName = null;
-    let halaman = null;
+    if (isValid) {
+      localStorage.setItem('lastSelectedGroup', JSON.stringify({
+        id: groupId,
+        name: document.getElementById('groupInput').value
+      }));
+      localStorage.setItem('lastSelectedMember', JSON.stringify({
+        id: penyetorId,
+        name: penyetorName
+      }));
+    }
+  } else if (penyetorType === 'teman') {
+    penyetorId = document.getElementById('selectedTeman').value;
+    penyetorFullname = document.getElementById('temanInput').value;
+    penyetorName = document.getElementById('temanInput').getAttribute('data-username');
     
-    if (tampilkanType === 'surat') {
-      suratId = document.getElementById('selectedSurat').value;
-      suratName = document.getElementById('suratInput').value;
-      
-      if (!suratId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Surat terlebih dahulu");
-      } else {
-        localStorage.setItem('lastSelectedSurah', JSON.stringify({
-          id: suratId,
-          name: suratName
-        }));
-      }
-    } else if (tampilkanType === 'juz') {
-      juzId = document.getElementById('selectedJuz').value;
-      juzName = document.getElementById('juzInput').value;
-      
-      if (!juzId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Juz terlebih dahulu");
-      } else {
-        localStorage.setItem('lastSelectedJuz', JSON.stringify({
-          id: juzId,
-          name: juzName
-        }));
-      }
-    } else if (tampilkanType === 'halaman') {
-      halaman = document.getElementById('selectedHalaman').value;
-      
-      if (!halaman || isNaN(parseInt(halaman, 10))) {
-        const lastSelectedPage = localStorage.getItem('lastSelectedPage');
-        if (lastSelectedPage) {
-          try {
-            const pageData = JSON.parse(lastSelectedPage);
-            halaman = pageData.id;
-          } catch (error) {
-            console.error('Gagal parse lastSelectedPage dari localStorage:', error);
-          }
+    if (!penyetorId) {
+      isValid = false;
+      errorMessages.push("Silakan pilih Teman terlebih dahulu");
+    }
+    if (penyetorId == currentUserId) {
+      isValid = false;
+      errorMessages.push("Anda tidak dapat memilih diri sendiri sebagai penyetor");
+    }
+    
+    // Assign qu_setting_user to qu_setting
+    if (isValid && Object.keys(qu_setting_user).length > 0) {
+      qu_setting = qu_setting_user;
+    } else {
+      isValid = false;
+      errorMessages.push("Pengaturan pengguna tidak ditemukan.");
+    }
+    
+    if (isValid) {
+      localStorage.setItem('lastSelectedFriend', JSON.stringify({
+        id: penyetorId,
+        name: penyetorName
+      }));
+    }
+  }
+  
+  // Handle tampilkan type
+  let suratId = null;
+  let suratName = null;
+  let juzId = null;
+  let juzName = null;
+  let halaman = null;
+  
+  if (tampilkanType === 'surat') {
+    suratId = document.getElementById('selectedSurat').value;
+    suratName = document.getElementById('suratInput').value;
+    
+    if (!suratId) {
+      isValid = false;
+      errorMessages.push("Silakan pilih Surat terlebih dahulu");
+    } else {
+      localStorage.setItem('lastSelectedSurah', JSON.stringify({
+        id: suratId,
+        name: suratName
+      }));
+    }
+  } else if (tampilkanType === 'juz') {
+    juzId = document.getElementById('selectedJuz').value;
+    juzName = document.getElementById('juzInput').value;
+    
+    if (!juzId) {
+      isValid = false;
+      errorMessages.push("Silakan pilih Juz terlebih dahulu");
+    } else {
+      localStorage.setItem('lastSelectedJuz', JSON.stringify({
+        id: juzId,
+        name: juzName
+      }));
+    }
+  } else if (tampilkanType === 'halaman') {
+    halaman = document.getElementById('selectedHalaman').value;
+    
+    if (!halaman || isNaN(parseInt(halaman, 10))) {
+      const lastSelectedPage = localStorage.getItem('lastSelectedPage');
+      if (lastSelectedPage) {
+        try {
+          const pageData = JSON.parse(lastSelectedPage);
+          halaman = pageData.id;
+        } catch (error) {
+          console.error('Gagal parse lastSelectedPage dari localStorage:', error);
         }
       }
-      
-      if (!halaman) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Halaman terlebih dahulu");
-      } else {
-        const pageNumber = parseInt(halaman, 10);
-        if (isNaN(pageNumber) || pageNumber < 1 || pageNumber > 604) {
-          isValid = false;
-          errorMessages.push("Nomor halaman tidak valid. Harus antara 1 dan 604.");
-        } else {
-          localStorage.setItem('lastSelectedPage', JSON.stringify({
-            id: halaman,
-            name: document.getElementById('halamanInput').value
-          }));
-        }
-      }
     }
     
-    localStorage.setItem('lastPenyetorType', penyetorType);
-    localStorage.setItem('lastTampilkanType', tampilkanType);
-    
-    if (!isValid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Kesalahan',
-        html: errorMessages.join('<br>'),
-      });
-      return;
-    }
-    
-    const payload = {
-      user_id: Number(currentUserId),
-      user_name: currentUserName,
-      penyetor_type: penyetorType,
-      penyetor_id: Number(penyetorId),
-      penyetor_name: penyetorName,
-      penyetor_fullname: penyetorFullname,
-      setoran_type: setoranType,
-      tampilkan_type: tampilkanType,
-      surat_id: suratId ? Number(suratId) : null,
-      surat_name: suratName,
-      juz_id: juzId ? Number(juzId) : null,
-      juz_name: juzName,
-      halaman: halaman ? Number(halaman) : null,
-      group_id: groupId ? Number(groupId) : null
-    };
-    
-    try {
-      localStorage.setItem('setoranPayload', JSON.stringify(payload));
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Kesalahan',
-        text: 'Gagal menyimpan data ke localStorage',
-      });
-      return;
-    }
-    
-    let redirectUrl = '{/literal}{$system['system_url']|escape:'javascript'}{literal}/qurani/setoran';
-    if (tampilkanType === 'surat' && suratId) {
-      redirectUrl += '/surah/' + suratId;
-    } else if (tampilkanType === 'juz' && juzId) {
-      redirectUrl += '/juz/' + juzId;
-    } else if (tampilkanType === 'halaman' && halaman) {
+    if (!halaman) {
+      isValid = false;
+      errorMessages.push("Silakan pilih Halaman terlebih dahulu");
+    } else {
       const pageNumber = parseInt(halaman, 10);
-      if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= 604) {
-        redirectUrl += '/page/' + pageNumber;
+      if (isNaN(pageNumber) || pageNumber < 1 || pageNumber > 604) {
+        isValid = false;
+        errorMessages.push("Nomor halaman tidak valid. Harus antara 1 dan 604.");
       } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Kesalahan',
-          text: 'Nomor halaman tidak valid untuk redirect.',
-        });
-        return;
+        localStorage.setItem('lastSelectedPage', JSON.stringify({
+          id: halaman,
+          name: document.getElementById('halamanInput').value
+        }));
       }
     }
-    
-    window.location.href = redirectUrl;
-  });
+  }
+  
+  localStorage.setItem('lastPenyetorType', penyetorType);
+  localStorage.setItem('lastTampilkanType', tampilkanType);
+  
+  if (!isValid) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Kesalahan',
+      html: errorMessages.join('<br>'),
+    });
+    return;
+  }
+  
+  // Construct the payload
+  const payload = {
+    user_id: Number(currentUserId),
+    user_name: currentUserName,
+    penyetor_type: penyetorType,
+    penyetor_id: Number(penyetorId),
+    penyetor_name: penyetorName,
+    penyetor_fullname: penyetorFullname,
+    setoran_type: setoranType,
+    tampilkan_type: tampilkanType,
+    surat_id: suratId ? Number(suratId) : null,
+    surat_name: suratName,
+    juz_id: juzId ? Number(juzId) : null,
+    juz_name: juzName,
+    halaman: halaman ? Number(halaman) : null,
+    group_id: groupId ? Number(groupId) : null,
+    qu_setting: qu_setting
+  };
+  
+  try {
+    localStorage.setItem('setoranPayload', JSON.stringify(payload));
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Kesalahan',
+      text: 'Gagal menyimpan data ke localStorage',
+    });
+    return;
+  }
+  
+  let redirectUrl = '{/literal}{$system['system_url']|escape:'javascript'}{literal}/qurani/setoran';
+  if (tampilkanType === 'surat' && suratId) {
+    redirectUrl += '/surah/' + suratId;
+  } else if (tampilkanType === 'juz' && juzId) {
+    redirectUrl += '/juz/' + juzId;
+  } else if (tampilkanType === 'halaman' && halaman) {
+    const pageNumber = parseInt(halaman, 10);
+    if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= 604) {
+      redirectUrl += '/page/' + pageNumber;
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Kesalahan',
+        text: 'Nomor halaman tidak valid untuk redirect.',
+      });
+      return;
+    }
+  }
+  
+  window.location.href = redirectUrl;
+});
 
   // Inisialisasi Peta
   try {

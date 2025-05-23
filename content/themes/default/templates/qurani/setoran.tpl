@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
             halaman: parsedPayload.halaman ? Number(parsedPayload.halaman) : null,
             group_id: parsedPayload.penyetor_type === 'grup' ? (Number(parsedPayload.group_id) || null) : null,
             penyetor_fullname : parsedPayload.penyetor_fullname || '',
+            qu_setting : parsedPayload.qu_setting || '',
             language_code : language_code
           };
 

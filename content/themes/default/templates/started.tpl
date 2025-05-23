@@ -102,7 +102,7 @@
                 <div class="form-group">
                   {assign var="defaultCountryValue" value=$user->_data['user_country']|default:101}
 
-                  <label class="form-label" for="country">{__("Country")}</label>
+                  <label class="form-label" for="_country">{__("Country")}</label>
                   <div class="combobox-container w-100" data-default="{$defaultCountryValue}" data-options="#country-combobox" data-hidden="#country">
                     <input type="text" id="_country" class="combobox form-control" placeholder="{__('Select Country')}" autocomplete="off" spellcheck="false">
                     <div id="country-combobox" class="combobox-options">

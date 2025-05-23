@@ -18498,7 +18498,8 @@ class User
       $stripe_billing_plan = stripe_create_billing_plan($title, $custom_description, $period_num, $period, $price);
     }
     /* insert monetization plan */
-    $db->query(sprintf("INSERT INTO monetization_plans (node_id, node_type, title, price, period_num, period, custom_description, plan_order, paypal_billing_plan, stripe_billing_plan, xendit_billing_plan) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", secure($node_id, 'int'), secure($node_type), secure($title), secure($price, 'float'), secure($period_num), secure($period), secure($custom_description), secure($plan_order ?: '1'), secure($paypal_billing_plan), secure($stripe_billing_plan), secure($xendit_billing_plan)));
+    $xendit_billing_plan_sql = is_numeric($xendit_billing_plan) ? secure($xendit_billing_plan, 'int') : 'NULL';
+    $db->query(sprintf("INSERT INTO monetization_plans (node_id, node_type, title, price, period_num, period, custom_description, plan_order, paypal_billing_plan, stripe_billing_plan, xendit_billing_plan) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", secure($node_id, 'int'), secure($node_type), secure($title), secure($price, 'float'), secure($period_num), secure($period), secure($custom_description), secure($plan_order ?: '1'), secure($paypal_billing_plan), secure($stripe_billing_plan), $xendit_billing_plan_sql));
     $monetization_plan_id = $db->insert_id;
     /* update monetization plans */
     $this->update_monetization_plans($node_id, $node_type);
@@ -18634,7 +18635,8 @@ class User
       $db->query(sprintf("DELETE FROM users_recurring_payments WHERE handle = 'subscribe' AND handle_id = %s", secure($plan_id, 'int')));
     }
     /* update monetization plan */
-    $db->query(sprintf("UPDATE monetization_plans SET title = %s, price = %s, period_num = %s, period = %s, custom_description = %s, plan_order = %s, paypal_billing_plan = %s, stripe_billing_plan = %s, xendit_billing_plan = %s WHERE plan_id = %s", secure($title), secure($price, 'float'), secure($period_num), secure($period), secure($custom_description), secure($plan_order), secure($paypal_billing_plan), secure($stripe_billing_plan), secure($xendit_billing_plan), secure($plan_id, 'int')));
+    $xendit_billing_plan_sql = is_numeric($xendit_billing_plan) ? secure($xendit_billing_plan, 'int') : 'NULL';
+    $db->query(sprintf("UPDATE monetization_plans SET title = %s, price = %s, period_num = %s, period = %s, custom_description = %s, plan_order = %s, paypal_billing_plan = %s, stripe_billing_plan = %s, xendit_billing_plan = %s WHERE plan_id = %s", secure($title), secure($price, 'float'), secure($period_num), secure($period), secure($custom_description), secure($plan_order), secure($paypal_billing_plan), secure($stripe_billing_plan), $xendit_billing_plan_sql, secure($plan_id, 'int')));
     /* update monetization plans */
     $this->update_monetization_plans($monetization_plan['node_id'], $monetization_plan['node_type']);
     /* return updated plan */

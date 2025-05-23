@@ -53,12 +53,13 @@
 
     <!-- CSS -->
     {if $system['language']['dir'] == "LTR"}
+      {assign var="css_path" value="content/themes/`$system.theme`/css/style.min.css"}
       <link href="{$system['system_url']}/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-      <link href="{$system['system_url']}/content/themes/{$system['theme']}/css/style.min.css" rel="stylesheet">
     {else}
+      {assign var="css_path" value="content/themes/`$system.theme`/css/style.rtl.min.css"}
       <link rel="stylesheet" href="{$system['system_url']}/node_modules/bootstrap/dist/css/bootstrap.rtl.min.css">
-      <link href="{$system['system_url']}/content/themes/{$system['theme']}/css/style.rtl.min.css" rel="stylesheet">
     {/if}
+    <link href="{$system.system_url}/{$css_path}?v={$css_path|filemtime}" rel="stylesheet">
     <!-- CSS -->
 
     <!-- CSS Customized -->

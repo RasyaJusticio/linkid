@@ -660,6 +660,7 @@ function init_smarty()
   $smarty->registerPlugin('modifier', 'get_payment_vat_percentage', 'get_payment_vat_percentage');
   $smarty->registerPlugin('modifier', 'implode', 'implode');
   $smarty->registerPlugin('modifier', 'trim', 'trim');
+  $smarty->registerPlugin('modifier', 'filemtime', 'filemtime');
 
   $smarty->registerPlugin("modifier", "to_local_timezone", function($value) use ($user) {
       return convert_timezone($value, "UTC", get_user_timezone());

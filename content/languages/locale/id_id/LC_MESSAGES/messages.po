@@ -8915,6 +8915,9 @@ msgstr "Video"
 msgid "Store"
 msgstr "Cerita"
 
+msgid "My Courses"
+msgstr "Kursus Saya"
+
 # msgid "preview"
 #: content/themes/default/templates/group.tpl:273
 #: content/themes/default/templates/group.tpl:372
@@ -8951,7 +8954,7 @@ msgstr "Tinjauan"
 #: content/themes/default/templates/__feeds_group.tpl:71
 #: content/themes/default/templates/page.tpl:1635
 msgid "Members"
-msgstr "Peserta"
+msgstr "Anggota"
 
 #: content/themes/default/templates/group.tpl:299
 #: content/themes/default/templates/_need_subscription.tpl:17
@@ -8988,10 +8991,6 @@ msgstr "Grup tertutup"
 #: content/themes/default/templates/ajax.group.publisher.tpl:29
 msgid "Secret Group"
 msgstr "Grup rahasia"
-
-#: content/themes/default/templates/group.tpl:337
-msgid "members"
-msgstr "Peserta"
 
 #: content/themes/default/templates/group.tpl:405
 #: content/themes/default/templates/event.tpl:433
@@ -15866,14 +15865,6 @@ msgstr "Pilih salah satu halaman yang ingin Anda tempatkan iklan"
 msgid "Target Group"
 msgstr "Grup target"
 
-#: content/themes/default/templates/ads.tpl:326
-#: content/themes/default/templates/ads.tpl:564
-#: content/themes/default/templates/ajax.share.publisher.tpl:115
-#: content/themes/default/templates/share.tpl:81
-#: content/themes/default/templates/blogs.tpl:800
-msgid "Select Group"
-msgstr "Выбрать группу"
-
 #: content/themes/default/templates/ads.tpl:332
 #: content/themes/default/templates/ads.tpl:570
 msgid "Select one of your groups you want to advertise for"
@@ -21481,11 +21472,6 @@ msgstr "Rekor terakhir"
 msgid "No Threads"
 msgstr "TIDAK"
 
-#: content/themes/default/templates/forums.tpl:329
-#: content/themes/default/templates/forums.tpl:382
-msgid "Member"
-msgstr "Peserta"
-
 #: content/themes/default/templates/forums.tpl:460
 #: content/themes/default/templates/forums.tpl:512
 #: content/themes/default/templates/forums.tpl:555
@@ -22043,12 +22029,6 @@ msgstr "Perbarui sekarang"
 #, fuzzy
 msgid "You are now"
 msgstr "Tapi Anda bisa masuk sekarang"
-
-# msgid "members"
-#: content/themes/default/templates/packages.tpl:538
-#, fuzzy
-msgid "member"
-msgstr "Peserta"
 
 #: content/themes/default/templates/packages.tpl:541
 msgid "Your package allows you to pick categories that you are interested in"
@@ -24550,10 +24530,6 @@ msgstr "Buat cerita baru"
 msgid "Manage Banned IPs"
 msgstr "Manajemen IP yang diblokir"
 
-#: content/themes/default/templates/admin.users.tpl:42
-msgid "Reset"
-msgstr "Reset"
-
 # msgid "Login"
 #: content/themes/default/templates/admin.users.tpl:63
 #, fuzzy
@@ -25836,6 +25812,9 @@ msgstr "Informasi tentang zona waktu ini telah diperbarui"
 
 # \---------------- #
 # Setting kesalahan qurani
+msgid "page"
+msgtr "Halaman"
+
 msgid "Excellent"
 msgstr "Sempurna"
 
@@ -25853,4 +25832,92 @@ msgstr "Lemah/Kurang"
 
 msgid "Not Pass"
 msgstr "Tidak Lulus"
+# ----------------\ #
+
+# \---------------- #
+# Halaman Qurani Form
+msgid "Qurani History"
+msgstr "Riwayat Qurani"
+
+msgid "Qurani Setting"
+msgstr "Pengaturan Qurani"
+
+msgid "Reciter"
+msgstr "Penyetor"
+
+msgid "Recipient"
+msgstr "Penerima"
+
+msgid "Friend"
+msgstr "Teman"
+
+msgid "Group"
+msgstr "Grup"
+
+msgid "Group"
+msgstr "Grup"
+
+msgid "Select Group"
+msgstr "Pilih Grup"
+
+msgid "Anggota"
+msgstr "Member"
+
+msgid "Join a group first"
+msgstr "Bergabung dengan grup terlebih dahulu"
+
+msgid "Select a group first"
+msgstr "Pilih grup terlebih dahulu"
+
+msgid "Recite"
+msgstr "Setoran"
+
+msgid "Display"
+msgstr "Tampilkan"
+
+msgid "Surah"
+msgstr "Surat"
+
+msgid "Select Surah"
+msgstr "Pilih Surat"
+
+msgid "Start"
+msgstr "Mulai"
+
+msgid "Reset"
+msgstr "Set Ulang"
+
+msgid "History"
+msgstr "Riwayat"
+
+msgid "Time"
+msgstr "Waktu"
+
+msgid "Select Member"
+msgstr "Pilih Anggota"
+
+msgid "Results"
+msgstr "Hasil"
+
+msgid "Signature"
+msgstr "Paraf"
+
+msgid "Only the reciter or recipient can add a signature."
+msgstr "Hanya penyetor atau penerima yang dapat menambahkan paraf."
+
+msgid "Not Allowed"
+msgstr "Tidak Diizinkan"
+
+msgid "Confirmation Signature"
+msgstr "Konfirmasi Paraf"
+
+msgid "doesnt recite history"
+msgstr "Tidak ada riwayat setora"
+
+msgid "Are you sure you want to mark this reciter as initialed?"
+msgstr "Apakah Anda yakin ingin menandai setoran ini sebagai diparaf?"
+
+msgid ""
+msgstr "Ya, Paraf"
+
 # ----------------\ #

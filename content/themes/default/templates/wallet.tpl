@@ -58,6 +58,10 @@
             {__("Wallet")}
 
             <div class="qr-btns-container">
+              <a class="btn btn-outline-primary" href="{$system['system_url']}/transfer">
+                {include file='__svg_icons.tpl' icon="money_send" width="24px" height="24px"}
+                {__("Transfer History")}
+              </a>
               <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr-scan">
                 {include file='__svg_icons.tpl' icon="money_send" width="24px" height="24px"}
                 {__("QR Pay")}
@@ -80,7 +84,7 @@
                     margin-left: auto;
                     gap: 0.4rem;
 
-                    button {
+                    button, a {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;

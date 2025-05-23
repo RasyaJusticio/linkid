@@ -72,7 +72,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const sendPostMessage = (data) => {
     try {
       const targetOrigin = quraniUrl;
-      iframe.contentWindow.postMessage(data, targetOrigin);
+      const messageData = {
+        ...data,
+        language_code: language_code
+      };
+      iframe.contentWindow.postMessage(messageData, targetOrigin);
       console.log('✅ postMessage dikirim ke iframe:', data, 'Waktu:', new Date().toISOString());
     } catch (error) {
       console.error('Gagal mengirim postMessage:', error);
@@ -163,3 +167,5 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 {/literal}
 </script>
+
+{include file='_js_files.tpl'}

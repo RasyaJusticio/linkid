@@ -201,6 +201,10 @@ try {
           if (!$system['location_info_enabled']) {
             _error(404);
           }
+
+          $cities = $user->get_cities();
+          
+          $smarty->assign('cities', $cities);
           break;
 
         case 'education':

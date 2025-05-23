@@ -121,7 +121,21 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label class="form-label" for="city">{__("Current City")}</label>
-                      <input type="text" class="form-control js_geocomplete" name="city" id="city" value="{$user->_data['user_current_city']}">
+                      <select class="form-select" name="city" id="city">
+                        <option value="none">{__("Select City")}</option>
+                        {foreach $cities as $city}
+                          <option
+                            {if $user->_data['user_city'] == $city['id']}
+                              selected
+                            {elseif !$user->_data['user_city'] && $city['id'] == 6}
+                              selected
+                            {/if}
+                            value="{$city['id']}"
+                          >
+                            {$city['nama']}
+                          </option>
+                        {/foreach}
+                      </select>
                     </div>
                     <div class="form-group col-md-6">
                       <label class="form-label" for="hometown">{__("Hometown")}</label>

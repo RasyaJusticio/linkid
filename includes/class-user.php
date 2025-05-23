@@ -408,6 +408,24 @@ class User
   /* ------------------------------- */
   /* System City */
   /* ------------------------------- */
+  /**
+   * get_cities ✅
+   * 
+   * @return array
+   */
+  public function get_cities()
+  {
+    global $db, $system;
+    $cities = [];
+    $get_cities = $db->query("SELECT * FROM kota ORDER BY nama ASC");
+    if ($get_cities->num_rows > 0) {
+      while ($city = $get_cities->fetch_assoc()) {
+        $cities[] = $city;
+      }
+    }
+    return $cities;
+  }
+
   public function get_city($city_id)
   {
     global $db;
@@ -416,6 +434,22 @@ class User
       return null;
     }
     return $get_city->fetch_assoc();
+  }
+
+  /**
+   * check_city 
+   * 
+   * @param integer $city_id
+   * @return boolean
+   */
+  public function check_city($city_id)
+  {
+    global $db;
+    $check = $db->query(sprintf("SELECT COUNT(*) as count FROM kota WHERE id = %s", secure($city_id, 'int')));
+    if ($check->fetch_assoc()['count'] > 0) {
+      return true;
+    }
+    return false;
   }
 
   /* ------------------------------- */
@@ -22287,8 +22321,18 @@ class User
       case 'location':
         /* set custom fields */
         $this->set_custom_fields($args, "user", "settings", $this->_data['user_id']);
+        
+        /* validate city */
+        if ($args['city'] == "none") {
+          throw new Exception(__("You must select valid city"));
+        } else {
+          if (!$this->check_city($args['city'])) {
+            throw new Exception(__("You must select valid city"));
+          }
+        }
+
         /* update user */
-        $db->query(sprintf("UPDATE users SET user_current_city = %s, user_hometown = %s WHERE user_id = %s", secure($args['city']), secure($args['hometown']), secure($this->_data['user_id'], 'int')));
+        $db->query(sprintf("UPDATE users SET user_city = %s, user_hometown = %s WHERE user_id = %s", secure($args['city']), secure($args['hometown']), secure($this->_data['user_id'], 'int')));
         break;
 
       case 'education':
@@ -23578,6 +23622,14 @@ class User
         throw new ValidationException(__("You must select valid country"));
       }
     }
+    /* validate city */
+    if ($args['city'] == "none") {
+      throw new ValidationException(__("You must select valid city"));
+    } else {
+      if (!$this->check_city($args['city'])) {
+        throw new ValidationException(__("You must select valid city"));
+      }
+    }
     /* validate work website */
     if (!is_empty($args['work_url'])) {
       /* check if contains https:// or http:// if not add it */
@@ -23591,7 +23643,7 @@ class User
       $args['work_url'] = 'null';
     }
     /* update user */
-    $db->query(sprintf("UPDATE users SET user_country = %s, user_work_title = %s, user_work_place = %s, user_work_url = %s, user_current_city = %s, user_hometown = %s, user_edu_major = %s, user_edu_school = %s, user_edu_class = %s WHERE user_id = %s", secure($args['country'], 'int'), secure($args['work_title']), secure($args['work_place']), secure($args['work_url']), secure($args['city']), secure($args['hometown']), secure($args['edu_major']), secure($args['edu_school']), secure($args['edu_class']), secure($this->_data['user_id'], 'int')));
+    $db->query(sprintf("UPDATE users SET user_country = %s, user_work_title = %s, user_work_place = %s, user_work_url = %s, user_city = %s, user_hometown = %s, user_edu_major = %s, user_edu_school = %s, user_edu_class = %s WHERE user_id = %s", secure($args['country'], 'int'), secure($args['work_title']), secure($args['work_place']), secure($args['work_url']), secure($args['city']), secure($args['hometown']), secure($args['edu_major']), secure($args['edu_school']), secure($args['edu_class']), secure($this->_data['user_id'], 'int')));
   }
 
 
@@ -23614,7 +23666,10 @@ class User
       if ($system['getting_started_location_required'] && is_empty($user_info['user_country'])) {
         throw new Exception(__("You must enter your location info"));
       }
-      if ($system['getting_started_location_required'] && $system['location_info_enabled'] && (is_empty($user_info['user_current_city']) || is_empty($user_info['user_hometown']))) {
+      if ($system['getting_started_location_required'] && is_empty($user_info['user_current_city'])) {
+        throw new Exception(__("You must enter your location info"));
+      }
+      if ($system['getting_started_location_required'] && $system['location_info_enabled'] && is_empty($user_info['user_hometown'])) {
         throw new Exception(__("You must enter your location info"));
       }
       /* check if work data required */

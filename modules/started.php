@@ -32,6 +32,8 @@ try {
     $smarty->assign('countries', $user->get_countries());
   }
 
+  $smarty->assign('cities', $user->get_cities());
+
   // get suggested people
   $smarty->assign('new_people', $user->get_new_people(0, true));
 

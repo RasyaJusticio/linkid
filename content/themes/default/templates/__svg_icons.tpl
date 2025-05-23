@@ -264,6 +264,10 @@
 
     {include file='../images/svg/wallet.svg'}
 
+  {elseif $icon == "wallet_2"}
+
+    {include file='../images/svg/wallet-2.svg'}
+
   {elseif $icon == "resolution"}
 
     {include file='../images/svg/resolution.svg'}

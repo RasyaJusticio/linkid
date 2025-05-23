@@ -17889,14 +17889,50 @@ class User
     /* decrease viewer user wallet balance */
     $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($this->_data['user_id'], 'int')));
     /* log this transaction */
+    $this->transfer_set_transaction($this->_data['user_id'], $user_id, $amount, 'out');
     $this->wallet_set_transaction($this->_data['user_id'], 'user', $user_id, $amount, 'out');
     /* increase target user wallet balance */
     $db->query(sprintf("UPDATE users SET user_wallet_balance = user_wallet_balance + %s WHERE user_id = %s", secure($amount), secure($user_id, 'int')));
     /* send notification (money sent) to the target user */
     $this->post_notification(['to_user_id' => $user_id, 'action' => 'money_sent', 'node_type' => $amount]);
     /* wallet transaction */
+    $this->transfer_set_transaction($user_id, $this->_data['user_id'], $amount, 'in');
     $this->wallet_set_transaction($user_id, 'user', $this->_data['user_id'], $amount, 'in');
     $_SESSION['transfer_send_amount'] = $amount;
+  }
+
+  /**
+   * transfer_set_transaction
+   * 
+   * @param integer $user_id
+   * @param integer $user_target_id
+   * @param integer $amount
+   * @param string $type
+   * @return void
+   */
+  public function transfer_set_transaction($user_id, $user_target_id, $amount, $type)
+  {
+    global $db, $system, $date;
+    $db->query(sprintf("INSERT INTO transfer_transactions (user_id, user_target_id, amount, type, date) VALUES (%s, %s, %s, %s, %s)", secure($user_id, 'int'), secure($user_target_id, 'int'), secure($amount), secure($type), secure($date)));
+  }
+
+  /**
+   * transfer_get_transactions
+   * 
+   * @return array
+   */
+  public function transfer_get_transactions()
+  {
+    global $db;
+    $transactions = [];
+    $get_transactions = $db->query(sprintf("SELECT transfer_transactions.*, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture FROM transfer_transactions LEFT JOIN users ON transfer_transactions.user_target_id = users.user_id WHERE transfer_transactions.user_id = %s ORDER BY transfer_transactions.transaction_id DESC", secure($this->_data['user_id'], 'int')));
+    if ($get_transactions->num_rows > 0) {
+      while ($transaction = $get_transactions->fetch_assoc()) {
+        $transaction['user_picture'] = get_picture($transaction['user_picture'], $transaction['user_gender']);
+        $transactions[] = $transaction;
+      }
+    }
+    return $transactions;
   }
 
   /* ------------------------------- */

@@ -53,9 +53,11 @@
 
         <!-- wallet -->
         <div class="card mt20">
-          <div class="card-header with-icon jsc_top-bar">
-            {include file='__svg_icons.tpl' icon="wallet" class="main-icon mr10" width="24px" height="24px"}
-            {__("Wallet")}
+          <div class="card-header with-icon wallet-header">
+            <div class="header-title">
+              {include file='__svg_icons.tpl' icon="wallet" class="main-icon mr10" width="24px" height="24px"}
+              {__("Wallet")}
+            </div>
 
             <div class="qr-btns-container">
               <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr-scan">
@@ -66,31 +68,12 @@
                 {include file='__svg_icons.tpl' icon="money_receive" width="24px" height="24px"}
                 {__("QR Request")}
               </button>
+              <a class="btn btn-outline-primary" href="{$system['system_url']}/transfer">
+                {include file='__svg_icons.tpl' icon="wallet_2" width="24px" height="24px"}
+                {__("Transfer History")}
+              </a>
             </div>
           </div>
-          <style>
-            .jsc_top-bar {
-                display: flex;
-                align-items: center;
-
-                .qr-btns-container {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-left: auto;
-                    gap: 0.4rem;
-
-                    button {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        gap: 0.2rem;
-                        padding: 0.4rem 1rem;
-                    }
-                }
-            }
-          </style>
           <div class="card-body page-content">
             {if $wallet_transfer_amount}
               <div class="alert alert-success mb20">

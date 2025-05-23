@@ -100,42 +100,34 @@
               </div>
               <div class="pl-md-4">
                 <div class="form-group">
+                  {assign var="defaultCountryValue" value=$user->_data['user_country']|default:101}
+
                   <label class="form-label" for="country">{__("Country")}</label>
-                  <select class="form-select" name="country" id="country">
-                    <option value="none">{__("Select Country")}</option>
-                    {foreach $countries as $country}
-                      <option
-                        {if $user->_data['user_country'] == $country['country_id']}
-                          selected
-                        {elseif !$user->_data['user_country'] && $country['country_id'] == 101}
-                          selected
-                        {/if}
-                        value="{$country['country_id']}"
-                      >
-                        {$country['country_name']}
-                      </option>
-                    {/foreach}
-                  </select>
+                  <div class="combobox-container w-100" data-default="{$defaultCountryValue}" data-options="#country-combobox" data-hidden="#country">
+                    <input type="text" id="_country" class="combobox form-control" placeholder="{__('Select Country')}" autocomplete="off" spellcheck="false">
+                    <div id="country-combobox" class="combobox-options">
+                      {foreach $countries as $country}
+                      <div class="combobox-option" data-value="{$country['country_id']}">{$country['country_name']}</div>
+                      {/foreach}
+                    </div>
+                    <input type="hidden" id="country" name="country">
+                  </div>
                 </div>
                 {if $system['location_info_enabled']}
                   <div class="row">
                     <div class="form-group col-md-6">
-                      <label class="form-label" for="city">{__("Current City")}</label>
-                      <select class="form-select" name="city" id="city">
-                        <option value="none">{__("Select City")}</option>
-                        {foreach $cities as $city}
-                          <option
-                            {if $user->_data['user_city'] == $city['id']}
-                              selected
-                            {elseif !$user->_data['user_city'] && $city['id'] == 6}
-                              selected
-                            {/if}
-                            value="{$city['id']}"
-                          >
-                            {$city['nama']}
-                          </option>
-                        {/foreach}
-                      </select>
+                      {assign var="defaultCityValue" value=$user->_data['user_city']|default:6}
+
+                      <label class="form-label" for="_city">{__("Current City")}</label>
+                      <div class="combobox-container w-100" data-default="{$defaultCityValue}" data-options="#city-combobox" data-hidden="#city">
+                        <input type="text" id="_city" class="combobox form-control" placeholder="{__('Select City')}" autocomplete="off" spellcheck="false">
+                        <div id="city-combobox" class="combobox-options">
+                          {foreach $cities as $city}
+                          <div class="combobox-option" data-value="{$city['id']}">{$city['nama']}</div>
+                          {/foreach}
+                        </div>
+                        <input type="hidden" id="city" name="city">
+                      </div>
                     </div>
                     <div class="form-group col-md-6">
                       <label class="form-label" for="hometown">{__("Hometown")}</label>

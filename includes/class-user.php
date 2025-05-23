@@ -23666,7 +23666,10 @@ class User
       if ($system['getting_started_location_required'] && is_empty($user_info['user_country'])) {
         throw new Exception(__("You must enter your location info"));
       }
-      if ($system['getting_started_location_required'] && $system['location_info_enabled'] && (is_empty($user_info['user_current_city']) || is_empty($user_info['user_hometown']))) {
+      if ($system['getting_started_location_required'] && is_empty($user_info['user_current_city'])) {
+        throw new Exception(__("You must enter your location info"));
+      }
+      if ($system['getting_started_location_required'] && $system['location_info_enabled'] && is_empty($user_info['user_hometown'])) {
         throw new Exception(__("You must enter your location info"));
       }
       /* check if work data required */

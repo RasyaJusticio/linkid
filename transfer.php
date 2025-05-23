@@ -23,7 +23,7 @@ try {
   switch ($_GET['view']) {
     case '':
       // page header
-      page_header(__("Transfer") . ' | ' . __($system['system_title']));
+      page_header(__("Transfer History") . ' | ' . __($system['system_title']));
 
       // get transfer transactions
       $transactions = $user->transfer_get_transactions();

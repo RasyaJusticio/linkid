@@ -13,53 +13,13 @@
 
     <!-- content panel -->
     <div class="col-12 sg-offcanvas-mainbar">
-
-      {if $view == ""}
-
         <div class="card mt20">
           <div class="card-header with-icon jsc_top-bar">
             {include file='__svg_icons.tpl' icon="wallet_2" class="mr10" width="24px" height="24px"}
-            {__("Transfers")}
-
-            <div class="qr-btns-container">
-              <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr-scan">
-                {include file='__svg_icons.tpl' icon="money_send" width="24px" height="24px"}
-                {__("QR Pay")}
-              </button>
-              <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr" data-options='{ "qrcode_uri": "$qrcode_uri" }'>
-                {include file='__svg_icons.tpl' icon="money_receive" width="24px" height="24px"}
-                {__("QR Request")}
-              </button>
-            </div>
+            {__("Transfer History")}
           </div>
-          <style>
-            .jsc_top-bar {
-                display: flex;
-                align-items: center;
-
-                .qr-btns-container {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-left: auto;
-                    gap: 0.4rem;
-
-                    button {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        gap: 0.2rem;
-                        padding: 0.4rem 1rem;
-                    }
-                }
-            }
-          </style>
           <div class="card-body page-content">
               <div class="col-12">
-                <div class="section-title mt10 mb20">
-                  {__("Transfers History")}
-                </div>
                 {if $transactions}
                   <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover js_walletHistoryTable">
@@ -112,7 +72,6 @@
             </div>
           </div>
         </div>
-      {/if}
     </div>
     <!-- content panel -->
 

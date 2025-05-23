@@ -48,7 +48,7 @@
                         {if $package['price'] == 0}
                           {__("Free")}
                         {else}
-                          {print_money($package['price'])}
+                          {print_money($package['price']|format_number)}
                         {/if}
                       </h2>
                       <div>
@@ -508,7 +508,7 @@
                               {__("Try Now")}
                             </button>
                           {else}
-                            <button class="btn rounded-pill btn-danger" data-toggle="modal" data-url="#payment" data-options='{ "handle": "packages", "id": {$package["package_id"]}, "price": "{$package["price"]}", "vat": "{get_payment_vat_value($package['price'])}", "fees": "{get_payment_fees_value($package['price'])}", "total": "{get_payment_total_value($package['price'])}", "total_printed": "{get_payment_total_value($package['price'], true)}", "name": "{$package["name"]}", "img": "{$package["icon"]}" }'>
+                            <button class="btn rounded-pill btn-danger" data-toggle="modal" data-url="#payment" data-options='{ "handle": "packages", "id": {$package["package_id"]}, "price": "{$package["price"]}", "price_printed": "{print_money(format_number($package["price"]))}", "vat": "{get_payment_vat_value($package['price'])}", "vat_printed": "{print_money(format_number(get_payment_vat_value($package['price'])))}", "fees": "{get_payment_fees_value($package['price'])}", "fees_printed": "{print_money(format_number(get_payment_fees_value($package['price'])))}", "total": "{get_payment_total_value($package['price'])}", "total_printed": "{get_payment_total_value($package['price'], true)}", "name": "{$package["name"]}", "img": "{$package["icon"]}" }'>
                               {if !$user->_data['user_subscribed']}
                                 {__("Buy Now")}
                               {else}

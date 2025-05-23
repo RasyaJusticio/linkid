@@ -1409,216 +1409,237 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
   document.getElementById('setoranForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+  e.preventDefault();
+  
+  let isValid = true;
+  let errorMessages = [];
+  
+  const currentUserId = {/literal}{$user->_data['user_id']|escape:'javascript'}{literal};
+  const currentUserName = {/literal}"{$user->_data['user_name']|escape:'javascript'}"{literal};
+  
+  // Retrieve settings from localStorage
+  const qu_setting_user = JSON.parse(localStorage.getItem('qu_user_setting') || '{}');
+  const qu_setting_group = JSON.parse(localStorage.getItem('qu_setting_group') || '{}');
+  
+  const penyetorType = document.querySelector('input[name="penyetor"]:checked')?.value;
+  const setoranType = document.querySelector('input[name="setoran"]:checked')?.value;
+  const tampilkanType = document.querySelector('input[name="tampilkan"]:checked')?.value;
+  let penyetorId = null;
+  let penyetorName = null;
+  let penyetorFullname = null;
+  let groupId = null;
+  let qu_setting = null; // Initialize qu_setting
+  
+  // Validation for penyetorType
+  if (!penyetorType) {
+    isValid = false;
+    errorMessages.push("Silakan pilih jenis penyetor (Grup atau Teman)");
+  }
+  if (!setoranType) {
+    isValid = false;
+    errorMessages.push("Silakan pilih jenis setoran (Tahsin atau Tahfidz)");
+  }
+  if (!tampilkanType) {
+    isValid = false;
+    errorMessages.push("Silakan pilih jenis tampilan (Surat, Juz, atau Halaman)");
+  }
+  
+  // Handle penyetor type
+  if (penyetorType === 'grup') {
+    groupId = document.getElementById('selectedGroup').value;
+    penyetorId = document.getElementById('selectedMember').value;
+    penyetorFullname = document.getElementById('memberInput').value;
+    penyetorName = document.getElementById('memberInput').getAttribute('data-username');
     
-    let isValid = true;
-    let errorMessages = [];
-    
-    const currentUserId = {/literal}{$user->_data['user_id']|escape:'javascript'}{literal};
-    const currentUserName = {/literal}"{$user->_data['user_name']|escape:'javascript'}"{literal};
-    
-    localStorage.setItem('currentUserId', JSON.stringify({
-      id: currentUserId,
-      name: currentUserName
-    }));
-    
-    const penyetorType = document.querySelector('input[name="penyetor"]:checked')?.value;
-    const setoranType = document.querySelector('input[name="setoran"]:checked')?.value;
-    const tampilkanType = document.querySelector('input[name="tampilkan"]:checked')?.value;
-    let penyetorId = null;
-    let penyetorName = null;
-    let penyetorFullname = null;
-    let groupId = null;
-    
-    if (!penyetorType) {
+    if (!groupId) {
       isValid = false;
-      errorMessages.push("Silakan pilih jenis penyetor (Grup atau Teman)");
+      errorMessages.push("Silakan pilih Grup terlebih dahulu");
     }
-    if (!setoranType) {
+    if (!penyetorId) {
       isValid = false;
-      errorMessages.push("Silakan pilih jenis setoran (Tahsin atau Tahfidz)");
+      errorMessages.push("Silakan pilih Anggota terlebih dahulu");
     }
-    if (!tampilkanType) {
+    if (penyetorId == currentUserId) {
       isValid = false;
-      errorMessages.push("Silakan pilih jenis tampilan (Surat, Juz, atau Halaman)");
+      errorMessages.push("Anda tidak dapat memilih diri sendiri sebagai penyetor");
     }
     
-    if (penyetorType === 'grup') {
-      groupId = document.getElementById('selectedGroup').value;
-      penyetorId = document.getElementById('selectedMember').value;
-      penyetorFullname = document.getElementById('memberInput').value;
-      penyetorName = document.getElementById('memberInput').getAttribute('data-username');
-      
-      if (!groupId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Grup terlebih dahulu");
-      }
-      if (!penyetorId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Anggota terlebih dahulu");
-      }
-      if (penyetorId == currentUserId) {
-        isValid = false;
-        errorMessages.push("Anda tidak dapat memilih diri sendiri sebagai penyetor");
-      }
-      
-      if (isValid) {
-        localStorage.setItem('lastSelectedGroup', JSON.stringify({
-          id: groupId,
-          name: document.getElementById('groupInput').value
-        }));
-        localStorage.setItem('lastSelectedMember', JSON.stringify({
-          id: penyetorId,
-          name: penyetorName
-        }));
-      }
-    } else if (penyetorType === 'teman') {
-      penyetorId = document.getElementById('selectedTeman').value;
-      penyetorFullname = document.getElementById('temanInput').value;
-      penyetorName = document.getElementById('temanInput').getAttribute('data-username');
-      
-      if (!penyetorId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Teman terlebih dahulu");
-      }
-      if (penyetorId == currentUserId) {
-        isValid = false;
-        errorMessages.push("Anda tidak dapat memilih diri sendiri sebagai penyetor");
-      }
-      
-      if (isValid) {
-        localStorage.setItem('lastSelectedFriend', JSON.stringify({
-          id: penyetorId,
-          name: penyetorName
-        }));
-      }
+    // Assign qu_setting_group to qu_setting
+    if (isValid && Object.keys(qu_setting_group).length > 0) {
+      qu_setting = qu_setting_group;
+    } else {
+      isValid = false;
+      errorMessages.push("Pengaturan grup tidak ditemukan. Silakan pilih grup yang valid.");
     }
     
-    let suratId = null;
-    let suratName = null;
-    let juzId = null;
-    let juzName = null;
-    let halaman = null;
+    if (isValid) {
+      localStorage.setItem('lastSelectedGroup', JSON.stringify({
+        id: groupId,
+        name: document.getElementById('groupInput').value
+      }));
+      localStorage.setItem('lastSelectedMember', JSON.stringify({
+        id: penyetorId,
+        name: penyetorName
+      }));
+    }
+  } else if (penyetorType === 'teman') {
+    penyetorId = document.getElementById('selectedTeman').value;
+    penyetorFullname = document.getElementById('temanInput').value;
+    penyetorName = document.getElementById('temanInput').getAttribute('data-username');
     
-    if (tampilkanType === 'surat') {
-      suratId = document.getElementById('selectedSurat').value;
-      suratName = document.getElementById('suratInput').value;
-      
-      if (!suratId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Surat terlebih dahulu");
-      } else {
-        localStorage.setItem('lastSelectedSurah', JSON.stringify({
-          id: suratId,
-          name: suratName
-        }));
-      }
-    } else if (tampilkanType === 'juz') {
-      juzId = document.getElementById('selectedJuz').value;
-      juzName = document.getElementById('juzInput').value;
-      
-      if (!juzId) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Juz terlebih dahulu");
-      } else {
-        localStorage.setItem('lastSelectedJuz', JSON.stringify({
-          id: juzId,
-          name: juzName
-        }));
-      }
-    } else if (tampilkanType === 'halaman') {
-      halaman = document.getElementById('selectedHalaman').value;
-      
-      if (!halaman || isNaN(parseInt(halaman, 10))) {
-        const lastSelectedPage = localStorage.getItem('lastSelectedPage');
-        if (lastSelectedPage) {
-          try {
-            const pageData = JSON.parse(lastSelectedPage);
-            halaman = pageData.id;
-          } catch (error) {
-            console.error('Gagal parse lastSelectedPage dari localStorage:', error);
-          }
+    if (!penyetorId) {
+      isValid = false;
+      errorMessages.push("Silakan pilih Teman terlebih dahulu");
+    }
+    if (penyetorId == currentUserId) {
+      isValid = false;
+      errorMessages.push("Anda tidak dapat memilih diri sendiri sebagai penyetor");
+    }
+    
+    // Assign qu_setting_user to qu_setting
+    if (isValid && Object.keys(qu_setting_user).length > 0) {
+      qu_setting = qu_setting_user;
+    } else {
+      isValid = false;
+      errorMessages.push("Pengaturan pengguna tidak ditemukan.");
+    }
+    
+    if (isValid) {
+      localStorage.setItem('lastSelectedFriend', JSON.stringify({
+        id: penyetorId,
+        name: penyetorName
+      }));
+    }
+  }
+  
+  // Handle tampilkan type
+  let suratId = null;
+  let suratName = null;
+  let juzId = null;
+  let juzName = null;
+  let halaman = null;
+  
+  if (tampilkanType === 'surat') {
+    suratId = document.getElementById('selectedSurat').value;
+    suratName = document.getElementById('suratInput').value;
+    
+    if (!suratId) {
+      isValid = false;
+      errorMessages.push("Silakan pilih Surat terlebih dahulu");
+    } else {
+      localStorage.setItem('lastSelectedSurah', JSON.stringify({
+        id: suratId,
+        name: suratName
+      }));
+    }
+  } else if (tampilkanType === 'juz') {
+    juzId = document.getElementById('selectedJuz').value;
+    juzName = document.getElementById('juzInput').value;
+    
+    if (!juzId) {
+      isValid = false;
+      errorMessages.push("Silakan pilih Juz terlebih dahulu");
+    } else {
+      localStorage.setItem('lastSelectedJuz', JSON.stringify({
+        id: juzId,
+        name: juzName
+      }));
+    }
+  } else if (tampilkanType === 'halaman') {
+    halaman = document.getElementById('selectedHalaman').value;
+    
+    if (!halaman || isNaN(parseInt(halaman, 10))) {
+      const lastSelectedPage = localStorage.getItem('lastSelectedPage');
+      if (lastSelectedPage) {
+        try {
+          const pageData = JSON.parse(lastSelectedPage);
+          halaman = pageData.id;
+        } catch (error) {
+          console.error('Gagal parse lastSelectedPage dari localStorage:', error);
         }
       }
-      
-      if (!halaman) {
-        isValid = false;
-        errorMessages.push("Silakan pilih Halaman terlebih dahulu");
-      } else {
-        const pageNumber = parseInt(halaman, 10);
-        if (isNaN(pageNumber) || pageNumber < 1 || pageNumber > 604) {
-          isValid = false;
-          errorMessages.push("Nomor halaman tidak valid. Harus antara 1 dan 604.");
-        } else {
-          localStorage.setItem('lastSelectedPage', JSON.stringify({
-            id: halaman,
-            name: document.getElementById('halamanInput').value
-          }));
-        }
-      }
     }
     
-    localStorage.setItem('lastPenyetorType', penyetorType);
-    localStorage.setItem('lastTampilkanType', tampilkanType);
-    
-    if (!isValid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Kesalahan',
-        html: errorMessages.join('<br>'),
-      });
-      return;
-    }
-    
-    const payload = {
-      user_id: Number(currentUserId),
-      user_name: currentUserName,
-      penyetor_type: penyetorType,
-      penyetor_id: Number(penyetorId),
-      penyetor_name: penyetorName,
-      penyetor_fullname: penyetorFullname,
-      setoran_type: setoranType,
-      tampilkan_type: tampilkanType,
-      surat_id: suratId ? Number(suratId) : null,
-      surat_name: suratName,
-      juz_id: juzId ? Number(juzId) : null,
-      juz_name: juzName,
-      halaman: halaman ? Number(halaman) : null,
-      group_id: groupId ? Number(groupId) : null
-    };
-    
-    try {
-      localStorage.setItem('setoranPayload', JSON.stringify(payload));
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Kesalahan',
-        text: 'Gagal menyimpan data ke localStorage',
-      });
-      return;
-    }
-    
-    let redirectUrl = '{/literal}{$system['system_url']|escape:'javascript'}{literal}/qurani/setoran';
-    if (tampilkanType === 'surat' && suratId) {
-      redirectUrl += '/surah/' + suratId;
-    } else if (tampilkanType === 'juz' && juzId) {
-      redirectUrl += '/juz/' + juzId;
-    } else if (tampilkanType === 'halaman' && halaman) {
+    if (!halaman) {
+      isValid = false;
+      errorMessages.push("Silakan pilih Halaman terlebih dahulu");
+    } else {
       const pageNumber = parseInt(halaman, 10);
-      if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= 604) {
-        redirectUrl += '/page/' + pageNumber;
+      if (isNaN(pageNumber) || pageNumber < 1 || pageNumber > 604) {
+        isValid = false;
+        errorMessages.push("Nomor halaman tidak valid. Harus antara 1 dan 604.");
       } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Kesalahan',
-          text: 'Nomor halaman tidak valid untuk redirect.',
-        });
-        return;
+        localStorage.setItem('lastSelectedPage', JSON.stringify({
+          id: halaman,
+          name: document.getElementById('halamanInput').value
+        }));
       }
     }
-    
-    window.location.href = redirectUrl;
-  });
+  }
+  
+  localStorage.setItem('lastPenyetorType', penyetorType);
+  localStorage.setItem('lastTampilkanType', tampilkanType);
+  
+  if (!isValid) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Kesalahan',
+      html: errorMessages.join('<br>'),
+    });
+    return;
+  }
+  
+  // Construct the payload
+  const payload = {
+    user_id: Number(currentUserId),
+    user_name: currentUserName,
+    penyetor_type: penyetorType,
+    penyetor_id: Number(penyetorId),
+    penyetor_name: penyetorName,
+    penyetor_fullname: penyetorFullname,
+    setoran_type: setoranType,
+    tampilkan_type: tampilkanType,
+    surat_id: suratId ? Number(suratId) : null,
+    surat_name: suratName,
+    juz_id: juzId ? Number(juzId) : null,
+    juz_name: juzName,
+    halaman: halaman ? Number(halaman) : null,
+    group_id: groupId ? Number(groupId) : null,
+    qu_setting: qu_setting
+  };
+  
+  try {
+    localStorage.setItem('setoranPayload', JSON.stringify(payload));
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Kesalahan',
+      text: 'Gagal menyimpan data ke localStorage',
+    });
+    return;
+  }
+  
+  let redirectUrl = '{/literal}{$system['system_url']|escape:'javascript'}{literal}/qurani/setoran';
+  if (tampilkanType === 'surat' && suratId) {
+    redirectUrl += '/surah/' + suratId;
+  } else if (tampilkanType === 'juz' && juzId) {
+    redirectUrl += '/juz/' + juzId;
+  } else if (tampilkanType === 'halaman' && halaman) {
+    const pageNumber = parseInt(halaman, 10);
+    if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= 604) {
+      redirectUrl += '/page/' + pageNumber;
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Kesalahan',
+        text: 'Nomor halaman tidak valid untuk redirect.',
+      });
+      return;
+    }
+  }
+  
+  window.location.href = redirectUrl;
+});
 
   // Inisialisasi Peta
   try {

@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const iframe = document.getElementById('rekapanFrame');
   console.log('Iframe URL:', iframe.src);
   const quraniUrl = "{/literal}{$system['qurani_url']}{literal}";
+  const qu_setting = localStorage.getItem('qu_user_setting');
 
-  // Fungsi untuk mengatur title dengan format [Spesifik Title] | Link.id - Sosmed Islami
   function setPageTitleFromData(data) {
     try {
       let baseTitle = 'Riwayat Setoran';
@@ -60,20 +60,19 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Fungsi untuk mengambil setoranId dari URL (mendukung /riwayat/265)
   const getSetoranId = () => {
     const pathSegments = window.location.pathname.split('/');
     const setoranId = pathSegments[pathSegments.length - 1];
     return isNaN(parseInt(setoranId)) ? null : parseInt(setoranId);
   };
 
-  // Fungsi untuk mengirim postMessage
   const sendPostMessage = (data) => {
     try {
       const targetOrigin = quraniUrl;
       const messageData = {
         ...data,
-        language_code: language_code
+        language_code: language_code,
+        qu_setting : qu_setting 
       };
       iframe.contentWindow.postMessage(messageData, targetOrigin);
       console.log('✅ postMessage dikirim ke iframe:', data, 'Waktu:', new Date().toISOString());
@@ -83,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
-  // Fungsi untuk mengalihkan ke halaman notFound
   const redirectToNotFound = () => {
     window.location.href = '{/literal}{$system['system_url']}{literal}/qurani/notFound';
   };
@@ -99,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then(response => {
       if (!response.ok) {
-        redirectToNotFound(); // Langsung redirect tanpa pesan
+        redirectToNotFound(); 
         return null;
       }
       return response.json();
@@ -107,28 +105,25 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(data => {
       if (!data) return; // Jika redirect sudah dipanggil, skip
       if (data.error) {
-        redirectToNotFound(); // Langsung redirect tanpa pesan
+        redirectToNotFound(); 
         return;
       }
       setPageTitleFromData(data);
       sendPostMessage(data);
     })
     .catch(() => {
-      redirectToNotFound(); // Langsung redirect tanpa pesan
+      redirectToNotFound(); 
     });
   };
 
-  // Set favicon segera saat halaman dimuat
   setFavicon();
 
-  // Ambil setoranId awal
   const initialSetoranId = getSetoranId();
   if (!initialSetoranId) {
-    redirectToNotFound(); // Langsung redirect tanpa pesan
+    redirectToNotFound(); 
     return;
   }
 
-  // Kirim data saat iframe dimuat
   iframe.onload = () => {
     fetchSetoranData(initialSetoranId);
   };
@@ -142,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
       fetchSetoranData(currentSetoranId);
       lastSetoranId = currentSetoranId;
     } else if (!currentSetoranId) {
-      redirectToNotFound(); // Langsung redirect tanpa pesan
+      redirectToNotFound();
     }
   });
 

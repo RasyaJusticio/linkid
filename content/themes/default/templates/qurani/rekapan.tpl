@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
     try {
       let baseTitle = 'Riwayat Setoran';
       if (data && data.id) {
-        baseTitle = `Setoran #${data.id}`; // Gunakan data.id alih-alih setoran_id
+        baseTitle = `Setoran`;
       }
       const fullTitle = `${baseTitle} | Link.id - Sosmed Islami`;
       document.title = fullTitle;

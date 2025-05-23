@@ -17890,12 +17890,14 @@ class User
     $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($this->_data['user_id'], 'int')));
     /* log this transaction */
     $this->transfer_set_transaction($this->_data['user_id'], $user_id, $amount, 'out');
+    $this->wallet_set_transaction($this->_data['user_id'], 'user', $user_id, $amount, 'out');
     /* increase target user wallet balance */
     $db->query(sprintf("UPDATE users SET user_wallet_balance = user_wallet_balance + %s WHERE user_id = %s", secure($amount), secure($user_id, 'int')));
     /* send notification (money sent) to the target user */
     $this->post_notification(['to_user_id' => $user_id, 'action' => 'money_sent', 'node_type' => $amount]);
     /* wallet transaction */
     $this->transfer_set_transaction($user_id, $this->_data['user_id'], $amount, 'in');
+    $this->wallet_set_transaction($user_id, 'user', $this->_data['user_id'], $amount, 'in');
     $_SESSION['transfer_send_amount'] = $amount;
   }
 

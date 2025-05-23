@@ -21,9 +21,9 @@ if ($system['registration_type'] == "paid" && !$user->_data['user_subscribed']) 
 }
 
 // check if already getted started
-if (!$system['getting_started'] || $user->_data['user_started']) {
-  redirect();
-}
+//if (!$system['getting_started'] || $user->_data['user_started']) {
+//  redirect();
+//}
 
 try {
 
@@ -31,6 +31,8 @@ try {
   if (!$countries) {
     $smarty->assign('countries', $user->get_countries());
   }
+
+  $smarty->assign('cities', $user->get_cities());
 
   // get suggested people
   $smarty->assign('new_people', $user->get_new_people(0, true));

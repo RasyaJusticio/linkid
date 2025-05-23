@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Fungsi untuk mengatur favicon dengan URL yang diberikan
   function setFavicon() {
     try {
       const existingFavicons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');

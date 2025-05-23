@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Zamblek
+# Copyright (C) YEAR Ketumbar
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -11,14 +11,13 @@ msgstr ""
 "PO-Revision-Date: 2024-09-25 20:14+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: ru_RU\n"
+"Language: id_ID\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.5\n"
 
-#: content/themes/default/templates/_sidebar.tpl:43
 msgid "Mine"
 msgstr "Pribadi"
 
@@ -2858,20 +2857,20 @@ msgstr "Pesan"
 #: includes/class-user.php:3061 includes/class-user.php:3839
 #: includes/class-user.php:4392
 msgid "sent you a friend request"
-msgstr "Mengirimi Anda permintaan untuk berteman"
+msgstr "Saya mengirimi Anda permintaan untuk menambahkan teman"
 
 #: includes/class-user.php:3067 includes/class-user.php:3844
 #: includes/class-user.php:4399
 msgid "accepted your friend request"
-msgstr "Menerima permintaan pertemanan anda"
+msgstr "Menerima Proposal Persahabatan Anda"
 
 #: includes/class-user.php:3073 includes/class-user.php:3849
 msgid "now following you"
-msgstr "Sekarang mengikuti Anda"
+msgstr "Sekarang ditandatangani oleh Anda"
 
 #: includes/class-user.php:3079 includes/class-user.php:3854
 msgid "poked you"
-msgstr "Menyapamu"
+msgstr "menusukmu"
 
 #: includes/class-user.php:3085 includes/class-user.php:3859
 msgid "Sent you a gift"
@@ -2881,7 +2880,7 @@ msgstr "Saya mengirimi Anda hadiah"
 #: includes/class-user.php:3092 includes/class-user.php:3865
 #, fuzzy
 msgid "subscribed to your profile"
-msgstr "Berlangganan ke profil Anda"
+msgstr "Saya mengunjungi profil Anda"
 
 # msgid "replied to your thread"
 #: includes/class-user.php:3098 includes/class-user.php:3870
@@ -2899,7 +2898,7 @@ msgstr "diminta untuk bergabung dengan grup Anda"
 #: includes/class-user.php:3110
 #, fuzzy
 msgid "bought your post"
-msgstr "Bagikan postingan anda"
+msgstr "Bagikan Rekor Anda (LAS)"
 
 #: includes/class-user.php:3123 includes/class-user.php:3892
 #: includes/class-user.php:4413
@@ -6707,7 +6706,7 @@ msgstr "Semua poin pengguna menyalahkan telah diatur ulang"
 
 #: includes/ajax/admin/tools.php:361
 msgid "All users points balance have been resetted"
-msgstr "Semua poin pengguna keseimbangan telah diatur ulang"
+msgstr "Semua saldo poin pengguna telah diatur ulang"
 
 #: includes/ajax/admin/tools.php:363 includes/ajax/admin/tools.php:364
 msgid "All compiled templates have been cleared"
@@ -9400,7 +9399,7 @@ msgstr "Tambahkan game"
 #: content/themes/default/templates/admin.users.tpl:1657
 #, fuzzy
 msgid "Monetization Balance"
-msgstr "Keseimbangan poin"
+msgstr "Saldo Monetize"
 
 # msgid "Subscribers"
 #: content/themes/default/templates/group.tpl:1518
@@ -10021,7 +10020,7 @@ msgstr "Langganan"
 #: content/themes/default/templates/settings.market.tpl:20
 #: content/themes/default/templates/settings.affiliates.tpl:89
 msgid "Withdrawal Request"
-msgstr "Permintaan minimum untuk mengangkat dana"
+msgstr "Minta Tarik Dana"
 
 #: content/themes/default/templates/settings.monetization.tpl:192
 #: content/themes/default/templates/settings.points.tpl:217
@@ -10030,7 +10029,7 @@ msgstr "Permintaan minimum untuk mengangkat dana"
 #: content/themes/default/templates/settings.market.tpl:26
 #: content/themes/default/templates/settings.affiliates.tpl:95
 msgid "Your Balance"
-msgstr "Keseimbangan"
+msgstr "Saldo anda"
 
 #: content/themes/default/templates/settings.monetization.tpl:210
 #: content/themes/default/templates/settings.points.tpl:235
@@ -10976,13 +10975,13 @@ msgstr "Untuk merujuk pengguna"
 #: content/themes/default/templates/settings.points.tpl:122
 #: content/themes/default/templates/admin.users.tpl:1512
 msgid "Points Balance"
-msgstr "Keseimbangan poin"
+msgstr "Saldo poin"
 
 # msgid "Points Balance"
 #: content/themes/default/templates/settings.points.tpl:139
 #, fuzzy
 msgid "Points Money Balance"
-msgstr "Keseimbangan poin"
+msgstr "Saldo uang poin"
 
 # msgid "Post Translation"
 #: content/themes/default/templates/settings.points.tpl:157
@@ -17439,7 +17438,7 @@ msgstr ""
 
 #: content/themes/default/templates/admin.pro.tpl:51
 msgid "Users Can Buy Packages From Wallet Balance"
-msgstr "Pengguna dapat membeli paket dari keseimbangan dompet"
+msgstr "Pengguna dapat membeli paket dari saldo dompet"
 
 #: content/themes/default/templates/admin.pro.tpl:53
 msgid "Enable users to buy packages from their wallet balance"
@@ -17945,18 +17944,18 @@ msgstr "Kirim dan Terima Uang"
 #: content/themes/default/templates/wallet.tpl:154
 #: content/themes/default/templates/_js_templates.tpl:1430
 msgid "Send Money"
-msgstr "Kirim Uang"
+msgstr "Transfer Saldo"
 
 #: content/themes/default/templates/wallet.tpl:162
 #: content/themes/default/templates/wallet.tpl:246
 #: content/themes/default/templates/_js_templates.tpl:1402
 msgid "Replenish Credit"
-msgstr "Isi kembali pinjaman"
+msgstr "Topup Saldo"
 
 #: content/themes/default/templates/wallet.tpl:167
 #: content/themes/default/templates/wallet.tpl:250
 msgid "Affiliates Credit"
-msgstr "Pinjaman pasangan"
+msgstr "Saldo Affiliate"
 
 #: content/themes/default/templates/wallet.tpl:173
 #: content/themes/default/templates/wallet.tpl:252
@@ -17967,19 +17966,19 @@ msgstr "Poin kredit"
 #: content/themes/default/templates/wallet.tpl:179
 #, fuzzy
 msgid "Marketplace Credit"
-msgstr "Hasil pencarian"
+msgstr "Saldo Marketplace"
 
 #: content/themes/default/templates/wallet.tpl:185
 #: content/themes/default/templates/wallet.tpl:256
 msgid "Funding Credit"
-msgstr "Kredit pendanaan"
+msgstr "Saldo Galang Dana"
 
 # msgid "Points Credit"
 #: content/themes/default/templates/wallet.tpl:191
 #: content/themes/default/templates/wallet.tpl:258
 #, fuzzy
 msgid "Monetization Credit"
-msgstr "Poin kredit"
+msgstr "Saldo Monetize"
 
 #: content/themes/default/templates/wallet.tpl:201
 msgid "Wallet Transactions"
@@ -18165,7 +18164,7 @@ msgstr ""
 #: content/themes/default/templates/admin.monetization.tpl:37
 #, fuzzy
 msgid "Users Can Subscribe Via Wallet Balance"
-msgstr "Pengguna dapat membeli paket dari keseimbangan dompet"
+msgstr "Pengguna dapat membeli paket dari saldo dompet"
 
 # msgid "Enable users to buy packages from their wallet balance"
 #: content/themes/default/templates/admin.monetization.tpl:39
@@ -18289,7 +18288,7 @@ msgstr ""
 #: content/themes/default/templates/admin.monetization.tpl:177
 #, fuzzy
 msgid "Maximum Monetization Plan Price"
-msgstr "Keseimbangan poin"
+msgstr "Harga Paket Monetisasi Maksimum"
 
 #: content/themes/default/templates/admin.monetization.tpl:182
 #, fuzzy
@@ -18708,7 +18707,7 @@ msgstr "Sistem Pendanaan"
 
 #: content/themes/default/templates/settings.funding.tpl:170
 msgid "Your Funding Balance"
-msgstr "Keseimbangan pendanaan Anda"
+msgstr "Saldo pendanaan anda"
 
 #: content/themes/default/templates/search.tpl:11
 msgid "Discover new people, create new connections and make new friends"
@@ -18841,7 +18840,7 @@ msgstr "Kontrol"
 #: content/themes/default/templates/admin.bank.tpl:44
 #: content/themes/default/templates/settings.bank.tpl:29
 msgid "Add Wallet Balance"
-msgstr "Tambahkan keseimbangan dompet"
+msgstr "Tambahkan saldo dompet"
 
 # msgid "Create Group"
 #: content/themes/default/templates/courses.tpl:40
@@ -19724,7 +19723,7 @@ msgstr "Hasil pencarian"
 #: content/themes/default/templates/settings.market.tpl:170
 #, fuzzy
 msgid "Your Market Balance"
-msgstr "Keseimbangan"
+msgstr "Saldo Anda"
 
 #: content/themes/default/templates/admin.movies.tpl:45
 msgid "Source"
@@ -20184,7 +20183,7 @@ msgstr "Menghidupkan dan mematikan dana"
 #: content/themes/default/templates/admin.funding.tpl:43
 #, fuzzy
 msgid "Users Can Donate Via Wallet Balance"
-msgstr "Pengguna dapat membeli paket dari keseimbangan dompet"
+msgstr "Pengguna dapat membeli paket dari saldo dompet"
 
 # msgid "Enable users to buy packages from their wallet balance"
 #: content/themes/default/templates/admin.funding.tpl:45
@@ -24675,7 +24674,7 @@ msgstr "Pilih paket"
 
 #: content/themes/default/templates/admin.users.tpl:1535
 msgid "Wallet Balance"
-msgstr "Keseimbangan dompet"
+msgstr "Saldo dompet"
 
 # msgid "Search Results"
 #: content/themes/default/templates/admin.users.tpl:1563
@@ -24687,7 +24686,7 @@ msgstr "Hasil pencarian"
 #: content/themes/default/templates/admin.users.tpl:1587
 #, fuzzy
 msgid "Funding Balance"
-msgstr "Keseimbangan poin"
+msgstr "Saldo poin"
 
 #: content/themes/default/templates/admin.users.tpl:1675
 msgid "This user is not eligible for monetization"
@@ -25204,48 +25203,6 @@ msgstr "Paypal"
 msgid "Transaction complete successfully"
 msgstr "Transaksi berhasil lengkap"
 
-# \---------------- #
-# QRCode
-msgid "QR Request"
-msgstr "QR Terima"
-
-msgid "QR Pay"
-msgstr "QR Bayar"
-
-msgid "QR Send"
-msgstr "QR Kirim"
-
-msgid "QR Scan"
-msgstr "QR Pindai"
-# ----------------\ #
-
-# \---------------- #
-# Timezone
-msgid "Timezones"
-msgstr "Zona Waktu"
-
-msgid "Timezone"
-msgstr "Zona Waktu"
-
-msgid "Add New Timezones"
-msgstr "Tambahkan Zona Waktu Baru"
-
-msgid "Add New Timezone"
-msgstr "Tambahkan Zona Waktu Baru"
-
-msgid "Timezone Name"
-msgstr "Nama Zona Waktu"
-
-msgid "UTC Offset"
-msgstr "Pergerseran UTC"
-
-msgid "UTC Offset, for example: 7.00, -7.00, 12.30"
-msgstr "Pergerseran UTC, contoh: 7.00, -7.00, 12.30"
-
-msgid "Timezone info have been updated"
-msgstr "Informasi tentang zona waktu ini telah diperbarui"
-# ----------------\ #
-
 #~ msgid "Friend Suggestions"
 #~ msgstr "Предложения друзей"
 
@@ -25560,11 +25517,7 @@ msgstr "Informasi tentang zona waktu ini telah diperbarui"
 
 #, fuzzy
 #~ msgid "Send To"
-#~ msgstr "Kirim Ke"
-
-#, fuzzy
-#~ msgid "Sending To"
-#~ msgstr "Mengirim Ke"
+#~ msgstr ""
 
 #~ msgid "Billed To"
 #~ msgstr "Отправить"
@@ -25838,3 +25791,66 @@ msgstr "Informasi tentang zona waktu ini telah diperbarui"
 
 #~ msgid "Excellent"
 #~ msgstr "Sempurna"
+
+# \---------------- #
+# QRCode
+msgid "QR Request"
+msgstr "QR Terima"
+
+msgid "QR Pay"
+msgstr "QR Bayar"
+
+msgid "QR Send"
+msgstr "QR Kirim"
+
+msgid "QR Scan"
+msgstr "QR Pindai"
+# ----------------\ #
+
+# \---------------- #
+# Timezone
+msgid "Timezones"
+msgstr "Zona Waktu"
+
+msgid "Timezone"
+msgstr "Zona Waktu"
+
+msgid "Add New Timezones"
+msgstr "Tambahkan Zona Waktu Baru"
+
+msgid "Add New Timezone"
+msgstr "Tambahkan Zona Waktu Baru"
+
+msgid "Timezone Name"
+msgstr "Nama Zona Waktu"
+
+msgid "UTC Offset"
+msgstr "Pergerseran UTC"
+
+msgid "UTC Offset, for example: 7.00, -7.00, 12.30"
+msgstr "Pergerseran UTC, contoh: 7.00, -7.00, 12.30"
+
+msgid "Timezone info have been updated"
+msgstr "Informasi tentang zona waktu ini telah diperbarui"
+# ----------------\ #
+
+# \---------------- #
+# Setting kesalahan qurani
+msgid "Excellent"
+msgstr "Sempurna"
+
+msgid "Very Good"
+msgstr "Baik Sekali"
+
+msgid "Good"
+msgstr "Baik"
+
+msgid "Pass"
+msgstr "Cukup"
+
+msgid "Weak"
+msgstr "Lemah/Kurang"
+
+msgid "Not Pass"
+msgstr "Tidak Lulus"
+# ----------------\ #

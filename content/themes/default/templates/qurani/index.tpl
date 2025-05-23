@@ -996,9 +996,15 @@ body.map-fullscreen .js_sticky-header {
 document.addEventListener("DOMContentLoaded", function() {
 
   console.log(window.location.href);
+  const user_settings = JSON.parse('{/literal}{$user_settings}{literal}');
+  localStorage.setItem('qu_user_setting', JSON.stringify(user_settings));
 
   // Setup dropdowns
-  setupDropdown('groupInput', 'groupDropdown', 'selectedGroup', enableMemberInput);
+  setupDropdown('groupInput', 'groupDropdown', 'selectedGroup', function(groupId) {
+    console.log('Selected group_id:', groupId); 
+    fetchGroupSettings(groupId); 
+    enableMemberInput(groupId);
+  });
   setupDropdown('memberInput', 'memberDropdown', 'selectedMember');
   setupDropdown('temanInput', 'temanDropdown', 'selectedTeman', undefined, true);
   setupDropdown('suratInput', 'suratDropdown', 'selectedSurat');
@@ -1016,6 +1022,38 @@ document.addEventListener("DOMContentLoaded", function() {
     {/foreach}
     {literal}
   };
+
+    function fetchGroupSettings(groupId) {
+    if (!groupId || groupId === '0') {
+      console.log('No valid group_id selected');
+      return;
+    }
+
+    fetch(`{/literal}{$system['system_url']|escape:'javascript'}{literal}/qurani/?action=get_group_settings&group_id=${groupId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      return response.json();
+    })
+    .then(data => {
+      if (data.error) {
+        console.error('Error fetching group settings:', data.error);
+        return;
+      }
+      console.log('Group settings for group_id', groupId, ':', data);
+      localStorage.setItem('qu_setting_group',JSON.stringify(data));
+    })
+    .catch(error => {
+      console.error('Error fetching group settings:', error.message);
+    });
+  }
 
   // Handle rekapan links
   document.querySelectorAll('.rekapan-link').forEach(link => {
@@ -1240,7 +1278,12 @@ document.addEventListener("DOMContentLoaded", function() {
           dropdownElement.style.display = 'none';
           items.forEach(i => i.classList.remove('selected'));
           this.classList.add('selected');
-          
+
+          // Log group_id jika ini adalah dropdown groupInput
+          if (inputId === 'groupInput') {
+            console.log('Selected group_id:', selectedValue);
+          }
+
           if (inputId === 'halamanInput') {
             const pageNumber = parseInt(selectedValue, 10);
             if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= 604) {
@@ -1249,7 +1292,7 @@ document.addEventListener("DOMContentLoaded", function() {
               console.error('Invalid page value selected:', selectedValue);
             }
           }
-          
+
           if (callback && inputId === 'groupInput') {
             callback(selectedValue);
           }

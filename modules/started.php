@@ -21,9 +21,9 @@ if ($system['registration_type'] == "paid" && !$user->_data['user_subscribed']) 
 }
 
 // check if already getted started
-//if (!$system['getting_started'] || $user->_data['user_started']) {
-//  redirect();
-//}
+if (!$system['getting_started'] || $user->_data['user_started']) {
+  redirect();
+}
 
 try {
 

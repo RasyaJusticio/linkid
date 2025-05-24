@@ -410,6 +410,7 @@ body.night-mode .dropdown-divider {
   border: 0;
   box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px,
     rgb(0 0 0 / 10%) 0px 4px 6px -4px;
+  background: '#ffffff';
 }
 
 body.night-mode .combobox-options {

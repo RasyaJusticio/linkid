@@ -647,7 +647,7 @@ body.dark-mode .fa-cog {
       <input type="text" id="temanInput" class="input-dropdown form-control" placeholder="Pilih teman" autocomplete="off" spellcheck="false">
       <div id="temanDropdown" class="dropdown-menu">
         {foreach $all_users as $user}
-          <div class="dropdown-item" data-value="{$user.user_id|escape:'html'}">{$user.fullname|escape:'html'}</div>
+          <div class="dropdown-item" data-value="{$user.user_id|escape:'html'}" data-username="{$user.user_name|escape:'html'}">{$user.fullname|escape:'html'}</div>
         {/foreach}
       </div>
       <input type="hidden" id="selectedTeman" name="teman">

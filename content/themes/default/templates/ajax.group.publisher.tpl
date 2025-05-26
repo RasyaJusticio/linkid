@@ -9,13 +9,13 @@
   <div class="modal-body">
     <div class="form-group">
       <label class="form-label" for="title">{__("Name Your Group")}</label>
-      <input type="text" class="form-control" name="title" id="title">
+      <input type="text" class="form-group-title form-control" name="title" id="title">
     </div>
     <div class="form-group">
       <label class="form-label" for="username">{__("Group Username")}</label>
       <div class="input-group">
         <span class="input-group-text d-none d-sm-block">{$system['system_url']}/groups/</span>
-        <input type="text" class="form-control" name="username" id="username">
+        <input type="text" class="form-group-username form-control" name="username" id="username">
       </div>
       <div class="form-text">
         {__("Can only contain alphanumeric characters (A–Z, 0–9), periods ('.'), and hyphens ('-')")}

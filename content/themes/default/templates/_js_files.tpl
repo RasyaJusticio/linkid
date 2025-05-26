@@ -940,6 +940,12 @@
   {/if}
   <!-- QRCode -->
 
+  <!-- Slugify -->
+  {if in_array($page, ["groups"])}
+    <script src="{$system['system_url']}/node_modules/slugify/slugify.js"></script>
+  {/if}
+  <!-- Slugify -->
+
   <!-- Cookies Policy -->
   {if $system['cookie_consent_enabled']}
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js" {if !$user->_logged_in}defer{/if}>

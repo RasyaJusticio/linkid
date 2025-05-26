@@ -16,7 +16,7 @@ if ($user->_logged_in || !$system['system_public']) {
 }
 
 // check username
-if (is_empty($_GET['username']) || !valid_username($_GET['username'], '_.-')) {
+if (is_empty($_GET['username']) || !valid_username($_GET['username'], '.-')) {
   _error(404);
 }
 

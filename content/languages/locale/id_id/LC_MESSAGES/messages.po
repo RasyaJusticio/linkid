@@ -4176,6 +4176,12 @@ msgstr ""
 "Masukkan alamat web yang sebenarnya (a-z0-9_.) Setidaknya 3 karakter dengan "
 "panjang"
 
+#: includes/class-user.php:13732 includes/class-user.php:13832
+msgid "Please enter a valid web address (a-z0-9.-) with minimum 3 characters long"
+msgstr ""
+"Masukkan alamat web yang sebenarnya (a-z0-9.-) Setidaknya 3 karakter dengan "
+"panjang"
+
 #: includes/class-user.php:13735 includes/class-user.php:13835
 msgid "as web address"
 msgstr "Seperti web"
@@ -9210,6 +9216,11 @@ msgstr "Nama pengguna grup"
 #: content/themes/default/templates/settings.account.tpl:104
 msgid "Can only contain alphanumeric characters (A–Z, 0–9) and periods ('.')"
 msgstr "Mungkin hanya berisi simbol alfanumerik (a-z, 0–9) dan poin ('.')"
+
+#: content/themes/default/templates/group.tpl:1217
+#: content/themes/default/templates/ajax.group.publisher.tpl:21
+msgid "Can only contain alphanumeric characters (A–Z, 0–9), periods ('.'), and hyphens ('-')"
+msgstr "Hanya boleh berisi karakter alfanumerik (A–Z, 0–9), titik ('.'), dan tanda hubung ('-')"
 
 #: content/themes/default/templates/group.tpl:1228
 #: content/themes/default/templates/admin.groups.tpl:225

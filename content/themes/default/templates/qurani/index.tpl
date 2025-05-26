@@ -647,7 +647,7 @@ body.dark-mode .fa-cog {
       <input type="text" id="temanInput" class="input-dropdown form-control" placeholder="{__("Select Friend")}" autocomplete="off" spellcheck="false">
       <div id="temanDropdown" class="dropdown-menu">
         {foreach $all_users as $user}
-          <div class="dropdown-item" data-value="{$user.user_id|escape:'html'}" data-username="{$user.user_name|escape:'html'}">{$user.fullname|escape:'html'}</div>
+          <div class="dropdown-item" data-value="{$user.user_id|escape:'html'}">{$user.fullname|escape:'html'}</div>
         {/foreach}
       </div>
       <input type="hidden" id="selectedTeman" name="teman">
@@ -828,7 +828,7 @@ body.dark-mode .fa-cog {
             <div class="radio-group-container">
               <label class="form-label fw-bold">Juz</label>
               <div class="input-dropdown-container w-100">
-                <input type="text" id="juzInput" class="input-dropdown form-control" placeholder="Pilih Juz" autocomplete="off" spellcheck="false">
+                <input type="text" id="juzInput" class="input-dropdown form-control" placeholder="{__("Select Juz")}" autocomplete="off" spellcheck="false">
                 <div id="juzDropdown" class="dropdown-menu">
                   <div class="dropdown-item" data-value="1">1</div>
                   <div class="dropdown-item" data-value="2">2</div>
@@ -871,7 +871,7 @@ body.dark-mode .fa-cog {
   <div class="radio-group-container">
     <label class="form-label fw-bold">Halaman</label>
     <div class="input-dropdown-container w-100">
-      <input type="text" id="halamanInput" class="input-dropdown form-control" placeholder="Pilih Halaman" autocomplete="off" spellcheck="false">
+      <input type="text" id="halamanInput" class="input-dropdown form-control" placeholder="{__("Select Page")}" autocomplete="off" spellcheck="false">
       <div id="halamanDropdown" class="dropdown-menu">
         {for $i=1 to 604}
           <div class="dropdown-item" data-value="{$i|escape:'html'}">{$i|escape:'html'}</div>
@@ -1652,6 +1652,179 @@ document.addEventListener("DOMContentLoaded", function() {
   window.location.href = redirectUrl;
 });
 
+  // Fungsi untuk mengisi form dari localStorage
+  function populateFormFromLocalStorage() {
+    // Ambil data dari localStorage
+    const lastPenyetorType = localStorage.getItem('lastPenyetorType');
+    const lastSetoranType = localStorage.getItem('lastSetoranType');
+    const lastTampilkanType = localStorage.getItem('lastTampilkanType');
+    const lastSelectedGroup = localStorage.getItem('lastSelectedGroup');
+    const lastSelectedMember = localStorage.getItem('lastSelectedMember');
+    const lastSelectedFriend = localStorage.getItem('lastSelectedFriend');
+    const lastSelectedSurah = localStorage.getItem('lastSelectedSurah');
+    const lastSelectedJuz = localStorage.getItem('lastSelectedJuz');
+    const lastSelectedPage = localStorage.getItem('lastSelectedPage');
+
+    // Isi Penyetor Type (Grup atau Teman)
+    if (lastPenyetorType) {
+      const penyetorRadio = document.querySelector(`input[name="penyetor"][value="${lastPenyetorType}"]`);
+      if (penyetorRadio) {
+        penyetorRadio.checked = true;
+        const grupSection = document.getElementById('grup-anggota');
+        const temanSection = document.getElementById('teman-select');
+        if (lastPenyetorType === 'grup') {
+          grupSection.style.display = 'block';
+          temanSection.style.display = 'none';
+        } else if (lastPenyetorType === 'teman') {
+          grupSection.style.display = 'none';
+          temanSection.style.display = 'block';
+        }
+      }
+    }
+
+    // Isi Grup dan Anggota jika penyetorType adalah 'grup'
+    if (lastPenyetorType === 'grup' && lastSelectedGroup && lastSelectedMember) {
+      try {
+        const groupData = JSON.parse(lastSelectedGroup);
+        const memberData = JSON.parse(lastSelectedMember);
+
+        // Isi input grup
+        const groupInput = document.getElementById('groupInput');
+        const selectedGroup = document.getElementById('selectedGroup');
+        if (groupInput && selectedGroup) {
+          groupInput.value = groupData.name;
+          selectedGroup.value = groupData.id;
+
+          // Aktifkan dan isi input anggota
+          enableMemberInput(groupData.id);
+          const memberInput = document.getElementById('memberInput');
+          const selectedMember = document.getElementById('selectedMember');
+          if (memberInput && selectedMember) {
+            memberInput.value = memberData.name;
+            selectedMember.value = memberData.id;
+            memberInput.setAttribute('data-username', memberData.name);
+          }
+        }
+      } catch (error) {
+        console.error('Gagal parse data grup atau anggota dari localStorage:', error);
+      }
+    }
+
+    // Isi Teman jika penyetorType adalah 'teman'
+    if (lastPenyetorType === 'teman' && lastSelectedFriend) {
+      try {
+        const friendData = JSON.parse(lastSelectedFriend);
+        const temanInput = document.getElementById('temanInput');
+        const selectedTeman = document.getElementById('selectedTeman');
+        if (temanInput && selectedTeman) {
+          temanInput.value = friendData.name;
+          selectedTeman.value = friendData.id;
+          temanInput.setAttribute('data-username', friendData.name);
+        }
+      } catch (error) {
+        console.error('Gagal parse data teman dari localStorage:', error);
+      }
+    }
+
+    // Isi Setoran Type (Tahsin atau Tahfidz)
+    if (lastSetoranType) {
+      const setoranRadio = document.querySelector(`input[name="setoran"][value="${lastSetoranType}"]`);
+      if (setoranRadio) {
+        setoranRadio.checked = true;
+      }
+    }
+
+    // Isi Tampilkan Type (Surat, Juz, atau Halaman)
+    if (lastTampilkanType) {
+      const tampilkanRadio = document.querySelector(`input[name="tampilkan"][value="${lastTampilkanType}"]`);
+      if (tampilkanRadio) {
+        tampilkanRadio.checked = true;
+        const suratSection = document.getElementById('surat-select');
+        const juzSection = document.getElementById('juz-select');
+        const halamanSection = document.getElementById('halaman-select');
+        if (suratSection && juzSection && halamanSection) {
+          suratSection.style.display = (lastTampilkanType === 'surat') ? 'block' : 'none';
+          juzSection.style.display = (lastTampilkanType === 'juz') ? 'block' : 'none';
+          halamanSection.style.display = (lastTampilkanType === 'halaman') ? 'block' : 'none';
+        }
+      }
+    }
+
+    // Isi Surat jika tampilkanType adalah 'surat'
+    if (lastTampilkanType === 'surat' && lastSelectedSurah) {
+      try {
+        const surahData = JSON.parse(lastSelectedSurah);
+        const suratInput = document.getElementById('suratInput');
+        const selectedSurat = document.getElementById('selectedSurat');
+        if (suratInput && selectedSurat) {
+          suratInput.value = surahData.name;
+          selectedSurat.value = surahData.id;
+
+          // Tandai item yang dipilih di dropdown
+          const dropdownItems = document.querySelectorAll('#suratDropdown .dropdown-item');
+          dropdownItems.forEach(item => {
+            item.classList.remove('selected');
+            if (item.getAttribute('data-value') === surahData.id) {
+              item.classList.add('selected');            }
+          });
+        }
+      } catch (error) {
+        console.error('Gagal parse data surat dari localStorage:', error);
+      }
+    }
+
+    // Isi Juz jika tampilkanType adalah 'juz'
+    if (lastTampilkanType === 'juz' && lastSelectedJuz) {
+      try {
+        const juzData = JSON.parse(lastSelectedJuz);
+        const juzInput = document.getElementById('juzInput');
+        const selectedJuz = document.getElementById('selectedJuz');
+        if (juzInput && selectedJuz) {
+          juzInput.value = juzData.name;
+          selectedJuz.value = juzData.id;
+
+          // Tandai item yang dipilih di dropdown
+          const dropdownItems = document.querySelectorAll('#juzDropdown .dropdown-item');
+          dropdownItems.forEach(item => {
+            item.classList.remove('selected');
+            if (item.getAttribute('data-value') === juzData.id) {
+              item.classList.add('selected');
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Gagal parse data juz dari localStorage:', error);
+      }
+    }
+
+    // Isi Halaman jika tampilkanType adalah 'halaman'
+    if (lastTampilkanType === 'halaman' && lastSelectedPage) {
+      try {
+        const pageData = JSON.parse(lastSelectedPage);
+        const halamanInput = document.getElementById('halamanInput');
+        const selectedHalaman = document.getElementById('selectedHalaman');
+        if (halamanInput && selectedHalaman) {
+          halamanInput.value = pageData.name;
+          selectedHalaman.value = pageData.id;
+
+          // Tandai item yang dipilih di dropdown
+          const dropdownItems = document.querySelectorAll('#halamanDropdown .dropdown-item');
+          dropdownItems.forEach(item => {
+            item.classList.remove('selected');
+            if (item.getAttribute('data-value') === pageData.id) {
+              item.classList.add('selected');
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Gagal parse data halaman dari localStorage:', error);
+      }
+    }
+  }
+
+  // Panggil fungsi untuk mengisi form saat halaman dimuat
+  populateFormFromLocalStorage();
+
   // Inisialisasi Peta
   try {
     if (typeof L === 'undefined') {
@@ -1790,6 +1963,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('map').innerHTML = '<p>Error: Tidak dapat menginisialisasi peta.</p>';
   }
 });
+
+
 {/literal}
 </script>
 

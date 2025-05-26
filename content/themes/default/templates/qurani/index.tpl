@@ -644,7 +644,7 @@ body.dark-mode .fa-cog {
   <div class="radio-group-container">
     <label class="form-label fw-bold">Teman</label>
     <div class="input-dropdown-container w-100">
-      <input type="text" id="temanInput" class="input-dropdown form-control" placeholder="Pilih teman" autocomplete="off" spellcheck="false">
+      <input type="text" id="temanInput" class="input-dropdown form-control" placeholder="{__("Select Friend")}" autocomplete="off" spellcheck="false">
       <div id="temanDropdown" class="dropdown-menu">
         {foreach $all_users as $user}
           <div class="dropdown-item" data-value="{$user.user_id|escape:'html'}" data-username="{$user.user_name|escape:'html'}">{$user.fullname|escape:'html'}</div>

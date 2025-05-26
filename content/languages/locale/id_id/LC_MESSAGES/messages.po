@@ -25902,6 +25902,9 @@ msgstr "Hasil"
 msgid "Signature"
 msgstr "Paraf"
 
+msgid "Select Friend"
+msgstr "Pilih Teman"
+
 msgid "Only the reciter or recipient can add a signature."
 msgstr "Hanya penyetor atau penerima yang dapat menambahkan paraf."
 

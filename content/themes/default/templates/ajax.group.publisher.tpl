@@ -18,14 +18,14 @@
         <input type="text" class="form-control" name="username" id="username">
       </div>
       <div class="form-text">
-        {__("Can only contain alphanumeric characters (A–Z, 0–9) and periods ('.')")}
+        {__("Can only contain alphanumeric characters (A–Z, 0–9), periods ('.'), and hyphens ('-')")}
       </div>
     </div>
     <div class="form-group">
       <label class="form-label" for="privacy">{__("Select Privacy")}</label>
       <select class="form-select" name="privacy">
         <option value="public">{__("Public Group")}</option>
-        <option value="closed">{__("Closed Group")}</option>
+        <option value="closed" selected>{__("Closed Group")}</option>
         <option value="secret">{__("Secret Group")}</option>
       </select>
     </div>

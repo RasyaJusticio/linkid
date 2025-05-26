@@ -937,15 +937,16 @@ function valid_url($url)
  * valid_username
  *
  * @param string $username
+ * @param string $allowed_extra_chars Optional additional characters to allow (e.g., '-_.') 
  * @return boolean
  */
-function valid_username($username)
+function valid_username($username, $allowed_symbols = '_.')
 {
-  if (strlen($username) >= 3 && preg_match('/^[a-zA-Z0-9]+([_|.]?[a-zA-Z0-9])*$/', $username)) {
-    return true;
-  } else {
-    return false;
-  }
+    $escaped = preg_quote($allowed_symbols, '/');
+
+    $pattern = '/^[a-zA-Z0-9]+([' . $escaped . ']?[a-zA-Z0-9])*$/';
+
+    return strlen($username) >= 3 && preg_match($pattern, $username);
 }
 
 

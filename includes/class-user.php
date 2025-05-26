@@ -13755,7 +13755,7 @@ class User
     if (is_empty($args['username'])) {
       throw new Exception(__("You must enter a web address for your group"));
     }
-    if (!valid_username($args['username'])) {
+    if (!valid_username($args['username'], '_.-')) {
       throw new Exception(__("Please enter a valid web address (a-z0-9_.) with minimum 3 characters long"));
     }
     if ($this->reserved_username($args['username'])) {
@@ -13855,8 +13855,8 @@ class User
           if (is_empty($args['username'])) {
             throw new Exception(__("You must enter a web address for your group"));
           }
-          if (!valid_username($args['username'])) {
-            throw new Exception(__("Please enter a valid web address (a-z0-9_.) with minimum 3 characters long"));
+          if (!valid_username($args['username'], '_.-')) {
+            throw new Exception(__("Please enter a valid web address (a-z0-9_.-) with minimum 3 characters long"));
           }
           if ($this->reserved_username($args['username'])) {
             throw new Exception(__("You can't use") . " " . $args['username'] . " " . __("as web address"));

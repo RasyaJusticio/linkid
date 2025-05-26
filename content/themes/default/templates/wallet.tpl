@@ -68,10 +68,6 @@
                 {include file='__svg_icons.tpl' icon="money_receive" width="24px" height="24px"}
                 {__("QR Request")}
               </button>
-              <a class="btn btn-outline-primary" href="{$system['system_url']}/transfer">
-                {include file='__svg_icons.tpl' icon="wallet_2" width="24px" height="24px"}
-                {__("Transfer History")}
-              </a>
             </div>
           </div>
           <div class="card-body page-content">

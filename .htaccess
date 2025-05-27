@@ -341,6 +341,9 @@ RewriteRule ^qurani/setoran/edit/([^/]+)/?$ qurani/setoran.php?view=edit&campaig
 RewriteRule ^qurani/rekapan/?$ qurani/rekapan.php [L,QSA]
 RewriteRule ^qurani/riwayat/([^/]+)/?$ qurani/rekapan.php?id=$1 [L,QSA]
 
+# Mutabaah 
+RewriteRule ^mutabaah/?$ mutabaah/index.php [L,QSA]
+
 # Uploads
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^content/uploads/.+ 404.php [L]

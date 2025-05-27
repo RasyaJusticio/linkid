@@ -597,6 +597,9 @@ msgstr "Lihat"
 msgid "Games"
 msgstr "Pertandingan"
 
+msgid "Mutabaah"
+msgstr "Mutabaah"
+
 #: games.php:74 content/themes/default/templates/games.tpl:28
 msgid "Your Games"
 msgstr "Game Anda"
@@ -11680,13 +11683,21 @@ msgstr "Deskripsi Modul Film Anda"
 #: content/themes/default/templates/admin.settings.tpl:399
 #, fuzzy
 msgid "Games Description"
-msgstr "Teks pengumuman"
+msgstr "Deskripsi Gim"
+
+#, fuzzy
+msgid "Mutabaah Description"
+msgstr "Deskripsi Mutabaah"
 
 # msgid "Description of your website"
 #: content/themes/default/templates/admin.settings.tpl:404
 #, fuzzy
 msgid "Description of your games module"
 msgstr "Deskripsi Situs Anda"
+
+#, fuzzy
+msgid "Description of your mutabaah module"
+msgstr "Deskripsi Mutabaah Anda"
 
 #: content/themes/default/templates/admin.settings.tpl:434
 msgid "Turn the pages On and Off"

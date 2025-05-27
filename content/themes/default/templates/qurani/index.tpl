@@ -102,6 +102,20 @@ body {
   flex-direction: column;
 }
 
+#mapCard {
+  .text-start {
+    color: black;
+  }
+}
+
+body.night-mode {
+  #mapCard {
+    .text-start {
+      color: white;
+    }
+  }
+}
+
 .map-card.fullscreen .map-header {
   padding: 1rem;
   color: white;
@@ -920,6 +934,9 @@ body.dark-mode .fa-cog {
           <div class="d-flex justify-content-between align-items-center mb-3">
             <a href='{$system['system_url']|escape:'html'}'><h3 class="text-start mb-0 cursor-pointer">{__("History")}</h3></a>
             <div>
+            <button class="btn btn-sm btn-outline-secondary me-2" id="showTableBtn" title="Report History" onclick="localStorage.setItem('activeTab', 'locations'); window.location.href='{$system['system_url']}/qurani/riwayat';">
+                <i class="fas fa-paper-plane"></i>
+            </button>
               <button class="btn btn-sm btn-outline-secondary me-2" onclick="window.location.href='{$system['system_url']}/qurani/riwayat'">
                 <i class="fas fa-table"></i>
               </button>
@@ -928,7 +945,7 @@ body.dark-mode .fa-cog {
               </button>
             </div>
           </div>
-          <table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th>{__("Time")}</th>

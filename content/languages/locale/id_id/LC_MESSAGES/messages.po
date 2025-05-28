@@ -2857,48 +2857,48 @@ msgstr "Pesan"
 #: includes/class-user.php:3061 includes/class-user.php:3839
 #: includes/class-user.php:4392
 msgid "sent you a friend request"
-msgstr "Saya mengirimi Anda permintaan untuk menambahkan teman"
+msgstr "Mengirimi anda permintaan perteman"
 
 #: includes/class-user.php:3067 includes/class-user.php:3844
 #: includes/class-user.php:4399
 msgid "accepted your friend request"
-msgstr "Menerima Proposal Persahabatan Anda"
+msgstr "Menerima permintaan pertemanan anda"
 
 #: includes/class-user.php:3073 includes/class-user.php:3849
 msgid "now following you"
-msgstr "Sekarang ditandatangani oleh Anda"
+msgstr "Sekarang mengikuti anda"
 
 #: includes/class-user.php:3079 includes/class-user.php:3854
 msgid "poked you"
-msgstr "menusukmu"
+msgstr "Menyapamu"
 
 #: includes/class-user.php:3085 includes/class-user.php:3859
 msgid "Sent you a gift"
-msgstr "Saya mengirimi Anda hadiah"
+msgstr "Mengirimi Anda hadiah"
 
 # msgid "visited your profile"
 #: includes/class-user.php:3092 includes/class-user.php:3865
 #, fuzzy
 msgid "subscribed to your profile"
-msgstr "Saya mengunjungi profil Anda"
+msgstr "Mengunjungi profil Anda"
 
 # msgid "replied to your thread"
 #: includes/class-user.php:3098 includes/class-user.php:3870
 #, fuzzy
 msgid "subscribed to your page"
-msgstr "menjawab topik Anda"
+msgstr "Membalas topik Anda"
 
 # msgid "asked to join your group"
 #: includes/class-user.php:3104 includes/class-user.php:3875
 #, fuzzy
 msgid "subscribed to your group"
-msgstr "diminta untuk bergabung dengan grup Anda"
+msgstr "Diminta untuk bergabung dengan grup Anda"
 
 # msgid "shared your post"
 #: includes/class-user.php:3110
 #, fuzzy
 msgid "bought your post"
-msgstr "Bagikan Rekor Anda (LAS)"
+msgstr "Bagikan postingan anda"
 
 #: includes/class-user.php:3123 includes/class-user.php:3892
 #: includes/class-user.php:4413
@@ -3335,13 +3335,13 @@ msgstr "Ponsel Anda telah diubah"
 #: includes/class-user.php:3706 includes/class-user.php:4321
 #, fuzzy
 msgid "sent you a paid message"
-msgstr "Saya mengirimi Anda permintaan untuk menambahkan teman"
+msgstr "Mengirimi anda permintaan perteman"
 
 # msgid "sent you a friend request"
 #: includes/class-user.php:3712 includes/class-user.php:4326
 #, fuzzy
 msgid "sent you a message"
-msgstr "Saya mengirimi Anda permintaan untuk menambahkan teman"
+msgstr "Mengirimi anda permintaan perteman"
 
 # msgid "pending needs your approval"
 #: includes/class-user.php:3718
@@ -3372,13 +3372,13 @@ msgstr "Mengirim permintaan baru untuk verifikasi"
 #: includes/class-user.php:3745 includes/class-user.php:4351
 #, fuzzy
 msgid "accepted your activities permission request as editor"
-msgstr "Menerima Proposal Persahabatan Anda"
+msgstr "Menerima permintaan pertemanan anda"
 
 # msgid "accepted your friend request"
 #: includes/class-user.php:3751 includes/class-user.php:4356
 #, fuzzy
 msgid "accepted your activities permission request as viewer"
-msgstr "Menerima Proposal Persahabatan Anda"
+msgstr "Menerima permintaan pertemanan anda"
 
 # msgid "Declined your affiliates withdrawal request"
 #: includes/class-user.php:3757 includes/class-user.php:4361
@@ -8638,7 +8638,7 @@ msgstr "Rahasia Aplikasi"
 #: content/themes/default/templates/ajax.posts.tpl:11
 #: content/themes/default/templates/_posts.tpl:210
 msgid "More Stories"
-msgstr "Lagi"
+msgstr "Cerita lainnya"
 
 #: content/themes/default/templates/settings.tpl:29
 #: content/themes/default/templates/settings.profile.tpl:3
@@ -8787,23 +8787,13 @@ msgstr "Tinjauan"
 #: content/themes/default/templates/blogs.tpl:433
 #: content/themes/default/templates/page.tpl:210
 msgid "Share"
-msgstr "Membagikan"
+msgstr "Bagikan"
 
 # msgid "Share the post to"
 #: content/themes/default/templates/group.tpl:189
 #, fuzzy
 msgid "Share this group"
 msgstr "Berbagi dengan"
-
-#: content/themes/default/templates/group.tpl:198
-#: content/themes/default/templates/__feeds_comment.tpl:18
-#: content/themes/default/templates/event.tpl:176
-#: content/themes/default/templates/profile.tpl:243
-#: content/themes/default/templates/ajax.report.publisher.tpl:4
-#: content/themes/default/templates/ajax.report.publisher.tpl:34
-#: content/themes/default/templates/page.tpl:221
-msgid "Report"
-msgstr "Mengeluh"
 
 #: content/themes/default/templates/group.tpl:200
 #: content/themes/default/templates/event.tpl:178
@@ -8834,7 +8824,7 @@ msgstr "Edit pada panel moderator"
 #: content/themes/default/templates/blogs.tpl:741
 #: content/themes/default/templates/page.tpl:263
 msgid "Timeline"
-msgstr "Pita"
+msgstr "Linimasa"
 
 #: content/themes/default/templates/group.tpl:251
 #: content/themes/default/templates/group.tpl:353
@@ -9015,7 +9005,7 @@ msgstr "Informasi"
 #: content/themes/default/templates/page.tpl:619
 #: content/themes/default/templates/page.tpl:640
 msgid "See All"
-msgstr "Lihat semuanya"
+msgstr "Lihat Semua"
 
 #: content/themes/default/templates/group.tpl:465
 #: content/themes/default/templates/event.tpl:465
@@ -9959,7 +9949,7 @@ msgstr "Silakan bagikan mengapa akun Anda harus diperiksa"
 #: content/themes/default/templates/_publisher.tpl:9
 #, fuzzy
 msgid "Verify Now"
-msgstr "Mengonfirmasi"
+msgstr "Verifikasi sekarang"
 
 # msgid "Turn On Chat"
 #: content/themes/default/templates/settings.monetization.tpl:61
@@ -10004,7 +9994,7 @@ msgstr ""
 #: content/themes/default/templates/blogs.tpl:313
 #, fuzzy
 msgid "Subscriptions"
-msgstr "Tanggal berlangganan"
+msgstr "Berlangganan"
 
 # msgid "List Subscribers"
 #: content/themes/default/templates/settings.monetization.tpl:154
@@ -10333,7 +10323,7 @@ msgstr "Memerintah album"
 #: content/themes/default/templates/_js_templates.tpl:2521
 #: content/themes/default/templates/ajax.invitations.tpl:88
 msgid "Cancel"
-msgstr "Pembatalan"
+msgstr "Batal"
 
 #: content/themes/default/templates/ajax.album.edit_title.tpl:19
 #: content/themes/default/templates/ajax.job.editor.tpl:198
@@ -10728,7 +10718,7 @@ msgstr "Pelanggan Anda"
 #: content/themes/default/templates/admin.users.tpl:1226
 #, fuzzy
 msgid "subscriptions"
-msgstr "Tanggal berlangganan"
+msgstr "Berlangganan"
 
 #: content/themes/default/templates/settings.privacy.tpl:353
 #: content/themes/default/templates/admin.settings.tpl:3425
@@ -11051,7 +11041,7 @@ msgstr "Semua reaksi"
 #: content/themes/default/templates/settings.points.tpl:193
 #, fuzzy
 msgid "Followed"
-msgstr "Berlangganan"
+msgstr "Mengikuti"
 
 # msgid "Verified Users"
 #: content/themes/default/templates/settings.points.tpl:195
@@ -15944,7 +15934,7 @@ msgstr "Menawarkan"
 #: content/themes/default/templates/ajax.orders.edit.tpl:15
 #, fuzzy
 msgid "canceled"
-msgstr "Pembatalan"
+msgstr "dibatalkan"
 
 #: content/themes/default/templates/ajax.orders.edit.tpl:16
 msgid "accepted"
@@ -15994,7 +15984,7 @@ msgstr "Pesan hanya akan dikirim ke alamat email situs web"
 
 #: content/themes/default/templates/admin.newsletter.tpl:27
 msgid "Send to"
-msgstr "Kepada siapa"
+msgstr "Kirim ke"
 
 #: content/themes/default/templates/admin.newsletter.tpl:31
 msgid "All Users"
@@ -17656,7 +17646,7 @@ msgstr "Kirim"
 #: content/themes/default/templates/_posts.tpl:3
 #: content/themes/default/templates/_sidebar.tpl:19
 msgid "Recent Updates"
-msgstr "Pembaruan terbaru"
+msgstr "Pembaruan Terkini"
 
 #: content/themes/default/templates/_sidebar.tpl:5
 msgid "Application"
@@ -18086,7 +18076,7 @@ msgstr "Kunjungi tautannya"
 #: content/themes/default/templates/share.tpl:15
 #, fuzzy
 msgid "Share to"
-msgstr "Membagikan"
+msgstr "Bagikan ke"
 
 #: content/themes/default/templates/events.tpl:54
 #: content/themes/default/templates/_header.tpl:190
@@ -18933,7 +18923,7 @@ msgstr "Hapus dialog"
 
 #: content/themes/default/templates/_js_translator.tpl:6
 msgid "Block User"
-msgstr "Blok pengguna"
+msgstr "Blokir pengguna"
 
 #: content/themes/default/templates/_js_translator.tpl:7
 msgid "Unblock User"
@@ -18975,19 +18965,19 @@ msgstr "Diterjemahkan"
 
 #: content/themes/default/templates/_js_translator.tpl:15
 msgid "Are you sure you want to delete this?"
-msgstr "Apakah Anda yakin ingin menghapusnya?"
+msgstr "Apakah anda yakin ingin menghapusnya?"
 
 #: content/themes/default/templates/_js_translator.tpl:16
 msgid "Are you sure you want to remove your cover photo?"
-msgstr "Apakah Anda yakin ingin menghapus penutup Anda?"
+msgstr "Apakah anda yakin ingin menghapus penutup Anda?"
 
 #: content/themes/default/templates/_js_translator.tpl:17
 msgid "Are you sure you want to remove your profile picture?"
-msgstr "Apakah Anda yakin ingin menghapus foto Anda?"
+msgstr "Apakah anda yakin ingin menghapus foto Anda?"
 
 #: content/themes/default/templates/_js_translator.tpl:18
 msgid "Are you sure you want to delete this post?"
-msgstr "Apakah Anda yakin ingin menghapus entri ini?"
+msgstr "Apakah anda yakin ingin menghapus entri ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:19
 msgid "Are you sure you want to delete this comment?"
@@ -18995,43 +18985,43 @@ msgstr "Anda yakin ingin menghapus komentar ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:20
 msgid "Are you sure you want to delete this conversation?"
-msgstr "Apakah Anda yakin ingin menghapus dialog ini?"
+msgstr "Apakah anda yakin ingin menghapus dialog ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:21
 msgid "Are you sure you want to report this?"
-msgstr "Apakah Anda yakin ingin melaporkan ini?"
+msgstr "Apakah anda yakin ingin melaporkan ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:22
 msgid "Are you sure you want to block this user?"
-msgstr "Apakah Anda benar -benar ingin memblokir pengguna ini?"
+msgstr "Apakah anda ingin memblokir pengguna ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:23
 msgid "Are you sure you want to unblock this user?"
-msgstr "Apakah Anda benar -benar ingin membuka kunci pengguna ini?"
+msgstr "Apakah anda ingin membuka kunci pengguna ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:24
 msgid "Are you sure you want to delete your account?"
-msgstr "Apakah Anda yakin ingin menghapus akun Anda?"
+msgstr "Apakah anda yakin ingin menghapus akun Anda?"
 
 #: content/themes/default/templates/_js_translator.tpl:25
 msgid "Are you sure you want to verify this request?"
-msgstr "Apakah Anda benar -benar ingin mengonfirmasi permintaan ini?"
+msgstr "Apakah anda ingin mengonfirmasi permintaan ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:26
 msgid "Are you sure you want to decline this request?"
-msgstr "Apakah Anda benar -benar ingin menolak permintaan ini?"
+msgstr "Apakah anda ingin menolak permintaan ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:27
 msgid "Are you sure you want to approve this request?"
-msgstr "Apakah Anda benar -benar ingin menyetujui permintaan ini?"
+msgstr "Apakah anda ingin menyetujui permintaan ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:28
 msgid "Are you sure you want to do this?"
-msgstr "Apakah Anda yakin ingin melakukannya?"
+msgstr "Apakah anda yakin ingin melakukannya?"
 
 #: content/themes/default/templates/_js_translator.tpl:29
 msgid "Are you sure you want to reset your website?"
-msgstr "Apakah Anda yakin ingin mengatur ulang situs web Anda?"
+msgstr "Apakah anda yakin ingin mengatur ulang situs web Anda?"
 
 #: content/themes/default/templates/_js_translator.tpl:30
 msgid "There is something that went wrong!"
@@ -19159,7 +19149,7 @@ msgid ""
 "Are you sure you want to hide this post from your profile timeline? It may "
 "still appear in other places like newsfeed and search results"
 msgstr ""
-"Apakah Anda yakin ingin menyembunyikan posting ini dari timeline profil "
+"Apakah anda yakin ingin menyembunyikan posting ini dari timeline profil "
 "Anda? Itu mungkin masih muncul di tempat lain seperti umpan berita dan "
 "hasil pencarian"
 
@@ -19264,7 +19254,7 @@ msgstr "Pro-Paket"
 #: content/themes/default/templates/_js_translator.tpl:83
 #, fuzzy
 msgid "Are you sure you want to subscribe to this free package?"
-msgstr "Apakah Anda benar -benar ingin menolak permintaan ini?"
+msgstr "Apakah anda ingin menolak permintaan ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:84
 #: content/themes/default/templates/ajax.monetization.plans.tpl:20
@@ -19275,7 +19265,7 @@ msgstr "Puncak menyelinap"
 #: content/themes/default/templates/_js_translator.tpl:85
 #, fuzzy
 msgid "Are you sure you want to subscribe to this free plan?"
-msgstr "Apakah Anda benar -benar ingin menolak permintaan ini?"
+msgstr "Apakah anda ingin menolak permintaan ini?"
 
 #: content/themes/default/templates/_js_translator.tpl:86
 msgid "Your video is being processed, We will let you know when it is ready!"
@@ -19303,13 +19293,13 @@ msgstr "Konfirmasi pembayaran"
 #: content/themes/default/templates/_js_translator.tpl:92
 #, fuzzy
 msgid "Are you sure you want to login as this user?"
-msgstr "Apakah Anda benar -benar ingin memblokir pengguna ini?"
+msgstr "Apakah anda ingin memblokir pengguna ini?"
 
 # msgid "Are you sure you want to delete your account?"
 #: content/themes/default/templates/_js_translator.tpl:93
 #, fuzzy
 msgid "Are you sure you want to switch back to your account?"
-msgstr "Apakah Anda yakin ingin menghapus akun Anda?"
+msgstr "Apakah anda yakin ingin menghapus akun Anda?"
 
 # msgid "Unsave Post"
 #: content/themes/default/templates/_js_translator.tpl:94
@@ -20504,7 +20494,7 @@ msgstr "V"
 #: content/themes/default/templates/_js_templates.tpl:73
 #: content/themes/default/templates/_js_templates.tpl:84
 msgid "Confirm"
-msgstr "Mengonfirmasi"
+msgstr "Konfirmasi"
 
 #: content/themes/default/templates/ajax.popover.tpl:72
 #: content/themes/default/templates/profile.tpl:170
@@ -20536,7 +20526,7 @@ msgstr "Berteman"
 #: content/themes/default/templates/__feeds_user.tpl:78
 #: content/themes/default/templates/__feeds_user.tpl:193
 msgid "Following"
-msgstr "Ditandatangani (a)"
+msgstr "Mengikuti"
 
 #: content/themes/default/templates/ajax.popover.tpl:92
 #: content/themes/default/templates/profile.tpl:195
@@ -20544,7 +20534,7 @@ msgstr "Ditandatangani (a)"
 #: content/themes/default/templates/__feeds_user.tpl:73
 #: content/themes/default/templates/__feeds_user.tpl:188
 msgid "Follow"
-msgstr "Berlangganan"
+msgstr "Ikuti"
 
 #: content/themes/default/templates/admin.affiliates.tpl:16
 msgid "Affiliates Enabled"
@@ -21199,7 +21189,7 @@ msgstr "Anda tidak dapat mengirim pesan"
 
 #: content/themes/default/templates/profile.tpl:223
 msgid "Poke"
-msgstr "Memanggang"
+msgstr "Menyapa"
 
 #: content/themes/default/templates/profile.tpl:225
 msgid "Let them know you are here"
@@ -21209,11 +21199,11 @@ msgstr "Beri tahu mereka bahwa Anda ada di sini"
 #: content/themes/default/templates/profile.tpl:236
 #, fuzzy
 msgid "Share this profile"
-msgstr "Seseorang mengunjungi profilnya"
+msgstr "Bagikan profil ini"
 
 #: content/themes/default/templates/profile.tpl:252
 msgid "Block"
-msgstr "Memblokir"
+msgstr "Blokir"
 
 #: content/themes/default/templates/profile.tpl:254
 msgid "This user won't be able to reach you"
@@ -21274,8 +21264,6 @@ msgstr "Tambahkan informasi tentang pendidikan"
 #: content/themes/default/templates/profile.tpl:480
 #: content/themes/default/templates/page.tpl:339
 #, fuzzy
-msgid "Send a Tip"
-msgstr "Mengirim"
 
 #: content/themes/default/templates/profile.tpl:491
 msgid "Send a Gift"
@@ -21292,14 +21280,6 @@ msgstr "Pendidikan"
 #: content/themes/default/templates/profile.tpl:592
 msgid "Class of"
 msgstr "Kelas"
-
-#: content/themes/default/templates/profile.tpl:651
-msgid "Followed by"
-msgstr "Membaca"
-
-#: content/themes/default/templates/profile.tpl:652
-msgid "people"
-msgstr "Manusia"
 
 #: content/themes/default/templates/profile.tpl:667
 #: content/themes/default/templates/admin.custom_fields.tpl:59
@@ -21597,7 +21577,7 @@ msgstr "Masuk"
 #: content/themes/default/templates/ajax.report.publisher.tpl:12
 #, fuzzy
 msgid "Why you want to report this?"
-msgstr "Apakah Anda yakin ingin melaporkan ini?"
+msgstr "Apakah anda yakin ingin melaporkan ini?"
 
 #: content/themes/default/templates/ajax.report.publisher.tpl:23
 msgid "Reason"
@@ -22476,7 +22456,7 @@ msgstr "Metode pembayaran"
 
 #: content/themes/default/templates/_js_templates.tpl:81
 msgid "You are about to purchase the items, do you want to proceed?"
-msgstr "Anda akan membeli barang, apakah Anda ingin melanjutkan?"
+msgstr "Anda akan membeli barang, apakah anda ingin melanjutkan?"
 
 #: content/themes/default/templates/_js_templates.tpl:129
 msgid "Search for"
@@ -22697,7 +22677,7 @@ msgstr "Ada lebih banyak berita di umpan berita"
 #: content/themes/default/templates/_js_templates.tpl:1359
 #, fuzzy
 msgid "Send Tip"
-msgstr "Mengirim"
+msgstr "Kirim uang"
 
 # msgid "Wallet Credit"
 #: content/themes/default/templates/_js_templates.tpl:1366
@@ -22720,10 +22700,6 @@ msgstr "dan maksimum"
 #, fuzzy
 msgid "The maximum amount you can transfer is"
 msgstr "Jumlah minimum uang yang dapat ditarik pengguna"
-
-#: content/themes/default/templates/_js_templates.tpl:1450
-msgid "Send To"
-msgstr "Mengirim"
 
 #: content/themes/default/templates/_js_templates.tpl:1470
 msgid "Withdraw Affiliates Credit"
@@ -22820,7 +22796,7 @@ msgstr "Alamat web"
 
 #: content/themes/default/templates/_js_templates.tpl:1759
 msgid "Verify"
-msgstr "Mengonfirmasi"
+msgstr "Verifikasi"
 
 #: content/themes/default/templates/_js_templates.tpl:1776
 msgid "Row to begin at"
@@ -25141,7 +25117,7 @@ msgstr "Akhir dari akhir"
 #: content/themes/default/templates/pdf/invoice.tpl:26
 #, fuzzy
 msgid "Billed & Shipped To"
-msgstr "Mengirim"
+msgstr "Kirim ke"
 
 #: content/themes/default/templates/pdf/invoice.tpl:43
 msgid "Order summary"
@@ -25896,6 +25872,12 @@ msgstr "Waktu"
 msgid "Select Member"
 msgstr "Pilih Anggota"
 
+msgid "Select Juz"
+msgstr "Pilih Juz"
+
+msgid "Select Page"
+msgstr "Pilih Halaman"
+
 msgid "Results"
 msgstr "Hasil"
 
@@ -25904,6 +25886,12 @@ msgstr "Paraf"
 
 msgid "Select Friend"
 msgstr "Pilih Teman"
+
+msgid "Surah"
+msgstr "Surat"
+
+msgid "Page"
+msgstr "Halaman"
 
 msgid "Only the reciter or recipient can add a signature."
 msgstr "Hanya penyetor atau penerima yang dapat menambahkan paraf."
@@ -25918,9 +25906,71 @@ msgid "doesnt recite history"
 msgstr "Tidak ada riwayat setora"
 
 msgid "Are you sure you want to mark this reciter as initialed?"
-msgstr "Apakah Anda yakin ingin menandai setoran ini sebagai diparaf?"
+msgstr "Apakah anda yakin ingin menandai setoran ini sebagai diparaf?"
 
 msgid ""
 msgstr "Ya, Paraf"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Halaman Utama
+
+#: content/themes/default/templates/__feeds_post.body.tpl:454
+#, fuzzy
+#| msgid "Test Secret Key"
+msgid "sent merit"
+msgtr "kirim penghargaan"
+
+#: includes/class-user.php:3845 includes/class-user.php:4466
+#, fuzzy
+#| msgid "Your invitation has been sent"
+msgid "Your merit has been sent"
+msgstr "Penghargaan anda telah dikirim"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Mutabaah
+
+msgid "Mutabaah is the process of following and watching, or in the context of worship, evaluating and recording daily actions to evaluate and improve the quality of worship."
+msgtr "Mutabaah adalah proses mengikuti dan mengawasi, atau dalam konteks ibadah, evaluasi dan pencatatan amal harian untuk mengevaluasi dan meningkatkan kualitas ibadah."
+
+msgid "Coming Soon"
+msgstr "Segera Hadir"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Dompet
+
+msgid "Send a Tip"
+msgstr "Kirim uang"
+
+msgid "Male"
+msgstr "Pria"
+
+msgid "Female"
+msgstr "Perempuan"
+
+
+#: content/themes/default/templates/profile.tpl:651
+msgid "Followed by"
+msgstr "Diikuti oleh"
+
+#: content/themes/default/templates/profile.tpl:652
+msgid "people"
+msgstr "orang"
+
+
+#: content/themes/default/templates/group.tpl:198
+#: content/themes/default/templates/__feeds_comment.tpl:18
+#: content/themes/default/templates/event.tpl:176
+#: content/themes/default/templates/profile.tpl:243
+#: content/themes/default/templates/ajax.report.publisher.tpl:4
+#: content/themes/default/templates/ajax.report.publisher.tpl:34
+#: content/themes/default/templates/page.tpl:221
+msgid "Report"
+msgstr "Laporkan"
 
 # ----------------\ #

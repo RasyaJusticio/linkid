@@ -49,6 +49,7 @@ try {
       $_POST['verification_badge_enabled'] = (isset($_POST['verification_badge_enabled'])) ? '1' : '0';
       $_POST['boost_posts_enabled'] = (isset($_POST['boost_posts_enabled'])) ? '1' : '0';
       $_POST['boost_pages_enabled'] = (isset($_POST['boost_pages_enabled'])) ? '1' : '0';
+      $_POST['trial_enabled'] = (isset($_POST['trial_enabled'])) ? '1' : '0';
       /* valid inputs */
       if (is_empty($_POST['name'])) {
         throw new Exception(__("You have to enter the package name"));
@@ -75,6 +76,13 @@ try {
         }
       } else {
         $_POST['boost_pages'] = 0;
+      }
+      if ($_POST['trial_enabled']) {
+        if (is_empty($_POST['trial_enabled']) || !is_numeric($_POST['trial_enabled'])) {
+          throw new Exception(__("You have to enter valid trial enabled number"));
+        }
+      } else {
+        $_POST['trial_enabled'] = 0;
       }
       /* Xendit billing plan */
       $xendit_billing_plan = $package['xendit_billing_plan'];
@@ -156,7 +164,7 @@ try {
       }
       /* update */
       $xendit_billing_plan_sql = is_numeric($xendit_billing_plan) ? secure($xendit_billing_plan, 'int') : 'NULL';
-      $db->query(sprintf("UPDATE packages SET name = %s, price = %s, period_num = %s, period = %s, color = %s, icon = %s, package_permissions_group_id = %s, allowed_videos_categories = %s, allowed_blogs_categories = %s, allowed_products = %s, verification_badge_enabled = %s, boost_posts_enabled = %s, boost_posts = %s, boost_pages_enabled = %s, boost_pages = %s, custom_description = %s, package_order = %s, paypal_billing_plan = %s, stripe_billing_plan = %s, xendit_billing_plan = %s WHERE package_id = %s", secure($_POST['name']), secure($_POST['price']), secure($_POST['period_num']), secure($_POST['period']), secure($_POST['color']), secure($_POST['icon']), secure($_POST['permissions_group']), secure($_POST['allowed_videos_categories'], 'int'), secure($_POST['allowed_blogs_categories'], 'int'), secure($_POST['allowed_products'], 'int'), secure($_POST['verification_badge_enabled']), secure($_POST['boost_posts_enabled']), secure($_POST['boost_posts'], 'int'), secure($_POST['boost_pages_enabled']), secure($_POST['boost_pages'], 'int'), secure($_POST['custom_description']), secure($_POST['package_order'], 'int'), secure($paypal_billing_plan), secure($stripe_billing_plan), $xendit_billing_plan_sql, secure($_GET['id'], 'int')));
+      $db->query(sprintf("UPDATE packages SET name = %s, price = %s, period_num = %s, period = %s, color = %s, icon = %s, is_trial = %s, package_permissions_group_id = %s, allowed_videos_categories = %s, allowed_blogs_categories = %s, allowed_products = %s, verification_badge_enabled = %s, boost_posts_enabled = %s, boost_posts = %s, boost_pages_enabled = %s, boost_pages = %s, custom_description = %s, package_order = %s, paypal_billing_plan = %s, stripe_billing_plan = %s, xendit_billing_plan = %s WHERE package_id = %s", secure($_POST['name']), secure($_POST['price']), secure($_POST['period_num']), secure($_POST['period']), secure($_POST['color']), secure($_POST['icon']), secure($_POST['trial_enabled'], 'int'), secure($_POST['permissions_group']), secure($_POST['allowed_videos_categories'], 'int'), secure($_POST['allowed_blogs_categories'], 'int'), secure($_POST['allowed_products'], 'int'), secure($_POST['verification_badge_enabled']), secure($_POST['boost_posts_enabled']), secure($_POST['boost_posts'], 'int'), secure($_POST['boost_pages_enabled']), secure($_POST['boost_pages'], 'int'), secure($_POST['custom_description']), secure($_POST['package_order'], 'int'), secure($paypal_billing_plan), secure($stripe_billing_plan), $xendit_billing_plan_sql, secure($_GET['id'], 'int')));
       /* return */
       return_json(['success' => true, 'message' => __("Package info have been updated")]);
       break;
@@ -166,6 +174,7 @@ try {
       $_POST['verification_badge_enabled'] = (isset($_POST['verification_badge_enabled'])) ? '1' : '0';
       $_POST['boost_posts_enabled'] = (isset($_POST['boost_posts_enabled'])) ? '1' : '0';
       $_POST['boost_pages_enabled'] = (isset($_POST['boost_pages_enabled'])) ? '1' : '0';
+      $_POST['trial_enabled'] = (isset($_POST['trial_enabled'])) ? '1' : '0';
       /* valid inputs */
       if (is_empty($_POST['name'])) {
         throw new Exception(__("You have to enter the package name"));
@@ -193,6 +202,13 @@ try {
       } else {
         $_POST['boost_pages'] = 0;
       }
+      if ($_POST['trial_enabled']) {
+        if (is_empty($_POST['trial_enabled']) || !is_numeric($_POST['trial_enabled'])) {
+          throw new Exception(__("You have to enter valid trial enabled number"));
+        }
+      } else {
+        $_POST['trial_enabled'] = 0;
+      }
       /* Xendit billing plan */
       $xendit_billing_plan = 'NULL';
       $xendit_recurring_enabled = $system['xendit_enabled'];
@@ -216,7 +232,7 @@ try {
       }
       /* insert */
       $xendit_billing_plan_sql = is_numeric($xendit_billing_plan) ? secure($xendit_billing_plan, 'int') : 'NULL';
-      $db->query(sprintf("INSERT INTO packages (name, price, period_num, period, color, icon, package_permissions_group_id, allowed_videos_categories, allowed_blogs_categories, allowed_products, verification_badge_enabled, boost_posts_enabled, boost_posts, boost_pages_enabled, boost_pages, custom_description, package_order, paypal_billing_plan, stripe_billing_plan, xendit_billing_plan) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", secure($_POST['name']), secure($_POST['price']), secure($_POST['period_num']), secure($_POST['period']), secure($_POST['color']), secure($_POST['icon']), secure($_POST['permissions_group'], 'int'), secure($_POST['allowed_videos_categories'], 'int'), secure($_POST['allowed_blogs_categories'], 'int'), secure($_POST['allowed_products'], 'int'), secure($_POST['verification_badge_enabled']), secure($_POST['boost_posts_enabled']), secure($_POST['boost_posts'], 'int'), secure($_POST['boost_pages_enabled']), secure($_POST['boost_pages'], 'int'), secure($_POST['custom_description']), secure($_POST['package_order'], 'int'), secure($paypal_billing_plan), secure($stripe_billing_plan), $xendit_billing_plan_sql));
+      $db->query(sprintf("INSERT INTO packages (name, price, period_num, period, color, icon, is_trial, package_permissions_group_id, allowed_videos_categories, allowed_blogs_categories, allowed_products, verification_badge_enabled, boost_posts_enabled, boost_posts, boost_pages_enabled, boost_pages, custom_description, package_order, paypal_billing_plan, stripe_billing_plan, xendit_billing_plan) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", secure($_POST['name']), secure($_POST['price']), secure($_POST['period_num']), secure($_POST['period']), secure($_POST['color']), secure($_POST['icon']), secure($_POST['trial_enabled'], 'int'), secure($_POST['permissions_group'], 'int'), secure($_POST['allowed_videos_categories'], 'int'), secure($_POST['allowed_blogs_categories'], 'int'), secure($_POST['allowed_products'], 'int'), secure($_POST['verification_badge_enabled']), secure($_POST['boost_posts_enabled']), secure($_POST['boost_posts'], 'int'), secure($_POST['boost_pages_enabled']), secure($_POST['boost_pages'], 'int'), secure($_POST['custom_description']), secure($_POST['package_order'], 'int'), secure($paypal_billing_plan), secure($stripe_billing_plan), $xendit_billing_plan_sql));
       /* return */
       return_json(['callback' => 'window.location = "' . $system['system_url'] . '/' . $control_panel['url'] . '/pro/packages";']);
       break;

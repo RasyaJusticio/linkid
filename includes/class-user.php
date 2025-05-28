@@ -1630,19 +1630,34 @@ class User
   /**
    * get_pro_members
    * 
+   * @param bool $exclude_trial Whether to exclude users with trial packages
    * @return array
    */
-  public function get_pro_members()
+  public function get_pro_members($exclude_trial = false)
   {
     global $db, $system;
     $pro_members = [];
-    $get_pro_members = $db->query(sprintf("SELECT user_id, user_name, user_firstname, user_lastname, user_gender, user_picture, user_subscribed, user_verified FROM users WHERE user_subscribed = '1' ORDER BY RAND() LIMIT %s", $system['max_results']));
+  
+    $sql = "SELECT users.user_id, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture, users.user_subscribed, users.user_verified 
+            FROM users";
+  
+    if ($exclude_trial) {
+      $sql .= " INNER JOIN packages ON users.user_package = packages.package_id WHERE users.user_subscribed = '1' AND packages.is_trial = '0'";
+    } else {
+      $sql .= " WHERE users.user_subscribed = '1'";
+    }
+  
+    $sql .= " ORDER BY RAND() LIMIT " . $system['max_results'];
+  
+    $get_pro_members = $db->query($sql);
+  
     if ($get_pro_members->num_rows > 0) {
       while ($user = $get_pro_members->fetch_assoc()) {
         $user['user_picture'] = get_picture($user['user_picture'], $user['user_gender']);
         $pro_members[] = $user;
       }
     }
+  
     return $pro_members;
   }
 

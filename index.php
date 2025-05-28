@@ -488,7 +488,7 @@ try {
     // get pro members & pages
     if ($system['packages_enabled']) {
       // get pro members
-      $pro_members = $user->get_pro_members();
+      $pro_members = $user->get_pro_members(true);
       /* assign variables */
       $smarty->assign('pro_members', $pro_members);
       // get promoted pages

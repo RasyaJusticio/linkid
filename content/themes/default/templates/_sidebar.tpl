@@ -10,7 +10,7 @@
           {include file='__svg_icons.tpl' icon="courses" class="main-icon mr10" width="24px" height="24px"}{("Qurani")}
         </a>
         <a href="{$system['system_url']}/mutabaah">
-          {include file='__svg_icons.tpl' icon="clock" class="main-icon mr10" width="24px" height="24px"}{__("Mutaba'ah")}
+          {include file='__svg_icons.tpl' icon="clock" class="main-icon mr10" width="24px" height="24px"}{__("Mutabaah")}
         </a>
       {/if}
       <!-- islamic -->

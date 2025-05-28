@@ -406,6 +406,18 @@
               </div>
             </div>
 
+            <div class="row form-group">
+              <label class="col-md-3 form-label">
+                {__("Mutabaah Description")}
+              </label>
+              <div class="col-md-9">
+                <textarea class="form-control" name="system_description_mutabaah" rows="3">{$system['system_description_mutabaah']}</textarea>
+                <div class="form-text">
+                  {__("Description of your mutabaah module")}
+                </div>
+              </div>
+            </div>
+
             <!-- success -->
             <div class="alert alert-success mt15 mb0 x-hidden"></div>
             <!-- success -->

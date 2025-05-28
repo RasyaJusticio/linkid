@@ -937,15 +937,16 @@ function valid_url($url)
  * valid_username
  *
  * @param string $username
+ * @param string $allowed_extra_chars Optional additional characters to allow (e.g., '-_.') 
  * @return boolean
  */
-function valid_username($username)
+function valid_username($username, $allowed_symbols = '_.')
 {
-  if (strlen($username) >= 3 && preg_match('/^[a-zA-Z0-9]+([_|.]?[a-zA-Z0-9])*$/', $username)) {
-    return true;
-  } else {
-    return false;
-  }
+    $escaped = preg_quote($allowed_symbols, '/');
+
+    $pattern = '/^[a-zA-Z0-9]+([' . $escaped . ']?[a-zA-Z0-9])*$/';
+
+    return strlen($username) >= 3 && preg_match($pattern, $username);
 }
 
 
@@ -7150,10 +7151,6 @@ function user_access($is_ajax = false, $bypass_subscription = false, $bypass_get
     if (!$user->_logged_in) {
       user_login($oauth_app_id);
     }
-    /* check registration type */
-    if ($system['registration_type'] == "paid" && $user->_data['user_group'] > '1' && !$user->_data['user_subscribed'] && !$bypass_subscription) {
-      redirect('/packages');
-    }
     /* check user activated */
     if ($system['activation_enabled'] && $system['activation_required'] && !$user->_data['user_activated']) {
       _error('ACTIVATION');
@@ -7161,6 +7158,10 @@ function user_access($is_ajax = false, $bypass_subscription = false, $bypass_get
     /* check user getted started */
     if ($system['getting_started'] && !$user->_data['user_started'] && !$bypass_getting_started) {
       redirect('/started');
+    }
+    /* check registration type */
+    if ($system['registration_type'] == "paid" && $user->_data['user_group'] > '1' && !$user->_data['user_subscribed'] && !$bypass_subscription) {
+      redirect('/packages');
     }
     /* check user approval */
     if ($system['users_approval_enabled'] && !$user->_data['user_approved'] && $user->_data['user_group'] >= '3') {

@@ -90,6 +90,7 @@ try {
     case 'out':
       // check the token
       if (!isset($_GET['cache']) || $_SESSION['secret'] != $_GET['cache']) {
+        redirect();
         exit;
       }
       // check user logged in

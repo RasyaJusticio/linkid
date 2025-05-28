@@ -9,23 +9,23 @@
   <div class="modal-body">
     <div class="form-group">
       <label class="form-label" for="title">{__("Name Your Group")}</label>
-      <input type="text" class="form-control" name="title" id="title">
+      <input type="text" class="form-group-title form-control" name="title" id="title">
     </div>
     <div class="form-group">
       <label class="form-label" for="username">{__("Group Username")}</label>
       <div class="input-group">
         <span class="input-group-text d-none d-sm-block">{$system['system_url']}/groups/</span>
-        <input type="text" class="form-control" name="username" id="username">
+        <input type="text" class="form-group-username form-control" name="username" id="username">
       </div>
       <div class="form-text">
-        {__("Can only contain alphanumeric characters (A–Z, 0–9) and periods ('.')")}
+        {__("Can only contain alphanumeric characters (A–Z, 0–9), periods ('.'), and hyphens ('-')")}
       </div>
     </div>
     <div class="form-group">
       <label class="form-label" for="privacy">{__("Select Privacy")}</label>
       <select class="form-select" name="privacy">
         <option value="public">{__("Public Group")}</option>
-        <option value="closed">{__("Closed Group")}</option>
+        <option value="closed" selected>{__("Closed Group")}</option>
         <option value="secret">{__("Secret Group")}</option>
       </select>
     </div>

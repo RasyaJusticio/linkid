@@ -2472,4 +2472,18 @@ $(function () {
     input.val(setAmount);
   });
 
+  $('body').on('input', '.form-group-title', function () {
+    var _this = $(this);
+    var usernameInput = _this.closest('.form-group').next('.form-group').find('.form-group-username');
+
+    if (slugify) {
+      usernameInput.val(slugify(_this.val(), {
+        lower: true,
+        remove: /[^a-zA-Z0-9. ]/g 
+      }));
+    } else {
+      console.error("`slugify` method is not found, please import the script first!");
+    }
+  });
+
 });

@@ -597,6 +597,9 @@ msgstr "Lihat"
 msgid "Games"
 msgstr "Pertandingan"
 
+msgid "Mutabaah"
+msgstr "Mutabaah"
+
 #: games.php:74 content/themes/default/templates/games.tpl:28
 msgid "Your Games"
 msgstr "Game Anda"
@@ -4174,6 +4177,12 @@ msgstr "Anda harus memperkenalkan alamat web untuk grup Anda"
 msgid "Please enter a valid web address (a-z0-9_.) with minimum 3 characters long"
 msgstr ""
 "Masukkan alamat web yang sebenarnya (a-z0-9_.) Setidaknya 3 karakter dengan "
+"panjang"
+
+#: includes/class-user.php:13732 includes/class-user.php:13832
+msgid "Please enter a valid web address (a-z0-9.-) with minimum 3 characters long"
+msgstr ""
+"Masukkan alamat web yang sebenarnya (a-z0-9.-) Setidaknya 3 karakter dengan "
 "panjang"
 
 #: includes/class-user.php:13735 includes/class-user.php:13835
@@ -9201,6 +9210,11 @@ msgstr "Nama pengguna grup"
 msgid "Can only contain alphanumeric characters (A–Z, 0–9) and periods ('.')"
 msgstr "Mungkin hanya berisi simbol alfanumerik (a-z, 0–9) dan poin ('.')"
 
+#: content/themes/default/templates/group.tpl:1217
+#: content/themes/default/templates/ajax.group.publisher.tpl:21
+msgid "Can only contain alphanumeric characters (A–Z, 0–9), periods ('.'), and hyphens ('-')"
+msgstr "Hanya boleh berisi karakter alfanumerik (A–Z, 0–9), titik ('.'), dan tanda hubung ('-')"
+
 #: content/themes/default/templates/group.tpl:1228
 #: content/themes/default/templates/admin.groups.tpl:225
 msgid "Note: Change group privacy to public will approve any pending join requests"
@@ -11659,13 +11673,21 @@ msgstr "Deskripsi Modul Film Anda"
 #: content/themes/default/templates/admin.settings.tpl:399
 #, fuzzy
 msgid "Games Description"
-msgstr "Teks pengumuman"
+msgstr "Deskripsi Gim"
+
+#, fuzzy
+msgid "Mutabaah Description"
+msgstr "Deskripsi Mutabaah"
 
 # msgid "Description of your website"
 #: content/themes/default/templates/admin.settings.tpl:404
 #, fuzzy
 msgid "Description of your games module"
 msgstr "Deskripsi Situs Anda"
+
+#, fuzzy
+msgid "Description of your mutabaah module"
+msgstr "Deskripsi Mutabaah Anda"
 
 #: content/themes/default/templates/admin.settings.tpl:434
 msgid "Turn the pages On and Off"
@@ -25911,8 +25933,6 @@ msgstr "Apakah anda yakin ingin menandai setoran ini sebagai diparaf?"
 msgid ""
 msgstr "Ya, Paraf"
 
-# ----------------\ #
-
 # \---------------- #
 # Bagian Halaman Utama
 
@@ -25961,7 +25981,6 @@ msgstr "Diikuti oleh"
 #: content/themes/default/templates/profile.tpl:652
 msgid "people"
 msgstr "orang"
-
 
 #: content/themes/default/templates/group.tpl:198
 #: content/themes/default/templates/__feeds_comment.tpl:18

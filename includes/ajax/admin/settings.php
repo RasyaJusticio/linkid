@@ -93,7 +93,8 @@ try {
         'system_description_courses' => secure($_POST['system_description_courses']),
         'system_description_forums' => secure($_POST['system_description_forums']),
         'system_description_movies' => secure($_POST['system_description_movies']),
-        'system_description_games' => secure($_POST['system_description_games'])
+        'system_description_games' => secure($_POST['system_description_games']),
+        'system_description_mutabaah' => secure($_POST['system_description_mutabaah'])
       ]);
       break;
 

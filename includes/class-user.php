@@ -18530,7 +18530,7 @@ class User
     /* Xendit billing plan */
     $xendit_billing_plan = 'NULL';
     $xendit_recurring_enabled = $system['xendit_enabled'];
-    if ($xendit_recurring_enabled && $price > 0 && !in_array($period, ['minute', 'hour'])) {
+    if ($xendit_recurring_enabled && $price > 0 && !in_array($period, ["minute", "hour", "day", "week", "year", "life"])) {
       /* create Xendit billing plan */
       $xendit_billing_plan = xendit_create_billing_plan($period_num, strtoupper($period), $price);
     }
@@ -18620,7 +18620,7 @@ class User
     /* Xendit billing plan */
     $xendit_billing_plan = $monetization_plan['xendit_billing_plan'];
     $xendit_recurring_enabled = $system['xendit_enabled'];
-    if ($xendit_recurring_enabled && $price > 0 && !in_array($period, ['minute', 'hour'])) {
+    if ($xendit_recurring_enabled && $price > 0 && !in_array($period, ["minute", "hour", "day", "week", "year", "life"])) {
       /* check if Xendit billing plan is not created */
       if (is_empty($xendit_billing_plan)) {
         /* create Xendit billing plan */

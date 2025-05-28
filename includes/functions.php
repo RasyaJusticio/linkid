@@ -5064,6 +5064,29 @@ function paypal_deactivate_billing_plan($billing_plan_id)
   $access_token = paypal_access_token();
   /* prepare API url */
   $paypal_api_url = ($system['paypal_mode'] == "sandbox") ? "https://api-m.sandbox.paypal.com" : "https://api.paypal.com";
+
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $paypal_api_url . '/v1/billing/plans/' . $billing_plan_id);
+  curl_setopt($ch, CURLOPT_HEADER, 0);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'Authorization: Bearer ' . $access_token]);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  $response = curl_exec($ch);
+  $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  if (curl_errno($ch)) {
+    throw new Exception("Error checking plan status");
+  }
+  curl_close($ch);
+
+  $plan_data = json_decode($response);
+  if ($httpCode != 200 || !isset($plan_data->status)) {
+    throw new Exception("Unable to retrieve plan status");
+  }
+
+  if ($plan_data->status === 'INACTIVE') {
+    return;
+  }
+
   /* deactivate plan */
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $paypal_api_url . '/v1/billing/plans/' . $billing_plan_id . '/deactivate');

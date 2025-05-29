@@ -1073,4 +1073,10 @@
   {/if}
   <!-- Mouse Right Click Disabled -->
 
+  {if $page == "wallet"}
+    <style type="text/css">
+      {include file="../css/custom/wallet.css"}
+    </style>
+  {/if}
+
 {/strip}

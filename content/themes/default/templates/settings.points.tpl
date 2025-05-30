@@ -134,7 +134,7 @@
           <div class="stat-cell">
             <i class="fa fa-piggy-bank bg-icon"></i>
             <div class="h3 mtb10">
-              {$user->_data['user_points']} {__("Points")}
+              {$user->_data['user_points']|format_number:2} {__("Points")}
             </div>
           </div>
         </div>

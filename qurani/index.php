@@ -16,7 +16,7 @@ user_access();
 $user_id = $user->_data['user_id'];
 $current_language = $system['current_language'];
 $theme_mode_night = $system['theme_mode_night'];
-$session_hash = get_hash_token();
+$session_hash = $user->_data['session_token'];
 
 $smarty->assign('c_user', $user_id);
 $smarty->assign('s_lang', $current_language);

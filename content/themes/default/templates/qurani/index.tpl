@@ -1,7 +1,7 @@
 {include file='_head.tpl'}
 {include file='_header.tpl'}
 
-<iframe src="{$system['qurani_url']}" id="qurani-iframe"></iframe>
+<iframe src="{$system['qurani_url']}" name="qurani-iframe" id="qurani-iframe"></iframe>
 
 <style>
   #qurani-iframe {

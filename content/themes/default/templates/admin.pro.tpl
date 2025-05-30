@@ -136,7 +136,7 @@
                     </a>
                   {/if}
                 </td>
-                <td>{print_money($row['price'])}</td>
+                <td>{print_money($row['price']|format_number)}</td>
                 <td>
                   {if $row['period'] == 'life'}
                     {__("Life Time")}
@@ -421,6 +421,21 @@
           </div>
         </div>
 
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            {__("Trial Enabled")}
+          </label>
+          <div class="col-md-9">
+            <label class="switch" for="trial_enabled">
+              <input type="checkbox" name="trial_enabled" id="trial_enabled" {if $data['is_trial']}checked{/if}>
+              <span class="slider round"></span>
+            </label>
+            <div class="form-text">
+              {__("Enable trial package. Trial package can only be bought once")}
+            </div>
+          </div>
+        </div>
+
         <!-- success -->
         <div class="alert alert-success mt15 mb0 x-hidden"></div>
         <!-- success -->
@@ -679,6 +694,21 @@
           </label>
           <div class="col-md-9">
             <input class="form-control" name="package_order">
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            {__("Trial Enabled")}
+          </label>
+          <div class="col-md-9">
+            <label class="switch" for="trial_enabled">
+              <input type="checkbox" name="trial_enabled" id="trial_enabled" {if $data['is_trial']}checked{/if}>
+              <span class="slider round"></span>
+            </label>
+            <div class="form-text">
+              {__("Enable trial package. Trial package can only be bought once")}
+            </div>
           </div>
         </div>
 

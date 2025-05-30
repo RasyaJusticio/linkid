@@ -14,7 +14,7 @@
 <!-- page header -->
 
 <!-- page content -->
-<div class="{if $system['fluid_design']}container-fluid{else}container{/if} sg-offcanvas" style="margin-top: -25px;">
+<div class="{if $system['fluid_design']}container-fluid{else}container{/if} sg-offcanvas">
   <div class="row">
 
     <!-- side panel -->
@@ -33,7 +33,7 @@
             <li {if $view == ""}class="active" {/if}>
               <a href="{$system['system_url']}/wallet">
                 {include file='__svg_icons.tpl' icon="wallet" class="main-icon mr10" width="24px" height="24px"}
-                <span class="d-none d-xl-inline-block ml5">{__("Wallet")}</span>
+                <span class="d-none d-xl-inline-block ml6">{__("Wallet")}</span>
               </a>
             </li>
             {if $system['wallet_withdrawal_enabled']}

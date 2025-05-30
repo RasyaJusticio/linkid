@@ -597,6 +597,9 @@ msgstr "Lihat"
 msgid "Games"
 msgstr "Pertandingan"
 
+msgid "Mutabaah"
+msgstr "Mutabaah"
+
 #: games.php:74 content/themes/default/templates/games.tpl:28
 msgid "Your Games"
 msgstr "Game Anda"
@@ -4161,6 +4164,12 @@ msgstr "Anda harus memperkenalkan alamat web untuk grup Anda"
 msgid "Please enter a valid web address (a-z0-9_.) with minimum 3 characters long"
 msgstr ""
 "Masukkan alamat web yang sebenarnya (a-z0-9_.) Setidaknya 3 karakter dengan "
+"panjang"
+
+#: includes/class-user.php:13732 includes/class-user.php:13832
+msgid "Please enter a valid web address (a-z0-9.-) with minimum 3 characters long"
+msgstr ""
+"Masukkan alamat web yang sebenarnya (a-z0-9.-) Setidaknya 3 karakter dengan "
 "panjang"
 
 #: includes/class-user.php:13735 includes/class-user.php:13835
@@ -9188,6 +9197,11 @@ msgstr "Nama pengguna grup"
 msgid "Can only contain alphanumeric characters (A–Z, 0–9) and periods ('.')"
 msgstr "Mungkin hanya berisi simbol alfanumerik (a-z, 0–9) dan poin ('.')"
 
+#: content/themes/default/templates/group.tpl:1217
+#: content/themes/default/templates/ajax.group.publisher.tpl:21
+msgid "Can only contain alphanumeric characters (A–Z, 0–9), periods ('.'), and hyphens ('-')"
+msgstr "Hanya boleh berisi karakter alfanumerik (A–Z, 0–9), titik ('.'), dan tanda hubung ('-')"
+
 #: content/themes/default/templates/group.tpl:1228
 #: content/themes/default/templates/admin.groups.tpl:225
 msgid "Note: Change group privacy to public will approve any pending join requests"
@@ -11593,13 +11607,21 @@ msgstr "Deskripsi Modul Film Anda"
 #: content/themes/default/templates/admin.settings.tpl:399
 #, fuzzy
 msgid "Games Description"
-msgstr "Teks pengumuman"
+msgstr "Deskripsi Gim"
+
+#, fuzzy
+msgid "Mutabaah Description"
+msgstr "Deskripsi Mutabaah"
 
 # msgid "Description of your website"
 #: content/themes/default/templates/admin.settings.tpl:404
 #, fuzzy
 msgid "Description of your games module"
 msgstr "Deskripsi Situs Anda"
+
+#, fuzzy
+msgid "Description of your mutabaah module"
+msgstr "Deskripsi Mutabaah Anda"
 
 #: content/themes/default/templates/admin.settings.tpl:434
 msgid "Turn the pages On and Off"
@@ -25821,8 +25843,6 @@ msgstr "Apakah anda yakin ingin menandai setoran ini sebagai diparaf?"
 msgid ""
 msgstr "Ya, Paraf"
 
-# ----------------\ #
-
 # \---------------- #
 # Bagian Halaman Utama
 
@@ -25881,221 +25901,5 @@ msgstr "orang"
 #: content/themes/default/templates/page.tpl:221
 msgid "Report"
 msgstr "Laporkan"
-
-# ----------------\ #
-
-# \---------------- #
-# Bagian Setting
-
-#: content/themes/default/templates/settings.account.tpl:17
-msgid "Email Verification Required"
-msgstr "Diperlukan Verifikasi Email"
-
-#: content/themes/default/templates/settings.account.tpl:18
-msgid "Check your email inbox"
-msgstr "Periksa kotak surat anda"
-
-# msgid "Resend Verification Email"
-#: content/themes/default/templates/admin.tools.tpl:641
-#, fuzzy
-msgid "Resend Activation Emails"
-msgstr "Kirim Ulang Aktivasi Email"
-
-#: content/themes/default/templates/activation.tpl:35
-#: content/themes/default/templates/_header.tpl:25
-#: content/themes/default/templates/settings.account.tpl:19
-msgid "Resend Verification Email"
-msgstr "Kirim Ulang Verifikasi Email"
-
-# ----------------\ #
-
-# \---------------- #
-# Bagian Jadwal
-
-msgid "Scheduled Posts"
-msgstr "Postingan Terjadwal"
-
-# ----------------\ #
-
-# \---------------- #
-# Bagian Mata Uang
-
-msgid "Currencies"
-msgstr "Mata Uang"
-
-#~ msgid "Please select valid currency"
-#~ msgstr "Pilih mata uang yang berlaku"
-
-#~ msgid "Currency"
-#~ msgstr "Mata uang"
-
-msgid "Exchange Rate History"
-msgstr "Riwayat Nilai Tukar"
-
-msgid "Exchange Rate"
-msgstr "Nilai Tukar"
-
-msgid "Retrived At"
-msgstr "Diambil"
-
-# ----------------\ #
-
-
-# \---------------- #
-# Kategori Penawaran
-
-msgid "Apparel & Accessories"
-msgstr "Pakaian & Aksesoris"
-
-msgid "Autos & Vehicles"
-msgstr "Mobil & Kendaraan"
-
-msgid "Baby & Children's Products"
-msgstr "Produk Bayi & Anak-anak"
-
-msgid "Beauty Products & Services"
-msgstr "Produk & Layanan Kecantikan"
-
-msgid "Computers & Peripherals"
-msgstr "Komputer & Periferal"
-
-msgid "Consumer Electronics"
-msgstr "Barang Elektronik Konsumen"
-
-msgid "Dating Services"
-msgstr "Layanan Kencan"
-
-msgid "Financial Services"
-msgstr "Layanan Keuangan"
-
-msgid "Gifts & Occasions"
-msgstr "Hadiah & Acara"
-
-msgid "Home & Garden"
-msgstr "Rumah & Taman"
-
-# ----------------\ #
-
-# \---------------- #
-# Bagian Setting Admin Panel
-
-msgid "Qurani Settings"
-msgstr "Pengaturan Qurani"
-
-
-#: admin.php:136 content/themes/default/templates/admin.users.tpl:446
-#: content/themes/default/templates/admin.tpl:46
-msgid "Registration Settings"
-msgstr "Pengaturan Pendaftaran"
-
-# ----------------\ #
-
-# \---------------- #
-# Bagian Setting System Admin Panel
-
-#: content/themes/default/templates/admin.settings.tpl:32
-msgid "Features"
-msgstr "Fitur"
-
-#: content/themes/default/templates/admin.settings.tpl:69
-msgid "The text that is presented when the site is closed"
-msgstr "Teks yang ditampilkan saat situs ditutup"
-
-
-#: content/themes/default/templates/admin.settings.tpl:87
-msgid "The contact email that all messages send to"
-msgstr "Email kontak yang dikirim ke semua pesan"
-
-
-#: content/themes/default/templates/admin.settings.tpl:94
-msgid "System Datetime Format"
-msgstr "Format Waktu Data Sistem"
-
-
-#: content/themes/default/templates/admin.settings.tpl:109
-msgid "System Distance Unit"
-msgstr "Satuan Jarak Sistem"
-
-
-#: content/themes/default/templates/admin.settings.tpl:124f
-msgid "System Currency"
-msgstr "Mata Uang Sistem"
-
-# ----------------\ #
-
-# \---------------- #
-# Bagian Setting System General Admin Panel
-
-msgid "Turn the entire website On and Off"
-msgstr "Mengaktifkan dan menonaktifkan seluruh situs web"
-
-#: content/themes/default/templates/admin.settings.tpl:64
-msgid "Shutdown Message"
-msgstr "Pesan Saat Dinonaktifkan"
-
-msgid "We Will Back Soon"
-msgstr "Kami Akan Segera Kembali"
-
-# ----------------\ #
-
-# \---------------- #
-# Bagian Setting System SEO Admin Panel
-
-#: content/themes/default/templates/admin.settings.tpl:164
-msgid "Website Public"
-msgstr "Situs Web Publik"
-
-#: content/themes/default/templates/admin.settings.tpl:180
-#, fuzzy
-msgid "Newsfeed Public"
-msgstr "Saluran Berita Publik"
-
-#: content/themes/default/templates/admin.settings.tpl:183
-msgid "Enable this will make your website public and list only public posts"
-msgstr "Mengaktifkan ini akan membuat situs web Anda menjadi publik dan hanya mencantumkan postingan publik"
-
-#: content/themes/default/templates/admin.settings.tpl:182
-msgid "Make the newsfeed available for visitors in landing page"
-msgstr "Buat saluran berita tersedia untuk pengunjung di halaman utama"
-
-#: directory.php:29 content/themes/default/templates/admin.settings.tpl:199
-#: content/themes/default/templates/_footer.links.tpl:40
-#: content/themes/default/templates/directory.tpl:10
-#: content/themes/default/templates/admin.widgets.tpl:103
-#: content/themes/default/templates/admin.widgets.tpl:199
-#: content/themes/default/templates/_footer_mini.tpl:42
-#: content/themes/default/templates/admin.ads.tpl:338
-#: content/themes/default/templates/admin.ads.tpl:442
-msgid "Directory"
-msgstr "Direktori"
-
-
-#: content/themes/default/templates/admin.settings.tpl:201
-msgid "Enable the directory for better SEO results"
-msgstr "Aktifkan direktori untuk hasil SEO yang lebih baik"
-
-
-#: content/themes/default/templates/admin.settings.tpl:165
-#: content/themes/default/templates/admin.settings.tpl:202
-msgid "Make the website public to allow non logged users to view website content"
-msgstr "Jadikan situs web publik agar pengguna yang belum daftar dapat melihat konten situs web"
-
-# ----------------\ #
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-# \---------------- #
-
-#: done
-msgid "You can advertise for a URL or one of your posts, pages, groups or events"
-msgstr "Anda dapat mengiklankan URL atau salah satu postingan, halaman, grup, atau acara Anda"
-
-#: done
-msgid "sent merit"
-msgstr "kirim penghargaan"
-
-#: done
-msgid "Verified Status"
-msgstr "Status Terverifikasi"
 
 # ----------------\ #

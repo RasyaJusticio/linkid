@@ -15,11 +15,6 @@ if (!$user->_logged_in) {
   user_login();
 }
 
-// check registration type
-if ($system['registration_type'] == "paid" && !$user->_data['user_subscribed']) {
-  redirect('/packages');
-}
-
 // check if already getted started
 if (!$system['getting_started'] || $user->_data['user_started']) {
   redirect();

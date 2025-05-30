@@ -843,11 +843,12 @@ function extarct_hash_token($file_name)
 function set_cookie($cookie_name, $cookie_value, $is_expired = false)
 {
   $secured = (get_system_protocol() == "https") ? true : false;
+  $domain = (get_system_protocol() == "https") ? '.link.id' : '';
   $expire_time = ($is_expired) ?  0 : time() + 2592000;
   $options = [
     'expires' => $expire_time,
     'path' => '/',
-    'domain' => '',
+    'domain' => $domain,
     'secure' => $secured,
     'httponly' => true,
     'samesite' => 'Lax'

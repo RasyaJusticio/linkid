@@ -40,7 +40,7 @@ msgstr "Pribadi"
 #: content/themes/default/templates/_sidebar.tpl:248
 #: content/themes/default/templates/admin.tpl:465
 msgid "Movies"
-msgstr "Bioskop"
+msgstr "Film"
 
 #: movies.php:140 ads.php:99 developers.php:125 event.php:298 wallet.php:125
 #: group.php:371 settings.php:638 index.php:414 post.php:53 games.php:115
@@ -519,7 +519,7 @@ msgstr "Postingan Populer"
 #: content/themes/default/templates/admin.settings.tpl:1170
 #: content/themes/default/templates/_sidebar.tpl:32
 msgid "Discover Posts"
-msgstr "Temukan pesan"
+msgstr "Temukan Postingan"
 
 #: index.php:322 index.php:342
 #: content/themes/default/templates/index.newsfeed.tpl:217
@@ -574,14 +574,6 @@ msgstr "Pesan yang ditingkatkan"
 msgid "Boosted Pages"
 msgstr "Halaman yang ditingkatkan"
 
-#: index.php:314 content/themes/default/templates/index.newsfeed.tpl:253
-#: content/themes/default/templates/admin.settings.tpl:638
-#: content/themes/default/templates/movies.tpl:217
-#: content/themes/default/templates/admin.permissions_groups.tpl:939
-#: content/themes/default/templates/_footer.bottom_bar.tpl:18
-#: content/themes/default/templates/_sidebar.tpl:183
-msgid "Watch"
-msgstr "Lihat"
 
 #: games.php:29 games.php:59 admin.php:2374 admin.php:2412 admin.php:2417
 #: admin.php:2431 admin.php:2457 admin.php:2462
@@ -595,7 +587,7 @@ msgstr "Lihat"
 #: content/themes/default/templates/_sidebar.tpl:256
 #: content/themes/default/templates/admin.tpl:487
 msgid "Games"
-msgstr "Pertandingan"
+msgstr "Permainan"
 
 #: games.php:74 content/themes/default/templates/games.tpl:28
 msgid "Your Games"
@@ -693,30 +685,6 @@ msgstr "Mencari"
 msgid "File not found"
 msgstr "Informasi tentang halaman tersebut"
 
-#: reels.php:43 content/themes/default/templates/group.tpl:261
-#: content/themes/default/templates/group.tpl:766
-#: content/themes/default/templates/group.tpl:807
-#: content/themes/default/templates/group.tpl:819
-#: content/themes/default/templates/admin.settings.tpl:618
-#: content/themes/default/templates/_posts.tpl:88
-#: content/themes/default/templates/event.tpl:233
-#: content/themes/default/templates/event.tpl:740
-#: content/themes/default/templates/event.tpl:777
-#: content/themes/default/templates/event.tpl:789
-#: content/themes/default/templates/ajax.load_more.tpl:11
-#: content/themes/default/templates/profile.tpl:310
-#: content/themes/default/templates/profile.tpl:1590
-#: content/themes/default/templates/profile.tpl:1631
-#: content/themes/default/templates/profile.tpl:1643
-#: content/themes/default/templates/admin.permissions_groups.tpl:183
-#: content/themes/default/templates/admin.permissions_groups.tpl:921
-#: content/themes/default/templates/page.tpl:277
-#: content/themes/default/templates/page.tpl:850
-#: content/themes/default/templates/page.tpl:891
-#: content/themes/default/templates/page.tpl:903
-#: content/themes/default/templates/_sidebar.tpl:173
-msgid "Reels"
-msgstr "Reels"
 
 #: events.php:37 events.php:65 admin.php:1464 admin.php:1490 admin.php:1539
 #: admin.php:1544 admin.php:1572 admin.php:1577
@@ -1134,7 +1102,7 @@ msgstr "Mengobrol"
 #: admin.php:169 content/themes/default/templates/admin.tpl:76
 #, fuzzy
 msgid "Live Stream Settings"
-msgstr "Pengaturan Sistem"
+msgstr "Pengaturan Siaran Langsung"
 
 #: admin.php:174 content/themes/default/templates/admin.movies.tpl:135
 #: content/themes/default/templates/admin.movies.tpl:341
@@ -2443,7 +2411,7 @@ msgstr "Apa yang kamu mainkan?"
 
 #: includes/functions.php:6794
 msgid "Eating"
-msgstr "Saya makan"
+msgstr "Makan"
 
 #: includes/functions.php:6794
 msgid "What are you eating?"
@@ -7171,7 +7139,7 @@ msgstr "Ini hidup tidak ada lagi"
 #: content/themes/default/templates/_publisher.tpl:660
 #: content/themes/default/templates/_footer.bottom_bar.tpl:37
 msgid "Post"
-msgstr "Menerbitkan"
+msgstr "Posting"
 
 #: includes/ajax/data/report.php:51
 msgid "Your report has been submitted"
@@ -8445,7 +8413,7 @@ msgstr "Pembayaran koin dinonaktifkan"
 #: content/themes/default/templates/admin.bank.tpl:14
 #: content/themes/default/templates/admin.wallet.tpl:15
 msgid "Make sure you have configured"
-msgstr "Pastikan Anda mengatur semuanya"
+msgstr "Pastikan anda telah mengonfigurasi"
 
 #: content/themes/default/templates/admin.coinpayments.tpl:24
 msgid ""
@@ -8755,7 +8723,7 @@ msgstr "Bergabung"
 #: content/themes/default/templates/page.tpl:194
 #, fuzzy
 msgid "Review"
-msgstr "Tinjauan"
+msgstr "Ulasan"
 
 #: content/themes/default/templates/group.tpl:187
 #: content/themes/default/templates/movies.tpl:187
@@ -8912,7 +8880,7 @@ msgstr "Kursus Saya"
 #: content/themes/default/templates/page.tpl:986
 #, fuzzy
 msgid "Reviews"
-msgstr "Tinjauan"
+msgstr "Ulasan"
 
 #: content/themes/default/templates/group.tpl:278
 #: content/themes/default/templates/group.tpl:949
@@ -10517,7 +10485,7 @@ msgstr "Bukan siapa-siapa"
 #: content/themes/default/templates/admin.settings.tpl:3171
 #: content/themes/default/templates/admin.users.tpl:976
 msgid "Who can poke you"
-msgstr "Siapa yang bisa menyodokmu"
+msgstr "Siapa yang bisa menyapamu"
 
 #: content/themes/default/templates/settings.privacy.tpl:102
 #: content/themes/default/templates/admin.settings.tpl:3189
@@ -10529,7 +10497,7 @@ msgstr "Siapa yang bisa mengirimkan hadiah"
 #: content/themes/default/templates/admin.settings.tpl:3207
 #: content/themes/default/templates/admin.users.tpl:1016
 msgid "Who can post on your wall"
-msgstr "Siapa yang bisa menerbitkan di dinding"
+msgstr "Siapa yang dapat memposting di dinding Anda"
 
 #: content/themes/default/templates/settings.privacy.tpl:133
 #: content/themes/default/templates/settings.privacy.tpl:153
@@ -11198,7 +11166,7 @@ msgstr "Undang teman"
 #: content/themes/default/templates/ajax.addresses.edit.tpl:4
 #, fuzzy
 msgid "Edit Address"
-msgstr "EL. surat"
+msgstr "Ubah Alamat"
 
 #: content/themes/default/templates/ajax.addresses.edit.tpl:25
 #: content/themes/default/templates/_js_templates.tpl:2206
@@ -11459,17 +11427,12 @@ msgstr "Judul Website"
 msgid "Title of your website"
 msgstr "Nama Situs"
 
-#: content/themes/default/templates/admin.settings.tpl:229
-msgid "Website Description"
-msgstr "Meta-Desription Lapangan"
+
 
 #: content/themes/default/templates/admin.settings.tpl:234
 msgid "Description of your website"
 msgstr "Deskripsi Situs Anda"
 
-#: content/themes/default/templates/admin.settings.tpl:241
-msgid "Website Keywords"
-msgstr "Kata meta-kunci bidang"
 
 # msgid "Example: social, sngine, social site"
 #: content/themes/default/templates/admin.settings.tpl:246
@@ -11485,11 +11448,6 @@ msgstr "Deskripsi Direktori"
 msgid "Description of your Directory"
 msgstr "Deskripsi Direktori Anda"
 
-# msgid "Ads Description"
-#: content/themes/default/templates/admin.settings.tpl:267
-#, fuzzy
-msgid "Pages Description"
-msgstr "Teks pengumuman"
 
 # msgid "Description of your website"
 #: content/themes/default/templates/admin.settings.tpl:272
@@ -11497,11 +11455,6 @@ msgstr "Teks pengumuman"
 msgid "Description of your pages module"
 msgstr "Deskripsi Situs Anda"
 
-# msgid "Ads Description"
-#: content/themes/default/templates/admin.settings.tpl:279
-#, fuzzy
-msgid "Groups Description"
-msgstr "Teks pengumuman"
 
 # msgid "Description of your website"
 #: content/themes/default/templates/admin.settings.tpl:284
@@ -11509,11 +11462,6 @@ msgstr "Teks pengumuman"
 msgid "Description of your groups module"
 msgstr "Deskripsi Situs Anda"
 
-# msgid "Ads Description"
-#: content/themes/default/templates/admin.settings.tpl:291
-#, fuzzy
-msgid "Events Description"
-msgstr "Teks pengumuman"
 
 # msgid "Description of your website"
 #: content/themes/default/templates/admin.settings.tpl:296
@@ -11529,43 +11477,26 @@ msgstr "Deskripsi Blog"
 msgid "Description of your blogs module"
 msgstr "Deskripsi Modul Blog Anda"
 
-#: content/themes/default/templates/admin.settings.tpl:315
-msgid "Marketplace Description"
-msgstr "Deskripsi pasar"
 
 #: content/themes/default/templates/admin.settings.tpl:320
 msgid "Description of your marketplace module"
 msgstr "Deskripsi Modul Pasar Anda"
 
-#: content/themes/default/templates/admin.settings.tpl:327
-msgid "Funding Description"
-msgstr "Deskripsi pendanaan"
 
 #: content/themes/default/templates/admin.settings.tpl:332
 msgid "Description of your funding module"
 msgstr "Deskripsi Modul Pendanaan Anda"
 
-#: content/themes/default/templates/admin.settings.tpl:339
-msgid "Offers Description"
-msgstr "Menawarkan deskripsi"
 
 #: content/themes/default/templates/admin.settings.tpl:344
 msgid "Description of your offer module"
 msgstr "Deskripsi Modul Penawaran Anda"
 
-#: content/themes/default/templates/admin.settings.tpl:351
-msgid "Jobs Description"
-msgstr "Deskripsi pekerjaan"
 
 #: content/themes/default/templates/admin.settings.tpl:356
 msgid "Description of your jobs module"
 msgstr "Deskripsi Modul Pekerjaan Anda"
 
-# msgid "Ads Description"
-#: content/themes/default/templates/admin.settings.tpl:363
-#, fuzzy
-msgid "Courses Description"
-msgstr "Teks pengumuman"
 
 # msgid "Description of your website"
 #: content/themes/default/templates/admin.settings.tpl:368
@@ -11573,297 +11504,11 @@ msgstr "Teks pengumuman"
 msgid "Description of your courses module"
 msgstr "Deskripsi Situs Anda"
 
-#: content/themes/default/templates/admin.settings.tpl:375
-msgid "Forums Description"
-msgstr "Deskripsi Forum"
 
 #: content/themes/default/templates/admin.settings.tpl:380
 msgid "Description of your forums module"
 msgstr "Deskripsi Modul Forum Anda"
 
-#: content/themes/default/templates/admin.settings.tpl:387
-msgid "Movies Description"
-msgstr "Deskripsi Film"
-
-#: content/themes/default/templates/admin.settings.tpl:392
-msgid "Description of your movies module"
-msgstr "Deskripsi Modul Film Anda"
-
-# msgid "Ads Description"
-#: content/themes/default/templates/admin.settings.tpl:399
-#, fuzzy
-msgid "Games Description"
-msgstr "Teks pengumuman"
-
-# msgid "Description of your website"
-#: content/themes/default/templates/admin.settings.tpl:404
-#, fuzzy
-msgid "Description of your games module"
-msgstr "Deskripsi Situs Anda"
-
-#: content/themes/default/templates/admin.settings.tpl:434
-msgid "Turn the pages On and Off"
-msgstr "Nyalakan dan Mati dan Mati"
-
-# msgid "preview"
-#: content/themes/default/templates/admin.settings.tpl:449
-#, fuzzy
-msgid "Pages Reviews"
-msgstr "Tinjauan Halaman"
-
-# msgid "Turn the stories On and Off"
-#: content/themes/default/templates/admin.settings.tpl:450
-#, fuzzy
-msgid "Turn the pages reviews On and Off"
-msgstr "Menyalakan dan mematikan cerita"
-
-#: content/themes/default/templates/admin.settings.tpl:465
-msgid "Pages Review Replacement"
-msgstr "Penggantian Tinjauan Halaman"
-
-#: content/themes/default/templates/admin.settings.tpl:466
-#: content/themes/default/templates/admin.settings.tpl:535
-#: content/themes/default/templates/admin.settings.tpl:601
-#: content/themes/default/templates/admin.settings.tpl:1752
-msgid "Enbale this to allow user to change his review"
-msgstr "Enbale Ini untuk memungkinkan pengguna mengubah ulasannya"
-
-#: content/themes/default/templates/admin.settings.tpl:481
-msgid "Pages Business ID (PBID)"
-msgstr "ID Bisnis Halaman (PBID)"
-
-# msgid "Turn the stories On and Off"
-#: content/themes/default/templates/admin.settings.tpl:483
-#, fuzzy
-msgid "Turn the page business ID On and Off"
-msgstr "Menyalakan dan mematikan cerita"
-
-#: content/themes/default/templates/admin.settings.tpl:484
-msgid ""
-"PBID is a unique ID for each page consists of 16 digits from country code "
-"and category id and page id"
-msgstr ""
-"PBID adalah ID unik untuk setiap halaman terdiri dari 16 digit dari kode "
-"negara dan ID kategori dan ID halaman"
-
-#: content/themes/default/templates/admin.settings.tpl:503
-msgid "Turn the groups On and Off"
-msgstr "Menghidupkan dan mematikan grup"
-
-# msgid "Search Results"
-#: content/themes/default/templates/admin.settings.tpl:518
-#, fuzzy
-msgid "Groups Reviews"
-msgstr "Hasil pencarian"
-
-# msgid "Turn the stories On and Off"
-#: content/themes/default/templates/admin.settings.tpl:519
-#, fuzzy
-msgid "Turn the groups reviews On and Off"
-msgstr "Menyalakan dan mematikan cerita"
-
-#: content/themes/default/templates/admin.settings.tpl:534
-msgid "Groups Review Replacement"
-msgstr "Penggantian Tinjauan Grup"
-
-#: content/themes/default/templates/admin.settings.tpl:553
-msgid "Turn the events On and Off"
-msgstr "Hidupkan dan mematikan acara"
-
-# msgid "Manage Events"
-#: content/themes/default/templates/admin.settings.tpl:568
-#, fuzzy
-msgid "Pages Events"
-msgstr "Manajemen acara"
-
-# msgid "Allow users to create accounts"
-#: content/themes/default/templates/admin.settings.tpl:569
-#, fuzzy
-msgid "Allow pages to create events"
-msgstr "Izinkan pengguna membuat akun"
-
-# msgid "Minimum Even Results"
-#: content/themes/default/templates/admin.settings.tpl:584
-#, fuzzy
-msgid "Events Reviews"
-msgstr "Hasil minimum bahkan"
-
-# msgid "Turn the stories On and Off"
-#: content/themes/default/templates/admin.settings.tpl:585
-#, fuzzy
-msgid "Turn the events reviews On and Off"
-msgstr "Menyalakan dan mematikan cerita"
-
-#: content/themes/default/templates/admin.settings.tpl:600
-msgid "Events Review Replacement"
-msgstr "Penggantian Tinjauan Acara"
-
-# msgid "Turn the stories On and Off"
-#: content/themes/default/templates/admin.settings.tpl:620
-#, fuzzy
-msgid "Turn the reels On and Off"
-msgstr "Menyalakan dan mematikan cerita"
-
-# msgid "Turn the movies On and Off"
-#: content/themes/default/templates/admin.settings.tpl:640
-#, fuzzy
-msgid "Turn the watch videos On and Off"
-msgstr "Menyalakan dan mematikan film"
-
-#: content/themes/default/templates/admin.settings.tpl:641
-msgid "Watch module will show all public videos at one place"
-msgstr "Tonton modul akan menampilkan semua video publik di satu tempat"
-
-#: content/themes/default/templates/admin.settings.tpl:660
-msgid "Turn the blogs On and Off"
-msgstr "Menghidupkan dan mematikan blog"
-
-#: content/themes/default/templates/admin.settings.tpl:679
-#, fuzzy
-msgid "Turn the offers On and Off"
-msgstr "Menyalakan dan keluar dari forum"
-
-#: content/themes/default/templates/admin.settings.tpl:699
-#, fuzzy
-msgid "Turn the jobs On and Off"
-msgstr "Menyalakan dan keluar dari forum"
-
-# msgid "Turn the stories On and Off"
-#: content/themes/default/templates/admin.settings.tpl:719
-#, fuzzy
-msgid "Turn the courses On and Off"
-msgstr "Menyalakan dan mematikan cerita"
-
-#: content/themes/default/templates/admin.settings.tpl:738
-msgid "Turn the forums On and Off"
-msgstr "Menyalakan dan keluar dari forum"
-
-#: content/themes/default/templates/admin.settings.tpl:753
-msgid "Online Users"
-msgstr "Pengguna online"
-
-#: content/themes/default/templates/admin.settings.tpl:754
-msgid "Show forums online users"
-msgstr "Tampilkan forum pengguna online"
-
-#: content/themes/default/templates/admin.settings.tpl:769
-msgid "Statistics"
-msgstr "Statistik"
-
-#: content/themes/default/templates/admin.settings.tpl:770
-msgid "Show forums statistics"
-msgstr "Tunjukkan statistik forum"
-
-#: content/themes/default/templates/admin.settings.tpl:788
-msgid "Turn the movies On and Off"
-msgstr "Menyalakan dan mematikan film"
-
-#: content/themes/default/templates/admin.settings.tpl:806
-msgid "Turn the games On and Off"
-msgstr "Game v"
-
-# msgid "Unusual Login Detection"
-#: content/themes/default/templates/admin.settings.tpl:840
-#, fuzzy
-msgid "Auto Language Detection"
-msgstr "Deteksi pintu masuk yang tidak biasa"
-
-#: content/themes/default/templates/admin.settings.tpl:841
-msgid "If enabled sytem will detect user language automatically"
-msgstr "Jika diaktifkan sytem akan mendeteksi bahasa pengguna secara otomatis"
-
-#: content/themes/default/templates/admin.settings.tpl:858
-#, fuzzy
-msgid "Fliter by Location"
-msgstr "Harap masukkan kata sandi Anda lagi"
-
-# msgid "If enabled users will be able to withdraw earned money"
-#: content/themes/default/templates/admin.settings.tpl:859
-#, fuzzy
-msgid "If enabled user will able to filter people, products ... etc by location"
-msgstr "Jika pengguna dapat menarik uang yang diperoleh"
-
-#: content/themes/default/templates/admin.settings.tpl:876
-#: content/themes/default/templates/contact.tpl:10
-#: content/themes/default/templates/_footer.links.tpl:35
-#: content/themes/default/templates/_footer_mini.tpl:35 modules/contact.php:19
-msgid "Contact Us"
-msgstr "Hubungi kami"
-
-#: content/themes/default/templates/admin.settings.tpl:877
-msgid "Turn the contact us page On and Off"
-msgstr "Halaman Umpan Balik VKL/OFF"
-
-#: content/themes/default/templates/admin.settings.tpl:894
-msgid "DayTime Messages"
-msgstr "Pesan harian"
-
-#: content/themes/default/templates/admin.settings.tpl:895
-msgid "Turn the DayTime Messages (Good Morning, Afternoon, Evening) On and Off"
-msgstr "Menyalakan dan memutuskan pesan siang hari (selamat pagi, siang, malam)"
-
-# msgid "Message"
-#: content/themes/default/templates/admin.settings.tpl:907
-#, fuzzy
-msgid "Morning Message"
-msgstr "Pesan"
-
-# msgid "Shutdown Message"
-#: content/themes/default/templates/admin.settings.tpl:916
-#, fuzzy
-msgid "Afternoon Message"
-msgstr "Penyelesaian pekerjaan"
-
-# msgid "New Message"
-#: content/themes/default/templates/admin.settings.tpl:925
-#, fuzzy
-msgid "Evening Message"
-msgstr "Pesan baru"
-
-#: content/themes/default/templates/admin.settings.tpl:939
-msgid "Pokes"
-msgstr "Suka"
-
-#: content/themes/default/templates/admin.settings.tpl:940
-msgid "Enable users to poke each others"
-msgstr "Izinkan pengguna untuk saling menyukai"
-
-#: content/themes/default/templates/admin.settings.tpl:959
-msgid "Enable users to send gifts to each others"
-msgstr "Izinkan pengguna untuk mengirim hadiah satu sama lain"
-
-#: content/themes/default/templates/admin.settings.tpl:978
-msgid "Cookie Consent"
-msgstr "Menyetujui penggunaan cookie"
-
-#: content/themes/default/templates/admin.settings.tpl:978
-#: content/themes/default/templates/admin.settings.tpl:2217
-#: content/themes/default/templates/admin.settings.tpl:2866
-#: content/themes/default/templates/admin.settings.tpl:2882
-msgid "GDPR"
-msgstr "GDPR"
-
-#: content/themes/default/templates/admin.settings.tpl:979
-msgid "Turn the cookie consent notification On and Off"
-msgstr "Inklusi dan pemutusan pemberitahuan persetujuan untuk penggunaan cookie"
-
-#: content/themes/default/templates/admin.settings.tpl:996
-msgid "Adblock Detector"
-msgstr "Detektor Adblock"
-
-#: content/themes/default/templates/admin.settings.tpl:998
-msgid "Turn the Adblock auto detector notification On and Off"
-msgstr "Menyalakan dan mematikan pemberitahuan Adblock Detektor Otomatis"
-
-#: content/themes/default/templates/admin.settings.tpl:998
-msgid "(Note: Admin is exception)"
-msgstr "(Catatan: Administrator adalah pengecualian)"
-
-#: content/themes/default/templates/admin.settings.tpl:999
-msgid "Red block message will appear to make user disable adblock from his browser"
-msgstr ""
-"Pesan blok merah akan tampak memaksa pengguna untuk menonaktifkan adblock "
-"dari browser -nya"
 
 #: content/themes/default/templates/admin.settings.tpl:1047
 msgid "Turn the stories On and Off"
@@ -13183,7 +12828,7 @@ msgstr "Menyalakan dan mematikan pemberitahuan suara"
 #: content/themes/default/templates/admin.design.tpl:154
 #: content/themes/default/templates/admin.design.tpl:205
 msgid "preview"
-msgstr "Tinjauan"
+msgstr "Ulasan"
 
 #: content/themes/default/templates/admin.settings.tpl:4031
 msgid "Enable/Disable email notifications system"
@@ -13328,12 +12973,12 @@ msgstr "Twilio API SECRET"
 #: content/themes/default/templates/admin.settings.tpl:4388
 #, fuzzy
 msgid "Live Stream"
-msgstr "Kelas Cecret Langsung"
+msgstr "Siaran Langsung"
 
 #: content/themes/default/templates/admin.settings.tpl:4401
 #, fuzzy
 msgid "Live Stream Enabled"
-msgstr "Status pengguna disertakan"
+msgstr "Siaran Langsung Diaktifkan"
 
 #: content/themes/default/templates/admin.settings.tpl:4402
 #, fuzzy
@@ -17181,7 +16826,7 @@ msgstr "Unduh"
 #: content/themes/default/templates/ajax.product.publisher.tpl:4
 #, fuzzy
 msgid "Create New Product"
-msgstr "Buat grup baru"
+msgstr "Buat produk baru"
 
 # msgid "Edit Product"
 #: content/themes/default/templates/ajax.product.publisher.tpl:12
@@ -17576,7 +17221,7 @@ msgstr "Kirim"
 #: content/themes/default/templates/_posts.tpl:3
 #: content/themes/default/templates/_sidebar.tpl:19
 msgid "Recent Updates"
-msgstr "Pembaruan Terkini"
+msgstr "Berita Terbaru"
 
 #: content/themes/default/templates/_sidebar.tpl:5
 msgid "Application"
@@ -17622,7 +17267,7 @@ msgstr "Buat Produk"
 #: content/themes/default/templates/_header.tpl:166
 #: content/themes/default/templates/_publisher.tpl:357
 msgid "Create Funding"
-msgstr "Buat dana"
+msgstr "Buat Pendanaan"
 
 # msgid "View Post"
 #: content/themes/default/templates/_posts.tpl:191
@@ -18309,7 +17954,7 @@ msgstr "Daftar dengan beberapa opsi"
 #: content/themes/default/templates/admin.colored_posts.tpl:251
 #: content/themes/default/templates/admin.stickers.tpl:29
 msgid "Preview"
-msgstr "Tinjauan"
+msgstr "Ulasan"
 
 #: content/themes/default/templates/admin.gifts.tpl:73
 #: content/themes/default/templates/admin.gifts.tpl:124
@@ -18753,7 +18398,7 @@ msgstr "Tambahkan saldo dompet"
 #: content/themes/default/templates/_publisher.tpl:381
 #, fuzzy
 msgid "Create Course"
-msgstr "Buat grup"
+msgstr "Buat Kursus"
 
 # msgid "Promoted Posts"
 #: content/themes/default/templates/courses.tpl:110
@@ -18979,7 +18624,7 @@ msgstr "Tidak ada hasil yang ditemukan"
 
 #: content/themes/default/templates/_js_translator.tpl:36
 msgid "You haved poked"
-msgstr "Anda menusuk"
+msgstr "Anda telah menyapa"
 
 #: content/themes/default/templates/_js_translator.tpl:37
 msgid "Touch to unmute"
@@ -19200,7 +18845,7 @@ msgstr "Video Anda sedang diproses, kami akan memberi tahu Anda saat sudah siap!
 #: content/themes/default/templates/_js_translator.tpl:87
 #, fuzzy
 msgid "Under Review"
-msgstr "Dalam tinjauan"
+msgstr "Dalam Ulasan"
 
 #: content/themes/default/templates/_js_translator.tpl:88
 msgid "Your post is under review now, We will let you know when it is ready!"
@@ -19701,7 +19346,7 @@ msgstr "Tautan IMDB, Contoh:"
 #: content/themes/default/templates/admin.movies.tpl:172
 #: content/themes/default/templates/admin.movies.tpl:378
 msgid "Movie Stars"
-msgstr "Bintang bioskop"
+msgstr "Bintang Film"
 
 #: content/themes/default/templates/admin.movies.tpl:177
 #: content/themes/default/templates/admin.movies.tpl:383
@@ -20331,7 +19976,7 @@ msgstr "Total penjualan"
 #: content/themes/default/templates/admin.earnings.tpl:310
 #, fuzzy
 msgid "Movie"
-msgstr "Bioskop"
+msgstr "Film"
 
 #: content/themes/default/templates/_album.tpl:9
 msgid "Add Photos"
@@ -21316,7 +20961,7 @@ msgstr "Meta-Desription Lapangan"
 #: content/themes/default/templates/_publisher.tpl:373
 #, fuzzy
 msgid "Create Job"
-msgstr "Membuat survei"
+msgstr "Tambahkan Pekerjaan"
 
 #: content/themes/default/templates/jobs.tpl:110
 #, fuzzy
@@ -21772,18 +21417,18 @@ msgstr "Jual produk baru"
 #: content/themes/default/templates/packages.tpl:196
 #, fuzzy
 msgid "Create Offers"
-msgstr "Buat halaman"
+msgstr "Buat Penawaran"
 
 #: content/themes/default/templates/packages.tpl:207
 #, fuzzy
 msgid "Create Jobs"
-msgstr "Membuat survei"
+msgstr "Tambahkan Pekerjaan"
 
 # msgid "Create Group"
 #: content/themes/default/templates/packages.tpl:218
 #, fuzzy
 msgid "Create Courses"
-msgstr "Buat grup"
+msgstr "Buat Kursus"
 
 # msgid "Forum Thread"
 #: content/themes/default/templates/packages.tpl:229
@@ -21801,7 +21446,7 @@ msgstr "Daftar film"
 #: content/themes/default/templates/packages.tpl:251
 #, fuzzy
 msgid "Play Games"
-msgstr "Pertandingan"
+msgstr "Bermain Game"
 
 # msgid "Send a Gift"
 #: content/themes/default/templates/packages.tpl:262
@@ -23292,8 +22937,8 @@ msgstr "Buat album"
 #: content/themes/default/templates/_publisher.tpl:365
 #: content/themes/default/templates/offers.tpl:40
 #, fuzzy
-msgid "Create Offer"
-msgstr "Buat halaman"
+msgid "Create Offer"    
+msgstr "Buat Penawaran"
 
 #: content/themes/default/templates/_publisher.tpl:390
 msgid "Create Poll"
@@ -23416,7 +23061,7 @@ msgstr "Kelola kategori yang diizinkan"
 
 #: content/themes/default/templates/__feeds_game.tpl:13
 msgid "Played"
-msgstr "Pertandingan"
+msgstr "Bermain"
 
 #: content/themes/default/templates/admin.permissions_groups.tpl:25
 msgid "System Permissions Groups"
@@ -23520,14 +23165,14 @@ msgstr "Buat halaman"
 #: content/themes/default/templates/admin.permissions_groups.tpl:1030
 #, fuzzy
 msgid "Can Create Jobs"
-msgstr "Buat aplikasi"
+msgstr "Dapat membuat pekerjaan"
 
 # msgid "Create Group"
 #: content/themes/default/templates/admin.permissions_groups.tpl:310
 #: content/themes/default/templates/admin.permissions_groups.tpl:1048
 #, fuzzy
 msgid "Can Create courses"
-msgstr "Buat grup"
+msgstr "Dapat membuat kursus"
 
 #: content/themes/default/templates/admin.permissions_groups.tpl:328
 #: content/themes/default/templates/admin.permissions_groups.tpl:1066
@@ -23721,7 +23366,7 @@ msgstr "Sesi aktif"
 #: content/themes/default/templates/admin.permissions_groups.tpl:1378
 #, fuzzy
 msgid "Can Go Live"
-msgstr "Siapa yang bisa menyodokmu"
+msgstr "Dapat ditayangkan"
 
 # msgid "Uploads Settings"
 #: content/themes/default/templates/admin.permissions_groups.tpl:655
@@ -23870,13 +23515,13 @@ msgstr "Menerbitkan"
 #: content/themes/default/templates/ajax.review.publisher.tpl:12
 #, fuzzy
 msgid "Rating"
-msgstr "Saya makan"
+msgstr "Nilai"
 
 # msgid "Invite Your Friends"
 #: content/themes/default/templates/ajax.review.publisher.tpl:28
 #, fuzzy
 msgid "Write Your Review"
-msgstr "Undang teman"
+msgstr "Tulis Ulasan Anda"
 
 # msgid "Add New Ads"
 #: content/themes/default/templates/ajax.addresses.add.tpl:4
@@ -23900,7 +23545,7 @@ msgstr "Mengirim permintaan"
 
 #: content/themes/default/templates/people.tpl:53
 msgid "People You May Know"
-msgstr "Anda mungkin mengenal Anda"
+msgstr "Orang yang mungkin anda kenal"
 
 #: content/themes/default/templates/people.tpl:91
 msgid "No people available for your search"
@@ -24300,13 +23945,13 @@ msgstr "Produk yang dipromosikan"
 
 #: content/themes/default/templates/market.tpl:303
 msgid "Your cart is empty."
-msgstr "Keranjang Anda kosong."
+msgstr "Keranjang anda kosong."
 
 # msgid "Email Address"
 #: content/themes/default/templates/market.tpl:308
 #, fuzzy
 msgid "Shipping Address"
-msgstr "EL. surat"
+msgstr "Alamat Pengiriman"
 
 #: content/themes/default/templates/market.tpl:324
 msgid "Select a shipping address"
@@ -24316,7 +23961,7 @@ msgstr "Pilih Alamat Pengiriman"
 #: content/themes/default/templates/market.tpl:329
 #, fuzzy
 msgid "You have no addresses"
-msgstr "Anda menusuk"
+msgstr "Anda belum memiliki alamat"
 
 # msgid "Monthly Average"
 #: content/themes/default/templates/market.tpl:335
@@ -24328,7 +23973,7 @@ msgstr "Total Harga"
 #: content/themes/default/templates/market.tpl:345
 #, fuzzy
 msgid "Checkout"
-msgstr "Aula"
+msgstr "Bayar"
 
 # msgid "Total Sales"
 #: content/themes/default/templates/market.tpl:399
@@ -24966,9 +24611,6 @@ msgstr "Android"
 msgid "IOS"
 msgstr "IOS"
 
-#: content/themes/default/templates/blogs.tpl:13
-msgid "Explore the latest articles"
-msgstr ""
 
 #: content/themes/default/templates/offers.tpl:14
 msgid "Discover new offer"
@@ -25481,14 +25123,7 @@ msgstr "belum memiliki video"
 #~ msgid "Discover Games"
 #~ msgstr "Поиск игр"
 
-#~ msgid "Discover Events"
-#~ msgstr "Откройте "
 
-#~ msgid "Discover Groups"
-#~ msgstr "Поиск групп"
-
-#~ msgid "Discover Pages"
-#~ msgstr "Temukan halaman"
 
 #, fuzzy
 #~ msgid "You have to enter valid package price"
@@ -26080,6 +25715,441 @@ msgstr "Aktifkan direktori untuk hasil SEO yang lebih baik"
 msgid "Make the website public to allow non logged users to view website content"
 msgstr "Jadikan situs web publik agar pengguna yang belum daftar dapat melihat konten situs web"
 
+#: content/themes/default/templates/admin.settings.tpl:229
+msgid "Website Description"
+msgstr "Deskripsi Website"
+
+msgid "Discover new people, create new connections and make new friends"
+msgstr "Temukan orang baru, buat koneksi baru, dan dapatkan teman baru"
+
+#: content/themes/default/templates/admin.settings.tpl:241
+msgid "Website Keywords"
+msgstr "Kata Kunci Website"
+
+msgid "Discover new people, create new connections and make new friends"
+msgstr "Temukan orang baru, buat koneksi baru, dan dapatkan teman baru"
+
+
+# msgid "Ads Description"
+#: content/themes/default/templates/admin.settings.tpl:267
+#, fuzzy
+msgid "Pages Description"
+msgstr "Deskripsi Halaman"
+
+msgid "Discover pages"
+msgstr "Temukan halaman"
+
+# msgid "Ads Description"
+#: content/themes/default/templates/admin.settings.tpl:291
+#, fuzzy
+msgid "Events Description"
+msgstr "Deskripsi Acara"
+
+msgid "Discover events"
+msgstr "Temukan acara"
+
+# msgid "Ads Description"
+#: content/themes/default/templates/admin.settings.tpl:279
+#, fuzzy
+msgid "Groups Description"
+msgstr "Deskripsi Grup"
+
+msgid "Discover groups"
+msgstr "Temukan grup"
+
+#: content/themes/default/templates/blogs.tpl:13
+msgid "Explore the latest articles"
+msgstr "Jelajahi artikel terbaru"
+
+#: content/themes/default/templates/admin.settings.tpl:315
+msgid "Marketplace Description"
+msgstr "Deskripsi Pasar"
+
+msgid "Discover new products"
+msgstr "Temukan produk baru"
+
+#: content/themes/default/templates/admin.settings.tpl:327
+msgid "Funding Description"
+msgstr "Deskripsi Pendanaan"
+
+msgid "Discover new funding requests"
+msgstr "Temukan permintaan pendanaan baru"
+
+#: content/themes/default/templates/admin.settings.tpl:339
+msgid "Offers Description"
+msgstr "Deskripsi Penawaran"
+
+msgid "Discover new offers"
+msgstr "Temukan penawaran baru"
+
+#: content/themes/default/templates/admin.settings.tpl:351
+msgid "Jobs Description"
+msgstr "Deskripsi Pekerjaan"
+
+msgid "Discover new jobs offers"
+msgstr "Temukan tawaran pekerjaan baru"
+
+# msgid "Ads Description"
+#: content/themes/default/templates/admin.settings.tpl:363
+#, fuzzy
+msgid "Courses Description"
+msgstr "Deskripsi Kursus"
+
+msgid "Discover new courses"
+msgstr "Temukan kursus baru"
+
+#: content/themes/default/templates/admin.settings.tpl:375
+msgid "Forums Description"
+msgstr "Deskripsi Forum"
+
+msgid "The great place to discuss topics with other users"
+msgstr "Tempat yang tepat untuk mendiskusikan topik dengan pengguna lain"
+
+#: content/themes/default/templates/admin.settings.tpl:387
+msgid "Movies Description"
+msgstr "Deskripsi Film"
+
+msgid "Discover new film"
+msgstr "Temukan film baru"
+
+# msgid "Ads Description"
+#: content/themes/default/templates/admin.settings.tpl:399
+#, fuzzy
+msgid "Games Description"
+msgstr "Deskirpsi Permainan"
+
+msgid "Discover new games"
+msgstr "Temukan permainan baru"
+
+# msgid "Description of your website"
+#: content/themes/default/templates/admin.settings.tpl:404
+#, fuzzy
+msgid "Description of your games module"
+msgstr "Deskripsi Modul Permainan Anda"
+
+msgid "Mutabaah Description"
+msgstr "Deksripsi Mutabaah"
+
+msgid "Description of your mutabaah module"
+msgstr "Deskripsi Modul Mutabaah Anda"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Setting System Modul Admin Panel
+
+#: content/themes/default/templates/admin.settings.tpl:392
+msgid "Description of your movies module"
+msgstr "Deskripsi Modul Film Anda"
+
+
+#: content/themes/default/templates/admin.settings.tpl:434
+msgid "Turn the pages On and Off"
+msgstr "Mengaktifkan dan Menonaktifkan halaman"
+
+# msgid "preview"
+#: content/themes/default/templates/admin.settings.tpl:449
+#, fuzzy
+msgid "Pages Reviews"
+msgstr "Halaman Ulasan"
+
+# msgid "Turn the stories On and Off"
+#: content/themes/default/templates/admin.settings.tpl:450
+#, fuzzy
+msgid "Turn the pages reviews On and Off"
+msgstr "Mengaktifkan dan menonaktifkan halaman ulasan"
+
+#: content/themes/default/templates/admin.settings.tpl:465
+msgid "Pages Review Replacement"
+msgstr "Penggantian Ulasan Halaman"
+
+#: content/themes/default/templates/admin.settings.tpl:466
+#: content/themes/default/templates/admin.settings.tpl:535
+#: content/themes/default/templates/admin.settings.tpl:601
+#: content/themes/default/templates/admin.settings.tpl:1752
+msgid "Enable this to allow user to change his review"
+msgstr "Aktifkan ini untuk mengizinkan pengguna mengubah ulasannya"
+
+#: content/themes/default/templates/admin.settings.tpl:481
+msgid "Pages Business ID (PBID)"
+msgstr "ID Bisnis Halaman (PBID)"
+
+# msgid "Turn the stories On and Off"
+#: content/themes/default/templates/admin.settings.tpl:483
+#, fuzzy
+msgid "Turn the page business ID On and Off"
+msgstr "Mengaktifkan dan menonaktifkan ID bisnis halaman"
+
+#: content/themes/default/templates/admin.settings.tpl:484
+msgid "PBID is a unique ID for each page consists of 16 digits from country code and category id and page id"
+msgstr "PBID adalah ID unik untuk setiap halaman yang terdiri dari 16 digit dari kode negara dan id kategori dan id halaman"
+
+#: content/themes/default/templates/admin.settings.tpl:503
+msgid "Turn the groups On and Off"
+msgstr "Mengaktifkan dan menonaktifkan grup"
+
+# msgid "Search Results"
+#: content/themes/default/templates/admin.settings.tpl:518
+#, fuzzy
+msgid "Groups Reviews"
+msgstr "Ulasan Grup"
+
+# msgid "Turn the stories On and Off"
+#: content/themes/default/templates/admin.settings.tpl:519
+#, fuzzy
+msgid "Turn the groups reviews On and Off"
+msgstr "Mengaktifkan dan menonaktifkan ulasan grup"
+
+#: content/themes/default/templates/admin.settings.tpl:534
+msgid "Groups Review Replacement"
+msgstr "Penggantian Ulasan Grup"
+
+#: content/themes/default/templates/admin.settings.tpl:553
+msgid "Turn the events On and Off"
+msgstr "Mengaktifkan dan menonaktifkan acara"
+
+# msgid "Manage Events"
+#: content/themes/default/templates/admin.settings.tpl:568
+#, fuzzy
+msgid "Pages Events"
+msgstr "Manajemen Acara"
+
+# msgid "Allow users to create accounts"
+#: content/themes/default/templates/admin.settings.tpl:569
+#, fuzzy
+msgid "Allow pages to create events"
+msgstr "Izinkan halaman membuat akun"
+
+# msgid "Minimum Even Results"
+#: content/themes/default/templates/admin.settings.tpl:584
+#, fuzzy
+msgid "Events Reviews"
+msgstr "Ulasan Acara"
+
+# msgid "Turn the stories On and Off"
+#: content/themes/default/templates/admin.settings.tpl:585
+#, fuzzy
+msgid "Turn the events reviews On and Off"
+msgstr "Mengaktifkan dan menonaktifkan ulasan acara"
+
+#: content/themes/default/templates/admin.settings.tpl:600
+msgid "Events Review Replacement"
+msgstr "Penggantian Ulasan Acara"
+
+
+#: reels.php:43 content/themes/default/templates/group.tpl:261
+#: content/themes/default/templates/group.tpl:766
+#: content/themes/default/templates/group.tpl:807
+#: content/themes/default/templates/group.tpl:819
+#: content/themes/default/templates/admin.settings.tpl:618
+#: content/themes/default/templates/_posts.tpl:88
+#: content/themes/default/templates/event.tpl:233
+#: content/themes/default/templates/event.tpl:740
+#: content/themes/default/templates/event.tpl:777
+#: content/themes/default/templates/event.tpl:789
+#: content/themes/default/templates/ajax.load_more.tpl:11
+#: content/themes/default/templates/profile.tpl:310
+#: content/themes/default/templates/profile.tpl:1590
+#: content/themes/default/templates/profile.tpl:1631
+#: content/themes/default/templates/profile.tpl:1643
+#: content/themes/default/templates/admin.permissions_groups.tpl:183
+#: content/themes/default/templates/admin.permissions_groups.tpl:921
+#: content/themes/default/templates/page.tpl:277
+#: content/themes/default/templates/page.tpl:850
+#: content/themes/default/templates/page.tpl:891
+#: content/themes/default/templates/page.tpl:903
+#: content/themes/default/templates/_sidebar.tpl:173
+msgid "Reels"
+msgstr "VIdeo Pendek"
+
+# msgid "Turn the stories On and Off"
+#: content/themes/default/templates/admin.settings.tpl:620
+#, fuzzy
+msgid "Turn the reels On and Off"
+msgstr "Mengaktifkan dan menonaktifkan video pendek"
+
+#: index.php:314 content/themes/default/templates/index.newsfeed.tpl:253
+#: content/themes/default/templates/admin.settings.tpl:638
+#: content/themes/default/templates/movies.tpl:217
+#: content/themes/default/templates/admin.permissions_groups.tpl:939
+#: content/themes/default/templates/_footer.bottom_bar.tpl:18
+#: content/themes/default/templates/_sidebar.tpl:183
+msgid "Watch"
+msgstr "Menonton"
+
+# msgid "Turn the movies On and Off"
+#: content/themes/default/templates/admin.settings.tpl:640
+#, fuzzy
+msgid "Turn the watch videos On and Off"
+msgstr "Mengaktifkan dan menonaktifkan video"
+
+#: content/themes/default/templates/admin.settings.tpl:641
+msgid "Watch module will show all public videos at one place"
+msgstr "Modul menonton akan menampilkan semua video publik"
+
+#: content/themes/default/templates/admin.settings.tpl:660
+msgid "Turn the blogs On and Off"
+msgstr "Mengaktifkan dan menonaktifkan artikel"
+
+#: content/themes/default/templates/admin.settings.tpl:679
+#, fuzzy
+msgid "Turn the offers On and Off"
+msgstr "Mengaktifkan dan menonaktifkan penawaran"
+
+#: content/themes/default/templates/admin.settings.tpl:699
+#, fuzzy
+msgid "Turn the jobs On and Off"
+msgstr "Mengaktifkan dan menonaktifkan pekerjaan"
+
+# msgid "Turn the stories On and Off"
+#: content/themes/default/templates/admin.settings.tpl:719
+#, fuzzy
+msgid "Turn the courses On and Off"
+msgstr "Mengaktifkan dan menonaktifkan kursus"
+
+#: content/themes/default/templates/admin.settings.tpl:738
+msgid "Turn the forums On and Off"
+msgstr "Mengaktifkan dan menonaktifkan forum"
+
+#: content/themes/default/templates/admin.settings.tpl:753
+msgid "Online Users"
+msgstr "Pengguna online"
+
+#: content/themes/default/templates/admin.settings.tpl:754
+msgid "Show forums online users"
+msgstr "Tampilkan forum pengguna online"
+
+#: content/themes/default/templates/admin.settings.tpl:769
+msgid "Statistics"
+msgstr "Statistik"
+
+#: content/themes/default/templates/admin.settings.tpl:770
+msgid "Show forums statistics"
+msgstr "Tunjukkan statistik forum"
+
+#: content/themes/default/templates/admin.settings.tpl:788
+msgid "Turn the movies On and Off"
+msgstr "Mengaktifkan dan menonaktifkan film"
+
+#: content/themes/default/templates/admin.settings.tpl:806
+msgid "Turn the games On and Off"
+msgstr "Mengaktifkan dan menonaktifkan permainan"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Setting System Fitur Admin Panel
+
+# msgid "Unusual Login Detection"
+#: content/themes/default/templates/admin.settings.tpl:840
+#, fuzzy
+msgid "Auto Language Detection"
+msgstr "Deteksi Bahasa Otomatis"
+
+#: content/themes/default/templates/admin.settings.tpl:841
+msgid "If enabled sytem will detect user language automatically"
+msgstr "Jika diaktifkan sytem akan mendeteksi bahasa pengguna secara otomatis"
+
+#: content/themes/default/templates/admin.settings.tpl:858
+#, fuzzy
+msgid "Fliter by Location"
+msgstr "Fliter berdasarkan Lokasi"
+
+# msgid "If enabled users will be able to withdraw earned money"
+#: content/themes/default/templates/admin.settings.tpl:859
+#, fuzzy
+msgid "If enabled user will able to filter people, products ... etc by location"
+msgstr "Jika diaktifkan, pengguna akan dapat memfilter orang, produk... dll berdasarkan lokasi"
+
+#: content/themes/default/templates/admin.settings.tpl:876
+#: content/themes/default/templates/contact.tpl:10
+#: content/themes/default/templates/_footer.links.tpl:35
+#: content/themes/default/templates/_footer_mini.tpl:35 modules/contact.php:19
+msgid "Contact Us"
+msgstr "Hubungi Kami"
+
+#: content/themes/default/templates/admin.settings.tpl:877
+msgid "Turn the contact us page On and Off"
+msgstr "Mengaktifkan dan menonaktifkan halaman Hubungi Kami"
+
+#: content/themes/default/templates/admin.settings.tpl:894
+msgid "DayTime Messages"
+msgstr "Pesan Harian"
+
+#: content/themes/default/templates/admin.settings.tpl:895
+msgid "Turn the DayTime Messages (Good Morning, Afternoon, Evening) On and Off"
+msgstr "Mengaktifkan dan Menonaktifkan Pesan Waktu Harian (Selamat Pagi, Siang, Malam)"
+
+# msgid "Message"
+#: content/themes/default/templates/admin.settings.tpl:907
+#, fuzzy
+msgid "Morning Message"
+msgstr "Pesan Pagi"
+
+msgid "Write it on your heart that every day is the best day in the year"
+msgstr "Tuliskan dalam hati Anda bahwa setiap hari adalah hari terbaik dalam setahun"
+
+# msgid "Shutdown Message"
+#: content/themes/default/templates/admin.settings.tpl:916
+#, fuzzy
+msgid "Afternoon Message"
+msgstr "Pesan Sore"
+
+msgid "May Your Good Afternoon Be Light, Blessed, Productive And Happy"
+msgstr "Semoga Sore Anda Cerah, Terberkati, Produktif Dan Bahagia"
+
+# msgid "New Message"
+#: content/themes/default/templates/admin.settings.tpl:925
+#, fuzzy
+msgid "Evening Message"
+msgstr "Pesan Malam"
+
+msgid "We hope you are enjoying your evening"
+msgstr "Kami harap Anda menikmati malam Anda"
+
+#: content/themes/default/templates/admin.settings.tpl:939
+msgid "Pokes"
+msgstr "Menyapa"
+
+#: content/themes/default/templates/admin.settings.tpl:940
+msgid "Enable users to poke each others"
+msgstr "Izinkan pengguna untuk saling menyapa"
+
+#: content/themes/default/templates/admin.settings.tpl:959
+msgid "Enable users to send gifts to each others"
+msgstr "Izinkan pengguna untuk mengirim hadiah satu sama lain"
+
+#: content/themes/default/templates/admin.settings.tpl:978
+msgid "Cookie Consent"
+msgstr "Persetujuan Cookie"
+
+#: content/themes/default/templates/admin.settings.tpl:978
+#: content/themes/default/templates/admin.settings.tpl:2217
+#: content/themes/default/templates/admin.settings.tpl:2866
+#: content/themes/default/templates/admin.settings.tpl:2882
+msgid "GDPR"
+msgstr "GDPR"
+
+#: content/themes/default/templates/admin.settings.tpl:979
+msgid "Turn the cookie consent notification On and Off"
+msgstr "Mengaktifkan dan menonaktifkan notifikasi persetujuan cookie"
+
+#: content/themes/default/templates/admin.settings.tpl:996
+msgid "Adblock Detector"
+msgstr "Detektor Adblock"
+
+#: content/themes/default/templates/admin.settings.tpl:998
+msgid "Turn the Adblock auto detector notification On and Off"
+msgstr "Mengaktifkan dan menonaktifkan notifikasi detektor Adblock"
+
+#: content/themes/default/templates/admin.settings.tpl:998
+msgid "(Note: Admin is exception)"
+msgstr "(Catatan: Administrator adalah pengecualian)"
+
+#: content/themes/default/templates/admin.settings.tpl:999
+msgid "Red block message will appear to make user disable adblock from his browser"
+msgstr "Pesan blokir merah akan muncul untuk membuat pengguna menonaktifkan adblock dari browsernya"
+
 # ----------------\ #
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26097,5 +26167,176 @@ msgstr "kirim penghargaan"
 #: done
 msgid "Verified Status"
 msgstr "Status Terverifikasi"
+
+#: done
+msgid "at location"
+msgstr "di lokasi"
+
+----------------------------------------------------------------------------->
+msgid "Cars and Vehicles"
+msgstr "Mobil dan Kendaraan"
+
+msgid "Comedy"
+msgstr "Komedi"
+
+msgid "Economics and Trade"
+msgstr "Ekonomi dan Perdagangan"
+
+msgid "Entertainment"
+msgstr "Hiburan"
+
+msgid "Movies and Animation"
+msgstr "Film dan Animasi"
+
+msgid "Gaming"
+msgstr "Permainan"
+
+msgid "History and Facts"
+msgstr "Sejarah dan Fakta"
+
+msgid "Live Style"
+msgstr "Gaya Hidup"
+
+msgid "News and Politics"
+msgstr "Berita dan Politik"
+
+msgid "People and Nations"
+msgstr "Orang dan Bangsa"
+
+msgid "Pets and Animals"
+msgstr "Hewan Peliharaan dan Satwa"
+
+msgid "Places and Regions"
+msgstr "Tempat dan Wilayah"
+
+msgid "Science and Technology"
+msgstr "Sains dan Teknologi"
+
+msgid "Sport"
+msgstr "Olahraga"
+
+msgid "Travel and Events"
+msgstr "Perjalanan dan Acara"
+
+msgid "Art"
+msgstr "Seni"
+
+msgid "Causes"
+msgstr "Penyebab"
+
+msgid "Crafts"
+msgstr "Kerajinan"
+
+msgid "Dance"
+msgstr "Tarian"
+
+msgid "Drinks"
+msgstr "Minuman"
+
+msgid "Fitness"
+msgstr "Kebugaran"
+
+msgid "Food"
+msgstr "Makanan"
+
+msgid "Gardening"
+msgstr "Berkebun"
+
+msgid "Health"
+msgstr "Kesehatan"
+
+msgid "Literature"
+msgstr "Sastra"
+
+msgid "Music"
+msgstr "Musik"
+
+msgid "Networking"
+msgstr "Jaringan"
+
+msgid "Party"
+msgstr "Pesta"
+
+msgid "Religion"
+msgstr "Agama"
+
+msgid "Shopping"
+msgstr "Belanja"
+
+msgid "Sports"
+msgstr "Olahraga"
+
+msgid "Theater"
+msgstr "Teater"
+
+msgid "Wellness"
+msgstr "Kesejahteraan"
+
+msgid "Admin & Office"
+msgstr "Admin & Kantor"
+
+msgid "Art & Design"
+msgstr "Seni & Desain"
+
+msgid "Business Operations"
+msgstr "Operasi Bisnis"
+
+msgid "Cleaning & Facilities"
+msgstr "Pembersihan & Fasilitas"
+
+msgid "Community & Social Services"
+msgstr "Komunitas & Layanan Sosial"
+
+msgid "Computer & Data"
+msgstr "Komputer & Data"
+
+msgid "Construction & Mining"
+msgstr "Konstruksi & Pertambangan"
+
+msgid "Pendidikan"
+msgstr "Pendidikan"
+
+msgid "Farming & Forestry"
+msgstr "Pertanian & Kehutanan"
+
+msgid "Healthcare"
+msgstr "Kesehatan"
+
+msgid "Installation, Maintenance & Repair"
+msgstr "Instalasi, Pemeliharaan & Perbaikan"
+
+msgid "Legal"
+msgstr "Hukum"
+
+msgid "Management"
+msgstr "Manajemen"
+
+msgid "Manufacturing"
+msgstr "Manufaktur"
+
+msgid "Media & Communication"
+msgstr "Media & Komunikasi"
+
+msgid "Personal Care"
+msgstr "Perawatan Pribadi"
+
+msgid "Protective Services"
+msgstr "Layanan Perlindungan"
+
+msgid "Restaurant & Hospitality"
+msgstr "Restoran & Perhotelan"
+
+msgid "Retail & Sales"
+msgstr "Ritel & Penjualan"
+
+msgid "Science & Engineering"
+msgstr "Sains & Teknik"
+
+msgid "Sports & Entertainment"
+msgstr "Olahraga & Hiburan"
+
+msgid "Transportation"
+msgstr "Transportasi"
+----------------------------------------------------------------------------->
 
 # ----------------\ #

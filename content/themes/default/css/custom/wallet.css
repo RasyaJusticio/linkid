@@ -1,0 +1,22 @@
+.sg-offcanvas {
+  margin-top: -25px;
+}
+
+@media (max-width: 767px) {
+  .sg-offcanvas {
+    margin-top: 0;
+    padding-top: calc(var(--bs-gutter-x) * .5);
+  }
+
+  .page-header {
+    display: none;
+  }
+
+  .card-header {
+    padding: 1rem !important;
+
+    .header-title {
+      margin-bottom: 1rem;
+    }
+  }
+}

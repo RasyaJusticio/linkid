@@ -25838,8 +25838,6 @@ msgtr "kirim penghargaan"
 msgid "Your merit has been sent"
 msgstr "Penghargaan anda telah dikirim"
 
-# ----------------\ #
-
 # \---------------- #
 # Bagian Mutabaah
 
@@ -25848,8 +25846,6 @@ msgtr "Mutabaah adalah proses mengikuti dan mengawasi, atau dalam konteks ibadah
 
 msgid "Coming Soon"
 msgstr "Segera Hadir"
-
-# ----------------\ #
 
 # \---------------- #
 # Bagian Dompet
@@ -25881,8 +25877,6 @@ msgstr "orang"
 #: content/themes/default/templates/page.tpl:221
 msgid "Report"
 msgstr "Laporkan"
-
-# ----------------\ #
 
 # \---------------- #
 # Bagian Setting
@@ -26080,10 +26074,6 @@ msgstr "Aktifkan direktori untuk hasil SEO yang lebih baik"
 msgid "Make the website public to allow non logged users to view website content"
 msgstr "Jadikan situs web publik agar pengguna yang belum daftar dapat melihat konten situs web"
 
-# ----------------\ #
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 # \---------------- #
 
 #: done
@@ -26099,3 +26089,14 @@ msgid "Verified Status"
 msgstr "Status Terverifikasi"
 
 # ----------------\ #
+# Package Trial
+
+msgid "Trial Enabled"
+msgstr "Trial Dinyalakan"
+
+msgid "You have to enter valid trial enabled number"
+msgstr "Anda harus memasukkan nomor trial dinyalakan yang valid"
+
+msgid "Enable trial package. Trial package can only be bought once"
+msgstr "Nyalakan paket trial. Paket trial hanya bisa dibeli sekali"
+

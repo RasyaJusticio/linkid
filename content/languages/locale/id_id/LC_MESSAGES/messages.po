@@ -487,7 +487,7 @@ msgstr "Aplikasi"
 #: content/themes/default/templates/market.tpl:230
 #, fuzzy
 msgid "Your Addresses"
-msgstr "Sesi Anda"
+msgstr "Alamat Anda"
 
 #: settings.php:603 content/themes/default/templates/settings.tpl:328
 #: content/themes/default/templates/ajax.job.apply.tpl:10
@@ -891,7 +891,7 @@ msgstr "Edit topiknya"
 #: content/themes/default/templates/forums.tpl:542
 #: content/themes/default/templates/forums.tpl:549
 msgid "Post Reply"
-msgstr "Menjawab"
+msgstr "Balas postingan"
 
 #: forums.php:146 content/themes/default/templates/forums.tpl:585
 #: content/themes/default/templates/forums.tpl:592
@@ -931,38 +931,29 @@ msgstr "Paket"
 msgid "Congratulation"
 msgstr "Selamat"
 
-#: directory.php:29 content/themes/default/templates/admin.settings.tpl:199
-#: content/themes/default/templates/_footer.links.tpl:40
-#: content/themes/default/templates/directory.tpl:10
-#: content/themes/default/templates/admin.widgets.tpl:103
-#: content/themes/default/templates/admin.widgets.tpl:199
-#: content/themes/default/templates/_footer_mini.tpl:42
-#: content/themes/default/templates/admin.ads.tpl:338
-#: content/themes/default/templates/admin.ads.tpl:442
-msgid "Directory"
-msgstr "Katalog"
+
 
 #: directory.php:34
 msgid "Users Directory"
-msgstr "Katalog Pengguna"
+msgstr "Direktori Pengguna"
 
 #: directory.php:62
 msgid "Posts Directory"
-msgstr "Katalog Pesan"
+msgstr "Direktori Pesan"
 
 #: directory.php:95
 msgid "Pages Directory"
-msgstr "Katalog Halaman"
+msgstr "Direktori Halaman"
 
 # msgid "Users Directory"
 #: directory.php:134
 #, fuzzy
 msgid "Groups Directory"
-msgstr "Katalog Pengguna"
+msgstr "Direktori Pengguna"
 
 #: directory.php:167
 msgid "Events Directory"
-msgstr "Katalog Acara"
+msgstr "Direktori Acara"
 
 #: directory.php:200
 msgid "Games Directory"
@@ -1116,10 +1107,6 @@ msgstr "Pengaturan Sistem"
 msgid "Posts Settings"
 msgstr "Pengaturan pesan"
 
-#: admin.php:136 content/themes/default/templates/admin.users.tpl:446
-#: content/themes/default/templates/admin.tpl:46
-msgid "Registration Settings"
-msgstr "Pendaftaran"
 
 #: admin.php:144 content/themes/default/templates/admin.tpl:51
 msgid "Accounts Settings"
@@ -2935,7 +2922,7 @@ msgstr "Mengomentari foto Anda"
 #: includes/class-user.php:3160 includes/class-user.php:3927
 #: includes/class-user.php:4452
 msgid "replied to your comment"
-msgstr "menjawab komentar Anda"
+msgstr "membalas komentar Anda"
 
 #: includes/class-user.php:3166 includes/class-user.php:3932
 #: includes/class-user.php:4459
@@ -3038,7 +3025,7 @@ msgstr "Posting Anda disetujui untuk diantisipasi dalam acara tersebut"
 
 #: includes/class-user.php:3298 includes/class-user.php:4046
 msgid "replied to your thread"
-msgstr "menjawab topik Anda"
+msgstr "membalas topik Anda"
 
 #: includes/class-user.php:3304 includes/class-user.php:4051
 #, fuzzy
@@ -3290,7 +3277,7 @@ msgstr "Informasi Anda diperbarui"
 #: includes/class-user.php:3643 includes/class-user.php:4271
 #, fuzzy
 msgid "reviewed your page"
-msgstr "menjawab topik Anda"
+msgstr "melihat halaman anda"
 
 # msgid "replied to your thread"
 #: includes/class-user.php:3649 includes/class-user.php:3661
@@ -5927,7 +5914,7 @@ msgstr "Opsi survei yang Anda tentukan terlalu lama. Tolong coba lagi"
 
 #: includes/ajax/posts/post.php:69
 msgid "Poll Option Already Added"
-msgstr "Opsi jajak pendapat telah ditambahkan"
+msgstr "Opsi poll telah ditambahkan"
 
 #: includes/ajax/posts/post.php:69
 msgid "This option was already added to the poll"
@@ -9763,11 +9750,6 @@ msgstr "Hapus dialog"
 msgid "Delete compiled templates files"
 msgstr "Hapus file templat yang dikompilasi"
 
-# msgid "Resend Verification Email"
-#: content/themes/default/templates/admin.tools.tpl:641
-#, fuzzy
-msgid "Resend Activation Emails"
-msgstr "Kirim Konfirmasi oleh E -Mail"
 
 #: content/themes/default/templates/admin.tools.tpl:655
 #: content/themes/default/templates/admin.tools.tpl:729
@@ -9827,7 +9809,7 @@ msgstr "Tidak ada permintaan baru"
 #: content/themes/default/templates/__feeds_comment.tpl:97
 #: content/themes/default/templates/forums.tpl:567
 msgid "Reply"
-msgstr "Menjawab"
+msgstr "Balas"
 
 #: content/themes/default/templates/settings.delete.tpl:10
 msgid "Once you delete your account you will no longer can access it again"
@@ -10027,7 +10009,7 @@ msgstr "Saldo anda"
 #: content/themes/default/templates/settings.market.tpl:44
 #: content/themes/default/templates/settings.affiliates.tpl:113
 msgid "The minimum withdrawal request amount is"
-msgstr "Jumlah minimum permintaan untuk pengangkatan dana"
+msgstr "Jumlah penarikan minimum adalah"
 
 #: content/themes/default/templates/settings.monetization.tpl:217
 #: content/themes/default/templates/settings.points.tpl:242
@@ -10130,7 +10112,7 @@ msgstr "Transfer perbankan"
 #: content/themes/default/templates/settings.affiliates.tpl:158
 #: content/themes/default/templates/settings.affiliates.tpl:195
 msgid "Transfer To"
-msgstr "Kirim dimana"
+msgstr "Kirim ke"
 
 #: content/themes/default/templates/settings.monetization.tpl:264
 #: content/themes/default/templates/settings.points.tpl:289
@@ -10139,7 +10121,7 @@ msgstr "Kirim dimana"
 #: content/themes/default/templates/settings.market.tpl:98
 #: content/themes/default/templates/settings.affiliates.tpl:167
 msgid "Make a withdrawal"
-msgstr "Menarik kesimpulan"
+msgstr "Tarik dana"
 
 #: content/themes/default/templates/settings.monetization.tpl:281
 #: content/themes/default/templates/settings.points.tpl:306
@@ -10148,7 +10130,7 @@ msgstr "Menarik kesimpulan"
 #: content/themes/default/templates/settings.market.tpl:115
 #: content/themes/default/templates/settings.affiliates.tpl:184
 msgid "Withdrawal History"
-msgstr "Sejarah Pembayaran"
+msgstr "Riwayat Pembayaran"
 
 #: content/themes/default/templates/settings.monetization.tpl:291
 #: content/themes/default/templates/settings.points.tpl:316
@@ -10970,13 +10952,13 @@ msgstr "Saldo poin"
 #: content/themes/default/templates/settings.points.tpl:139
 #, fuzzy
 msgid "Points Money Balance"
-msgstr "Saldo uang poin"
+msgstr "Saldo Uang Poin"
 
 # msgid "Post Translation"
 #: content/themes/default/templates/settings.points.tpl:157
 #, fuzzy
 msgid "Points Transactions"
-msgstr "Terjemahan pos"
+msgstr "Transaksi Poin"
 
 #: content/themes/default/templates/settings.points.tpl:166
 #: content/themes/default/templates/ajax.job.apply.tpl:67
@@ -11001,7 +10983,7 @@ msgstr "Pesan warna"
 #: content/themes/default/templates/settings.points.tpl:179
 #, fuzzy
 msgid "Post View"
-msgstr "Biaya berdasarkan Jenis"
+msgstr "Penonton"
 
 # msgid "Delete Comment"
 #: content/themes/default/templates/settings.points.tpl:181
@@ -11019,23 +11001,23 @@ msgstr "Semua reaksi"
 #: content/themes/default/templates/settings.points.tpl:185
 #, fuzzy
 msgid "Added Comment"
-msgstr "Ubah komentar"
+msgstr "Menambahkan Komentar"
 
 # msgid "Total Reactions"
 #: content/themes/default/templates/settings.points.tpl:187
 #, fuzzy
 msgid "Added Post Reaction"
-msgstr "Semua reaksi"
+msgstr "Menambahkan Reaksi Postingan"
 
 #: content/themes/default/templates/settings.points.tpl:189
 msgid "Added Post Photo Reaction"
-msgstr "Menambahkan reaksi posting foto"
+msgstr "Menambahkan Reaksi Postingan Foto"
 
 # msgid "Total Reactions"
 #: content/themes/default/templates/settings.points.tpl:191
 #, fuzzy
 msgid "Added Comment Reaction"
-msgstr "Semua reaksi"
+msgstr "Menambahkan Reaksi Komentar"
 
 # msgid "Follow"
 #: content/themes/default/templates/settings.points.tpl:193
@@ -11413,44 +11395,25 @@ msgstr "Umum"
 
 #: content/themes/default/templates/admin.settings.tpl:22
 msgid "SEO"
-msgstr "Seo"
+msgstr "SEO"
 
 #: content/themes/default/templates/admin.settings.tpl:27
 #: content/themes/default/templates/admin.tpl:249
 msgid "Modules"
 msgstr "Modul"
 
-#: content/themes/default/templates/admin.settings.tpl:32
-msgid "Features"
-msgstr "Kekhasan"
 
 #: content/themes/default/templates/admin.settings.tpl:51
 msgid "Website Live"
 msgstr "Situs web dihidupkan"
 
-#: content/themes/default/templates/admin.settings.tpl:52
-msgid "Turn the entire website On and Off"
-msgstr "Seluruh situs benar -benar hidup/mati"
 
-#: content/themes/default/templates/admin.settings.tpl:64
-msgid "Shutdown Message"
-msgstr "Penyelesaian pekerjaan"
-
-#: content/themes/default/templates/admin.settings.tpl:69
-msgid "The text that is presented when the site is closed"
-msgstr "Teks yang disajikan saat situs ditutup"
 
 #: content/themes/default/templates/admin.settings.tpl:78
 msgid "System Email"
 msgstr "Email Sistem"
 
-#: content/themes/default/templates/admin.settings.tpl:87
-msgid "The contact email that all messages send to"
-msgstr "Hubungi Alamat Email, ke mana semua pesan dikirim"
 
-#: content/themes/default/templates/admin.settings.tpl:94
-msgid "System Datetime Format"
-msgstr "Format sistem datetime"
 
 #: content/themes/default/templates/admin.settings.tpl:98
 #: content/themes/default/templates/admin.settings.tpl:99
@@ -11462,9 +11425,6 @@ msgstr "Contoh"
 msgid "Select the datetime format of the datetime picker"
 msgstr "Pilih Tanggal dan Waktu Tanggal Pilihan Tanggal dan Waktu"
 
-#: content/themes/default/templates/admin.settings.tpl:109
-msgid "System Distance Unit"
-msgstr "Unit jarak sistem"
 
 #: content/themes/default/templates/admin.settings.tpl:113
 msgid "Mile"
@@ -11478,48 +11438,22 @@ msgstr "Kilometer"
 msgid "Select the distance measure unit of your website"
 msgstr "Pilih unit pengukuran jarak dari situs web Anda"
 
-#: content/themes/default/templates/admin.settings.tpl:124
-msgid "System Currency"
-msgstr "Mata uang sistem"
 
 #: content/themes/default/templates/admin.settings.tpl:135
 msgid "You can add, edit or delete currencies from"
 msgstr "Anda dapat menambahkan, mengedit atau menghapus mata uang dari"
 
-#: content/themes/default/templates/admin.settings.tpl:164
-msgid "Website Public"
-msgstr "Situs ini diterbitkan dan tersedia untuk semua orang"
 
-#: content/themes/default/templates/admin.settings.tpl:165
-#: content/themes/default/templates/admin.settings.tpl:202
-msgid "Make the website public to allow non logged users to view website content"
-msgstr ""
-"Buat situs web publik untuk mengizinkan pengguna tanpa pendaftaran untuk "
-"melihat konten situs web"
 
 # msgid "Newsfeed"
-#: content/themes/default/templates/admin.settings.tpl:180
-#, fuzzy
-msgid "Newsfeed Public"
-msgstr "Saluran berita"
 
-#: content/themes/default/templates/admin.settings.tpl:182
-msgid "Make the newsfeed available for visitors in landing page"
-msgstr "Jadikan umpan berita tersedia untuk pengunjung di halaman arahan"
 
-#: content/themes/default/templates/admin.settings.tpl:183
-msgid "Enable this will make your website public and list only public posts"
-msgstr ""
-"Aktifkan ini akan membuat situs web Anda hanya publik dan daftar posting "
-"publik"
 
-#: content/themes/default/templates/admin.settings.tpl:201
-msgid "Enable the directory for better SEO results"
-msgstr "Nyalakan katalog untuk meningkatkan hasil SEO"
+
 
 #: content/themes/default/templates/admin.settings.tpl:217
 msgid "Website Title"
-msgstr "Judul situs"
+msgstr "Judul Website"
 
 #: content/themes/default/templates/admin.settings.tpl:222
 msgid "Title of your website"
@@ -12119,7 +12053,7 @@ msgstr "Pengkodean catatan suara"
 #: content/themes/default/templates/admin.settings.tpl:1334
 #: content/themes/default/templates/_posts.tpl:82
 msgid "Polls"
-msgstr "Jajak pendapat"
+msgstr "Pemungutan Suara"
 
 #: content/themes/default/templates/admin.settings.tpl:1335
 msgid "Turn the poll posts On and Off"
@@ -13523,7 +13457,7 @@ msgstr "Direktori untuk memuat"
 
 #: content/themes/default/templates/admin.settings.tpl:4632
 msgid "The path of uploads local directory"
-msgstr "Jalan menuju katalog boot"
+msgstr "Jalan menuju direktori lokal"
 
 #: content/themes/default/templates/admin.settings.tpl:4639
 msgid "Uploads Prefix"
@@ -15127,7 +15061,7 @@ msgstr "Nilai Maximim - Satu Hari = 86400 Detik"
 #: content/themes/default/templates/admin.settings.tpl:7692
 #, fuzzy
 msgid "Newsfeed Results"
-msgstr "Saluran berita"
+msgstr "Saluran Berita"
 
 # msgid "The Min number of results per request"
 #: content/themes/default/templates/admin.settings.tpl:7697
@@ -15691,7 +15625,7 @@ msgstr "Negara"
 #: content/themes/default/templates/ads.tpl:237
 #: content/themes/default/templates/ads.tpl:475
 msgid "Audience Gender"
-msgstr "Audiensi Paul"
+msgstr "Jenis Kelamin Penonton"
 
 #: content/themes/default/templates/ads.tpl:247
 #: content/themes/default/templates/ads.tpl:485
@@ -15817,10 +15751,6 @@ msgstr "Alamat URL"
 msgid "Page"
 msgstr "Halaman"
 
-#: content/themes/default/templates/ads.tpl:301
-#: content/themes/default/templates/ads.tpl:539
-msgid "You can advertise for a URL or one of your pages, groups or events"
-msgstr "Anda dapat mengiklankan URL atau salah satu halaman, grup, atau acara Anda"
 
 #: content/themes/default/templates/ads.tpl:305
 #: content/themes/default/templates/ads.tpl:543
@@ -15881,17 +15811,17 @@ msgstr "Pilih salah satu acara yang ingin Anda tempatkan iklan"
 #: content/themes/default/templates/ads.tpl:348
 #: content/themes/default/templates/ads.tpl:586
 msgid "Ads Placement"
-msgstr "Penempatan aksesi"
+msgstr "Penempatan Iklan"
 
 #: content/themes/default/templates/ads.tpl:350
 #: content/themes/default/templates/ads.tpl:588
 msgid "Newsfeed"
-msgstr "Saluran berita"
+msgstr "Saluran Berita"
 
 #: content/themes/default/templates/ads.tpl:351
 #: content/themes/default/templates/ads.tpl:589
 msgid "Sidebar"
-msgstr "Sadbar"
+msgstr "Bilah Samping"
 
 #: content/themes/default/templates/ads.tpl:355
 #: content/themes/default/templates/ads.tpl:593
@@ -17829,11 +17759,6 @@ msgstr "Untuk menyelesaikan proses aktivasi"
 msgid "Please check the SMS on your phone"
 msgstr "Periksa SMS di ponsel Anda"
 
-#: content/themes/default/templates/activation.tpl:35
-#: content/themes/default/templates/_header.tpl:25
-#: content/themes/default/templates/settings.account.tpl:19
-msgid "Resend Verification Email"
-msgstr "Kirim Konfirmasi oleh E -Mail"
 
 #: content/themes/default/templates/activation.tpl:38
 #: content/themes/default/templates/_header.tpl:29
@@ -18434,7 +18359,7 @@ msgstr "Tunjukkan e-mail tempat tautan referensi kata sandi akan dikirim"
 #: content/themes/default/templates/_js_templates.tpl:1832
 #: content/themes/default/templates/_js_templates.tpl:1903
 msgid "Continue"
-msgstr "Melanjutkan"
+msgstr "Lanjutkan"
 
 # msgid "Back to homepage"
 #: content/themes/default/templates/reset.tpl:46
@@ -20479,7 +20404,7 @@ msgstr "Pelanggan"
 #: content/themes/default/templates/profile.tpl:919
 #: content/themes/default/templates/__feeds_user.tpl:301
 msgid "mutual friends"
-msgstr "Teman Umum"
+msgstr "Teman yang sama"
 
 #: content/themes/default/templates/ajax.popover.tpl:43
 #: content/themes/default/templates/profile.tpl:547
@@ -22228,7 +22153,7 @@ msgstr "Dapatkan milik Anda"
 #: content/themes/default/templates/settings.account.tpl:26
 #: content/themes/default/templates/admin.users.tpl:528
 msgid "Email Address"
-msgstr "EL. surat"
+msgstr "Alamat email"
 
 #: content/themes/default/templates/app_oauth.tpl:39
 msgid "Continue as"
@@ -22240,7 +22165,7 @@ msgstr "Pesan promosi"
 
 #: content/themes/default/templates/ajax.mutual_friends.tpl:2
 msgid "Mutual Friends"
-msgstr "Teman Umum"
+msgstr "Teman yang sama"
 
 # msgid "Popular Posts"
 #: content/themes/default/templates/__feeds_post.tpl:4
@@ -23957,7 +23882,7 @@ msgstr "Undang teman"
 #: content/themes/default/templates/ajax.addresses.add.tpl:4
 #, fuzzy
 msgid "Add New Address"
-msgstr "Tambahkan iklan"
+msgstr "Tambahkan Alamat"
 
 #: content/themes/default/templates/ajax.page.publisher.tpl:4
 msgid "Create New Page"
@@ -24415,13 +24340,7 @@ msgstr "Total penjualan"
 msgid "Sales Orders"
 msgstr "Pesanan penjualan"
 
-#: content/themes/default/templates/settings.account.tpl:17
-msgid "Email Verification Required"
-msgstr "Konfirmasi pembicaraan listrik Anda diperlukan"
 
-#: content/themes/default/templates/settings.account.tpl:18
-msgid "Check your email inbox"
-msgstr "Memeriksa kotak surat"
 
 #: content/themes/default/templates/settings.account.tpl:18
 msgid "to complete the verification process"
@@ -24638,7 +24557,7 @@ msgstr "Hasil pencarian"
 #: content/themes/default/templates/admin.users.tpl:1587
 #, fuzzy
 msgid "Funding Balance"
-msgstr "Saldo poin"
+msgstr "Saldo Pendanaan"
 
 #: content/themes/default/templates/admin.users.tpl:1675
 msgid "This user is not eligible for monetization"
@@ -25262,8 +25181,8 @@ msgstr "Transaksi berhasil lengkap"
 #~ msgstr "нет альбомов"
 
 #, fuzzy
-#~ msgid "doesn't have videos"
-#~ msgstr ""
+msgid "doesn't have videos"
+msgstr "belum memiliki video"
 
 #~ msgid "doesn't have videos to show"
 #~ msgstr "не имеет видео"
@@ -25434,15 +25353,6 @@ msgstr "Transaksi berhasil lengkap"
 #~ msgid "Please select a valid gender"
 #~ msgstr ""
 
-#~ msgid "Please select valid currency"
-#~ msgstr "Пожалуйста, выберите правильный пол"
-
-#, fuzzy
-#~ msgid "Currencies"
-#~ msgstr ""
-
-#~ msgid "Currency"
-#~ msgstr "Валюты"
 
 #, fuzzy
 #~ msgid "Sngine uses Twemoji Awesome and you can check"
@@ -25456,7 +25366,7 @@ msgstr "Transaksi berhasil lengkap"
 
 #, fuzzy
 #~ msgid "Points Balance"
-#~ msgstr ""
+#~ msgstr "Saldo Poin"
 
 #~ msgid "New Monetization Plan"
 #~ msgstr "Баланс баллов"
@@ -25601,7 +25511,7 @@ msgstr "Transaksi berhasil lengkap"
 
 #, fuzzy
 #~ msgid "Not Activated"
-#~ msgstr ""
+#~ msgstr "Tidak Diaktifkan"
 
 #~ msgid "Photo Animated"
 #~ msgstr "Не активировано"
@@ -25962,7 +25872,6 @@ msgstr "Diikuti oleh"
 msgid "people"
 msgstr "orang"
 
-
 #: content/themes/default/templates/group.tpl:198
 #: content/themes/default/templates/__feeds_comment.tpl:18
 #: content/themes/default/templates/event.tpl:176
@@ -25972,5 +25881,221 @@ msgstr "orang"
 #: content/themes/default/templates/page.tpl:221
 msgid "Report"
 msgstr "Laporkan"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Setting
+
+#: content/themes/default/templates/settings.account.tpl:17
+msgid "Email Verification Required"
+msgstr "Diperlukan Verifikasi Email"
+
+#: content/themes/default/templates/settings.account.tpl:18
+msgid "Check your email inbox"
+msgstr "Periksa kotak surat anda"
+
+# msgid "Resend Verification Email"
+#: content/themes/default/templates/admin.tools.tpl:641
+#, fuzzy
+msgid "Resend Activation Emails"
+msgstr "Kirim Ulang Aktivasi Email"
+
+#: content/themes/default/templates/activation.tpl:35
+#: content/themes/default/templates/_header.tpl:25
+#: content/themes/default/templates/settings.account.tpl:19
+msgid "Resend Verification Email"
+msgstr "Kirim Ulang Verifikasi Email"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Jadwal
+
+msgid "Scheduled Posts"
+msgstr "Postingan Terjadwal"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Mata Uang
+
+msgid "Currencies"
+msgstr "Mata Uang"
+
+#~ msgid "Please select valid currency"
+#~ msgstr "Pilih mata uang yang berlaku"
+
+#~ msgid "Currency"
+#~ msgstr "Mata uang"
+
+msgid "Exchange Rate History"
+msgstr "Riwayat Nilai Tukar"
+
+msgid "Exchange Rate"
+msgstr "Nilai Tukar"
+
+msgid "Retrived At"
+msgstr "Diambil"
+
+# ----------------\ #
+
+
+# \---------------- #
+# Kategori Penawaran
+
+msgid "Apparel & Accessories"
+msgstr "Pakaian & Aksesoris"
+
+msgid "Autos & Vehicles"
+msgstr "Mobil & Kendaraan"
+
+msgid "Baby & Children's Products"
+msgstr "Produk Bayi & Anak-anak"
+
+msgid "Beauty Products & Services"
+msgstr "Produk & Layanan Kecantikan"
+
+msgid "Computers & Peripherals"
+msgstr "Komputer & Periferal"
+
+msgid "Consumer Electronics"
+msgstr "Barang Elektronik Konsumen"
+
+msgid "Dating Services"
+msgstr "Layanan Kencan"
+
+msgid "Financial Services"
+msgstr "Layanan Keuangan"
+
+msgid "Gifts & Occasions"
+msgstr "Hadiah & Acara"
+
+msgid "Home & Garden"
+msgstr "Rumah & Taman"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Setting Admin Panel
+
+msgid "Qurani Settings"
+msgstr "Pengaturan Qurani"
+
+
+#: admin.php:136 content/themes/default/templates/admin.users.tpl:446
+#: content/themes/default/templates/admin.tpl:46
+msgid "Registration Settings"
+msgstr "Pengaturan Pendaftaran"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Setting System Admin Panel
+
+#: content/themes/default/templates/admin.settings.tpl:32
+msgid "Features"
+msgstr "Fitur"
+
+#: content/themes/default/templates/admin.settings.tpl:69
+msgid "The text that is presented when the site is closed"
+msgstr "Teks yang ditampilkan saat situs ditutup"
+
+
+#: content/themes/default/templates/admin.settings.tpl:87
+msgid "The contact email that all messages send to"
+msgstr "Email kontak yang dikirim ke semua pesan"
+
+
+#: content/themes/default/templates/admin.settings.tpl:94
+msgid "System Datetime Format"
+msgstr "Format Waktu Data Sistem"
+
+
+#: content/themes/default/templates/admin.settings.tpl:109
+msgid "System Distance Unit"
+msgstr "Satuan Jarak Sistem"
+
+
+#: content/themes/default/templates/admin.settings.tpl:124f
+msgid "System Currency"
+msgstr "Mata Uang Sistem"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Setting System General Admin Panel
+
+msgid "Turn the entire website On and Off"
+msgstr "Mengaktifkan dan menonaktifkan seluruh situs web"
+
+#: content/themes/default/templates/admin.settings.tpl:64
+msgid "Shutdown Message"
+msgstr "Pesan Saat Dinonaktifkan"
+
+msgid "We Will Back Soon"
+msgstr "Kami Akan Segera Kembali"
+
+# ----------------\ #
+
+# \---------------- #
+# Bagian Setting System SEO Admin Panel
+
+#: content/themes/default/templates/admin.settings.tpl:164
+msgid "Website Public"
+msgstr "Situs Web Publik"
+
+#: content/themes/default/templates/admin.settings.tpl:180
+#, fuzzy
+msgid "Newsfeed Public"
+msgstr "Saluran Berita Publik"
+
+#: content/themes/default/templates/admin.settings.tpl:183
+msgid "Enable this will make your website public and list only public posts"
+msgstr "Mengaktifkan ini akan membuat situs web Anda menjadi publik dan hanya mencantumkan postingan publik"
+
+#: content/themes/default/templates/admin.settings.tpl:182
+msgid "Make the newsfeed available for visitors in landing page"
+msgstr "Buat saluran berita tersedia untuk pengunjung di halaman utama"
+
+#: directory.php:29 content/themes/default/templates/admin.settings.tpl:199
+#: content/themes/default/templates/_footer.links.tpl:40
+#: content/themes/default/templates/directory.tpl:10
+#: content/themes/default/templates/admin.widgets.tpl:103
+#: content/themes/default/templates/admin.widgets.tpl:199
+#: content/themes/default/templates/_footer_mini.tpl:42
+#: content/themes/default/templates/admin.ads.tpl:338
+#: content/themes/default/templates/admin.ads.tpl:442
+msgid "Directory"
+msgstr "Direktori"
+
+
+#: content/themes/default/templates/admin.settings.tpl:201
+msgid "Enable the directory for better SEO results"
+msgstr "Aktifkan direktori untuk hasil SEO yang lebih baik"
+
+
+#: content/themes/default/templates/admin.settings.tpl:165
+#: content/themes/default/templates/admin.settings.tpl:202
+msgid "Make the website public to allow non logged users to view website content"
+msgstr "Jadikan situs web publik agar pengguna yang belum daftar dapat melihat konten situs web"
+
+# ----------------\ #
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# \---------------- #
+
+#: done
+msgid "You can advertise for a URL or one of your posts, pages, groups or events"
+msgstr "Anda dapat mengiklankan URL atau salah satu postingan, halaman, grup, atau acara Anda"
+
+#: done
+msgid "sent merit"
+msgstr "kirim penghargaan"
+
+#: done
+msgid "Verified Status"
+msgstr "Status Terverifikasi"
 
 # ----------------\ #

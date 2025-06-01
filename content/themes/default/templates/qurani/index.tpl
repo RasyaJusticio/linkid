@@ -17,15 +17,21 @@
   const s_lang = "{/literal}{$s_lang}{literal}";
   const s_night_mode = "{/literal}{$s_night_mode}{literal}";
   const user_session = "{/literal}{$user_session}{literal}";
+  const signature = "{/literal}{$signature}{literal}";
 
   const quraniIFrame = document.getElementById('qurani-iframe');
 
+
   quraniIFrame.onload = () => {
     quraniIFrame.contentWindow.postMessage({
-      c_user,
-      s_lang,
-      s_night_mode,
-      user_session
+      data: {
+        c_user,
+        s_lang,
+        s_night_mode,
+        user_session,
+        signature
+      },
+      type: 'parent_state',
     }, quraniUrl);
   }
 

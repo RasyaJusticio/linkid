@@ -3532,6 +3532,9 @@ msgstr "Fungsi ini terputus oleh administrator"
 msgid "There is no enough credit in your wallet, Recharge your wallet to continue"
 msgstr "Dompet Anda tidak cukup untuk dibeli"
 
+msgid "There is no enough credit in their wallet"
+msgstr "Dompet tujuan tidak memiliki kredit yang cukup"
+
 # msgid "Upgrade Now"
 #: includes/class-user.php:5419 includes/class-user.php:16586
 #: includes/class-user.php:17134 includes/class-user.php:17195
@@ -4458,10 +4461,16 @@ msgstr "Anda perlu mencari pengguna untuk mengirim uang"
 msgid "You can't send money to yourself!"
 msgstr "Anda tidak dapat mengirim uang kepada diri sendiri!"
 
+msgid "You can't receive money to yourself!"
+msgstr "Anda tidak dapat menerima uang dari diri sendiri!"
+
 #: includes/class-user.php:17130 includes/class-user.php:17180
 #: includes/class-user.php:17187
 msgid "You can't send money to this user!"
 msgstr "Anda tidak dapat mengirim uang kepada pengguna ini!"
+
+msgid "You can't receive money from this user!"
+msgstr "Anda tidak dapat menerima uang dari pengguna ini!"
 
 # msgid "This feature has been disabled by the admin"
 #: includes/class-user.php:17166
@@ -17444,6 +17453,9 @@ msgstr "Alamat email Anda"
 msgid "transfer transaction successfuly sent"
 msgstr "Terjemahan berhasil dikirim"
 
+msgid "transfer transaction successfuly received"
+msgstr "Terjemahan berhasil diterima"
+
 #: content/themes/default/templates/wallet.tpl:70
 #: content/themes/default/templates/wallet.tpl:76
 #: content/themes/default/templates/wallet.tpl:82
@@ -17496,6 +17508,17 @@ msgstr "Kirim dan Terima Uang"
 #: content/themes/default/templates/_js_templates.tpl:1430
 msgid "Send Money"
 msgstr "Transfer Saldo"
+
+msgid "Sending To"
+msgstr "Mengirim Kepada"
+
+#: content/themes/default/templates/wallet.tpl:154
+#: content/themes/default/templates/_js_templates.tpl:1430
+msgid "Receive Money"
+msgstr "Terima Saldo"
+
+msgid "Receiving From"
+msgstr "Menerima Dari"
 
 #: content/themes/default/templates/wallet.tpl:162
 #: content/themes/default/templates/wallet.tpl:246
@@ -22269,7 +22292,11 @@ msgstr "dan maksimum"
 #: content/themes/default/templates/_js_templates.tpl:1439
 #, fuzzy
 msgid "The maximum amount you can transfer is"
-msgstr "Jumlah minimum uang yang dapat ditarik pengguna"
+msgstr "Jumlah maximum yang dapat Anda transfer adalah"
+
+#, fuzzy
+msgid "The maximum amount you can transfer is"
+msgstr "Jumlah maximum yang dapat Anda terima adalah"
 
 #: content/themes/default/templates/_js_templates.tpl:1470
 msgid "Withdraw Affiliates Credit"
@@ -25291,6 +25318,9 @@ msgstr "belum memiliki video"
 
 # \---------------- #
 # QRCode
+msgid "My QR"
+msgstr "QR Saya"
+
 msgid "QR Request"
 msgstr "QR Terima"
 

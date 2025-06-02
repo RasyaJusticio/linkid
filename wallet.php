@@ -33,6 +33,12 @@ try {
         /* unset session */
         unset($_SESSION['wallet_transfer_amount']);
       }
+      if (isset($_GET['wallet_receive_succeed']) && isset($_SESSION['wallet_receive_amount'])) {
+        /* assign variables */
+        $smarty->assign('wallet_receive_amount', $_SESSION['wallet_receive_amount']);
+        /* unset session */
+        unset($_SESSION['wallet_receive_amount']);
+      }
       if (isset($_GET['wallet_replenish_succeed']) && isset($_SESSION['wallet_replenish_amount'])) {
         /* assign variables */
         $smarty->assign('wallet_replenish_amount', $_SESSION['wallet_replenish_amount']);

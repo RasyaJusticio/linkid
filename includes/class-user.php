@@ -17224,6 +17224,64 @@ class User
     $_SESSION['wallet_transfer_amount'] = $amount;
   }
 
+  /**
+   * wallet_receive
+   * 
+   * @param integer $user_id
+   * @param integer $amount
+   * @return void
+   */
+  public function wallet_receive($user_id, $amount)
+  {
+    global $db, $system;
+    /* check if wallet enabled */
+    if (!$system['wallet_enabled']) {
+      throw new Exception(__("The wallet system has been disabled by the admin"));
+    }
+    /* check if wallet transfer enabled */
+    if (!$system['wallet_transfer_enabled']) {
+      throw new Exception(__("The wallet transfer feature has been disabled by the admin"));
+    }
+    /* validate amount */
+    if (is_empty($amount) || !is_numeric($amount) || $amount <= 0) {
+      throw new Exception(__("You must enter valid amount of money"));
+    }
+    if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
+      throw new Exception(__("You can't transfer more than") . " " . print_money($system['wallet_max_transfer']));
+    }
+    /* validate target user */
+    if (is_empty($user_id) || !is_numeric($user_id)) {
+      throw new Exception(__("You must search for a user to send money to"));
+    }
+    if ($this->_data['user_id'] == $user_id) {
+      throw new Exception(__("You can't receive money from yourself!"));
+    }
+    $check_user = $db->query(sprintf("SELECT COUNT(*) as count FROM users WHERE user_id = %s", secure($user_id, 'int')));
+    if ($check_user->fetch_assoc()['count'] == 0) {
+      throw new Exception(__("You can't receive money from this user!"));
+    }
+
+    $get_user = $db->query(sprintf("SELECT user_wallet_balance FROM users WHERE user_id = %s", secure($user_id, 'int')));
+    $user_data = $get_user->fetch_assoc();
+    
+    // Check balance of the user_id
+    if ($user_data['user_wallet_balance'] < $amount) {
+      throw new Exception(__("There is not enough credit in their wallet"));
+    }
+
+    /* decrease user id wallet balance */
+    $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($user_id, 'int')));
+    /* log this transaction */
+    $this->wallet_set_transaction($user_id, 'user', $this->_data['user_id'], $amount, 'out');
+    /* increase viewer user wallet balance */
+    $db->query(sprintf("UPDATE users SET user_wallet_balance = user_wallet_balance + %s WHERE user_id = %s", secure($amount), secure($this->_data['user_id'], 'int')));
+    /* send notification (money sent) to the target user */
+    $this->post_notification(['to_user_id' => $this->_data['user_id'], 'action' => 'money_sent', 'node_type' => $amount]);
+    /* wallet transaction */
+    $this->wallet_set_transaction($this->_data['user_id'], 'user', $user_id, $amount, 'in');
+    $_SESSION['wallet_receive_amount'] = $amount;
+  }
+
 
   /**
    * wallet_send_tip

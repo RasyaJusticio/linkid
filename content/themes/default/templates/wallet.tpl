@@ -66,7 +66,11 @@
               </button>
               <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr" data-options='{ "qrcode_uri": "$qrcode_uri" }'>
                 {include file='__svg_icons.tpl' icon="money_receive" width="24px" height="24px"}
-                {__("QR Request")}
+                {__("QR Receive")}
+              </button>
+              <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr" data-options='{ "qrcode_uri": "$qrcode_uri" }'>
+                {include file='__svg_icons.tpl' icon="money_receive" width="24px" height="24px"}
+                {__("My QR")}
               </button>
             </div>
           </div>
@@ -75,6 +79,12 @@
               <div class="alert alert-success mb20">
                 <i class="fas fa-check-circle mr5"></i>
                 {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_transfer_amount|format_number)}</span> {__("transfer transaction successfuly sent")}
+              </div>
+            {/if}
+            {if $wallet_receive_amount}
+              <div class="alert alert-success mb20">
+                <i class="fas fa-check-circle mr5"></i>
+                {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_receive_amount|format_number)}</span> {__("transfer transaction successfuly received")}
               </div>
             {/if}
             {if $wallet_replenish_amount}
@@ -177,6 +187,15 @@
                     <button class="btn btn-outline-primary mb10" data-toggle="modal" data-url="#wallet-transfer">
                       {include file='__svg_icons.tpl' icon="wallet_transfer" class="main-icon mr10" width="24px" height="24px"}
                       {__("Send Money")}
+                    </button>
+                  {/if}
+                </div>
+
+                <div class="d-grid">
+                  {if $system['wallet_transfer_enabled']}
+                    <button class="btn btn-outline-primary mb10" data-toggle="modal" data-url="#wallet-receive">
+                      {include file='__svg_icons.tpl' icon="wallet_transfer" class="main-icon mr10" width="24px" height="24px"}
+                      {__("Receive Money")}
                     </button>
                   {/if}
                 </div>

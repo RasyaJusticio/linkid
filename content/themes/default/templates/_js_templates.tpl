@@ -1496,6 +1496,82 @@
         </script>
       </script>
 
+      <script id="wallet-receive" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="wallet_transfer" class="main-icon mr10" width="24px" height="24px"}
+            {__("Receive Money")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form onsubmit="openConfirmationModal(event)">
+          <div class="modal-body">
+            {if $system['wallet_max_transfer'] != "0"}
+              <div class="alert alert-info mb20">
+                <i class="fas fa-info-circle mr5"></i>
+                {__("The maximum amount you can receive is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer']|format_number)}</span>
+              </div>
+            {/if}
+            <div class="form-group">
+              <label class="form-label">{__("Amount")}</label>
+              <div class="input-money {$system['system_currency_dir']}">
+                <span>{$system['system_currency_symbol']}</span>
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              {include file="__money_amounts.tpl"}
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="receive_from">{__("Receive From")}</label>
+              <div class="position-relative js_autocomplete">
+                <input class="form-control" type="text" placeholder="{__("Search for user name or email")}" name="receive_from" id="receive_from" autocomplete="off">
+                <input type="hidden" name="receive_from_id">
+              </div>
+            </div>
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Send")}</button>
+          </div>
+        </form>
+        <script>
+            function openConfirmationModal(event) {
+              event.preventDefault();
+            
+              var form = event.target;
+              var formData = new FormData(form);
+            
+              var data = {};
+              formData.forEach(function(value, key) {
+                data[key] = value;
+              });
+            
+              var user = {
+                'user_id': "{$user->_data['user_id']}",
+                'user_name': "{$user->_data['user_name']}",
+                'user_firstname': "{$user->_data['user_firstname']}",
+                'user_lastname': "{$user->_data['user_lastname']}",
+                'user_picture': "{$user->_data['user_picture']}"
+              };
+
+              $.post(ajax_path + "payments/wallet.php?do=get_user_info", {
+                  user_id: data.receive_from_id
+              }, function (response) {
+                  if (response.result == "valid") {
+                      isSuccessfull = true;
+                          
+                      const user = response.user;
+
+                      modal("#wallet-receive-confirm", { 'amount': data.amount, 'user_id': user['user_id'], 'user_name': user['user_name'], 'user_fullname': user['user_firstname'] + " " + user['user_lastname'], 'user_picture': user['user_picture'] });
+                  }
+              });
+
+              return false;
+            }
+        </script>
+      </script>
+
       <script id="wallet-transfer-confirm" type="text/template">
         <div class="modal-header">
           <h6 class="modal-title">
@@ -1506,92 +1582,92 @@
         </div>
         <form class="js_ajax-forms" data-url="payments/wallet.php?do=wallet_transfer">
           <div class="modal-body">
-            <p class="sending-to">
+            <p class="modal-label">
               {__("Sending To")}
             </p>
-            <div class="target-user">
-                <img class="user-avatar" src="{literal}{{user_picture}}{/literal}" alt="">
-                <p class="user-fullname">
+            <div class="user-info">
+                <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">
+                <p class="fullname">
                   {literal}{{user_fullname}}{/literal}
                 </p>
-                <p class="user-name">
+                <p class="name">
                   @{literal}{{user_name}}{/literal}
                 </p>
             </div>
 
-            <span id="send-money-total">Rp 0</span>
+            <span class="money-total" id="send-money-total">Rp 0</span>
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="send_to_id" value="{literal}{{user_id}}{/literal}">
+
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">{__("Send")}</button>
           </div>
         </form>
-        <style>
-            .sending-to {
-                width: 100%;
-                text-align: center;
-                margin-block: 0.2rem;
-                margin-bottom: 0.6rem;
-            }
-
-            .target-user {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 0.2rem;
-
-                .user-avatar {
-                    border-radius: 100%;
-                    aspect-ratio: 1 / 1;
-                    width: 6rem;
-                }
-
-                .user-fullname, .user-name {
-                    margin: 0;
-                }
-
-                .user-fullname {
-                    font-size: 1.4rem;
-                    margin-bottom: -0.4rem;
-                    font-weight: bold;
-                }
-            }
-            
-            #send-money-total {
-                margin-top: 1rem;
-                text-align: center;
-                font-size: 3rem;
-                font-weight: bolder;
-                color: rgb(94, 114, 228); 
-                width: 100%;
-                display: block;
-            }
-        </style>
         <script>
           (function () {
-            function formatNumber(amount) {
-              const formatter = new Intl.NumberFormat('de-DE', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-              });
-
-              const formatted = formatter.format(amount);
-
-              return formatted;
-            }
-
-            function printMoney(amount, symbol = "Rp", dir = "left") {
-              const formatted = formatNumber(amount);
-              return dir === "right" ? formatted + ' ' + symbol : symbol + ' ' + formatted;
-            }
-
             const amount = "{literal}{{amount}}{/literal}";
             const sendMoneyTotal = document.getElementById('send-money-total');
 
-            sendMoneyTotal.innerText = printMoney(Number(amount));
+            sendMoneyTotal.innerText = printMoney(formatNumber(Number(amount)));
+          })();
+        </script>
+      </script>
+
+      <script id="wallet-receive-confirm" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {__("Receive Money")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="js_ajax-forms" data-url="payments/wallet.php?do=wallet_receive">
+          <div class="modal-body">
+            <p class="modal-label">
+              {__("Receiving From")}
+            </p>
+            <div class="user-info">
+                <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">
+                <p class="fullname">
+                  {literal}{{user_fullname}}{/literal}
+                </p>
+                <p class="name">
+                  @{literal}{{user_name}}{/literal}
+                </p>
+            </div>
+
+            <span class="money-total" id="receive-money-total">Rp 0</span>
+            
+            <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
+            <input type="hidden" name="receive_from_id" value="{literal}{{user_id}}{/literal}">
+
+            <div class="divider"></div>
+
+            <p class="modal-label">
+              {__("Receiver PIN")}
+            </p>
+
+            {include file="__wallet_keypad.tpl" keypad_id="pin"}
+
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Confirm")}</button>
+          </div>
+        </form>
+        <script>
+          (function () {
+            const amount = "{literal}{{amount}}{/literal}";
+            const receiveMoneyTotal = document.getElementById('receive-money-total');
+
+            receiveMoneyTotal.innerText = printMoney(formatNumber(Number(amount)));
           })();
         </script>
       </script>
@@ -1773,7 +1849,7 @@
           <div class="modal-header">
             <h6 class="modal-title">
               {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
-              {__("QR Request")}
+              {__("My QR")}
             </h6>
             <button type="button" class="btn-download">
               <i class="fas fa-download"></i>
@@ -1872,7 +1948,7 @@
         <div class="modal-header">
           <h6 class="modal-title">
             {include file='__svg_icons.tpl' icon="qr_scan" class="mr10" width="24px" height="24px"}
-            {__("QR Scan")}
+            {__("QR Pay")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -1977,7 +2053,7 @@
         <div class="modal-header">
           <h6 class="modal-title">
             {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
-            {__("QR Send")}
+            {__("QR Pay")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -2070,7 +2146,7 @@
         <div class="modal-header">
           <h6 class="modal-title">
             {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
-            {__("QR Send")}
+            {__("QR Pay")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>

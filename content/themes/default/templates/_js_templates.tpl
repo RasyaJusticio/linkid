@@ -1652,7 +1652,7 @@
               {__("Receiver PIN")}
             </p>
 
-            {include file="__wallet_keypad.tpl" keypad_id="pin"}
+            {include file="__wallet_keypad.tpl" keypad_name="pin" keypad_id="pin"}
 
             <!-- error -->
             <div class="alert alert-danger mb0 mt10 x-hidden"></div>

@@ -34,12 +34,15 @@ try {
 
     case 'wallet_receive':
       // valid inputs
+      if (!isset($_POST['pin']) || !is_numeric($_POST['pin'])) {
+        throw new Exception(__("Enter a valid transfer PIN"));
+      }
       if (!isset($_POST['amount']) || !is_numeric($_POST['amount']) || $_POST['amount'] < 0) {
         throw new Exception(__("Enter valid amount of money"));
       }
 
       // process
-      $user->wallet_receive($_POST['receive_from_id'], $_POST['amount']);
+      $user->wallet_receive($_POST['receive_from_id'], $_POST['amount'], $_POST['pin']);
 
       // return
       return_json(['callback' => 'window.location = site_path + "/wallet?wallet_receive_succeed"']);

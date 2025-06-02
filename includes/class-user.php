@@ -17231,7 +17231,7 @@ class User
    * @param integer $amount
    * @return void
    */
-  public function wallet_receive($user_id, $amount)
+  public function wallet_receive($user_id, $amount, $pin)
   {
     global $db, $system;
     /* check if wallet enabled */
@@ -17241,6 +17241,17 @@ class User
     /* check if wallet transfer enabled */
     if (!$system['wallet_transfer_enabled']) {
       throw new Exception(__("The wallet transfer feature has been disabled by the admin"));
+    }
+
+    $get_user = $db->query(sprintf("SELECT user_wallet_balance, user_transfer_pin FROM users WHERE user_id = %s", secure($user_id, 'int')));
+    $user_data = $get_user->fetch_assoc();
+
+    /* validate pin */
+    if (is_empty($pin) || !is_numeric($pin)) {
+      throw new Exception(__("You must enter a valid transfer PIN"));
+    }
+    if (md5($pin) != $user_data['user_transfer_pin'] && !password_verify($pin, $user_data['user_transfer_pin'])) {
+      throw new Exception(__("The given transfer PIN is incorrect"));
     }
     /* validate amount */
     if (is_empty($amount) || !is_numeric($amount) || $amount <= 0) {
@@ -17260,10 +17271,6 @@ class User
     if ($check_user->fetch_assoc()['count'] == 0) {
       throw new Exception(__("You can't receive money from this user!"));
     }
-
-    $get_user = $db->query(sprintf("SELECT user_wallet_balance FROM users WHERE user_id = %s", secure($user_id, 'int')));
-    $user_data = $get_user->fetch_assoc();
-    
     // Check balance of the user_id
     if ($user_data['user_wallet_balance'] < $amount) {
       throw new Exception(__("There is not enough credit in their wallet"));

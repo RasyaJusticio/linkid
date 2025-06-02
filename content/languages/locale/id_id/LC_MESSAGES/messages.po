@@ -5696,6 +5696,9 @@ msgstr "File diunggah"
 msgid "Enter valid amount of money for example '50'"
 msgstr "Masukkan jumlah uang yang valid misalnya '50'"
 
+msgid "Enter a valid transfer PIN"
+msgstr "Masukkan sebuah transfer PIN yang valid"
+
 #: includes/ajax/payments/authorize.php:47
 #: includes/ajax/payments/authorize.php:71
 #: includes/ajax/payments/authorize.php:95
@@ -15588,6 +15591,9 @@ msgstr "Pesan hanya akan dikirim ke alamat email situs web"
 msgid "Send to"
 msgstr "Kirim ke"
 
+msgid "Receive From"
+msgstr "Terima dari"
+
 #: content/themes/default/templates/admin.newsletter.tpl:31
 msgid "All Users"
 msgstr "Semua"
@@ -17465,14 +17471,14 @@ msgstr "Kirim dan Transfer Uang"
 #: content/themes/default/templates/wallet.tpl:118
 #: content/themes/default/templates/wallet.tpl:124
 msgid "Your"
-msgstr "Alamat email Anda"
+msgstr "Anda"
 
 #: content/themes/default/templates/wallet.tpl:64
 msgid "transfer transaction successfuly sent"
-msgstr "Terjemahan berhasil dikirim"
+msgstr "transaksi transfer berhasil dikirim"
 
 msgid "transfer transaction successfuly received"
-msgstr "Terjemahan berhasil diterima"
+msgstr "transaksi transfer berhasil diterima"
 
 #: content/themes/default/templates/wallet.tpl:70
 #: content/themes/default/templates/wallet.tpl:76
@@ -26388,7 +26394,6 @@ msgstr "Olahraga & Hiburan"
 
 msgid "Transportation"
 msgstr "Transportasi"
------------------------------------------------------------------------------>
 
 # ----------------\ #
 # Package Trial
@@ -26401,4 +26406,16 @@ msgstr "Anda harus memasukkan nomor trial dinyalakan yang valid"
 
 msgid "Enable trial package. Trial package can only be bought once"
 msgstr "Nyalakan paket trial. Paket trial hanya bisa dibeli sekali"
+
+# ----------------\ #
+#
+
+msgid "You must enter valid amount of money"
+msgstr "Anda harus memasukkan sejumlah uang yang benar"
+
+msgid "You must enter a valid transfer PIN"
+msgstr "Anda harus memasukkan transfer PIN yang benar"
+
+msgid "The given transfer PIN is incorrect"
+msgstr "Transfer PIN yang dimasukkan salah"
 

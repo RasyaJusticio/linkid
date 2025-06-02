@@ -267,6 +267,9 @@ msgstr "Pengaturan"
 msgid "Change Password"
 msgstr "Ubah Kata Sandi"
 
+msgid "Change Transfer PIN"
+msgstr "Ubah PIN Transfer"
+
 #: settings.php:103 content/themes/default/templates/settings.tpl:92
 #: content/themes/default/templates/settings.security.tpl:53
 msgid "Manage Sessions"
@@ -4988,6 +4991,9 @@ msgstr "Undangan SMS tidak dapat dikirim"
 msgid "Your current password is incorrect"
 msgstr "Kata sandi yang salah"
 
+msgid "Your current transfer PIN is incorrect"
+msgstr "Transfer PIN Anda yang sekarang salah"
+
 #: includes/class-user.php:21575 includes/ajax/admin/users.php:164
 msgid "You must enter first name"
 msgstr "Anda harus memasukkan nama Anda"
@@ -5064,11 +5070,17 @@ msgstr "Fungsi ini terputus oleh administrator"
 msgid "Your passwords do not match"
 msgstr "Kata sandi tidak cocok"
 
+msgid "Your transfer PINs do not match"
+msgstr "Kedua transfer PIN anda tidak sama"
+
 #: includes/class-user.php:21746 includes/class-user.php:22351
 #: includes/class-user.php:23189 includes/class-user.php:23411
 #: includes/ajax/admin/users.php:113
 msgid "Your password must be at least 6 characters long. Please try another"
 msgstr "Kata sandi harus setidaknya 6 karakter. Tolong coba yang lain"
+
+msgid "Your transfer PIN must be 6 characters long. Please try another"
+msgstr "Transfer PIN Anda harus memiliki 6 karakter. Mohon coba yang lain"
 
 # msgid "Your password must be at least 6 characters long. Please try another"
 #: includes/class-user.php:21749 includes/class-user.php:22354
@@ -5077,6 +5089,9 @@ msgstr "Kata sandi harus setidaknya 6 karakter. Tolong coba yang lain"
 #, fuzzy
 msgid "Your password must be less than 64 characters long. Please try another"
 msgstr "Kata sandi harus setidaknya 6 karakter. Tolong coba yang lain"
+
+msgid "Your PIN must contain only numbers. Please try another"
+msgstr "Transfer PIN Anda hanya diperbolehkan untuk memiliki nomor. Mohon coba yang lain"
 
 #: includes/class-user.php:21766
 msgid ""
@@ -7042,6 +7057,9 @@ msgstr "Informasi tentang profil Anda diperbarui"
 #: includes/ajax/users/settings.php:131
 msgid "Your password has been updated"
 msgstr "Kata sandi Anda diperbarui"
+
+msgid "Your transfer PIN has been updated"
+msgstr "Transfer PIN Anda telah diperbarui"
 
 #: includes/ajax/users/settings.php:139
 msgid "Your two-factor authentication settings have been updated"
@@ -24053,6 +24071,9 @@ msgstr "Keamanan"
 msgid "Current Password"
 msgstr "Konfirmasikan kata sandi saat ini"
 
+msgid "Current Transfer PIN"
+msgstr "Transfer PIN saat ini"
+
 #: content/themes/default/templates/settings.account.tpl:126
 msgid "You need to enter your current password for security check"
 msgstr "Anda harus memasukkan kata sandi Anda saat ini untuk pemeriksaan keamanan"
@@ -24597,6 +24618,12 @@ msgstr "Kata sandi baru Anda"
 #: content/themes/default/templates/settings.security.tpl:28
 msgid "Confirm New Password"
 msgstr "Konfirmasikan kata sandi baru"
+
+msgid "Your New Transfer PIN"
+msgstr "Transfer PIN baru Anda"
+
+msgid "Confirm New Transfer PIN"
+msgstr "Konfirmasi Transfer PIN baru"
 
 #: content/themes/default/templates/settings.security.tpl:50
 msgid "Log Out Of All Sessions"

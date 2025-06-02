@@ -92,6 +92,11 @@
                       {__("Password")}
                     </a>
                   </li>
+                  <li {if $view == "security" && $sub_view == "transfer-pin"}class="active" {/if}>
+                    <a href="{$system['system_url']}/settings/security/transfer-pin">
+                      {__("Transfer PIN")}
+                    </a>
+                  </li>
                   <li {if $view == "security" && $sub_view == "sessions"}class="active" {/if}>
                     <a href="{$system['system_url']}/settings/security/sessions">
                       {__("Manage Sessions")}

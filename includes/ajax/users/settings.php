@@ -131,6 +131,25 @@ try {
       return_json(['success' => true, 'message' => __("Your password has been updated")]);
       break;
 
+    case 'transfer-pin':
+      // valid inputs
+      if (!is_empty($user->_data['user_transfer_pin'])) {
+        if (!isset($_POST['current']) || !isset($_POST['new']) || !isset($_POST['confirm'])) {
+          _error(400);
+        }
+      } else {
+        if (!isset($_POST['new']) || !isset($_POST['confirm'])) {
+          _error(400);
+        }
+      }
+
+      // change settings
+      $user->settings($_GET['edit'], $_POST);
+
+      // return
+      return_json(['success' => true, 'message' => __("Your transfer PIN has been updated")]);
+      break;
+
     case 'two-factor':
       // change settings
       $user->settings($_GET['edit'], $_POST);

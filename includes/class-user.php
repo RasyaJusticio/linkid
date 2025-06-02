@@ -22521,6 +22521,32 @@ class User
         $db->query(sprintf("DELETE FROM users_sessions WHERE session_id != %s AND user_id = %s", secure($this->_data['active_session_id']), secure($this->_data['user_id'], 'int')));
         break;
 
+      case 'transfer-pin':
+        /* validate all fields */
+        if (!is_empty($user->_data['user_transfer_pin'])) {
+          if (is_empty($args['current']) || is_empty($args['new']) || is_empty($args['confirm'])) {
+            throw new Exception(__("You must fill in all of the fields"));
+          }
+
+          /* validate current pin (MD5 check for versions < v2.5) */
+          if (md5($args['current']) != $this->_data['user_transfer_pin'] && !password_verify($args['current'], $this->_data['user_transfer_pin'])) {
+            throw new Exception(__("Your current transfer PIN is incorrect"));
+          }
+        } else {
+          if (is_empty($args['new']) || is_empty($args['confirm'])) {
+            throw new Exception(__("You must fill in all of the fields"));
+          }
+        }
+        /* validate new pin */
+        if ($args['new'] != $args['confirm']) {
+          throw new Exception(__("Your transfer PINs do not match"));
+        }
+        /* check password */
+        $this->check_pin($args['new']);
+        /* update user */
+        $db->query(sprintf("UPDATE users SET user_transfer_pin = %s WHERE user_id = %s", secure(_password_hash($args['new'])), secure($this->_data['user_id'], 'int')));
+        break;
+
       case 'two-factor':
         if ($system['two_factor_type'] != $args['type']) {
           _error(400);
@@ -24476,6 +24502,26 @@ class User
       if (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/', $password)) {
         throw new ValidationException(__("Your password must contain at least one special character. Please try another"));
       }
+    }
+  }
+
+  /**
+   * check_pin ✅
+   *
+   * @param string $pin
+   * @return void
+   */
+  public function check_pin($pin)
+  {
+    global $system;
+    /* check pin length */
+    if (strlen($pin) != 6) {
+      throw new ValidationException(__("Your transfer PIN must be 6 characters long. Please try another"));
+    }
+
+    /* check if PIN is only numeric */
+    if (!preg_match('/^\d+$/', $pin)) {
+      throw new ValidationException(__("Your PIN must contain only numbers. Please try another"));
     }
   }
 

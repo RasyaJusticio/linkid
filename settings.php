@@ -245,6 +245,11 @@ try {
           page_header(__("Settings") . " &rsaquo; " . __("Change Password"));
           break;
 
+        case 'transfer-pin':
+          // page header
+          page_header(__("Transfer PIN") . " &rsaquo; " . __("Change Transfer PIN"));
+          break;
+
         case 'sessions':
           // page header
           page_header(__("Settings") . " &rsaquo; " . __("Manage Sessions"));

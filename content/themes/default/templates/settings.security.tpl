@@ -43,6 +43,44 @@
     </div>
   </form>
 
+{elseif $sub_view == "transfer-pin"}
+  <div class="card-header with-icon">
+    {include file='__svg_icons.tpl' icon="security" class="main-icon mr15" width="24px" height="24px"}
+    {__("Change Transfer PIN")}
+  </div>
+  <form class="js_ajax-forms" data-url="users/settings.php?edit=transfer-pin">
+    <div class="card-body">
+      {if !is_empty($user->_data['user_transfer_pin'])}
+        <div class="form-group">
+          <label class="form-label">{__("Current Transfer PIN")}</label>
+          <input type="password" class="form-control" name="current">
+        </div>
+      {/if}
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="form-label">{__("Your New Transfer PIN")}</label>
+          <input type="password" class="form-control" name="new">
+        </div>
+        <div class="form-group col-md-6">
+          <label class="form-label">{__("Confirm New Transfer PIN")}</label>
+          <input type="password" class="form-control" name="confirm">
+        </div>
+      </div>
+
+      <!-- success -->
+      <div class="alert alert-success mt15 mb0 x-hidden"></div>
+      <!-- success -->
+
+      <!-- error -->
+      <div class="alert alert-danger mt15 mb0 x-hidden"></div>
+      <!-- error -->
+    </div>
+    <div class="card-footer text-end">
+      <button type="submit" class="btn btn-primary">{__("Save Changes")}</button>
+    </div>
+  </form>
+
 {elseif $sub_view == "sessions"}
   <div class="card-header with-icon">
     <div class="float-end">

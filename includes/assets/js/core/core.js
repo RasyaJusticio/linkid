@@ -2508,14 +2508,25 @@ $(function () {
   $('body').on('click', '.keypad-buttons button', function () {
     var $button = $(this);
     var digit = $button.data('amount');
+    var action = $button.data('action');
     var $wrapper = $button.closest('.keypad-wrapper');
     var $input = $wrapper.find('input[type="password"]');
 
     var currentVal = $input.val();
 
-    if (currentVal.length < 6) {
-      $input.val(currentVal + digit);
+    if (typeof digit == 'number') {
+      if (currentVal.length < 6) {
+        $input.val(currentVal + digit);
+      }
     }
+
+    if (action == "BACKSPACE") {
+      if (currentVal.length > 0) {
+        const newVal = currentVal.slice(0, -1);
+        $input.val(newVal);
+      }
+    }
+
   });
 
   $('body').on('input', '.keypad-input input', function () {

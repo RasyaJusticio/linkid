@@ -11614,7 +11614,6 @@ body.night-mode .pwa_install_banner {
 .keypad-buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   width: 100%;
   background-color: var(--bs-body-bg);
   padding: 0.8rem;

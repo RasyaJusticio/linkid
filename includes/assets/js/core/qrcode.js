@@ -130,7 +130,7 @@ async function drawQR(context, canvas, qrImage, options) {
             // Created At
             context.save();
 
-            context.font = "42px Poppins";
+            context.font = "34px Poppins";
             context.textAlign = "center";
             context.fillText(`Dibuat: ${dateTime}`, HALF_WIDTH, QR_CANVAS_HEIGHT - 130);
 
@@ -139,14 +139,11 @@ async function drawQR(context, canvas, qrImage, options) {
     
         // QR Code
         (function() {
-            const PADDING = 152 * 1.25;
+            const PADDING = 152;
             const SIZE = QR_CANVAS_WIDTH - PADDING * 2;
             context.save();
     
-            context.fillStyle = "#FFFFFF";
-            context.fillRect(PADDING, QR_CANVAS_HEIGHT - PADDING - SIZE - 28, SIZE, SIZE);
-    
-            context.drawImage(qrImage, PADDING, QR_CANVAS_HEIGHT - PADDING - SIZE - 28, SIZE, SIZE);
+            context.drawImage(qrImage, PADDING, QR_CANVAS_HEIGHT - PADDING - SIZE - 14, SIZE, SIZE);
     
             context.restore();
         })();

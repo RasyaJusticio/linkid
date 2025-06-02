@@ -741,6 +741,23 @@ function getCookie(cname) {
   return "";
 }
 
+// Formatting
+function formatNumber(amount) {
+  const formatter = new Intl.NumberFormat('de-DE', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+
+  const formatted = formatter.format(amount);
+
+  return formatted;
+}
+
+function printMoney(amount, symbol = "Rp", dir = "left") {
+  const formatted = amount;
+  return dir === "right" ? formatted + ' ' + symbol : symbol + ' ' + formatted;
+}
+
 
 $(function () {
 
@@ -2472,6 +2489,7 @@ $(function () {
     input.val(setAmount);
   });
 
+  // group sluggify
   $('body').on('input', '.form-group-title', function () {
     var _this = $(this);
     var usernameInput = _this.closest('.form-group').next('.form-group').find('.form-group-username');
@@ -2486,4 +2504,30 @@ $(function () {
     }
   });
 
+  // keypad
+  $('body').on('click', '.keypad-buttons button', function () {
+    var $button = $(this);
+    var digit = $button.data('amount');
+    var $wrapper = $button.closest('.keypad-wrapper');
+    var $input = $wrapper.find('input[type="password"]');
+
+    var currentVal = $input.val();
+
+    if (currentVal.length < 6) {
+      $input.val(currentVal + digit);
+    }
+  });
+
+  $('body').on('input', '.keypad-input input', function () {
+    var $input = $(this);
+    var value = $input.val();
+
+    var numericValue = value.replace(/\D/g, '');
+
+    if (numericValue.length > 6) {
+      numericValue = numericValue.substring(0, 6);
+    }
+
+    $input.val(numericValue);
+  });
 });

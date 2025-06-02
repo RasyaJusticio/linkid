@@ -60,11 +60,11 @@
             </div>
 
             <div class="qr-btns-container">
-              <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr-scan">
+              <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr-scan-pay">
                 {include file='__svg_icons.tpl' icon="money_send" width="24px" height="24px"}
                 {__("QR Pay")}
               </button>
-              <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr" data-options='{ "qrcode_uri": "$qrcode_uri" }'>
+              <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr-scan-receive">
                 {include file='__svg_icons.tpl' icon="money_receive" width="24px" height="24px"}
                 {__("QR Receive")}
               </button>

@@ -801,6 +801,106 @@ function openWalletConfirmation(event, userIdField, modalTarget) {
     }
   });
 }
+
+function openWalletQRConfirmation(event, targetUserData, modalTarget) {
+  event.preventDefault();
+
+  const $form = $(event.target);
+  const $error = $form.find('.alert.alert-danger');
+  const formData = new FormData($form[0]);
+  const data = {};
+  
+  if ($error.is(":visible")) $error.hide();
+
+  for (let [key, value] of formData.entries()) {
+    data[key] = value;
+  }
+
+  const amount = data.amount;
+  if (Number(amount) <= 0) {
+    $error.html(__['You must enter valid amount of money']).slideDown();
+    return;
+  }
+
+  modal(modalTarget, {
+    'amount': data.amount,
+    'user_id': targetUserData.user_id,
+    'user_name': targetUserData.user_name,
+    'user_fullname': targetUserData.user_fullname,
+    'user_picture': targetUserData.user_picture
+  });
+}
+
+// TODO: Translate error messages
+function initiateQRScanner(modalId, nextModalId) {
+  const baseModalElem = document.getElementById('modal');
+  const modalElem = document.getElementById(modalId);
+  const readerElem = modalElem.querySelector('.video-qr-reader');
+  const $error = $(modalElem.querySelector('.alert.alert-danger'));
+
+  let isSuccessfull = false;
+  let isProcessing = false;
+
+  const onSuccess = (result) => {
+    if (isSuccessfull || isProcessing) {
+        return;
+    }
+    isProcessing = true;
+
+    $.post(ajax_path + "payments/transfer.php?do=check_token", {
+        transfer_token: result.data
+    }, function (response) {
+      isProcessing = false;
+      qrScanner.stop();
+
+      if (response.result == "valid") {
+        isSuccessfull = true;
+            
+        const user = response.user;
+
+        modal(nextModalId, { 'user_id': user['user_id'], 'user_name': user['user_name'], 'user_fullname': user['user_firstname'] + " " + user['user_lastname'], 'user_picture': user['user_picture'] });
+        cleanUp();
+      } else {
+        $error.html('Scanned QR is invalid');
+      }
+    }).fail(function() {
+      isProcessing = false;
+      $error.html('Failed to get user data');
+    });
+  }
+    
+  const qrScanner = new QrScanner(
+    readerElem,
+    onSuccess,
+    {
+      returnDetailedScanResult: true,
+      highlightScanRegion: true,
+      highlightCodeOutline: true
+    }
+  );
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        if (!baseModalElem.classList.contains('show')) {
+            cleanUp();
+        }
+      }
+    });
+  });
+
+  observer.observe(baseModalElem, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+            
+  function cleanUp() {
+    qrScanner.stop();
+    observer.disconnect();
+  }
+
+  qrScanner.start();
+}
   
 $(function () {
 

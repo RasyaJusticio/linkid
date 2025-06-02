@@ -1,6 +1,6 @@
 <div class="keypad-wrapper">
   <div class="keypad-input">
-    <input type="password" name="{$keypad_name}" id="{$keypad_id}" placeholder="••••••" autocomplete="off" max="6">
+    <input type="password" name="{$keypad_name}" id="{$keypad_id}" placeholder="••••••" autofocus="on" autocomplete="off" max="6">
   </div>
 
   <div class="keypad-buttons">

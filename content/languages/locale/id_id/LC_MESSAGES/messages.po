@@ -22319,7 +22319,7 @@ msgid "The maximum amount you can transfer is"
 msgstr "Jumlah maximum yang dapat Anda transfer adalah"
 
 #, fuzzy
-msgid "The maximum amount you can transfer is"
+msgid "The maximum amount you can receive is"
 msgstr "Jumlah maximum yang dapat Anda terima adalah"
 
 #: content/themes/default/templates/_js_templates.tpl:1470
@@ -25356,6 +25356,9 @@ msgstr "QR Saya"
 
 msgid "QR Request"
 msgstr "QR Terima"
+
+msgid "QR Receive"
+msgstr "QR Minta"
 
 msgid "QR Pay"
 msgstr "QR Bayar"

@@ -1579,7 +1579,7 @@
             <div class="divider"></div>
 
             <p class="modal-label">
-              {__("Receiver PIN")}
+              {__("Giver PIN")}
             </p>
 
             {include file="__wallet_keypad.tpl" keypad_name="pin" keypad_id="pin"}

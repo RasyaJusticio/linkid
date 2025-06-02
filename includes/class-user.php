@@ -17250,6 +17250,9 @@ class User
     if (is_empty($pin) || !is_numeric($pin)) {
       throw new Exception(__("You must enter a valid transfer PIN"));
     }
+    if (is_empty($user_data['user_transfer_pin']) || !isset($user_data['user_transfer_pin'])) {
+      throw new Exception(__("This user doesn't have a transfer PIN"));
+    }
     if (md5($pin) != $user_data['user_transfer_pin'] && !password_verify($pin, $user_data['user_transfer_pin'])) {
       throw new Exception(__("The given transfer PIN is incorrect"));
     }

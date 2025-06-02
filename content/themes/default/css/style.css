@@ -11551,3 +11551,104 @@ body.night-mode .pwa_install_banner {
     padding-inline: 0.3rem;
     padding-block: 0.6rem;
 }
+
+/* -- */
+
+/* WALLET CONFIRM */
+/* ------------------------------- */
+.modal-label {
+  width: 100%;
+  text-align: center;
+  margin-block: 0.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.user-info .avatar {
+  border-radius: 100%;
+  aspect-ratio: 1 / 1;
+  width: 6rem;
+}
+
+.user-info .fullname,
+.user-info .username {
+  margin: 0;
+}
+
+.user-info .fullname {
+  font-size: 1.4rem;
+  margin-bottom: -0.4rem;
+  font-weight: bold;
+}
+
+.money-total {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bolder;
+  color: rgb(94, 114, 228);
+  width: 100%;
+  display: block;
+}
+
+/* -- */
+
+/* KEYPAD */
+/* ------------------------------- */
+.keypad-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--body-bg-color);
+  padding: 0.6rem;
+  border-radius: var(--bs-modal-inner-border-radius);
+}
+
+.keypad-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  background-color: var(--bs-body-bg);
+  padding: 0.8rem;
+  gap: 0.4rem;
+  border-bottom-right-radius: var(--bs-modal-inner-border-radius);
+  border-bottom-left-radius: var(--bs-modal-inner-border-radius);
+}
+
+.keypad-buttons button {
+  font-size: 1rem;
+}
+
+.keypad-input {
+  background-color: var(--bs-body-bg);
+  padding: 0.8rem;
+  border-top-right-radius: var(--bs-modal-inner-border-radius);
+  border-top-left-radius: var(--bs-modal-inner-border-radius);
+}
+
+.keypad-input input {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: transparent;
+  text-align: center;
+  border: 0;
+  outline: 0;
+  border-bottom: 3px solid #5e72e4;
+  letter-spacing: 1rem;
+}
+
+body.night-mode {
+  .keypad-wrapper {
+    background-color: var(--body-bg-color-dark);
+  }
+}
+

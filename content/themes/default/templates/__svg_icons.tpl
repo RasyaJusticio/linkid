@@ -1052,6 +1052,10 @@
 
     {include file='../images/svg/qr_scan.svg'}
 
+  {elseif $icon == "qr_code"}
+
+    {include file='../images/svg/qr_code.svg'}
+
   {/if}
 
 </div>

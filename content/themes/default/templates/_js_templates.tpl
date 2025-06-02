@@ -1423,7 +1423,7 @@
       <script id="wallet-transfer" type="text/template">
         <div class="modal-header">
           <h6 class="modal-title">
-            {include file='__svg_icons.tpl' icon="wallet_transfer" class="main-icon mr10" width="24px" height="24px"}
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
             {__("Send Money")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1464,7 +1464,7 @@
       <script id="wallet-receive" type="text/template">
         <div class="modal-header">
           <h6 class="modal-title">
-            {include file='__svg_icons.tpl' icon="wallet_transfer" class="main-icon mr10" width="24px" height="24px"}
+            {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
             {__("Receive Money")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1551,7 +1551,7 @@
       <script id="wallet-receive-confirm" type="text/template">
         <div class="modal-header">
           <h6 class="modal-title">
-            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
             {__("Receive Money")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1778,7 +1778,7 @@
         <div class="modal-wallet-qr">
           <div class="modal-header">
             <h6 class="modal-title">
-              {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
+              {include file='__svg_icons.tpl' icon="qr_code" class="mr10" width="24px" height="24px"}
               {__("My QR")}
             </h6>
             <button type="button" class="btn-download">
@@ -1878,7 +1878,7 @@
         <div id="wallet-qr-scan-pay">
           <div class="modal-header modal-qr-scanner">
             <h6 class="modal-title">
-              {include file='__svg_icons.tpl' icon="qr_scan" class="mr10" width="24px" height="24px"}
+              {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
               {__("QR Pay")}
             </h6>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1904,7 +1904,7 @@
         <div id="wallet-qr-scan-receive">
           <div class="modal-header modal-qr-scanner">
             <h6 class="modal-title">
-              {include file='__svg_icons.tpl' icon="qr_scan" class="mr10" width="24px" height="24px"}
+              {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
               {__("QR Receive")}
             </h6>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -2022,7 +2022,7 @@
       <script id="wallet-qr-receive" type="text/template">
         <div class="modal-header">
           <h6 class="modal-title">
-            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
             {__("QR Receive")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
@@ -2069,7 +2069,7 @@
       <script id="wallet-qr-receive-confirm" type="text/template">
         <div class="modal-header">
           <h6 class="modal-title">
-            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
             {__("QR Receive")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

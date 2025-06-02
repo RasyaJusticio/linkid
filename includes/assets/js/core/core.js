@@ -758,7 +758,50 @@ function printMoney(amount, symbol = "Rp", dir = "left") {
   return dir === "right" ? formatted + ' ' + symbol : symbol + ' ' + formatted;
 }
 
+function openWalletConfirmation(event, userIdField, modalTarget) {
+  event.preventDefault();
 
+  const $form = $(event.target);
+  const $error = $form.find('.alert.alert-danger');
+  const formData = new FormData($form[0]);
+  const data = {};
+  
+  if ($error.is(":visible")) $error.hide();
+
+  for (let [key, value] of formData.entries()) {
+    data[key] = value;
+  }
+
+  const amount = data.amount;
+  if (Number(amount) <= 0) {
+    $error.html(__['You must enter valid amount of money']).slideDown();
+    return;
+  }
+
+  const userId = data[userIdField];
+  if (!userId) {
+    $error.html(__['You must search for a user to send money to']).slideDown();
+    return;
+  }
+
+  $.post(ajax_path + "payments/wallet.php?do=get_user_info", {
+    user_id: userId
+  }, function(response) {
+    if (response.result === "valid") {
+      const user = response.user;
+      modal(modalTarget, {
+        'amount': data.amount,
+        'user_id': user.user_id,
+        'user_name': user.user_name,
+        'user_fullname': `${user.user_firstname} ${user.user_lastname}`,
+        'user_picture': user.user_picture
+      });
+    } else {
+      $error.html(__["You can't send money to this user!"]).slideDown();
+    }
+  });
+}
+  
 $(function () {
 
   // init plugins

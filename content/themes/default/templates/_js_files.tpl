@@ -304,6 +304,10 @@
     __['Download PDF'] = "{__('Download PDF')}";
     __['Download SVG vector image'] = "{__('Download SVG vector image')}";
     __['Chart context menu'] = "{__('Chart context menu')}";
+    /* i18n for Wallet */
+    __['You must search for a user to send money to'] = "{__('You must search for a user to send money to')}";
+    __["You can't send money to this user!"] = '{__("You can't send money to this user!")}';
+    __['You must enter valid amount of money'] = "{__('You must enter valid amount of money')}";
   </script>
   <!-- Initialize -->
 

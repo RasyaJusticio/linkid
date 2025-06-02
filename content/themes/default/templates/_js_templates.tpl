@@ -1428,7 +1428,7 @@
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form onsubmit="openConfirmationModal(event)">
+        <form onsubmit="openWalletConfirmation(event, 'send_to_id', '#wallet-transfer-confirm')">
           <div class="modal-body">
             {if $system['wallet_max_transfer'] != "0"}
               <div class="alert alert-info mb20">
@@ -1459,41 +1459,6 @@
             <button type="submit" class="btn btn-primary">{__("Send")}</button>
           </div>
         </form>
-        <script>
-            function openConfirmationModal(event) {
-              event.preventDefault();
-            
-              var form = event.target;
-              var formData = new FormData(form);
-            
-              var data = {};
-              formData.forEach(function(value, key) {
-                data[key] = value;
-              });
-            
-              var user = {
-                'user_id': "{$user->_data['user_id']}",
-                'user_name': "{$user->_data['user_name']}",
-                'user_firstname': "{$user->_data['user_firstname']}",
-                'user_lastname': "{$user->_data['user_lastname']}",
-                'user_picture': "{$user->_data['user_picture']}"
-              };
-
-              $.post(ajax_path + "payments/wallet.php?do=get_user_info", {
-                  user_id: data.send_to_id
-              }, function (response) {
-                  if (response.result == "valid") {
-                      isSuccessfull = true;
-                          
-                      const user = response.user;
-
-                      modal("#wallet-transfer-confirm", { 'amount': data.amount, 'user_id': user['user_id'], 'user_name': user['user_name'], 'user_fullname': user['user_firstname'] + " " + user['user_lastname'], 'user_picture': user['user_picture'] });
-                  }
-              });
-
-              return false;
-            }
-        </script>
       </script>
 
       <script id="wallet-receive" type="text/template">
@@ -1504,7 +1469,7 @@
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form onsubmit="openConfirmationModal(event)">
+        <form onsubmit="openWalletConfirmation(event, 'receive_from_id', '#wallet-receive-confirm')">
           <div class="modal-body">
             {if $system['wallet_max_transfer'] != "0"}
               <div class="alert alert-info mb20">
@@ -1535,41 +1500,6 @@
             <button type="submit" class="btn btn-primary">{__("Send")}</button>
           </div>
         </form>
-        <script>
-            function openConfirmationModal(event) {
-              event.preventDefault();
-            
-              var form = event.target;
-              var formData = new FormData(form);
-            
-              var data = {};
-              formData.forEach(function(value, key) {
-                data[key] = value;
-              });
-            
-              var user = {
-                'user_id': "{$user->_data['user_id']}",
-                'user_name': "{$user->_data['user_name']}",
-                'user_firstname': "{$user->_data['user_firstname']}",
-                'user_lastname': "{$user->_data['user_lastname']}",
-                'user_picture': "{$user->_data['user_picture']}"
-              };
-
-              $.post(ajax_path + "payments/wallet.php?do=get_user_info", {
-                  user_id: data.receive_from_id
-              }, function (response) {
-                  if (response.result == "valid") {
-                      isSuccessfull = true;
-                          
-                      const user = response.user;
-
-                      modal("#wallet-receive-confirm", { 'amount': data.amount, 'user_id': user['user_id'], 'user_name': user['user_name'], 'user_fullname': user['user_firstname'] + " " + user['user_lastname'], 'user_picture': user['user_picture'] });
-                  }
-              });
-
-              return false;
-            }
-        </script>
       </script>
 
       <script id="wallet-transfer-confirm" type="text/template">

@@ -16,6 +16,9 @@
     height: 100vh;
     border: none; /* Hilangkan garis border jika ada */
   }
+  .header-hidden {
+    display: none;
+  }
 </style>
 
 {literal}
@@ -45,5 +48,23 @@
     // (Opsional) Jika kamu ingin mengembalikan scroll ke parent nanti:
     // document.body.style.overflow = 'auto';
   }
+
+  // Listener buat pesan dari iframe
+  window.addEventListener('message', function(event) {
+    // Pastiin pesan dari iframe yang bener
+    if (event.origin !== quraniUrl) {
+      return;
+    }
+
+    // Cek tipe pesan: 'iframe_ready' (awal load) atau 'route_change' (URL berubah)
+    if (event.data.type === 'iframe_ready' || event.data.type === 'route_change') {
+      const header = document.querySelector('.main-header');
+      if (event.data.path === '/') {
+        header.classList.remove('header-hidden'); // Tampilin header
+      } else {
+        header.classList.add('header-hidden'); // Sembunyiin header
+      }
+    }
+  });
 </script>
 {/literal}

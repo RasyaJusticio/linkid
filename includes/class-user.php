@@ -17194,7 +17194,7 @@ class User
       throw new Exception(__("You must enter valid amount of money"));
     }
     if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
-      throw new Exception(__("You can't transfer more than") . " " . print_money($system['wallet_max_transfer']));
+      throw new Exception(__("You can't transfer more than") . " " . print_money(format_number($system['wallet_max_transfer'])));
     }
     /* validate target user */
     if (is_empty($user_id) || !is_numeric($user_id)) {
@@ -17261,7 +17261,7 @@ class User
       throw new Exception(__("You must enter valid amount of money"));
     }
     if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
-      throw new Exception(__("You can't transfer more than") . " " . print_money($system['wallet_max_transfer']));
+      throw new Exception(__("You can't transfer more than") . " " . print_money(format_number($system['wallet_max_transfer'])));
     }
     /* validate target user */
     if (is_empty($user_id) || !is_numeric($user_id)) {
@@ -17952,7 +17952,7 @@ class User
       throw new Exception(__("You must enter valid amount of money"));
     }
     if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
-      throw new Exception(__("You can't transfer more than") . " " . print_money($system['wallet_max_transfer']));
+      throw new Exception(__("You can't transfer more than") . " " . print_money(format_number($system['wallet_max_transfer'])));
     }
     /* validate target user */
     if (is_empty($user_id) || !is_numeric($user_id)) {

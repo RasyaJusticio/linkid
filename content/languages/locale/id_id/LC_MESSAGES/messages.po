@@ -22322,6 +22322,10 @@ msgstr "Jumlah maximum yang dapat Anda transfer adalah"
 msgid "The maximum amount you can receive is"
 msgstr "Jumlah maximum yang dapat Anda terima adalah"
 
+#, fuzzy
+msgid "Maximum amount"
+msgstr "Jumlah maximum"
+
 #: content/themes/default/templates/_js_templates.tpl:1470
 msgid "Withdraw Affiliates Credit"
 msgstr "Mengeluarkan dana mitra"

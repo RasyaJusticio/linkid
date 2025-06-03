@@ -4,9 +4,17 @@
 <iframe src="{$system['qurani_url']}" name="qurani-iframe" id="qurani-iframe"></iframe>
 
 <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+  }
+
   #qurani-iframe {
     width: 100%;
     height: 100vh;
+    border: none; /* Hilangkan garis border jika ada */
   }
 </style>
 
@@ -21,8 +29,8 @@
 
   const quraniIFrame = document.getElementById('qurani-iframe');
 
-
   quraniIFrame.onload = () => {
+    // Kirim data ke iframe
     quraniIFrame.contentWindow.postMessage({
       data: {
         c_user,
@@ -33,10 +41,9 @@
       },
       type: 'parent_state',
     }, quraniUrl);
+
+    // (Opsional) Jika kamu ingin mengembalikan scroll ke parent nanti:
+    // document.body.style.overflow = 'auto';
   }
-
-
 </script>
 {/literal}
-
-{include file='_footer.tpl'}

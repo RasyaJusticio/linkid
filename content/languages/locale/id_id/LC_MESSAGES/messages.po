@@ -1766,7 +1766,7 @@ msgstr "Halaman statis"
 #: content/themes/default/templates/admin.permissions_groups.tpl:1194
 #: content/themes/default/templates/admin.tpl:1026
 msgid "Colored Posts"
-msgstr "Pesan warna"
+msgstr "Warna Postingan"
 
 #: admin.php:4285 admin.php:4316 admin.php:4321
 #: content/themes/default/templates/admin.widgets.tpl:16
@@ -8664,7 +8664,7 @@ msgstr "Pembayaran koin"
 #: content/themes/default/templates/page.tpl:99
 #, fuzzy
 msgid "Upload Photo"
-msgstr "Unggah foto"
+msgstr "Unggah Foto"
 
 # msgid "Upload your photo"
 #: content/themes/default/templates/group.tpl:42
@@ -10213,12 +10213,12 @@ msgstr "Apa yang sedang kamu lakukan?"
 #: content/themes/default/templates/ajax.album.add_photos.tpl:89
 #: content/themes/default/templates/_publisher.tpl:284
 msgid "Upload Photos"
-msgstr "Unggah foto"
+msgstr "Unggah Foto"
 
 #: content/themes/default/templates/ajax.album.add_photos.tpl:97
 #: content/themes/default/templates/_publisher.tpl:300
 msgid "Feelings/Activity"
-msgstr "Perasaan/aktivitas"
+msgstr "Perasaan/Aktivitas"
 
 #: content/themes/default/templates/ajax.album.add_photos.tpl:105
 #: content/themes/default/templates/_publisher.tpl:308
@@ -11229,7 +11229,7 @@ msgstr "Gambar"
 #: content/themes/default/templates/admin.languages.tpl:99
 #: content/themes/default/templates/admin.languages.tpl:225
 msgid "Enabled"
-msgstr "Termasuk"
+msgstr "Aktifkan"
 
 #: content/themes/default/templates/admin.reactions.tpl:81
 #: content/themes/default/templates/admin.pro.tpl:225
@@ -11659,11 +11659,11 @@ msgstr "Nyalakan dan mematikan pesan warna"
 #: content/themes/default/templates/admin.permissions_groups.tpl:474
 #: content/themes/default/templates/admin.permissions_groups.tpl:1212
 msgid "Feelings/Activity Posts"
-msgstr "Posting Perasaan/Aktivitas"
+msgstr "Perasaan/Aktivitas"
 
 #: content/themes/default/templates/admin.settings.tpl:1253
 msgid "Turn the feelings and activity posts On and Off"
-msgstr "Menghidupkan dan mematikan perasaan dan aktivitas"
+msgstr "Mengaktifkan dan menonaktifkan postingan perasaan dan aktivitas"
 
 #: content/themes/default/templates/admin.settings.tpl:1271
 msgid "Voice Notes in Posts"
@@ -11725,7 +11725,7 @@ msgstr "Periksa dokumentasi untuk mengetahui cara mendapatkan kunci ini"
 #: content/themes/default/templates/admin.settings.tpl:1386
 #: content/themes/default/templates/_publisher.tpl:333
 msgid "GIF"
-msgstr "Gif"
+msgstr "GIF"
 
 #: content/themes/default/templates/admin.settings.tpl:1387
 msgid "Turn the gif posts On and Off"
@@ -12901,11 +12901,11 @@ msgstr "GL/OFF CHAT"
 #: content/themes/default/templates/admin.settings.tpl:4219
 #: content/themes/default/templates/_publisher.tpl:325
 msgid "Voice Notes"
-msgstr "Catatan suara"
+msgstr "Pesan Suara"
 
 #: content/themes/default/templates/admin.settings.tpl:4221
 msgid "Turn the voice notes in chat On and Off"
-msgstr "Menghidupkan dan mematikan catatan suara"
+msgstr "Mengaktifkan dan Menonaktifkan Pesan Suara"
 
 #: content/themes/default/templates/admin.settings.tpl:4237
 msgid "User Status Enabled"
@@ -13167,7 +13167,7 @@ msgstr "Aktifkan pengunggahan foto dalam komentar"
 
 #: content/themes/default/templates/admin.settings.tpl:4712
 msgid "Photo Upload in Chat"
-msgstr "Unggah foto dalam obrolan"
+msgstr "Unggah Foto dalam Obrolan"
 
 #: content/themes/default/templates/admin.settings.tpl:4713
 msgid "Enable photo upload in chat"
@@ -13175,7 +13175,7 @@ msgstr "Aktifkan unggahan foto dalam obrolan"
 
 #: content/themes/default/templates/admin.settings.tpl:4728
 msgid "Photo Upload in Blogs and Forums"
-msgstr "Unggah foto di blog dan forum"
+msgstr "Unggah Foto di Blog dan Forum"
 
 # msgid "Enable photo upload to share & upload photos to the site"
 #: content/themes/default/templates/admin.settings.tpl:4729
@@ -13436,7 +13436,7 @@ msgstr "Video ekspansi diizinkan (melalui koma ',)"
 #: content/themes/default/templates/admin.settings.tpl:5057
 #, fuzzy
 msgid "FFMPEG Enabled"
-msgstr "Termasuk"
+msgstr "Aktifkan FFMPEG"
 
 #: content/themes/default/templates/admin.settings.tpl:5058
 msgid "Enable FFMPEG to convert and optimize videos to mp4"
@@ -13602,7 +13602,7 @@ msgstr "Ekstensi audio diizinkan (melalui koma ',)"
 
 #: content/themes/default/templates/admin.settings.tpl:5302
 msgid "File Upload"
-msgstr "Unduh File"
+msgstr "Unggah File"
 
 #: content/themes/default/templates/admin.settings.tpl:5303
 msgid "Enable file upload to share & upload files to the site"
@@ -13998,7 +13998,7 @@ msgstr "Kata -kata tunduk pada sensor, dipisahkan oleh koma (,)"
 #: content/themes/default/templates/admin.settings.tpl:6289
 #, fuzzy
 msgid "HTML Enabled"
-msgstr "Termasuk"
+msgstr "Aktifkan HTML"
 
 #: content/themes/default/templates/admin.settings.tpl:6290
 msgid "Enable/Disable HTML code in Rich Text Editor (blogs and forums)"
@@ -16531,8 +16531,7 @@ msgstr "umum"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:330
 #, fuzzy
-msgid "Anonymous post"
-msgstr "Mengomentari catatan Anda"
+
 
 #: content/themes/default/templates/__feeds_post.body.tpl:335
 msgid "'s"
@@ -16852,7 +16851,7 @@ msgstr "Unduh"
 #: content/themes/default/templates/ajax.product.editor.tpl:28
 #, fuzzy
 msgid "OR Upload your File"
-msgstr "Unduh file"
+msgstr "Unggah File Anda"
 
 #: content/themes/default/templates/ajax.product.publisher.tpl:46
 #: content/themes/default/templates/ajax.product.editor.tpl:46
@@ -21106,7 +21105,7 @@ msgstr "Daftar Akun Terkait"
 #: content/themes/default/templates/_header.tpl:136
 #, fuzzy
 msgid "Create Post"
-msgstr "Membuat survei"
+msgstr "Buat Postingan"
 
 # msgid "Create File"
 #: content/themes/default/templates/_header.tpl:142
@@ -21476,7 +21475,7 @@ msgstr "Pesan warna"
 #: content/themes/default/templates/packages.tpl:304
 #, fuzzy
 msgid "Add Feelings/Activity Posts"
-msgstr "Perasaan/aktivitas"
+msgstr "Perasaan/Aktivitas"
 
 # msgid "Popular Posts"
 #: content/themes/default/templates/packages.tpl:315
@@ -21499,7 +21498,7 @@ msgstr "Tambahkan foto"
 #: content/themes/default/templates/packages.tpl:348
 #, fuzzy
 msgid "Add Anonymous Posts"
-msgstr "Mengomentari catatan Anda"
+msgstr "Tambahkan Postingan Anonim"
 
 # msgid "Invitation Code"
 #: content/themes/default/templates/packages.tpl:359
@@ -21530,19 +21529,19 @@ msgstr "Siaran langsung"
 #: content/themes/default/templates/packages.tpl:403
 #, fuzzy
 msgid "Upload Videos"
-msgstr "Unduh videonya"
+msgstr "Unggah Video"
 
 # msgid "Upload Audio"
 #: content/themes/default/templates/packages.tpl:414
 #, fuzzy
 msgid "Upload Audios"
-msgstr "Unduh audio"
+msgstr "Unggah Audio"
 
 # msgid "Upload File"
 #: content/themes/default/templates/packages.tpl:425
 #, fuzzy
 msgid "Upload Files"
-msgstr "Unduh file"
+msgstr "Unggah File"
 
 # msgid "send a friend request"
 #: content/themes/default/templates/packages.tpl:447
@@ -22348,7 +22347,7 @@ msgstr "Foto pribadi"
 #: content/themes/default/templates/page.tpl:1961
 #, fuzzy
 msgid "Company Tax File"
-msgstr "Unduh file"
+msgstr "Berkas Pajak Perusahaan"
 
 # msgid "Website"
 #: content/themes/default/templates/_js_templates.tpl:1730
@@ -22932,7 +22931,7 @@ msgstr "File diunggah"
 
 #: content/themes/default/templates/_publisher.tpl:291
 msgid "Create Album"
-msgstr "Buat album"
+msgstr "Buat Album"
 
 #: content/themes/default/templates/_publisher.tpl:365
 #: content/themes/default/templates/offers.tpl:40
@@ -22942,44 +22941,40 @@ msgstr "Buat Penawaran"
 
 #: content/themes/default/templates/_publisher.tpl:390
 msgid "Create Poll"
-msgstr "Membuat survei"
+msgstr "Buat Polling"
 
 # msgid "Uploaded"
 #: content/themes/default/templates/_publisher.tpl:400
 #, fuzzy
 msgid "Upload Reel"
-msgstr "Sarat"
+msgstr "Unggah Video Pendek"
 
 #: content/themes/default/templates/_publisher.tpl:410
 msgid "Upload Video"
-msgstr "Unduh videonya"
+msgstr "Unggah Video"
 
 #: content/themes/default/templates/_publisher.tpl:420
 msgid "Upload Audio"
-msgstr "Unduh audio"
+msgstr "Unggah Audio"
 
 #: content/themes/default/templates/_publisher.tpl:430
 msgid "Upload File"
-msgstr "Unduh file"
+msgstr "Unggah File"
 
 #: content/themes/default/templates/_publisher.tpl:451
 #, fuzzy
-msgid "Anonymous Post"
-msgstr "Mengomentari catatan Anda"
+
 
 #: content/themes/default/templates/_publisher.tpl:452
-msgid "Share your post as anonymous post"
-msgstr "Bagikan posting Anda sebagai posting anonim"
+
 
 # msgid "Auto Connect"
 #: content/themes/default/templates/_publisher.tpl:471
 #, fuzzy
-msgid "Adult Content"
-msgstr "Koneksi otomatis"
+
 
 #: content/themes/default/templates/_publisher.tpl:472
-msgid "Share your post as adult content"
-msgstr "Bagikan posting Anda sebagai konten dewasa"
+
 
 # msgid "Enabled"
 #: content/themes/default/templates/_publisher.tpl:491
@@ -22987,8 +22982,7 @@ msgstr "Bagikan posting Anda sebagai konten dewasa"
 #: content/themes/default/templates/blogs.tpl:901
 #: content/themes/default/templates/live.tpl:27
 #, fuzzy
-msgid "Enable Tips"
-msgstr "Termasuk"
+
 
 # msgid "No people voted for this"
 #: content/themes/default/templates/_publisher.tpl:492
@@ -22996,7 +22990,7 @@ msgstr "Termasuk"
 #: content/themes/default/templates/blogs.tpl:902
 #, fuzzy
 msgid "Allow people to send you tips"
-msgstr "Tidak ada yang memilihnya"
+msgstr "Izinkan seseorang mengirim tip"
 
 # msgid "Subscribers"
 #: content/themes/default/templates/_publisher.tpl:511
@@ -23113,7 +23107,7 @@ msgstr "Buat acara"
 #: content/themes/default/templates/admin.permissions_groups.tpl:940
 #, fuzzy
 msgid "Can Watch Videos"
-msgstr "Unduh videonya"
+msgstr "Dapat Menonton Video"
 
 #: content/themes/default/templates/admin.permissions_groups.tpl:219
 #: content/themes/default/templates/admin.permissions_groups.tpl:957
@@ -23236,14 +23230,14 @@ msgstr "Peserta dapat mempublikasikan pesan?"
 #: content/themes/default/templates/admin.permissions_groups.tpl:1195
 #, fuzzy
 msgid "Can Add Colored Posts"
-msgstr "Pesan warna"
+msgstr "Dapat Menambahkan Postingan Berwarna"
 
 # msgid "Feelings/Activity"
 #: content/themes/default/templates/admin.permissions_groups.tpl:475
 #: content/themes/default/templates/admin.permissions_groups.tpl:1213
 #, fuzzy
 msgid "Can Add Feelings/Activity Posts"
-msgstr "Perasaan/aktivitas"
+msgstr "Dapat Menambahkan Postingan Reaksi/Aktivitas"
 
 # msgid "Wall Posts"
 #: content/themes/default/templates/admin.permissions_groups.tpl:492
@@ -23257,7 +23251,7 @@ msgstr "Dinding pesan"
 #: content/themes/default/templates/admin.permissions_groups.tpl:1231
 #, fuzzy
 msgid "Can Add Polls Posts"
-msgstr "Pesan warna"
+msgstr "Dapat Menambahkan Postingan Polling"
 
 # msgid "Geolocation"
 #: content/themes/default/templates/admin.permissions_groups.tpl:510
@@ -23271,7 +23265,7 @@ msgstr "Geolokasi"
 #: content/themes/default/templates/admin.permissions_groups.tpl:1249
 #, fuzzy
 msgid "Can Add Geolocation Posts"
-msgstr "Pesan warna"
+msgstr "Dapat Menambahkan Postingan "
 
 # msgid "Posts"
 #: content/themes/default/templates/admin.permissions_groups.tpl:528
@@ -23285,7 +23279,7 @@ msgstr "Catatan"
 #: content/themes/default/templates/admin.permissions_groups.tpl:1267
 #, fuzzy
 msgid "Can Add GIF Posts"
-msgstr "Pesan warna"
+msgstr "Dapat Menambahkan Postingan GIF"
 
 #: content/themes/default/templates/admin.permissions_groups.tpl:546
 #: content/themes/default/templates/admin.permissions_groups.tpl:1284
@@ -23387,28 +23381,28 @@ msgstr "Unduh video"
 #: content/themes/default/templates/admin.permissions_groups.tpl:1403
 #, fuzzy
 msgid "Can Upload Videos"
-msgstr "Unduh videonya"
+msgstr "Dapat Unggah Video"
 
 # msgid "Upload Audio"
 #: content/themes/default/templates/admin.permissions_groups.tpl:683
 #: content/themes/default/templates/admin.permissions_groups.tpl:1421
 #, fuzzy
 msgid "Can Upload Audio"
-msgstr "Unduh audio"
+msgstr "Dapat Unggah Audio"
 
 # msgid "File Upload"
 #: content/themes/default/templates/admin.permissions_groups.tpl:700
 #: content/themes/default/templates/admin.permissions_groups.tpl:1438
 #, fuzzy
 msgid "Files Upload"
-msgstr "Unduh File"
+msgstr "Unggah File"
 
 # msgid "Upload File"
 #: content/themes/default/templates/admin.permissions_groups.tpl:701
 #: content/themes/default/templates/admin.permissions_groups.tpl:1439
 #, fuzzy
 msgid "Can Upload Files"
-msgstr "Unduh file"
+msgstr "Dapat Unggah File"
 
 # msgid "Manage Sessions"
 #: content/themes/default/templates/admin.permissions_groups.tpl:716
@@ -26165,6 +26159,33 @@ msgstr "Status Terverifikasi"
 #: done
 msgid "at location"
 msgstr "di lokasi"
+
+#: done
+msgid "Schedule Post"
+msgstr "Jadwal Postingan"
+
+#: done
+msgid "Schedule your post for later"
+msgstr "Jadwalkan postingan anda ntuk nanti"
+
+#: done
+msgid "Anonymous post"
+msgstr "Postingan Anonim"
+
+msgid "Anonymous Post"
+msgstr "Postingan Anonim"
+
+msgid "Share your post as anonymous post"
+msgstr "Bagikan postingan anda sebagai anonim"
+
+msgid "Adult Content"
+msgstr "Konten Dewasa"
+
+msgid "Share your post as adult content"
+msgstr "Bagikan postingan anda sebagai konten dewasa"
+
+msgid "Enable Tips"
+msgstr "Aktifkan Tip"
 
 ----------------------------------------------------------------------------->
 msgid "Cars and Vehicles"

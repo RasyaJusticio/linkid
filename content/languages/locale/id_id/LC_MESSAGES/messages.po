@@ -1073,7 +1073,7 @@ msgstr "Pengaturan Sistem"
 
 #: admin.php:131 content/themes/default/templates/admin.tpl:41
 msgid "Posts Settings"
-msgstr "Pengaturan pesan"
+msgstr "Pengaturan Postingan"
 
 
 #: admin.php:144 content/themes/default/templates/admin.tpl:51
@@ -1363,7 +1363,7 @@ msgstr "Kategori"
 #: content/themes/default/templates/admin.courses.tpl:12
 #: content/themes/default/templates/admin.courses.tpl:25
 msgid "Add New Category"
-msgstr "Tambahkan kategorinya"
+msgstr "Tambah Kategori Baru"
 
 #: admin.php:1173 admin.php:1209 admin.php:1265 admin.php:1270 admin.php:1298
 #: admin.php:1303 pages.php:37 pages.php:65
@@ -2379,7 +2379,7 @@ msgstr "Pekerjaan Saya"
 
 #: includes/functions.php:6790
 msgid "Feeling"
-msgstr "Suasana hati"
+msgstr "Perasaan"
 
 #: includes/functions.php:6790
 msgid "How are you feeling?"
@@ -11510,489 +11510,6 @@ msgid "Description of your forums module"
 msgstr "Deskripsi Modul Forum Anda"
 
 
-#: content/themes/default/templates/admin.settings.tpl:1047
-msgid "Turn the stories On and Off"
-msgstr "Menyalakan dan mematikan cerita"
-
-#: content/themes/default/templates/admin.settings.tpl:1048
-msgid "Stories are photos and videos that only last 24 hours"
-msgstr "Cerita adalah foto dan video yang bertahan 24 jam"
-
-#: content/themes/default/templates/admin.settings.tpl:1061
-msgid "Story Duration"
-msgstr "Durasi cerita"
-
-#: content/themes/default/templates/admin.settings.tpl:1066
-msgid "The story duration in seconds"
-msgstr "Durasi cerita dalam hitungan detik"
-
-# msgid "Post Approval"
-#: content/themes/default/templates/admin.settings.tpl:1078
-#, fuzzy
-msgid "Posts Approval System"
-msgstr "Setelah persetujuan"
-
-#: content/themes/default/templates/admin.settings.tpl:1080
-msgid ""
-"Turn the approval system On and Off (If disabled all posts will be approved "
-"by default)"
-msgstr ""
-"Nyalakan dan mematikan sistem persetujuan (jika dinonaktifkan semua posting "
-"akan disetujui secara default)"
-
-#: content/themes/default/templates/admin.settings.tpl:1081
-msgid "If enabled, posts will be pending for approval by the admin or moderators"
-msgstr ""
-"Jika diaktifkan, posting akan tertunda untuk disetujui oleh admin atau "
-"moderator"
-
-# msgid "Approved"
-#: content/themes/default/templates/admin.settings.tpl:1094
-#, fuzzy
-msgid "Appoval Limit"
-msgstr "Disetujui"
-
-#: content/themes/default/templates/admin.settings.tpl:1099
-msgid ""
-"After how many posts needs to be approved so the user can post without "
-"approval"
-msgstr ""
-"Setelah berapa banyak posting yang perlu disetujui sehingga pengguna dapat "
-"memposting tanpa persetujuan"
-
-#: content/themes/default/templates/admin.settings.tpl:1108
-msgid "Newsfeed Posts Source"
-msgstr "Sumber posting umpan berita"
-
-#: content/themes/default/templates/admin.settings.tpl:1112
-#: content/themes/default/templates/admin.currencies.tpl:33
-#: content/themes/default/templates/admin.themes.tpl:31
-#: content/themes/default/templates/admin.themes.tpl:105
-#: content/themes/default/templates/admin.themes.tpl:167
-#: content/themes/default/templates/admin.countries.tpl:34
-#: content/themes/default/templates/admin.countries.tpl:87
-#: content/themes/default/templates/admin.countries.tpl:188
-#: content/themes/default/templates/admin.design.tpl:68
-#: content/themes/default/templates/admin.languages.tpl:32
-#: content/themes/default/templates/admin.languages.tpl:84
-#: content/themes/default/templates/admin.languages.tpl:210
-#: content/themes/default/templates/admin.users.tpl:70
-msgid "Default"
-msgstr "Secara default"
-
-#: content/themes/default/templates/admin.settings.tpl:1112
-msgid "Show what user is followings (Friends, Followings, Pages... etc)"
-msgstr "Tunjukkan apa yang diikuti oleh pengguna (teman, pengikut, halaman ... dll)"
-
-#: content/themes/default/templates/admin.settings.tpl:1113
-msgid "All Posts"
-msgstr "Semua posting"
-
-#: content/themes/default/templates/admin.settings.tpl:1113
-msgid "All posts will be shown"
-msgstr "Semua posting akan ditampilkan"
-
-#: content/themes/default/templates/admin.settings.tpl:1116
-msgid ""
-"Algorithm will exclude any post from closed/secret groups and events that "
-"users not member of incase of all posts also will disable all posts privacy"
-msgstr ""
-"Algoritma akan mengecualikan posting apa pun dari grup tertutup/rahasia dan "
-"acara yang bukan anggota Anggota InCase dari semua posting juga akan "
-"menonaktifkan semua posting privasi"
-
-#: content/themes/default/templates/admin.settings.tpl:1128
-msgid "Newsfeed Location Filter"
-msgstr "Filter lokasi umpan berita"
-
-# msgid "Turn the post Geolocation On and Off"
-#: content/themes/default/templates/admin.settings.tpl:1130
-#, fuzzy
-msgid "Turn the newsfeed location filter On and Off"
-msgstr "Nyalakan dan Nonaktifkan Geolokasi"
-
-#: content/themes/default/templates/admin.settings.tpl:1131
-msgid "Will enable your users to filter their newsfeed by countries"
-msgstr "Akan memungkinkan pengguna Anda untuk memfilter newsfeed mereka di negara"
-
-#: content/themes/default/templates/admin.settings.tpl:1151
-msgid "Turn the popular posts On and Off"
-msgstr "Nyalakan dan Keluarkan Pesan Populer"
-
-#: content/themes/default/templates/admin.settings.tpl:1152
-msgid "Popular posts are public posts ordered by most reactions, comments & shares"
-msgstr ""
-"Pesan populer adalah pesan publik, dipesan oleh sebagian besar reaksi, "
-"komentar dan publikasi"
-
-#: content/themes/default/templates/admin.settings.tpl:1172
-msgid "Turn the discover posts On and Off"
-msgstr "Nyalakan dan mematikan deteksi pesan"
-
-#: content/themes/default/templates/admin.settings.tpl:1173
-msgid "Discover posts are public posts ordered from most recent to old"
-msgstr ""
-"Temukan pesan adalah pesan publik yang dipesan dari yang terakhir ke yang "
-"lama"
-
-#: content/themes/default/templates/admin.settings.tpl:1193
-msgid "Turn the memories On and Off"
-msgstr "Nyalakan dan matikan kenangan"
-
-#: content/themes/default/templates/admin.settings.tpl:1194
-msgid "Memories are posts from the same day on last year"
-msgstr "Kenangan posting dari hari yang sama tahun lalu"
-
-#: content/themes/default/templates/admin.settings.tpl:1212
-msgid "Wall Posts"
-msgstr "Dinding pesan"
-
-#: content/themes/default/templates/admin.settings.tpl:1213
-msgid "Users can publish posts on their friends walls"
-msgstr "Pengguna dapat mempublikasikan pesan di dinding teman mereka"
-
-#: content/themes/default/templates/admin.settings.tpl:1232
-msgid "Turn the colored posts On and Off"
-msgstr "Nyalakan dan mematikan pesan warna"
-
-#: content/themes/default/templates/admin.settings.tpl:1251
-#: content/themes/default/templates/admin.permissions_groups.tpl:474
-#: content/themes/default/templates/admin.permissions_groups.tpl:1212
-msgid "Feelings/Activity Posts"
-msgstr "Perasaan/Aktivitas"
-
-#: content/themes/default/templates/admin.settings.tpl:1253
-msgid "Turn the feelings and activity posts On and Off"
-msgstr "Mengaktifkan dan menonaktifkan postingan perasaan dan aktivitas"
-
-#: content/themes/default/templates/admin.settings.tpl:1271
-msgid "Voice Notes in Posts"
-msgstr "Catatan suara di postingan"
-
-#: content/themes/default/templates/admin.settings.tpl:1273
-msgid "Turn the voice notes in posts On and Off"
-msgstr "Nyalakan catatan suara di dan dimatikan"
-
-#: content/themes/default/templates/admin.settings.tpl:1289
-msgid "Voice Notes in Comments"
-msgstr "Catatan Suara di Komentar"
-
-#: content/themes/default/templates/admin.settings.tpl:1291
-msgid "Turn the voice notes in comments On and Off"
-msgstr "Menghidupkan dan mematikan catatan suara"
-
-#: content/themes/default/templates/admin.settings.tpl:1304
-msgid "Voice Notes Max Duration"
-msgstr "Nada suara durasi maksimal"
-
-# msgid "The maximim value is one day = 86400 seconds"
-#: content/themes/default/templates/admin.settings.tpl:1309
-#, fuzzy
-msgid "The maximum length for voice note in seconds"
-msgstr "Nilai Maximim - Satu Hari = 86400 Detik"
-
-#: content/themes/default/templates/admin.settings.tpl:1316
-msgid "Voice Notes Encoding"
-msgstr "Pengkodean catatan suara"
-
-#: content/themes/default/templates/admin.settings.tpl:1334
-#: content/themes/default/templates/_posts.tpl:82
-msgid "Polls"
-msgstr "Pemungutan Suara"
-
-#: content/themes/default/templates/admin.settings.tpl:1335
-msgid "Turn the poll posts On and Off"
-msgstr "Menyalakan atau menonaktifkan pemungutan suara"
-
-#: content/themes/default/templates/admin.settings.tpl:1352
-msgid "Geolocation"
-msgstr "Geolokasi"
-
-#: content/themes/default/templates/admin.settings.tpl:1353
-msgid "Turn the post Geolocation On and Off"
-msgstr "Nyalakan dan Nonaktifkan Geolokasi"
-
-#: content/themes/default/templates/admin.settings.tpl:1365
-msgid "Geolocation Google Key"
-msgstr "GeoGle Key Geolocation"
-
-#: content/themes/default/templates/admin.settings.tpl:1374
-#: content/themes/default/templates/admin.settings.tpl:1408
-#: content/themes/default/templates/admin.settings.tpl:1460
-msgid "Check the documentation to learn how to get this key"
-msgstr "Periksa dokumentasi untuk mengetahui cara mendapatkan kunci ini"
-
-#: content/themes/default/templates/admin.settings.tpl:1386
-#: content/themes/default/templates/_publisher.tpl:333
-msgid "GIF"
-msgstr "GIF"
-
-#: content/themes/default/templates/admin.settings.tpl:1387
-msgid "Turn the gif posts On and Off"
-msgstr "Nyalakan dan keluarkan catatan dalam format GIF"
-
-#: content/themes/default/templates/admin.settings.tpl:1399
-msgid "Giphy API Key"
-msgstr "API Giphy Key"
-
-#: content/themes/default/templates/admin.settings.tpl:1420
-msgid "Disable Profile Posts Updates"
-msgstr "Nonaktifkan Pembaruan Posting Profil"
-
-#: content/themes/default/templates/admin.settings.tpl:1421
-msgid "Turn it on to disable changing profile picture and cover posts"
-msgstr "Nyalakannya untuk menonaktifkan ganti gambar profil dan posting sampul"
-
-#: content/themes/default/templates/admin.settings.tpl:1438
-msgid "Post Translation"
-msgstr "Terjemahan pos"
-
-#: content/themes/default/templates/admin.settings.tpl:1439
-msgid "Turn the post translation On and Off"
-msgstr "Menyalakan dan mematikan ongkos kirim surat"
-
-#: content/themes/default/templates/admin.settings.tpl:1451
-msgid "Yandex Key"
-msgstr "Kunci Yandex"
-
-#: content/themes/default/templates/admin.settings.tpl:1472
-msgid "Smart YouTube Player"
-msgstr "Pemutar YouTube yang cerdas"
-
-#: content/themes/default/templates/admin.settings.tpl:1473
-msgid "Smart YouTube player will save a lot of bandwidth"
-msgstr "Pemain YouTube yang cerdas akan mempertahankan throughput besar"
-
-#: content/themes/default/templates/admin.settings.tpl:1490
-msgid "Social Media Share"
-msgstr "Bagikan di jejaring sosial"
-
-#: content/themes/default/templates/admin.settings.tpl:1491
-msgid "Turn the social media share for posts On and Off"
-msgstr "Nyalakan dan matikan publikasi di jejaring sosial"
-
-#: content/themes/default/templates/admin.settings.tpl:1505
-msgid "Max Post Characters"
-msgstr "Max Post Chick"
-
-#: content/themes/default/templates/admin.settings.tpl:1510
-msgid "The Maximum allowed post characters length (0 for unlimited)"
-msgstr "Panjang maksimum yang diizinkan dari simbol pos (0 untuk tidak terbatas)"
-
-#: content/themes/default/templates/admin.settings.tpl:1517
-msgid "Max Comment Characters"
-msgstr "Jumlah komentar maksimum"
-
-#: content/themes/default/templates/admin.settings.tpl:1522
-msgid "The Maximum allowed comment characters length (0 for unlimited)"
-msgstr "Simbol komentar maksimum yang diizinkan (0 untuk tidak terbatas)"
-
-#: content/themes/default/templates/admin.settings.tpl:1529
-msgid "Max Posts/Hour"
-msgstr "Pesan Max / Jam"
-
-#: content/themes/default/templates/admin.settings.tpl:1534
-msgid "The Maximum number of posts that user can publish per hour (0 for unlimited)"
-msgstr ""
-"Jumlah maksimum pesan yang dapat dipublikasikan pengguna per jam (0 untuk "
-"tidak terbatas)"
-
-#: content/themes/default/templates/admin.settings.tpl:1541
-msgid "Max Comments/Hour"
-msgstr "Max. Komentar / Jam"
-
-#: content/themes/default/templates/admin.settings.tpl:1546
-#, fuzzy
-msgid ""
-"The Maximum number of comments that user can publish per hour (0 for "
-"unlimited)"
-msgstr ""
-"Jumlah maksimum komentar yang dapat dipublikasikan pengguna per jam (0 "
-"untuk tidak terbatas)"
-
-#: content/themes/default/templates/admin.settings.tpl:1553
-msgid "Default Posts Privacy"
-msgstr "Laporan default"
-
-#: content/themes/default/templates/admin.settings.tpl:1571
-msgid "Post As Anonymous"
-msgstr "Posting sebagai anonim"
-
-#: content/themes/default/templates/admin.settings.tpl:1573
-msgid "Turn Anonymous mode On and Off"
-msgstr "Menghidupkan dan mematikan mode anonim"
-
-#: content/themes/default/templates/admin.settings.tpl:1574
-msgid "Note: Admins and Moderators will able to see the real post author"
-msgstr ""
-"Catatan: Admin dan moderator akan dapat melihat penulis posting yang "
-"sebenarnya"
-
-# msgid "Night Mode"
-#: content/themes/default/templates/admin.settings.tpl:1592
-#, fuzzy
-msgid "Adult Mode"
-msgstr "Mode dewasa"
-
-#: content/themes/default/templates/admin.settings.tpl:1594
-msgid ""
-"Adult mode will hide content that marked for adult from users under 18 "
-"years old"
-msgstr ""
-"Mode dewasa akan menyembunyikan konten yang ditandai untuk orang dewasa "
-"dari pengguna di bawah 18 tahun"
-
-#: content/themes/default/templates/admin.settings.tpl:1612
-msgid "Online Status on Posts"
-msgstr "Status online pada posting"
-
-#: content/themes/default/templates/admin.settings.tpl:1613
-msgid ""
-"Turn online indicator on Posts On and Off (User must be online and enabled "
-"the chat)"
-msgstr ""
-"Nyalakan indikator online pada posting dan mati (pengguna harus online dan "
-"mengaktifkan obrolan)"
-
-#: content/themes/default/templates/admin.settings.tpl:1630
-msgid "Desktop Infinite Scroll"
-msgstr "Gulungan tak terbatas desktop"
-
-#: content/themes/default/templates/admin.settings.tpl:1631
-msgid "Turn infinite scroll on desktop screens On and Off"
-msgstr "Nyalakan gulir tak terbatas di layar desktop"
-
-#: content/themes/default/templates/admin.settings.tpl:1646
-msgid "Mobile Infinite Scroll"
-msgstr "Gulir Mobile Infinite"
-
-#: content/themes/default/templates/admin.settings.tpl:1647
-msgid "Turn infinite scroll on mobile screens On and Off"
-msgstr "Nyalakan gulir tak terbatas di layar seluler"
-
-#: content/themes/default/templates/admin.settings.tpl:1664
-msgid "Auto Play Videos"
-msgstr "Video Putar Otomatis"
-
-# msgid "Turn the movies On and Off"
-#: content/themes/default/templates/admin.settings.tpl:1665
-#, fuzzy
-msgid "Turn auto play videos On and Off"
-msgstr "Menyalakan dan mematikan film"
-
-# msgid "Video Upload"
-#: content/themes/default/templates/admin.settings.tpl:1680
-#, fuzzy
-msgid "Videos Fluid Mode"
-msgstr "Unduh video"
-
-#: content/themes/default/templates/admin.settings.tpl:1681
-msgid "Enable video player fluid mode"
-msgstr "Aktifkan mode cairan pemutar video"
-
-# msgid "Cost by View"
-#: content/themes/default/templates/admin.settings.tpl:1698
-#, fuzzy
-msgid "Posts Views"
-msgstr "Biaya berdasarkan Jenis"
-
-# msgid "Turn the video call system On and Off"
-#: content/themes/default/templates/admin.settings.tpl:1699
-#, fuzzy
-msgid "Turn posts views system On and Off"
-msgstr "Menyalakan dan mematikan sistem panggilan video"
-
-# msgid "File Type"
-#: content/themes/default/templates/admin.settings.tpl:1711
-#, fuzzy
-msgid "Views Type"
-msgstr "Jenis file"
-
-# msgid "Views"
-#: content/themes/default/templates/admin.settings.tpl:1716
-#, fuzzy
-msgid "All Views"
-msgstr "Tampilan"
-
-#: content/themes/default/templates/admin.settings.tpl:1720
-msgid "Unique Views Only"
-msgstr "Tampilan unik saja"
-
-#: content/themes/default/templates/admin.settings.tpl:1723
-msgid "Note: All views will count all views including the same user multiple views"
-msgstr ""
-"Catatan: Semua tampilan akan menghitung semua tampilan termasuk pengguna "
-"yang sama dengan beberapa tampilan"
-
-# msgid "Cost by View"
-#: content/themes/default/templates/admin.settings.tpl:1735
-#, fuzzy
-msgid "Posts Reviews"
-msgstr "Biaya berdasarkan Jenis"
-
-# msgid "Turn the stories On and Off"
-#: content/themes/default/templates/admin.settings.tpl:1736
-#, fuzzy
-msgid "Turn the posts reviews On and Off"
-msgstr "Menyalakan dan mematikan cerita"
-
-#: content/themes/default/templates/admin.settings.tpl:1751
-msgid "Posts Review Replacement"
-msgstr "Posting Tinjau Penggantian"
-
-#: content/themes/default/templates/admin.settings.tpl:1769
-msgid "Trending Hashtags"
-msgstr "Tagar populer"
-
-#: content/themes/default/templates/admin.settings.tpl:1770
-msgid "Turn the trending hashtags feature On and Off"
-msgstr "Nyalakan dan keluarkan fitur tren tagar"
-
-#: content/themes/default/templates/admin.settings.tpl:1782
-msgid "Trending Interval"
-msgstr "Interval tren"
-
-#: content/themes/default/templates/admin.settings.tpl:1786
-msgid "Last 24 Hours"
-msgstr "24 jam terakhir"
-
-#: content/themes/default/templates/admin.settings.tpl:1787
-msgid "Last Week"
-msgstr "Minggu lalu"
-
-#: content/themes/default/templates/admin.settings.tpl:1788
-msgid "Last Month"
-msgstr "Bulan lalu"
-
-#: content/themes/default/templates/admin.settings.tpl:1791
-msgid "Select the interval of trending hashtags"
-msgstr "Pilih interval tagar tren"
-
-#: content/themes/default/templates/admin.settings.tpl:1798
-msgid "Hashtags Limit"
-msgstr "Batas hashteg"
-
-#: content/themes/default/templates/admin.settings.tpl:1803
-msgid "How many hashtags you want to display"
-msgstr "Berapa banyak tagar yang ingin Anda tampilkan"
-
-# msgid "User Gender"
-#: content/themes/default/templates/admin.settings.tpl:1815
-#, fuzzy
-msgid "Disable Download Images"
-msgstr "Pengguna Paul"
-
-#: content/themes/default/templates/admin.settings.tpl:1816
-msgid "Enable this to disable download images in lightbox modal"
-msgstr "Aktifkan ini untuk menonaktifkan gambar unduhan dalam modal LightBox"
-
-#: content/themes/default/templates/admin.settings.tpl:1831
-msgid "Disable Mouse Right Click"
-msgstr "Nonaktifkan Klik Kanan Mouse"
-
-#: content/themes/default/templates/admin.settings.tpl:1832
-msgid "Enable this to disable mouse right click on images"
-msgstr "Aktifkan ini untuk menonaktifkan mouse klik kanan pada gambar"
 
 #: content/themes/default/templates/admin.settings.tpl:1862
 #: content/themes/default/templates/admin.settings.tpl:1903
@@ -14706,7 +14223,7 @@ msgstr "Nilai Maximim - Satu Hari = 86400 Detik"
 #: content/themes/default/templates/admin.settings.tpl:7692
 #, fuzzy
 msgid "Newsfeed Results"
-msgstr "Saluran Berita"
+msgstr "Hasil Umpan Berita"
 
 # msgid "The Min number of results per request"
 #: content/themes/default/templates/admin.settings.tpl:7697
@@ -15073,7 +14590,7 @@ msgstr "Ubah komentar"
 #: content/themes/default/templates/blogs.tpl:398
 #, fuzzy
 msgid "React"
-msgstr "Interaksi"
+msgstr "Reaksi"
 
 #: content/themes/default/templates/__feeds_comment.tpl:151
 msgid "View previous replies"
@@ -18041,7 +17558,7 @@ msgstr "menit"
 #: content/themes/default/templates/_header.notifications.tpl:17
 #, fuzzy
 msgid "Sound"
-msgstr "Sinyal suara"
+msgstr "Suara"
 
 #: content/themes/default/templates/_header.notifications.tpl:30
 msgid "No notifications"
@@ -20960,7 +20477,7 @@ msgstr "Meta-Desription Lapangan"
 #: content/themes/default/templates/_publisher.tpl:373
 #, fuzzy
 msgid "Create Job"
-msgstr "Tambahkan Pekerjaan"
+msgstr "Tambah Pekerjaan"
 
 #: content/themes/default/templates/jobs.tpl:110
 #, fuzzy
@@ -21421,7 +20938,7 @@ msgstr "Buat Penawaran"
 #: content/themes/default/templates/packages.tpl:207
 #, fuzzy
 msgid "Create Jobs"
-msgstr "Tambahkan Pekerjaan"
+msgstr "Tambah Pekerjaan"
 
 # msgid "Create Group"
 #: content/themes/default/templates/packages.tpl:218
@@ -25948,7 +25465,7 @@ msgstr "Penggantian Ulasan Acara"
 #: content/themes/default/templates/page.tpl:903
 #: content/themes/default/templates/_sidebar.tpl:173
 msgid "Reels"
-msgstr "VIdeo Pendek"
+msgstr "Video Pendek"
 
 # msgid "Turn the stories On and Off"
 #: content/themes/default/templates/admin.settings.tpl:620
@@ -25969,7 +25486,7 @@ msgstr "Menonton"
 #: content/themes/default/templates/admin.settings.tpl:640
 #, fuzzy
 msgid "Turn the watch videos On and Off"
-msgstr "Mengaktifkan dan menonaktifkan video"
+msgstr "Aktifkan dan Nonaktifkan Video"
 
 #: content/themes/default/templates/admin.settings.tpl:641
 msgid "Watch module will show all public videos at one place"
@@ -26140,6 +25657,554 @@ msgstr "Pesan blokir merah akan muncul untuk membuat pengguna menonaktifkan adbl
 
 # ----------------\ #
 
+# \---------------- #
+# Bagian Post Setting Admin Panel
+
+#: content/themes/default/templates/admin.settings.tpl:1047
+msgid "Turn the stories On and Off"
+msgstr "Mengaktifkan dan menonaktifkan cerita"
+
+#: content/themes/default/templates/admin.settings.tpl:1048
+msgid "Stories are photos and videos that only last 24 hours"
+msgstr "Cerita adalah foto dan video yang hanya bertahan selama 24 jam"
+
+#: content/themes/default/templates/admin.settings.tpl:1061
+msgid "Story Duration"
+msgstr "Durasi Cerita"
+
+#: content/themes/default/templates/admin.settings.tpl:1066
+msgid "The story duration in seconds"
+msgstr "Durasi cerita dalam hitungan detik"
+
+msgid "Posts Schedule System"
+msgstr "Sistem Jadwal Postingan"
+
+msgid "Turn the schedule post system On and Off"
+msgstr "Mengaktifkan dan menonaktifkan sistem jadwal postingan"
+
+msgid "If enabled, users will be able to schedule posts to be published in the future"
+msgstr "Jika diaktifkan, pengguna akan dapat menjadwalkan postingan yang akan diunggah"
+
+# msgid "Post Approval"
+#: content/themes/default/templates/admin.settings.tpl:1078
+#, fuzzy
+msgid "Posts Approval System"
+msgstr "Sistem Persetujuan Postingan"
+
+#: content/themes/default/templates/admin.settings.tpl:1080
+msgid ""
+"Turn the approval system On and Off (If disabled all posts will be approved by default)"
+msgstr ""
+"Mengaktifkan dan menonaktifkan sistem persetujuan (Jika dinonaktifkan, semua postingan akan disetujui secara default)"
+
+#: content/themes/default/templates/admin.settings.tpl:1081
+msgid "If enabled, posts will be pending for approval by the admin or moderators"
+msgstr ""
+"Jika diaktifkan, postingan akan menunggu persetujuan dari admin atau moderator"
+
+# msgid "Approved"
+#: content/themes/default/templates/admin.settings.tpl:1094
+#, fuzzy
+msgid "Approval Limit"
+msgstr "Batas Disetujui"
+
+#: content/themes/default/templates/admin.settings.tpl:1099
+msgid ""
+"After how many posts needs to be approved so the user can post without "
+"approval"
+msgstr ""
+"Setelah berapa banyak postingan yang perlu disetujui sehingga pengguna dapat memposting tanpa persetujuan"
+
+#: content/themes/default/templates/admin.settings.tpl:1108
+msgid "Newsfeed Posts Source"
+msgstr "Sumber Postingan Berita Terbaru"
+
+#: content/themes/default/templates/admin.settings.tpl:1112
+#: content/themes/default/templates/admin.currencies.tpl:33
+#: content/themes/default/templates/admin.themes.tpl:31
+#: content/themes/default/templates/admin.themes.tpl:105
+#: content/themes/default/templates/admin.themes.tpl:167
+#: content/themes/default/templates/admin.countries.tpl:34
+#: content/themes/default/templates/admin.countries.tpl:87
+#: content/themes/default/templates/admin.countries.tpl:188
+#: content/themes/default/templates/admin.design.tpl:68
+#: content/themes/default/templates/admin.languages.tpl:32
+#: content/themes/default/templates/admin.languages.tpl:84
+#: content/themes/default/templates/admin.languages.tpl:210
+#: content/themes/default/templates/admin.users.tpl:70
+msgid "Default"
+msgstr "Secara default"
+
+#: content/themes/default/templates/admin.settings.tpl:1112
+msgid "Show what user is followings (Friends, Followings, Pages... etc)"
+msgstr "Tunjukkan apa yang diikuti oleh pengguna (teman, pengikut, halaman ... dll)"
+
+#: content/themes/default/templates/admin.settings.tpl:1113
+msgid "All Posts"
+msgstr "Semua postingan"
+
+#: content/themes/default/templates/admin.settings.tpl:1113
+msgid "All posts will be shown"
+msgstr "Semua postingan akan ditampilkan"
+
+#: content/themes/default/templates/admin.settings.tpl:1116
+msgid ""
+"Algorithm will exclude any post from closed/secret groups and events that "
+"users not member of incase of all posts also will disable all posts privacy"
+msgstr ""
+"Algoritma akan mengecualikan setiap postingan dari grup tertutup/rahasia dan "
+"acara yang tidak diikuti oleh pengguna yang bukan merupakan anggota, serta akan menonaktifkan semua privasi postingan"
+
+msgid "Newsfeed Merge"
+msgstr "Penggabungan Berita Terbaru"
+
+msgid "Turn the newsfeed merge On and Off"
+msgstr "Mengaktifkan dan menonaktifkan penggabungan berita terbaru"
+
+msgid "Will enable the newsfeed algorithm to merge posts from recent, popular & discover sources"
+msgstr "Akan memungkinkan algoritma berita terbaru untuk menggabungkan postingan dari sumber terpopuler & pencarian"
+
+msgid "Recent Results"
+msgstr "Hasil Terbaru"
+
+msgid "How many posts to show from recent source"
+msgstr "Berapa banyak postingan yang akan ditampilkan dari sumber terbaru"
+
+msgid "Popular Results"
+msgstr "Hasil Populer"
+
+msgid "How many posts to show from popular source"
+msgstr "Berapa banyak postingan yang akan ditampilkan dari sumber populer"
+
+msgid "Discover Results"
+msgstr "Hasil Temukan"
+
+msgid "How many posts to show from discover source"
+msgstr "Berapa banyak postingan yang akan ditampilkan dari sumber temukan"
+
+msgid "Newsfeed Caching"
+msgstr "Cache Berita Terbaru"
+
+msgid "Turn the newsfeed caching On and Off"
+msgstr "Mengaktifkan dan menonaktifkan cache berita terbaru"
+
+msgid "Delivers fresh, unique content on every refresh with a smart caching algorithm"
+msgstr "Menghadirkan konten yang segar dan unik di setiap harinya dengan algoritma yang cerdas"
+
+msgid "Enhance Newsfeed Infinite Scroll"
+msgstr "Tingkatkan Gulir Tanpa Batas Berita Terbaru"
+
+msgid "Ensures smooth newsfeed browsing experience by seamlessly replacing older results at the top with new ones"
+msgstr "Memastikan pengalaman menjelajah berita terbaru menjadi lancar dengan mengganti hasil lama di bagian atas dengan yang baru"
+
+#: content/themes/default/templates/admin.settings.tpl:1128
+msgid "Newsfeed Location Filter"
+msgstr "Filter Lokasi Berita Terbaru"
+
+# msgid "Turn the post Geolocation On and Off"
+#: content/themes/default/templates/admin.settings.tpl:1130
+#, fuzzy
+msgid "Turn the newsfeed location filter On and Off"
+msgstr "Mengaktifkan dan menonaktifkan filter lokasi berita terbaru"
+
+#: content/themes/default/templates/admin.settings.tpl:1131
+msgid "Will enable your users to filter their newsfeed by countries"
+msgstr "Memungkinkan pengguna untuk memfilter berita terbaru mereka berdasarkan negaranya"
+
+msgid "Popular Interval"
+msgstr "Interval Populer"
+
+#: content/themes/default/templates/admin.settings.tpl:1786
+msgid "Last 24 Hours"
+msgstr "24 Jam Terakhir"
+
+msgid "Last 30 Days"
+msgstr "30 Hari Terakhir"
+
+msgid "Last 7 Days"
+msgstr "7 Hari Terakhir"
+
+msgid "Last 12 Months"
+msgstr "12 Bulan Terakhir"
+
+msgid "Select the interval of popular posts"
+msgstr "Pilih interval postingan populer"
+
+#: content/themes/default/templates/admin.settings.tpl:1151
+msgid "Turn the popular posts On and Off"
+msgstr "Mengaktifkan dan menonaktifkan postingan populer"
+
+#: content/themes/default/templates/admin.settings.tpl:1152
+msgid "Popular posts are public posts ordered by most reactions, comments & shares"
+msgstr "Postingan populer adalah postingan publik yang diurutkan berdasarkan reaksi, komentar, dan share terbanyak"
+
+#: content/themes/default/templates/admin.settings.tpl:1172
+msgid "Turn the discover posts On and Off"
+msgstr "Nyalakan dan mematikan deteksi pesan"
+
+#: content/themes/default/templates/admin.settings.tpl:1173
+msgid "Discover posts are public posts ordered from most recent to old"
+msgstr ""
+"Temukan pesan adalah pesan publik yang dipesan dari yang terakhir ke yang "
+"lama"
+
+#: content/themes/default/templates/admin.settings.tpl:1193
+msgid "Turn the memories On and Off"
+msgstr "Nyalakan dan matikan kenangan"
+
+#: content/themes/default/templates/admin.settings.tpl:1194
+msgid "Memories are posts from the same day on last year"
+msgstr "Kenangan posting dari hari yang sama tahun lalu"
+
+#: content/themes/default/templates/admin.settings.tpl:1212
+msgid "Wall Posts"
+msgstr "Dinding pesan"
+
+#: content/themes/default/templates/admin.settings.tpl:1213
+msgid "Users can publish posts on their friends walls"
+msgstr "Pengguna dapat mempublikasikan pesan di dinding teman mereka"
+
+#: content/themes/default/templates/admin.settings.tpl:1232
+msgid "Turn the colored posts On and Off"
+msgstr "Nyalakan dan mematikan pesan warna"
+
+#: content/themes/default/templates/admin.settings.tpl:1251
+#: content/themes/default/templates/admin.permissions_groups.tpl:474
+#: content/themes/default/templates/admin.permissions_groups.tpl:1212
+msgid "Feelings/Activity Posts"
+msgstr "Perasaan/Aktivitas"
+
+#: content/themes/default/templates/admin.settings.tpl:1253
+msgid "Turn the feelings and activity posts On and Off"
+msgstr "Mengaktifkan dan menonaktifkan postingan perasaan dan aktivitas"
+
+#: content/themes/default/templates/admin.settings.tpl:1271
+msgid "Voice Notes in Posts"
+msgstr "Catatan suara di postingan"
+
+#: content/themes/default/templates/admin.settings.tpl:1273
+msgid "Turn the voice notes in posts On and Off"
+msgstr "Nyalakan catatan suara di dan dimatikan"
+
+#: content/themes/default/templates/admin.settings.tpl:1289
+msgid "Voice Notes in Comments"
+msgstr "Catatan Suara di Komentar"
+
+#: content/themes/default/templates/admin.settings.tpl:1291
+msgid "Turn the voice notes in comments On and Off"
+msgstr "Menghidupkan dan mematikan catatan suara"
+
+#: content/themes/default/templates/admin.settings.tpl:1304
+msgid "Voice Notes Max Duration"
+msgstr "Nada suara durasi maksimal"
+
+# msgid "The maximim value is one day = 86400 seconds"
+#: content/themes/default/templates/admin.settings.tpl:1309
+#, fuzzy
+msgid "The maximum length for voice note in seconds"
+msgstr "Nilai Maximim - Satu Hari = 86400 Detik"
+
+#: content/themes/default/templates/admin.settings.tpl:1316
+msgid "Voice Notes Encoding"
+msgstr "Pengkodean catatan suara"
+
+#: content/themes/default/templates/admin.settings.tpl:1334
+#: content/themes/default/templates/_posts.tpl:82
+msgid "Polls"
+msgstr "Pemungutan Suara"
+
+#: content/themes/default/templates/admin.settings.tpl:1335
+msgid "Turn the poll posts On and Off"
+msgstr "Menyalakan atau menonaktifkan pemungutan suara"
+
+#: content/themes/default/templates/admin.settings.tpl:1352
+msgid "Geolocation"
+msgstr "Geolokasi"
+
+#: content/themes/default/templates/admin.settings.tpl:1353
+msgid "Turn the post Geolocation On and Off"
+msgstr "Nyalakan dan Nonaktifkan Geolokasi"
+
+#: content/themes/default/templates/admin.settings.tpl:1365
+msgid "Geolocation Google Key"
+msgstr "GeoGle Key Geolocation"
+
+#: content/themes/default/templates/admin.settings.tpl:1374
+#: content/themes/default/templates/admin.settings.tpl:1408
+#: content/themes/default/templates/admin.settings.tpl:1460
+msgid "Check the documentation to learn how to get this key"
+msgstr "Periksa dokumentasi untuk mengetahui cara mendapatkan kunci ini"
+
+#: content/themes/default/templates/admin.settings.tpl:1386
+#: content/themes/default/templates/_publisher.tpl:333
+msgid "GIF"
+msgstr "GIF"
+
+#: content/themes/default/templates/admin.settings.tpl:1387
+msgid "Turn the gif posts On and Off"
+msgstr "Nyalakan dan keluarkan catatan dalam format GIF"
+
+#: content/themes/default/templates/admin.settings.tpl:1399
+msgid "Giphy API Key"
+msgstr "API Giphy Key"
+
+#: content/themes/default/templates/admin.settings.tpl:1420
+msgid "Disable Profile Posts Updates"
+msgstr "Nonaktifkan Pembaruan Posting Profil"
+
+#: content/themes/default/templates/admin.settings.tpl:1421
+msgid "Turn it on to disable changing profile picture and cover posts"
+msgstr "Nyalakannya untuk menonaktifkan ganti gambar profil dan posting sampul"
+
+#: content/themes/default/templates/admin.settings.tpl:1438
+msgid "Post Translation"
+msgstr "Terjemahan pos"
+
+#: content/themes/default/templates/admin.settings.tpl:1439
+msgid "Turn the post translation On and Off"
+msgstr "Menyalakan dan mematikan ongkos kirim surat"
+
+#: content/themes/default/templates/admin.settings.tpl:1451
+msgid "Yandex Key"
+msgstr "Kunci Yandex"
+
+#: content/themes/default/templates/admin.settings.tpl:1472
+msgid "Smart YouTube Player"
+msgstr "Pemutar YouTube yang cerdas"
+
+#: content/themes/default/templates/admin.settings.tpl:1473
+msgid "Smart YouTube player will save a lot of bandwidth"
+msgstr "Pemain YouTube yang cerdas akan mempertahankan throughput besar"
+
+#: content/themes/default/templates/admin.settings.tpl:1490
+msgid "Social Media Share"
+msgstr "Bagikan di jejaring sosial"
+
+#: content/themes/default/templates/admin.settings.tpl:1491
+msgid "Turn the social media share for posts On and Off"
+msgstr "Nyalakan dan matikan publikasi di jejaring sosial"
+
+#: content/themes/default/templates/admin.settings.tpl:1505
+msgid "Max Post Characters"
+msgstr "Max Post Chick"
+
+#: content/themes/default/templates/admin.settings.tpl:1510
+msgid "The Maximum allowed post characters length (0 for unlimited)"
+msgstr "Panjang maksimum yang diizinkan dari simbol pos (0 untuk tidak terbatas)"
+
+#: content/themes/default/templates/admin.settings.tpl:1517
+msgid "Max Comment Characters"
+msgstr "Jumlah komentar maksimum"
+
+#: content/themes/default/templates/admin.settings.tpl:1522
+msgid "The Maximum allowed comment characters length (0 for unlimited)"
+msgstr "Simbol komentar maksimum yang diizinkan (0 untuk tidak terbatas)"
+
+#: content/themes/default/templates/admin.settings.tpl:1529
+msgid "Max Posts/Hour"
+msgstr "Pesan Max / Jam"
+
+#: content/themes/default/templates/admin.settings.tpl:1534
+msgid "The Maximum number of posts that user can publish per hour (0 for unlimited)"
+msgstr ""
+"Jumlah maksimum pesan yang dapat dipublikasikan pengguna per jam (0 untuk "
+"tidak terbatas)"
+
+#: content/themes/default/templates/admin.settings.tpl:1541
+msgid "Max Comments/Hour"
+msgstr "Max. Komentar / Jam"
+
+#: content/themes/default/templates/admin.settings.tpl:1546
+#, fuzzy
+msgid ""
+"The Maximum number of comments that user can publish per hour (0 for "
+"unlimited)"
+msgstr ""
+"Jumlah maksimum komentar yang dapat dipublikasikan pengguna per jam (0 "
+"untuk tidak terbatas)"
+
+#: content/themes/default/templates/admin.settings.tpl:1553
+msgid "Default Posts Privacy"
+msgstr "Laporan default"
+
+#: content/themes/default/templates/admin.settings.tpl:1571
+msgid "Post As Anonymous"
+msgstr "Posting sebagai anonim"
+
+#: content/themes/default/templates/admin.settings.tpl:1573
+msgid "Turn Anonymous mode On and Off"
+msgstr "Menghidupkan dan mematikan mode anonim"
+
+#: content/themes/default/templates/admin.settings.tpl:1574
+msgid "Note: Admins and Moderators will able to see the real post author"
+msgstr ""
+"Catatan: Admin dan moderator akan dapat melihat penulis posting yang "
+"sebenarnya"
+
+# msgid "Night Mode"
+#: content/themes/default/templates/admin.settings.tpl:1592
+#, fuzzy
+msgid "Adult Mode"
+msgstr "Mode dewasa"
+
+#: content/themes/default/templates/admin.settings.tpl:1594
+msgid ""
+"Adult mode will hide content that marked for adult from users under 18 "
+"years old"
+msgstr ""
+"Mode dewasa akan menyembunyikan konten yang ditandai untuk orang dewasa "
+"dari pengguna di bawah 18 tahun"
+
+#: content/themes/default/templates/admin.settings.tpl:1612
+msgid "Online Status on Posts"
+msgstr "Status online pada posting"
+
+#: content/themes/default/templates/admin.settings.tpl:1613
+msgid ""
+"Turn online indicator on Posts On and Off (User must be online and enabled "
+"the chat)"
+msgstr ""
+"Nyalakan indikator online pada posting dan mati (pengguna harus online dan "
+"mengaktifkan obrolan)"
+
+#: content/themes/default/templates/admin.settings.tpl:1630
+msgid "Desktop Infinite Scroll"
+msgstr "Gulungan tak terbatas desktop"
+
+#: content/themes/default/templates/admin.settings.tpl:1631
+msgid "Turn infinite scroll on desktop screens On and Off"
+msgstr "Nyalakan gulir tak terbatas di layar desktop"
+
+#: content/themes/default/templates/admin.settings.tpl:1646
+msgid "Mobile Infinite Scroll"
+msgstr "Gulir Mobile Infinite"
+
+#: content/themes/default/templates/admin.settings.tpl:1647
+msgid "Turn infinite scroll on mobile screens On and Off"
+msgstr "Nyalakan gulir tak terbatas di layar seluler"
+
+#: content/themes/default/templates/admin.settings.tpl:1664
+msgid "Auto Play Videos"
+msgstr "Video Putar Otomatis"
+
+# msgid "Turn the movies On and Off"
+#: content/themes/default/templates/admin.settings.tpl:1665
+#, fuzzy
+msgid "Turn auto play videos On and Off"
+msgstr "Menyalakan dan mematikan film"
+
+# msgid "Video Upload"
+#: content/themes/default/templates/admin.settings.tpl:1680
+#, fuzzy
+msgid "Videos Fluid Mode"
+msgstr "Unduh video"
+
+#: content/themes/default/templates/admin.settings.tpl:1681
+msgid "Enable video player fluid mode"
+msgstr "Aktifkan mode cairan pemutar video"
+
+# msgid "Cost by View"
+#: content/themes/default/templates/admin.settings.tpl:1698
+#, fuzzy
+msgid "Posts Views"
+msgstr "Biaya berdasarkan Jenis"
+
+# msgid "Turn the video call system On and Off"
+#: content/themes/default/templates/admin.settings.tpl:1699
+#, fuzzy
+msgid "Turn posts views system On and Off"
+msgstr "Menyalakan dan mematikan sistem panggilan video"
+
+# msgid "File Type"
+#: content/themes/default/templates/admin.settings.tpl:1711
+#, fuzzy
+msgid "Views Type"
+msgstr "Jenis file"
+
+# msgid "Views"
+#: content/themes/default/templates/admin.settings.tpl:1716
+#, fuzzy
+msgid "All Views"
+msgstr "Tampilan"
+
+#: content/themes/default/templates/admin.settings.tpl:1720
+msgid "Unique Views Only"
+msgstr "Tampilan unik saja"
+
+#: content/themes/default/templates/admin.settings.tpl:1723
+msgid "Note: All views will count all views including the same user multiple views"
+msgstr ""
+"Catatan: Semua tampilan akan menghitung semua tampilan termasuk pengguna "
+"yang sama dengan beberapa tampilan"
+
+# msgid "Cost by View"
+#: content/themes/default/templates/admin.settings.tpl:1735
+#, fuzzy
+msgid "Posts Reviews"
+msgstr "Biaya berdasarkan Jenis"
+
+# msgid "Turn the stories On and Off"
+#: content/themes/default/templates/admin.settings.tpl:1736
+#, fuzzy
+msgid "Turn the posts reviews On and Off"
+msgstr "Menyalakan dan mematikan cerita"
+
+#: content/themes/default/templates/admin.settings.tpl:1751
+msgid "Posts Review Replacement"
+msgstr "Posting Tinjau Penggantian"
+
+#: content/themes/default/templates/admin.settings.tpl:1769
+msgid "Trending Hashtags"
+msgstr "Tagar populer"
+
+#: content/themes/default/templates/admin.settings.tpl:1770
+msgid "Turn the trending hashtags feature On and Off"
+msgstr "Nyalakan dan keluarkan fitur tren tagar"
+
+#: content/themes/default/templates/admin.settings.tpl:1782
+msgid "Trending Interval"
+msgstr "Interval tren"
+
+
+#: content/themes/default/templates/admin.settings.tpl:1787
+msgid "Last Week"
+msgstr "Minggu lalu"
+
+#: content/themes/default/templates/admin.settings.tpl:1788
+msgid "Last Month"
+msgstr "Bulan lalu"
+
+#: content/themes/default/templates/admin.settings.tpl:1791
+msgid "Select the interval of trending hashtags"
+msgstr "Pilih interval tagar tren"
+
+#: content/themes/default/templates/admin.settings.tpl:1798
+msgid "Hashtags Limit"
+msgstr "Batas hashteg"
+
+#: content/themes/default/templates/admin.settings.tpl:1803
+msgid "How many hashtags you want to display"
+msgstr "Berapa banyak tagar yang ingin Anda tampilkan"
+
+# msgid "User Gender"
+#: content/themes/default/templates/admin.settings.tpl:1815
+#, fuzzy
+msgid "Disable Download Images"
+msgstr "Pengguna Paul"
+
+#: content/themes/default/templates/admin.settings.tpl:1816
+msgid "Enable this to disable download images in lightbox modal"
+msgstr "Aktifkan ini untuk menonaktifkan gambar unduhan dalam modal LightBox"
+
+#: content/themes/default/templates/admin.settings.tpl:1831
+msgid "Disable Mouse Right Click"
+msgstr "Nonaktifkan Klik Kanan Mouse"
+
+#: content/themes/default/templates/admin.settings.tpl:1832
+msgid "Enable this to disable mouse right click on images"
+msgstr "Aktifkan ini untuk menonaktifkan mouse klik kanan pada gambar"
+#----------------------------------------------------------------------------------------------->
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # \---------------- #
@@ -26166,7 +26231,7 @@ msgstr "Jadwal Postingan"
 
 #: done
 msgid "Schedule your post for later"
-msgstr "Jadwalkan postingan anda ntuk nanti"
+msgstr "Jadwalkan postingan anda untuk nanti"
 
 #: done
 msgid "Anonymous post"
@@ -26354,7 +26419,7 @@ msgid "Transportation"
 msgstr "Transportasi"
 ----------------------------------------------------------------------------->
 
-# ----------------\ #
+# \---------------- #
 # Package Trial
 
 msgid "Trial Enabled"
@@ -26366,3 +26431,4 @@ msgstr "Anda harus memasukkan nomor trial dinyalakan yang valid"
 msgid "Enable trial package. Trial package can only be bought once"
 msgstr "Nyalakan paket trial. Paket trial hanya bisa dibeli sekali"
 
+# ----------------\ #

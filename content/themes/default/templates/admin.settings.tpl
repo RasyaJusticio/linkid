@@ -1124,7 +1124,7 @@
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
-            {__("Appoval Limit")}
+            {__("Approval Limit")}
           </label>
           <div class="col-md-9">
             <input type="text" class="form-control" name="posts_approval_limit" value="{$system['posts_approval_limit']}">

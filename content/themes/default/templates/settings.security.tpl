@@ -53,18 +53,18 @@
       {if !is_empty($user->_data['user_transfer_pin'])}
         <div class="form-group">
           <label class="form-label">{__("Current Transfer PIN")}</label>
-          <input type="password" class="form-control" name="current">
+          <input type="password" class="form-control pin-input" name="current">
         </div>
       {/if}
 
       <div class="row">
         <div class="form-group col-md-6">
           <label class="form-label">{__("Your New Transfer PIN")}</label>
-          <input type="password" class="form-control" name="new">
+          <input type="password" class="form-control pin-input" name="new">
         </div>
         <div class="form-group col-md-6">
           <label class="form-label">{__("Confirm New Transfer PIN")}</label>
-          <input type="password" class="form-control" name="confirm">
+          <input type="password" class="form-control pin-input" name="confirm">
         </div>
       </div>
 

@@ -2684,4 +2684,17 @@ $(function () {
 
     $input.val(numericValue);
   });
+
+  $('body').on('input', '.pin-input', function () {
+    var $input = $(this);
+    var value = $input.val();
+
+    var numericValue = value.replace(/\D/g, '');
+
+    if (numericValue.length > 6) {
+      numericValue = numericValue.substring(0, 6);
+    }
+
+    $input.val(numericValue);
+  });
 });

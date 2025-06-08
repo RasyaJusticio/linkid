@@ -4454,7 +4454,7 @@ msgstr "Anda harus memasukkan jumlah aktual"
 #: includes/class-user.php:17119
 #, fuzzy
 msgid "You can't transfer more than"
-msgstr "Anda tidak dapat mengunggah file yang melebihi"
+msgstr "Anda tidak dapat transfer yang melebihi"
 
 #: includes/class-user.php:17123
 msgid "You must search for a user to send money to"

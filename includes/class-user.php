@@ -23817,6 +23817,29 @@ class User
     $db->query(sprintf("UPDATE users SET user_country = %s, user_work_title = %s, user_work_place = %s, user_work_url = %s, user_city = %s, user_hometown = %s, user_edu_major = %s, user_edu_school = %s, user_edu_class = %s WHERE user_id = %s", secure($args['country'], 'int'), secure($args['work_title']), secure($args['work_place']), secure($args['work_url']), secure($args['city']), secure($args['hometown']), secure($args['edu_major']), secure($args['edu_school']), secure($args['edu_class']), secure($this->_data['user_id'], 'int')));
   }
 
+  /**
+   * getting_started_transfer_pin
+   * 
+   * @param array $args
+   * @return void
+   */
+  public function getting_started_transfer_pin($args)
+  {
+    global $db;
+
+    /* validate all fields */
+    if (is_empty($args['new']) || is_empty($args['confirm'])) {
+      throw new ValidationException(__("You must fill in all of the fields"));
+    }
+    /* validate new pin */
+    if ($args['new'] != $args['confirm']) {
+      throw new ValidationException(__("Your transfer PINs do not match"));
+    }
+    /* check password */
+    $this->check_pin($args['new']);
+    /* update user */
+    $db->query(sprintf("UPDATE users SET user_transfer_pin = %s WHERE user_id = %s", secure(_password_hash($args['new'])), secure($this->_data['user_id'], 'int')));
+  }
 
   /**
    * getting_satrted_finish
@@ -23837,7 +23860,7 @@ class User
       if ($system['getting_started_location_required'] && is_empty($user_info['user_country'])) {
         throw new Exception(__("You must enter your location info"));
       }
-      if ($system['getting_started_location_required'] && is_empty($user_info['user_current_city'])) {
+      if ($system['getting_started_location_required'] && is_empty($user_info['user_city'])) {
         throw new Exception(__("You must enter your location info"));
       }
       if ($system['getting_started_location_required'] && $system['location_info_enabled'] && is_empty($user_info['user_hometown'])) {
@@ -23850,6 +23873,9 @@ class User
       /* check if education data required */
       if ($system['getting_started_education_required'] && (is_empty($user_info['user_edu_major']) || is_empty($user_info['user_edu_school']) || is_empty($user_info['user_edu_class']))) {
         throw new Exception(__("You must enter your education info"));
+      }
+      if (is_empty($user_info['user_transfer_pin'])) {
+        throw new Exception(__("You must enter your transfer PIN"));
       }
     }
     // update user info

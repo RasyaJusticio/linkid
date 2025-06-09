@@ -17,7 +17,7 @@ if (!$user->_logged_in) {
 
 // check if already getted started
 if (!$system['getting_started'] || $user->_data['user_started']) {
-  redirect();
+  //redirect();
 }
 
 try {

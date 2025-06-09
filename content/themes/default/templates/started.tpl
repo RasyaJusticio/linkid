@@ -37,6 +37,12 @@
             <li class="nav-item">
               <a class="nav-link disabled" href="#step-3">
                 <h4 class="mb5">{__("Step 3")}</h4>
+                <p class="mb0">{__("Set your transfer PIN")}</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#step-4">
+                <h4 class="mb5">{__("Step 4")}</h4>
                 <p class="mb0">
                   {if $friends || $followers || $pages || $groups}
                     {__("Manage Connections")}
@@ -206,6 +212,45 @@
 
           <div class="js_wizard-content x-hidden" id="step-3">
             <div class="text-center">
+              <h3 class="mb5">{__("Set your transfer PIN")}</h3>
+              <p class="mb20">{__("Transfer PIN are useful for you to securely do transactions")}</p>
+            </div>
+
+            <form class="js_ajax-forms" data-url="users/started.php?do=transfer-pin">
+              <div class="heading-small mb20">
+                {__("Transfer PIN")}
+              </div>
+              <div class="pl-md-4">
+                <div class="form-group">
+                  <label class="form-label">{__("Transfer PIN")}</label>
+                  <input type="password" class="form-control pin-input" name="new">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">{__("Confirm Transfer PIN")}</label>
+                  <input type="password" class="form-control pin-input" name="confirm">
+                </div>
+              </div>
+              <!-- success -->
+              <div class="alert alert-success x-hidden"></div>
+              <!-- success -->
+
+              <!-- error -->
+              <div class="alert alert-danger x-hidden"></div>
+              <!-- error -->
+
+              <!-- buttons -->
+              <div class="clearfix mt20">
+                <div class="float-end">
+                  <button type="submit" class="btn btn-success"><i class="fas fa-check-circle mr5"></i>{__("Save Changes")}</button>
+                  <button type="button" class="btn btn-primary" id="activate-step-4">{__("Next")}<i class="fas fa-arrow-circle-right ml5"></i></button>
+                </div>
+              </div>
+              <!-- buttons -->
+            </form>
+          </div>
+
+          <div class="js_wizard-content x-hidden" id="step-4">
+            <div class="text-center">
               <h3 class="mb5">
                 {if $friends || $followers || $pages || $groups}
                   {__("Manage Connections")}
@@ -336,6 +381,11 @@
     $('#activate-step-3').on('click', function(e) {
       $('.js_wizard-steps li:eq(2) a').removeClass('disabled');
       $('.js_wizard-steps li a[href="#step-3"]').trigger('click');
+    });
+
+    $('#activate-step-4').on('click', function(e) {
+      $('.js_wizard-steps li:eq(3) a').removeClass('disabled');
+      $('.js_wizard-steps li a[href="#step-4"]').trigger('click');
     });
 
   });

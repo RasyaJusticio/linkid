@@ -1742,6 +1742,30 @@ class User
     return $_user;
   }
 
+  /**
+   * get_user_by_username
+   * 
+   * @param string $username
+   * @return array
+   */
+  public function get_user_by_username($username, $full_info = true)
+  {
+    global $db, $system;
+    if ($full_info) {
+      $requested_info = sprintf("users.*, (users.user_last_seen >= SUBTIME(NOW(), SEC_TO_TIME(%s))) AS user_is_online, users_groups.permissions_group_id, packages.package_permissions_group_id", secure($system['online_status_timeout'], 'int'));
+    } else {
+      $requested_info = sprintf("users.user_id, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture, users.user_subscribed, users.user_verified, users.user_last_seen, (users.user_last_seen >= SUBTIME(NOW(), SEC_TO_TIME(%s))) AS user_is_online", secure($system['offline_time'], 'int'));
+    }
+    $get_user = $db->query(sprintf("SELECT %s FROM users LEFT JOIN packages ON users.user_subscribed = '1' AND users.user_package = packages.package_id LEFT JOIN users_groups ON users.user_group = '3' AND users.user_group_custom != '0' AND users.user_group_custom = users_groups.user_group_id WHERE users.user_name = %s", $requested_info, secure($username)));
+    if ($get_user->num_rows == 0) {
+      return false;
+    }
+    $_user = $get_user->fetch_assoc();
+    $_user['user_picture'] = get_picture($_user['user_picture'], $_user['user_gender']);
+    $_user['user_fullname'] = ($system['show_usernames_enabled']) ? $_user['user_name'] : $_user['user_firstname'] . " " . $_user['user_lastname'];
+    return $_user;
+  }
+
 
 
   /* ------------------------------- */

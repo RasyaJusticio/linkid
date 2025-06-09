@@ -124,7 +124,7 @@
 
         <!-- username -->
         <div class="fr_welcome_field">
-          <input name="username" type="text" placeholder='{__("Username")}' required>
+          <input name="username" type="text" placeholder='{__("Username")}' required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="position-absolute">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
@@ -157,7 +157,7 @@
 
         <!-- password -->
         <div class="fr_welcome_field">
-          <input name="password" type="password" placeholder='{__("Password")}' required>
+          <input name="password" type="password" placeholder='{__("Password")}' required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" class="position-absolute">
             <path fill="currentColor" d="M120-280h720q17 0 28.5 11.5T880-240q0 17-11.5 28.5T840-200H120q-17 0-28.5-11.5T80-240q0-17 11.5-28.5T120-280Zm40-222-19 34q-6 11-18 14t-23-3q-11-6-14-18t3-23l19-34H70q-13 0-21.5-8.5T40-562q0-13 8.5-21.5T70-592h38l-19-32q-6-11-3-23t14-18q11-6 23-3t18 14l19 32 19-32q6-11 18-14t23 3q11 6 14 18t-3 23l-19 32h38q13 0 21.5 8.5T280-562q0 13-8.5 21.5T250-532h-38l19 34q6 11 3 23t-14 18q-11 6-23 3t-18-14l-19-34Zm320 0-19 34q-6 11-18 14t-23-3q-11-6-14-18t3-23l19-34h-38q-13 0-21.5-8.5T360-562q0-13 8.5-21.5T390-592h38l-19-32q-6-11-3-23t14-18q11-6 23-3t18 14l19 32 19-32q6-11 18-14t23 3q11 6 14 18t-3 23l-19 32h38q13 0 21.5 8.5T600-562q0 13-8.5 21.5T570-532h-38l19 34q6 11 3 23t-14 18q-11 6-23 3t-18-14l-19-34Zm320 0-19 34q-6 11-18 14t-23-3q-11-6-14-18t3-23l19-34h-38q-13 0-21.5-8.5T680-562q0-13 8.5-21.5T710-592h38l-19-32q-6-11-3-23t14-18q11-6 23-3t18 14l19 32 19-32q6-11 18-14t23 3q11 6 14 18t-3 23l-19 32h38q13 0 21.5 8.5T920-562q0 13-8.5 21.5T890-532h-38l19 34q6 11 3 23t-14 18q-11 6-23 3t-18-14l-19-34Z" />
           </svg>
@@ -334,7 +334,7 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-text bg-transparent"><i class="fas fa-envelope fa-fw"></i></span>
-              <input type="text" class="form-control" placeholder='{__("Email")} {__("or")} {__("Username")}' name="username_email" required>
+              <input type="text" class="form-control" placeholder='{__("Email")} {__("or")} {__("Username")}' name="username_email" required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
             </div>
           </div>
           <!-- username or email -->
@@ -342,7 +342,7 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-text bg-transparent"><i class="fas fa-lock fa-fw"></i></span>
-              <input type="password" class="form-control" placeholder='{__("Password")}' name="password" required>
+              <input type="password" class="form-control" placeholder='{__("Password")}' name="password" required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
               <div class="input-group-text bg-transparent js_toggle-password" style="border-top-right-radius: 16px; border-bottom-right-radius: 16px;">
                 <svg class="eye-icon" width="24px" height="24px" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
                   <path d="M 28.0103 46.4025 C 44.5562 46.4025 56 33.0170 56 28.8443 C 56 24.6511 44.5354 11.2863 28.0103 11.2863 C 11.5883 11.2863 0 24.6511 0 28.8443 C 0 33.0170 11.6710 46.4025 28.0103 46.4025 Z M 28.0103 40.3501 C 21.5655 40.3501 16.4840 35.1240 16.4426 28.8443 C 16.4220 22.3995 21.5655 17.3387 28.0103 17.3387 C 34.4139 17.3387 39.5574 22.3995 39.5574 28.8443 C 39.5574 35.1240 34.4139 40.3501 28.0103 40.3501 Z M 28.0103 32.9963 C 30.3032 32.9963 32.2036 31.1166 32.2036 28.8443 C 32.2036 26.5515 30.3032 24.6717 28.0103 24.6717 C 25.6968 24.6717 23.7964 26.5515 23.7964 28.8443 C 23.7964 31.1166 25.6968 32.9963 28.0103 32.9963 Z" />
@@ -427,7 +427,7 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-text bg-transparent"><i class="fas fa-globe fa-fw"></i></span>
-              <input name="username" type="text" class="form-control" placeholder='{__("Username")}' required>
+              <input name="username" type="text" class="form-control" placeholder='{__("Username")}' required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
             </div>
           </div>
           <!-- username -->
@@ -454,7 +454,7 @@
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-text bg-transparent"><i class="fas fa-key fa-fw"></i></span>
-                <input name="password" type="password" class="form-control" placeholder='{__("Password")}' required>
+                <input name="password" type="password" class="form-control" placeholder='{__("Password")}' required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
               </div>
             </div>
           </div>

@@ -50,7 +50,7 @@
             <label class="form-label">{__("Username")}</label>
             <div class="input-group">
               <span class="input-group-text"><i class="fas fa-globe fa-fw"></i></span>
-              <input name="username" type="text" class="form-control" value="{$user_profile->username}" required>
+              <input name="username" type="text" class="form-control" value="{$user_profile->username}" required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
             </div>
           </div>
           <div class="form-group">
@@ -65,7 +65,7 @@
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-text"><i class="fas fa-key fa-fw"></i></span>
-                <input name="password" type="password" class="form-control" required>
+                <input name="password" type="password" class="form-control" required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
               </div>
             </div>
           </div>

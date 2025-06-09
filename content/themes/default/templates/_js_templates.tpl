@@ -1447,7 +1447,7 @@
             <div class="form-group">
               <label class="form-label" for="send_to">{__("Send To")}</label>
               <div class="position-relative js_autocomplete">
-                <input class="form-control" type="text" placeholder="{__("Search for user name or email")}" name="send_to" id="send_to" autocomplete="off">
+                <input class="form-control" type="text" placeholder="{__("Search for user name or email")}" name="send_to" id="send_to" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
                 <input type="hidden" name="send_to_id">
               </div>
             </div>
@@ -1488,7 +1488,7 @@
             <div class="form-group">
               <label class="form-label" for="receive_from">{__("Receive From")}</label>
               <div class="position-relative js_autocomplete">
-                <input class="form-control" type="text" placeholder="{__("Search for user name or email")}" name="receive_from" id="receive_from" autocomplete="off">
+                <input class="form-control" type="text" placeholder="{__("Search for user name or email")}" name="receive_from" id="receive_from" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
                 <input type="hidden" name="receive_from_id">
               </div>
             </div>
@@ -1575,8 +1575,6 @@
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="receive_from_id" value="{literal}{{user_id}}{/literal}">
-
-            <div class="divider"></div>
 
             {include file="__wallet_keypad.tpl" keypad_name="pin" keypad_id="pin"}
 
@@ -2173,8 +2171,6 @@
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="receive_from_id" value="{literal}{{user_id}}{/literal}">
-
-            <div class="divider"></div>
 
             {include file="__wallet_keypad.tpl" keypad_name="pin" keypad_id="pin"}
 

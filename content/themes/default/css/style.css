@@ -11573,6 +11573,10 @@ body.night-mode .pwa_install_banner {
   align-items: center;
   justify-content: center;
   gap: 0.2rem;
+
+  p {
+    margin: 0;
+  }
 }
 
 .user-info .avatar {
@@ -11593,7 +11597,6 @@ body.night-mode .pwa_install_banner {
 }
 
 .money-total {
-  margin-top: 1rem;
   text-align: center;
   font-size: 3rem;
   font-weight: bolder;
@@ -11699,3 +11702,25 @@ body.night-mode {
     border: var(--bs-border-width) solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
 }
+
+/* -- */
+
+/* ------------------------------- */
+.send-receive-money {
+  > .d-grid > .btn {
+    margin-bottom: 0.4rem;
+  }
+
+  .withdraws {
+    gap: 0.4rem;
+
+    .btn {
+      margin-bottom: 0;
+    }
+  }
+
+  .btn {
+    padding: 0.6rem 1rem;
+  }
+}
+

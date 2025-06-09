@@ -12,12 +12,12 @@
     <!-- side panel -->
 
     <!-- content panel -->
-    <div class="col-12 pt-4 sg-offcanvas-mainbar">
+    <div class="col-12 pt-md-4 sg-offcanvas-mainbar">
 
       {if $view == ""}
 
         <!-- wallet -->
-        <div class="card mt20">
+        <div class="card mt-md-4">
           <div class="card-header with-icon wallet-header">
             <div class="header-title">
               {include file='__svg_icons.tpl' icon="wallet" class="main-icon mr10" width="24px" height="24px"}
@@ -128,7 +128,7 @@
             <div class="row">
               <!-- credit -->
               <div class="col-md-5">
-                <div class="section-title mb20">
+                <div class="section-title d-none d-md-block mb20">
                   {__("Your Credit")}
                 </div>
                 <div class="stat-panel bg-gradient-info">
@@ -143,13 +143,13 @@
               <!-- credit -->
 
               <!-- send & recieve money -->
-              <div class="col-md-7">
-                <div class="section-title mb20">
+              <div class="col-md-7 send-receive-money">
+                <div class="section-title mb20 d-none d-md-block">
                   {__("Send & Recieve Money")}
                 </div>
                 <div class="d-grid">
                   {if $system['wallet_transfer_enabled']}
-                    <button class="btn btn-outline-primary mb10" data-toggle="modal" data-url="#wallet-transfer">
+                    <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-transfer">
                       {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
                       {__("Send Money")}
                     </button>
@@ -158,14 +158,14 @@
 
                 <div class="d-grid">
                   {if $system['wallet_transfer_enabled']}
-                    <button class="btn btn-outline-primary mb10" data-toggle="modal" data-url="#wallet-receive">
+                    <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-receive">
                       {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
                       {__("Receive Money")}
                     </button>
                   {/if}
                 </div>
 
-                <div class="d-grid gap-2">
+                <div class="d-grid withdraws">
                   <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-replenish">
                     {include file='__svg_icons.tpl' icon="payments" class="main-icon mr10" width="24px" height="24px"}
                     {__("Replenish Credit")}

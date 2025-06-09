@@ -50,6 +50,13 @@
   </div>
   <form class="js_ajax-forms" data-url="users/settings.php?edit=transfer-pin">
     <div class="card-body">
+      {if $set_transfer_pin_succeed}
+        <div class="alert alert-success mb20">
+          <i class="fas fa-check-circle mr5"></i>
+          {__("Your transfer PIN has been updated")}
+        </div>
+      {/if}
+
       {if !is_empty($user->_data['user_transfer_pin'])}
         <div class="form-group">
           <label class="form-label">{__("Current Transfer PIN")}</label>

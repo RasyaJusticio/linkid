@@ -22557,7 +22557,7 @@ class User
 
       case 'transfer-pin':
         /* validate all fields */
-        if (!is_empty($user->_data['user_transfer_pin'])) {
+        if (!is_empty($this->_data['user_transfer_pin'])) {
           if (is_empty($args['current']) || is_empty($args['new']) || is_empty($args['confirm'])) {
             throw new Exception(__("You must fill in all of the fields"));
           }

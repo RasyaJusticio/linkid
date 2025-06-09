@@ -147,7 +147,7 @@ try {
       $user->settings($_GET['edit'], $_POST);
 
       // return
-      return_json(['success' => true, 'message' => __("Your transfer PIN has been updated")]);
+      return_json(['callback' => 'window.location = site_path + "/settings/security/transfer-pin?set_pin_succeed"']);
       break;
 
     case 'two-factor':

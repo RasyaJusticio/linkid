@@ -246,6 +246,10 @@ try {
           break;
 
         case 'transfer-pin':
+          if (isset($_GET['set_pin_succeed'])) {
+            $smarty->assign('set_transfer_pin_succeed', 'true');
+          }
+
           // page header
           page_header(__("Transfer PIN") . " &rsaquo; " . __("Change Transfer PIN"));
           break;

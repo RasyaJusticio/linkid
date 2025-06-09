@@ -1776,6 +1776,84 @@
         </form>
       </script>
 
+      <script id="wallet-withdraw" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="payments" class="main-icon mr10" width="24px" height="24px"}
+            {__("Withdraw Credit")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="js_ajax-forms" data-url="users/withdraw.php?type=wallet">
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label" for="amount">{__("Your Balance")}</label>
+              <div>
+                <span class="badge badge-lg bg-info">{print_money($user->_data['user_wallet_balance']|format_number)}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="amount">{__("Amount")}</label>
+              <div class="input-money {$system['system_currency_dir']}">
+                <span>{$system['system_currency_symbol']}</span>
+                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <div class="form-text">
+                  {__("The minimum withdrawal request amount is")} {print_money($system['wallet_min_withdrawal']|format_number)}
+                </div>
+              </div>
+              {include file="__money_amounts.tpl"}
+            </div>
+            <div class="form-group">
+              <label class="form-label">{__("Payment Method")}</label>
+              <div class="col-md-9">
+                {if in_array("paypal", $system['wallet_payment_method_array'])}
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="method" id="method_paypal" value="paypal" class="form-check-input">
+                    <label class="form-check-label" for="method_paypal">{__("PayPal")}</label>
+                  </div>
+                {/if}
+                {if in_array("skrill", $system['wallet_payment_method_array'])}
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="method" id="method_skrill" value="skrill" class="form-check-input">
+                    <label class="form-check-label" for="method_skrill">{__("Skrill")}</label>
+                  </div>
+                {/if}
+                {if in_array("moneypoolscash", $system['wallet_payment_method_array'])}
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="method" id="method_moneypoolscash" value="moneypoolscash" class="form-check-input">
+                    <label class="form-check-label" for="method_moneypoolscash">{__("MoneyPoolsCash")}</label>
+                  </div>
+                {/if}
+                {if in_array("bank", $system['wallet_payment_method_array'])}
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="method" id="method_bank" value="bank" class="form-check-input">
+                    <label class="form-check-label" for="method_bank">{__("Bank Transfer")}</label>
+                  </div>
+                {/if}
+                {if in_array("custom", $system['wallet_payment_method_array'])}
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="method" id="method_custom" value="custom" class="form-check-input">
+                    <label class="form-check-label" for="method_custom">{__($system['wallet_payment_method_custom'])}</label>
+                  </div>
+                {/if}
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="method_value">{__("Transfer To")}</label>
+              <div>
+                <input type="text" class="form-control" name="method_value">
+              </div>
+            </div>
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Continue")}</button>
+          </div>
+        </form>
+      </script>
+
       <script id="wallet-qr" type="text/template">
         <div class="modal-wallet-qr">
           <div class="modal-header">

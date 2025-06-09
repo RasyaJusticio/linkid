@@ -124,24 +124,13 @@ try {
       // get wallet transactions
       $transactions = $user->wallet_get_transactions();
 
-      /* assign variables */
-      $smarty->assign('transactions', $transactions);
-      $smarty->assign('qrcode_uri', $qrcode);
-      break;
-
-    case 'payments':
-      // check if wallet withdrawal enabled
-      if (!$system['wallet_withdrawal_enabled']) {
-        _error(404);
-      }
-
-      // page header
-      page_header(__("Wallet Payments") . ' | ' . __($system['system_title']));
-
       // get payments
       $payments = $user->wallet_get_payments();
+
       /* assign variables */
+      $smarty->assign('transactions', $transactions);
       $smarty->assign('payments', $payments);
+      $smarty->assign('qrcode_uri', $qrcode);
       break;
 
     default:

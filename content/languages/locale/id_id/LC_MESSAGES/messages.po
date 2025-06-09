@@ -17094,6 +17094,9 @@ msgstr "Saldo Galang Dana"
 msgid "Monetization Credit"
 msgstr "Saldo Monetize"
 
+msgid "Withdraw Credit"
+msgstr "Tarik Saldo"
+
 #: content/themes/default/templates/wallet.tpl:201
 msgid "Wallet Transactions"
 msgstr "Transaksi"

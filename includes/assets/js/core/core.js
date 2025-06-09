@@ -2659,14 +2659,20 @@ $(function () {
 
     if (typeof digit == 'number') {
       if (currentVal.length < 6) {
-        $input.val(currentVal + digit);
+        $input.val(currentVal + digit).trigger('input');
       }
     }
 
     if (action == "BACKSPACE") {
       if (currentVal.length > 0) {
         const newVal = currentVal.slice(0, -1);
-        $input.val(newVal);
+        $input.val(newVal).trigger('input');
+      }
+    }
+
+    if (action == "CLEAR") {
+      if (currentVal.length > 0) {
+        $input.val("").trigger('input');
       }
     }
 

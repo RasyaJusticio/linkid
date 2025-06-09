@@ -26503,9 +26503,6 @@ msgstr "Nyalakan paket trial. Paket trial hanya bisa dibeli sekali"
 # ----------------\ #
 #
 
-msgid "Giver PIN"
-msgstr "PIN Pemberi"
-
 msgid "You must enter valid amount of money"
 msgstr "Anda harus memasukkan sejumlah uang yang benar"
 

@@ -16,7 +16,9 @@
     <button type="button" class="btn btn-primary" data-amount="8">8</button>
     <button type="button" class="btn btn-primary" data-amount="9">9</button>
 
-    <div></div>
+    <button type="button" class="btn btn-primary" data-action="CLEAR">
+      <i class="fas fa-c"></i>
+    </button>
     <button type="button" class="btn btn-primary" data-amount="0">0</button>
     <button type="button" class="btn btn-primary" data-action="BACKSPACE">
       <i class="fas fa-backspace"></i>

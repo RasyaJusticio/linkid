@@ -1578,18 +1578,11 @@
 
             <div class="divider"></div>
 
-            <p class="modal-label">
-              {__("Giver PIN")}
-            </p>
-
             {include file="__wallet_keypad.tpl" keypad_name="pin" keypad_id="pin"}
 
             <!-- error -->
             <div class="alert alert-danger mb0 mt10 x-hidden"></div>
             <!-- error -->
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">{__("Confirm")}</button>
           </div>
         </form>
         <script>
@@ -1598,6 +1591,15 @@
             const receiveMoneyTotal = document.getElementById('receive-money-total');
 
             receiveMoneyTotal.innerText = printMoney(formatNumber(Number(amount)));
+
+            const pinInput = document.getElementById("pin");
+            const form = pinInput.closest(".js_ajax-forms");
+
+            $(pinInput).on("input", function () {
+              if (this.value.length === 6) {
+                $(form).submit();
+              }
+            });
           })();
         </script>
       </script>
@@ -2096,18 +2098,11 @@
 
             <div class="divider"></div>
 
-            <p class="modal-label">
-              {__("Giver PIN")}
-            </p>
-
             {include file="__wallet_keypad.tpl" keypad_name="pin" keypad_id="pin"}
 
             <!-- error -->
             <div class="alert alert-danger mb0 mt10 x-hidden"></div>
             <!-- error -->
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">{__("Confirm")}</button>
           </div>
         </form>
         <script>
@@ -2116,6 +2111,15 @@
             const walletQRTotal = document.getElementById('wallet-qr-receive-total');
 
             walletQRTotal.innerText = printMoney(formatNumber(Number(amount)));
+
+            const pinInput = document.getElementById("pin");
+            const form = pinInput.closest(".js_ajax-forms");
+
+            $(pinInput).on("input", function () {
+              if (this.value.length === 6) {
+                $(form).submit();
+              }
+            });
           })();
         </script>
       </script>

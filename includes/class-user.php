@@ -1748,7 +1748,7 @@ class User
    * @param string $username
    * @return array
    */
-  public function get_user_by_username($username, $full_info = true)
+  public function get_user_by_username($username, $full_info = true, $is_raw = true)
   {
     global $db, $system;
     if ($full_info) {
@@ -1761,8 +1761,11 @@ class User
       return false;
     }
     $_user = $get_user->fetch_assoc();
-    $_user['user_picture'] = get_picture($_user['user_picture'], $_user['user_gender']);
-    $_user['user_fullname'] = ($system['show_usernames_enabled']) ? $_user['user_name'] : $_user['user_firstname'] . " " . $_user['user_lastname'];
+
+    if ($is_raw) {
+      $_user['user_picture'] = get_picture($_user['user_picture'], $_user['user_gender']);
+      $_user['user_fullname'] = ($system['show_usernames_enabled']) ? $_user['user_name'] : $_user['user_firstname'] . " " . $_user['user_lastname'];
+    }
     return $_user;
   }
 
@@ -17956,8 +17959,11 @@ class User
     global $db;
     
     $get_user = $db->query(sprintf("SELECT user_id, user_name, user_firstname, user_lastname, user_gender, user_picture FROM users WHERE user_transfer_token = %s", secure($transfer_token)));
-      
-    return $get_user->fetch_assoc();
+    $_user = $get_user->fetch_assoc();
+    $_user['user_picture'] = get_picture($_user['user_picture'], $_user['user_gender']);
+    $_user['user_fullname'] = ($system['show_usernames_enabled']) ? $_user['user_name'] : $_user['user_firstname'] . " " . $_user['user_lastname'];
+
+    return $_user;
   }
 
   public function transfer_money($user_id, $amount)

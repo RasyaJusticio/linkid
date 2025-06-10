@@ -29,7 +29,7 @@ try {
       if (is_numeric($_POST['send_to_id'])) {
         $user->wallet_transfer($_POST['send_to_id'], $_POST['amount']);
       } else {
-        $sendToId = $user->get_user_by_username($_POST['send_to_id'], false);
+        $sendToId = $user->get_user_by_username($_POST['send_to_id'], false, false);
 
         $user->wallet_transfer($sendToId['user_id'] ?? "", $_POST['amount']);
       }
@@ -196,7 +196,7 @@ try {
       if (is_numeric($_POST['user_id'])) {
         $target_user = $user->wallet_get_user($_POST['user_id']);
       } else {
-        $target_user = $user->get_user_by_username($_POST['user_id'], false);
+        $target_user = $user->get_user_by_username($_POST['user_id'], false, false);
       }
 
       if (!isset($target_user) || empty($target_user)) {

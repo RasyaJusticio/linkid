@@ -2577,6 +2577,11 @@ $(function () {
       $('.js_theme-mode-text').text(__['Night Mode']);
       $.post(api['core/theme'], { 'mode': mode });
     }
+
+    // TODO: Send an event to the qurani iframe instead
+    if (current_page == 'qurani/index') {
+      window.location.reload();
+    }
   });
 
 

@@ -168,7 +168,7 @@
                 <div class="d-grid withdraws">
                   <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-replenish">
                     {include file='__svg_icons.tpl' icon="payments" class="main-icon mr10" width="24px" height="24px"}
-                    {__("Replenish Credit")}
+                    {__("Top Up Credit")}
                   </button>
                   {if $system['affiliates_enabled'] && $system['affiliates_money_transfer_enabled']}
                     <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-withdraw-affiliates">
@@ -249,7 +249,7 @@
                                   {/if}
                                 </a>
                               {elseif $transaction['node_type'] == "recharge"}
-                                {__("Replenish Credit")}
+                                {__("Top Up Credit")}
                               {elseif $transaction['node_type'] == "withdraw_wallet"}
                                 {__("Wallet Withdrawal")}
                               {elseif $transaction['node_type'] == "withdraw_affiliates"}

@@ -1395,7 +1395,7 @@
         <div class="modal-header">
           <h6 class="modal-title">
           {include file='__svg_icons.tpl' icon="payments" class="main-icon mr10" width="24px" height="24px"}
-          {__("Replenish Credit")}
+          {__("Top Up Credit")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
         </div>
@@ -1559,7 +1559,7 @@
         <form class="js_ajax-forms" data-url="payments/wallet.php?do=wallet_receive">
           <div class="modal-body">
             <p class="modal-label">
-              {__("Receiving From")}
+              {__("Receive From")}
             </p>
             <div class="user-info">
                 <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">
@@ -2155,7 +2155,7 @@
         <form class="js_ajax-forms" data-url="payments/wallet.php?do=wallet_receive">
           <div class="modal-body">
             <p class="modal-label">
-              {__("Receiving From")}
+              {__("Receive From")}
             </p>
             <div class="user-info">
                 <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">

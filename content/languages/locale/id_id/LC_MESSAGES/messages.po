@@ -17066,6 +17066,9 @@ msgstr "Menerima Dari"
 msgid "Replenish Credit"
 msgstr "Topup Saldo"
 
+msgid "Top Up Credit"
+msgstr "Isi Saldo"
+
 #: content/themes/default/templates/wallet.tpl:167
 #: content/themes/default/templates/wallet.tpl:250
 msgid "Affiliates Credit"

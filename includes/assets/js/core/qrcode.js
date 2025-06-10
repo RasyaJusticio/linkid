@@ -1,6 +1,6 @@
 /**
  * qrcode js
- * 
+ *
  * @author RasyaJusticio
  */
 
@@ -8,8 +8,147 @@ const QR_CANVAS_WIDTH = 1240;
 const QR_CANVAS_HEIGHT = 1748;
 let bgImage = new Image();
 let containerImage = new Image();
-let logoImage = new Image(); 
+let logoImage = new Image();
 let isImagesReady = false;
+
+// TODO: Translate error messages
+function initiateQRScanner(modalId, nextModalId) {
+  const baseModalElem = document.getElementById("modal");
+  const modalElem = document.getElementById(modalId);
+  const readerElem = modalElem.querySelector(".video-qr-reader");
+  const $error = $(modalElem.querySelector(".alert.alert-danger"));
+
+  let isSuccessfull = false;
+  let isProcessing = false;
+
+  const onSuccess = (result) => {
+    if (isSuccessfull || isProcessing) {
+      return;
+    }
+    isProcessing = true;
+
+    $.post(
+      ajax_path + "payments/transfer.php?do=check_token",
+      {
+        transfer_token: result.data,
+      },
+      function (response) {
+        isProcessing = false;
+        qrScanner.stop();
+
+        if (response.result == "valid") {
+          isSuccessfull = true;
+
+          const user = response.user;
+
+          modal(nextModalId, {
+            user_id: user["user_id"],
+            user_name: user["user_name"],
+            user_fullname: user["user_firstname"] + " " + user["user_lastname"],
+            user_picture: user["user_picture"],
+          });
+          cleanUp();
+        } else {
+          $error.html("Scanned QR is invalid").slideDown();
+        }
+      },
+    ).fail(function () {
+      isProcessing = false;
+      $error.html("Failed to get user data").slideDown();
+    });
+  };
+
+  var qrScanner = new QrScanner(readerElem, onSuccess, {
+    returnDetailedScanResult: true,
+    highlightScanRegion: true,
+    highlightCodeOutline: true,
+  });
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "class") {
+        if (!baseModalElem.classList.contains("show")) {
+          cleanUp();
+        }
+      }
+    });
+  });
+
+  observer.observe(baseModalElem, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  function cleanUp() {
+    qrScanner.stop();
+    qrScanner.destroy();
+    qrScanner = null;
+    observer.disconnect();
+  }
+
+  if (
+    !navigator.mediaDevices ||
+    typeof navigator.mediaDevices.getUserMedia !== "function"
+  ) {
+    $error
+      .html(
+        "Camera access is not supported in this browser or context. Please use a modern browser (e.g. Chrome, Firefox) and open this site via HTTPS.",
+      )
+      .slideDown();
+    return;
+  }
+
+  navigator.mediaDevices
+    .getUserMedia({ video: true })
+    .then((stream) => {
+      stream.getTracks().forEach((track) => track.stop());
+      qrScanner.start();
+    })
+    .catch((err) => {
+      switch (err.name) {
+        case "NotAllowedError":
+          $error
+            .html(
+              "Camera access was denied. Please enable camera permissions in your browser settings to scan QR codes.",
+            )
+            .slideDown();
+          break;
+        case "PermissionDeniedError":
+          $error
+            .html(
+              "Camera access was denied. Please enable camera permissions in your browser settings to scan QR codes.",
+            )
+            .slideDown();
+          break;
+        case "NotFoundError":
+          $error
+            .html(
+              "No camera detected. Please connect a camera or try again on a different device.",
+            )
+            .slideDown();
+          console.log(
+            "No camera detected. Please connect a camera or try again on a different device.",
+          );
+          break;
+        case "NotReadableError":
+          $error
+            .html(
+              "Camera is currently unavailable or being used by another application.",
+            )
+            .slideDown();
+          break;
+        case "OverconstrainedError":
+          $error
+            .html("Unable to access the camera with the required settings.")
+            .slideDown();
+          break;
+        default:
+          $error
+            .html("An unexpected error occurred while accessing the camera.")
+            .slideDown();
+      }
+    });
+}
 
 /**
  * Asynchronously draws a QR code image onto a canvas element.
@@ -29,28 +168,30 @@ let isImagesReady = false;
  *
  */
 async function drawQRToCanvas(canvasId, options) {
-    const canvas = document.getElementById(canvasId);
+  const canvas = document.getElementById(canvasId);
 
-    if (!canvas) {
-        console.error(`Unable to find a canvas with the id #${canvasId} - [drawQRToCanvas]`);
-        return;
-    }
+  if (!canvas) {
+    console.error(
+      `Unable to find a canvas with the id #${canvasId} - [drawQRToCanvas]`,
+    );
+    return;
+  }
 
-    const context = canvas.getContext("2d");
+  const context = canvas.getContext("2d");
 
-    canvas.width = QR_CANVAS_WIDTH;
-    canvas.height = QR_CANVAS_HEIGHT;
+  canvas.width = QR_CANVAS_WIDTH;
+  canvas.height = QR_CANVAS_HEIGHT;
 
-    const qrImage = await getQRCodeImage(options.qrCodeURI);
+  const qrImage = await getQRCodeImage(options.qrCodeURI);
 
-    drawQR(context, canvas, qrImage, options);
+  drawQR(context, canvas, qrImage, options);
 }
 
 /**
  * Draws a stylized QR code onto a canvas with branding and user information.
  *
  * This includes background, logo, container, user details (full name, username, transfer token),
- * creation timestamp, and the QR code itself. It uses several preloaded images such as `bgImage`, 
+ * creation timestamp, and the QR code itself. It uses several preloaded images such as `bgImage`,
  * `logoImage`, and `containerImage`, and assumes canvas dimensions are already set.
  *
  * @function drawQR
@@ -67,137 +208,159 @@ async function drawQRToCanvas(canvasId, options) {
  * @throws Will log a warning if any error occurs during the drawing process.
  */
 async function drawQR(context, canvas, qrImage, options) {
-    while (!isImagesReady) {
-        await new Promise(resolve => setTimeout(resolve, 50));
-    }
+  while (!isImagesReady) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
 
-    try {
-        // Generate created at datetime
-        const dateTime = generateQRCreatedTime();
+  try {
+    // Generate created at datetime
+    const dateTime = generateQRCreatedTime();
 
-        // Draw Background Image
-        context.drawImage(bgImage, 0, 0, QR_CANVAS_WIDTH, QR_CANVAS_HEIGHT);
-    
-        // Draw System Logo
-        (function() {
-            const IMG_RATIO = 1.778;
-            const TOP_PADDING = 20;
-            const HEIGHT = 300;
-            const WIDTH = HEIGHT * IMG_RATIO
-    
-            context.drawImage(logoImage, (QR_CANVAS_WIDTH / 2) - (WIDTH / 2), TOP_PADDING, WIDTH, HEIGHT);
-        })();
-    
-        // Main Container
-        (function() {
-            const PADDING = 72;
-            const Y = 330;
-    
-            context.drawImage(containerImage, PADDING, Y, QR_CANVAS_WIDTH - PADDING * 2, QR_CANVAS_HEIGHT - Y - PADDING);
-        })();
+    // Draw Background Image
+    context.drawImage(bgImage, 0, 0, QR_CANVAS_WIDTH, QR_CANVAS_HEIGHT);
 
-        // Draw QR Info
-        (function() {
-            const HALF_WIDTH = QR_CANVAS_WIDTH / 2;
+    // Draw System Logo
+    (function () {
+      const IMG_RATIO = 1.778;
+      const TOP_PADDING = 20;
+      const HEIGHT = 300;
+      const WIDTH = HEIGHT * IMG_RATIO;
 
-            // Full Name
-            context.save();
+      context.drawImage(
+        logoImage,
+        QR_CANVAS_WIDTH / 2 - WIDTH / 2,
+        TOP_PADDING,
+        WIDTH,
+        HEIGHT,
+      );
+    })();
 
-            context.font = "bold 64px Poppins";
-            context.textAlign = "center";
-            context.fillText(options.fullName, HALF_WIDTH, 470);
+    // Main Container
+    (function () {
+      const PADDING = 72;
+      const Y = 330;
 
-            context.restore();
+      context.drawImage(
+        containerImage,
+        PADDING,
+        Y,
+        QR_CANVAS_WIDTH - PADDING * 2,
+        QR_CANVAS_HEIGHT - Y - PADDING,
+      );
+    })();
 
-            // Username
-            context.save();
+    // Draw QR Info
+    (function () {
+      const HALF_WIDTH = QR_CANVAS_WIDTH / 2;
 
-            context.font = "42px Poppins";
-            context.textAlign = "center";
-            context.fillText(`@${options.userName}`, HALF_WIDTH, 520);
+      // Full Name
+      context.save();
 
-            context.restore();
+      context.font = "bold 64px Poppins";
+      context.textAlign = "center";
+      context.fillText(options.fullName, HALF_WIDTH, 470);
 
-            // QR ID
-            context.save();
+      context.restore();
 
-            context.font = "42px Poppins";
-            context.textAlign = "center";
-            context.fillText(`ID: ${options.transferToken}`, HALF_WIDTH, 630);
+      // Username
+      context.save();
 
-            context.restore();
+      context.font = "42px Poppins";
+      context.textAlign = "center";
+      context.fillText(`@${options.userName}`, HALF_WIDTH, 520);
 
-            // Created At
-            context.save();
+      context.restore();
 
-            context.font = "34px Poppins";
-            context.textAlign = "center";
-            context.fillText(`Dibuat: ${dateTime}`, HALF_WIDTH, QR_CANVAS_HEIGHT - 130);
+      // QR ID
+      context.save();
 
-            context.restore();
-        })();
-    
-        // QR Code
-        (function() {
-            const PADDING = 152;
-            const SIZE = QR_CANVAS_WIDTH - PADDING * 2;
-            context.save();
-    
-            context.drawImage(qrImage, PADDING, QR_CANVAS_HEIGHT - PADDING - SIZE - 14, SIZE, SIZE);
-    
-            context.restore();
-        })();
+      context.font = "42px Poppins";
+      context.textAlign = "center";
+      context.fillText(`ID: ${options.transferToken}`, HALF_WIDTH, 630);
 
-        canvas.dataset.transferToken = options.transferToken;
-        canvas.dataset.isReady = "true";
-    } catch (error) {
-        console.warn("[drawQR]: Failed to draw QR. Error:", error);
-    }
+      context.restore();
+
+      // Created At
+      context.save();
+
+      context.font = "34px Poppins";
+      context.textAlign = "center";
+      context.fillText(
+        `Dibuat: ${dateTime}`,
+        HALF_WIDTH,
+        QR_CANVAS_HEIGHT - 130,
+      );
+
+      context.restore();
+    })();
+
+    // QR Code
+    (function () {
+      const PADDING = 152;
+      const SIZE = QR_CANVAS_WIDTH - PADDING * 2;
+      context.save();
+
+      context.drawImage(
+        qrImage,
+        PADDING,
+        QR_CANVAS_HEIGHT - PADDING - SIZE - 14,
+        SIZE,
+        SIZE,
+      );
+
+      context.restore();
+    })();
+
+    canvas.dataset.transferToken = options.transferToken;
+    canvas.dataset.isReady = "true";
+  } catch (error) {
+    console.warn("[drawQR]: Failed to draw QR. Error:", error);
+  }
 }
 
 function getQRCodeImage(uri) {
-    return new Promise((resolve, reject) => {
-        const image = new Image();
-        image.src = uri;
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.src = uri;
 
-        image.onload = () => resolve(image);
-        image.onerror = reject;
-    });
+    image.onload = () => resolve(image);
+    image.onerror = reject;
+  });
 }
 
 async function loadImages() {
-    bgImage = await loadImage('qr-gradient.jpeg');
-    containerImage = await loadImage('qr-gradient-2.png');
-    logoImage = await loadImage('linkid_full_logo_white.png');
+  bgImage = await loadImage("qr-gradient.jpeg");
+  containerImage = await loadImage("qr-gradient-2.png");
+  logoImage = await loadImage("linkid_full_logo_white.png");
 
-    isImagesReady = true;
+  isImagesReady = true;
 }
 
 function loadImage(imagePath) {
-    return new Promise((resolve, reject) => {
-        const image = new Image();
-        image.src = `${site_path}/content/themes/default/images/${imagePath}`;
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.src = `${site_path}/content/themes/default/images/${imagePath}`;
 
-        image.onload = () => resolve(image);
-        image.onerror = reject;
-    });
+    image.onload = () => resolve(image);
+    image.onerror = reject;
+  });
 }
 
 function generateQRCreatedTime() {
   const now = new Date();
 
-  const formatter = new Intl.DateTimeFormat('en-GB', {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
     timeZone: local_timezone,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
     hour12: false,
   });
 
   const parts = formatter.formatToParts(now);
-  const partMap = Object.fromEntries(parts.map(p => [p.type, p.value]));
+  const partMap = Object.fromEntries(parts.map((p) => [p.type, p.value]));
 
   const formatted = `${partMap.day}-${partMap.month}-${partMap.year} ${partMap.hour}:${partMap.minute}`;
 
@@ -207,24 +370,24 @@ function generateQRCreatedTime() {
 loadImages();
 
 $(function () {
-    $('body').on('click', '.btn-download', function (e) {
-        const qrCodeCanvas = $('#qrcode').get(0);
+  $("body").on("click", ".btn-download", function (e) {
+    const qrCodeCanvas = $("#qrcode").get(0);
 
-        const isReady = $('#qrcode').data('isReady');
-        const transferToken = $('#qrcode').data('transferToken');
-        
-        if (!isReady) {
-            return;
-        }
+    const isReady = $("#qrcode").data("isReady");
+    const transferToken = $("#qrcode").data("transferToken");
 
-        const canvasUrl = qrCodeCanvas.toDataURL("image/jpeg", 1);
+    if (!isReady) {
+      return;
+    }
 
-        const linkEl = document.createElement("a");
-        linkEl.href = canvasUrl;
+    const canvasUrl = qrCodeCanvas.toDataURL("image/jpeg", 1);
 
-        linkEl.download = `Linkid-QR-${transferToken}`;
+    const linkEl = document.createElement("a");
+    linkEl.href = canvasUrl;
 
-        linkEl.click();
-        linkEl.remove();
-    }); 
-})
+    linkEl.download = `Linkid-QR-${transferToken}`;
+
+    linkEl.click();
+    linkEl.remove();
+  });
+});

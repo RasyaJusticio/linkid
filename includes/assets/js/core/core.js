@@ -2496,7 +2496,14 @@ $(function () {
       $('.table').addClass('table-dark');
       _this.data('mode', 'day');
       $('.js_theme-mode-text').text(__['Day Mode']);
-      $.post(api['core/theme'], { 'mode': mode });
+      $.post(api['core/theme'], { 'mode': mode }).then(() => {
+        // TODO: Send an event to the qurani iframe instead
+        if (current_page == 'qurani/index') {
+          setTimeout(() => {
+            window.location.reload();
+          }, 50);
+        }
+      });
 
     } else {
       $('body').removeClass('night-mode');
@@ -2504,12 +2511,14 @@ $(function () {
       $('.table').removeClass('table-dark');
       _this.data('mode', 'night');
       $('.js_theme-mode-text').text(__['Night Mode']);
-      $.post(api['core/theme'], { 'mode': mode });
-    }
-
-    // TODO: Send an event to the qurani iframe instead
-    if (current_page == 'qurani/index') {
-      window.location.reload();
+      $.post(api['core/theme'], { 'mode': mode }).then(() => {
+        // TODO: Send an event to the qurani iframe instead
+        if (current_page == 'qurani/index') {
+          setTimeout(() => {
+            window.location.reload();
+          }, 50);
+        }
+      });
     }
   });
 

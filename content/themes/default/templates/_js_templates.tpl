@@ -1519,7 +1519,7 @@
         <form class="js_ajax-forms" data-url="payments/wallet.php?do=wallet_transfer">
           <div class="modal-body">
             <p class="modal-label">
-              {__("Sending To")}
+              {__("Send To")}
             </p>
             <div class="user-info">
                 <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">
@@ -2008,7 +2008,7 @@
         <form class="js_ajax-forms" data-url="payments/transfer.php?do=send_money">
           <div class="modal-body">
             <p class="modal-label">
-              {__("Sending To")}
+              {__("Send To")}
             </p>
             <div class="user-info">
                 <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">

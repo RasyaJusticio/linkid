@@ -516,9 +516,17 @@
 
     {include file='../images/svg/money_receive.svg'}
 
+  {elseif $icon == "money_receive_mono"}
+
+    {include file='../images/svg/money_receive_mono.svg'}
+
   {elseif $icon == "money_send"}
 
     {include file='../images/svg/money_send.svg'}
+
+  {elseif $icon == "money_send_mono"}
+
+    {include file='../images/svg/money_send_mono.svg'}
 
   {elseif $icon == "transaction"}
 
@@ -1051,6 +1059,10 @@
   {elseif $icon == "qr_scan"}
 
     {include file='../images/svg/qr_scan.svg'}
+
+  {elseif $icon == "qr_scan_mono"}
+
+    {include file='../images/svg/qr_scan_mono.svg'}
 
   {elseif $icon == "qr_code"}
 

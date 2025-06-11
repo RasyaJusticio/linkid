@@ -1426,6 +1426,9 @@
             {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
             {__("Send Money")}
           </h6>
+          <button type="button" class="btn-action" data-toggle="modal" data-url="#wallet-qr-scan-pay">
+            {include file='__svg_icons.tpl' icon="qr_scan_mono" width="24px" height="24px"}
+          </button>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form onsubmit="openWalletConfirmation(event, 'send_to_id', '#wallet-transfer-confirm')">
@@ -1467,6 +1470,9 @@
             {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
             {__("Receive Money")}
           </h6>
+          <button type="button" class="btn-action" data-toggle="modal" data-url="#wallet-qr-scan-receive">
+            {include file='__svg_icons.tpl' icon="qr_scan_mono" width="24px" height="24px"}
+          </button>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form onsubmit="openWalletConfirmation(event, 'receive_from_id', '#wallet-receive-confirm')">
@@ -1859,7 +1865,7 @@
               {include file='__svg_icons.tpl' icon="qr_code" class="mr10" width="24px" height="24px"}
               {__("My QR")}
             </h6>
-            <button type="button" class="btn-download">
+            <button type="button" class="btn-action btn-download">
               <i class="fas fa-download"></i>
             </button>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1884,81 +1890,18 @@
             </script>
           </div>
         </div>
-        <style>
-            .modal-wallet-qr {
-                .modal-body {
-                    position: relative;
-
-                    .spinner-grow {
-                        position: absolute;
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-
-                        margin: auto;
-
-                        z-index: 1;
-                    }
-                }
-            
-                .modal-header {
-                    .btn-download {
-                        --bs-btn-close-color: #000;
-                        --bs-btn-close-opacity: 0.5;
-                        --bs-btn-close-hover-opacity: 0.75;
-                        --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-                        --bs-btn-close-focus-opacity: 1;
-                        --bs-btn-close-disabled-opacity: 0.25;
-
-                        padding: calc(var(--bs-modal-header-padding-y)* .5) calc(var(--bs-modal-header-padding-x)* .5);
-                        margin-top: calc(-.5* var(--bs-modal-header-padding-y));
-                        margin-right: calc(.6 * var(--bs-modal-header-padding-x));
-                        margin-bottom: calc(-.5* var(--bs-modal-header-padding-y));
-                        margin-left: auto;
-
-                        box-sizing: content-box;
-                        background: transparent;
-                        border: 0;
-                        border-radius: .375rem;
-                        opacity: var(--bs-btn-close-opacity);
-
-                        &:hover {
-                            color: var(--bs-btn-close-color);
-                            text-decoration: none;
-                            opacity: var(--bs-btn-close-hover-opacity);
-                        }
-
-                        &:focus {
-                            outline: 0;
-                            box-shadow: var(--bs-btn-close-focus-shadow);
-                            opacity: var(--bs-btn-close-focus-opacity);
-                        }
-                    }
-            
-                    .btn-close {
-                        margin-left: calc(-.5 * var(--bs-modal-header-padding-x));
-                    }
-                }
-
-                #qrcode {
-                  position: relative;
-                  aspect-ratio: 1240 / 1748;
-                  width: 100%;
-                  border-radius: var(--bs-border-radius);
-                  z-index: 2;
-                }
-            }
-        </style>
       </script>
 
       <script id="wallet-qr-scan-pay" type="text/template">
         <div id="wallet-qr-scan-pay">
           <div class="modal-header modal-qr-scanner">
             <h6 class="modal-title">
-              {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
+              {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
               {__("QR Pay")}
             </h6>
+            <button type="button" class="btn-action" data-toggle="modal" data-url="#wallet-transfer">
+              {include file='__svg_icons.tpl' icon="money_send_mono" width="24px" height="24px"}
+            </button>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -1985,6 +1928,9 @@
               {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
               {__("QR Receive")}
             </h6>
+            <button type="button" class="btn-action" data-toggle="modal" data-url="#wallet-receive">
+              {include file='__svg_icons.tpl' icon="money_receive_mono" width="24px" height="24px"}
+            </button>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

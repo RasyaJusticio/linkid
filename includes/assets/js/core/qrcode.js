@@ -45,6 +45,7 @@ function initiateQRScanner(modalId, nextModalId) {
             user_id: user["user_id"],
             user_name: user["user_name"],
             user_fullname: user["user_firstname"] + " " + user["user_lastname"],
+            user_verified: user["user_verified"],
             user_picture: user["user_picture"],
           });
           cleanUp();

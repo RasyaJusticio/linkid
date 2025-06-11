@@ -794,6 +794,7 @@ function openWalletConfirmation(event, userIdField, modalTarget) {
         'user_id': user.user_id,
         'user_name': user.user_name,
         'user_fullname': `${user.user_firstname} ${user.user_lastname}`,
+        'user_verified': user.user_verified === "1" ? true : false,
         'user_picture': user.user_picture
       });
     } else {
@@ -827,6 +828,7 @@ function openWalletQRConfirmation(event, targetUserData, modalTarget) {
     'user_id': targetUserData.user_id,
     'user_name': targetUserData.user_name,
     'user_fullname': targetUserData.user_fullname,
+    'user_verified': targetUserData.user_verified === "1" ? true : false,
     'user_picture': targetUserData.user_picture
   });
 }

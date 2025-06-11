@@ -1521,15 +1521,8 @@
             <p class="modal-label">
               {__("Send To")}
             </p>
-            <div class="user-info">
-                <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">
-                <p class="fullname">
-                  {literal}{{user_fullname}}{/literal}
-                </p>
-                <p class="name">
-                  @{literal}{{user_name}}{/literal}
-                </p>
-            </div>
+
+            {include file="__wallet_user_info.tpl"}
 
             <span class="money-total" id="send-money-total">Rp 0</span>
             
@@ -1567,15 +1560,8 @@
             <p class="modal-label">
               {__("Receive From")}
             </p>
-            <div class="user-info">
-                <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">
-                <p class="fullname">
-                  {literal}{{user_fullname}}{/literal}
-                </p>
-                <p class="name">
-                  @{literal}{{user_name}}{/literal}
-                </p>
-            </div>
+
+            {include file="__wallet_user_info.tpl"}
 
             <span class="money-total" id="receive-money-total">Rp 0</span>
             
@@ -1958,7 +1944,7 @@
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
         </div>
-        <form onsubmit="openWalletQRConfirmation(event, { user_id: '{literal}{{user_id}}{/literal}', user_name: '{literal}{{user_name}}{/literal}', user_fullname: '{literal}{{user_fullname}}{/literal}', user_picture: '{literal}{{user_picture}}{/literal}' }, '#wallet-qr-send-confirm')">
+        <form onsubmit="openWalletQRConfirmation(event, { user_id: '{literal}{{user_id}}{/literal}', user_name: '{literal}{{user_name}}{/literal}', user_fullname: '{literal}{{user_fullname}}{/literal}', user_verified: '{literal}{{user_verified}}{/literal}', user_picture: '{literal}{{user_picture}}{/literal}' }, '#wallet-qr-send-confirm')">
           <div class="modal-body">
             {if $system['wallet_max_transfer'] != "0"}
               <div class="alert alert-info mb20">
@@ -2010,15 +1996,8 @@
             <p class="modal-label">
               {__("Send To")}
             </p>
-            <div class="user-info">
-                <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">
-                <p class="fullname">
-                  {literal}{{user_fullname}}{/literal}
-                </p>
-                <p class="name">
-                  @{literal}{{user_name}}{/literal}
-                </p>
-            </div>
+
+            {include file="__wallet_user_info.tpl"}
 
             <span class="money-total" id="wallet-qr-total">Rp 0</span>
             
@@ -2051,7 +2030,7 @@
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
         </div>
-        <form onsubmit="openWalletQRConfirmation(event, { user_id: '{literal}{{user_id}}{/literal}', user_name: '{literal}{{user_name}}{/literal}', user_fullname: '{literal}{{user_fullname}}{/literal}', user_picture: '{literal}{{user_picture}}{/literal}' }, '#wallet-qr-receive-confirm')">
+        <form onsubmit="openWalletQRConfirmation(event, { user_id: '{literal}{{user_id}}{/literal}', user_name: '{literal}{{user_name}}{/literal}', user_fullname: '{literal}{{user_fullname}}{/literal}', user_picture: '{literal}{{user_picture}}{/literal}', user_verified: '{literal}{{user_verified}}{/literal}' }, '#wallet-qr-receive-confirm')">
           <div class="modal-body">
             {if $system['wallet_max_transfer'] != "0"}
               <div class="alert alert-info mb20">
@@ -2103,15 +2082,8 @@
             <p class="modal-label">
               {__("Receive From")}
             </p>
-            <div class="user-info">
-                <img class="avatar" src="{literal}{{user_picture}}{/literal}" alt="">
-                <p class="fullname">
-                  {literal}{{user_fullname}}{/literal}
-                </p>
-                <p class="name">
-                  @{literal}{{user_name}}{/literal}
-                </p>
-            </div>
+
+            {include file="__wallet_user_info.tpl"}
 
             <span class="money-total" id="wallet-qr-receive-total">Rp 0</span>
             

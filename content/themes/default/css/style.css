@@ -11590,6 +11590,13 @@ body.night-mode .pwa_install_banner {
   margin: 0;
 }
 
+.user-info .user-name-bar {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .user-info .fullname {
   font-size: 1.4rem;
   margin-bottom: -0.4rem;

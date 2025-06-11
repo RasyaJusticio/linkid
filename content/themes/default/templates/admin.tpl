@@ -135,13 +135,30 @@
               </li>
               <!-- Languages -->
 
-              <!-- Countries -->
-              <li {if $view == "countries"}class="active" {/if}>
-                <a href="{$system['system_url']}/{$control_panel['url']}/countries">
-                  <i class="fa fa-globe fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Countries")}
+              <!-- Locations -->
+              {assign var="location_views" value=["countries", "provinces"]}
+              <li {if in_array($view, $location_views)}class="active" {/if}>
+                <a href="#locations" data-bs-toggle="collapse" {if in_array($view, $location_views)}aria-expanded="true" {/if}>
+                  <i class="fa fa-cog fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Locations")}
                 </a>
+                <div class='collapse {if in_array($view, $location_views)}show{/if}' id="locations">
+                  <ul>
+                    <!-- Countries -->
+                    <li {if $view == 'countries'}class="active" {/if}>
+                      <a href="{$system['system_url']}/{$control_panel['url']}/countries">
+                        <i class="fa fa-globe fa-lg fa-fw mr10"></i>{__("Countries")}
+                      </a>
+                    </li>
+                    <!-- Provinces -->
+                    <li {if $view == 'provinces'}class="active" {/if}>
+                      <a href="{$system['system_url']}/{$control_panel['url']}/provinces">
+                        <i class="fa fa-globe fa-lg fa-fw mr10"></i>{__("Provinces")}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <!-- Countries -->
+              <!-- Locations -->
 
               <!-- Time Zones -->
               <li {if $view == "timezones"}class="active" {/if}>

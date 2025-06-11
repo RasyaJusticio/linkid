@@ -519,6 +519,91 @@ try {
       }
       break;
 
+    case 'provinces':
+      // check admin|moderator permission
+      if ($user->_is_moderator) {
+        _error(__('System Message'), __("You don't have the right permission to access this"));
+      }
+
+      // get nested view content
+      switch ($_GET['sub_view']) {
+        case '':
+          // page header
+          page_header($control_panel['title'] . " &rsaquo; " . __("Provinces"));
+
+          // get data
+          $get_rows = $db->query("
+            SELECT 
+              p.*, 
+              c.country_name 
+            FROM 
+              system_provinces p
+            LEFT JOIN 
+              system_countries c 
+              ON p.country_id = c.country_id
+          ");
+
+          if ($get_rows->num_rows > 0) {
+            while ($row = $get_rows->fetch_assoc()) {
+              $rows[] = $row;
+            }
+          }
+
+          // assign variables
+          $smarty->assign('rows', $rows);
+          break;
+
+        case 'edit':
+          // valid inputs
+          if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+            _error(404);
+          }
+
+          // get data
+          $get_data = $db->query(sprintf("SELECT * FROM system_provinces WHERE province_id = %s", secure($_GET['id'], 'int')));
+          if ($get_data->num_rows == 0) {
+            _error(404);
+          }
+          $data = $get_data->fetch_assoc();
+
+          $country_get_data = $db->query("SELECT country_id, country_name FROM system_countries");
+          if ($country_get_data->num_rows > 0) {
+            while ($row = $country_get_data->fetch_assoc()) {
+              $country_data[] = $row;
+            }
+          }
+
+
+          // assign variables
+          $smarty->assign('data', $data);
+          $smarty->assign('country_data', $country_data);
+
+          // page header
+          page_header($control_panel['title'] . " &rsaquo; " . __("Provinces") . " &rsaquo; " . $data['province_name']);
+          break;
+
+        case 'add':
+          // get data
+          $country_get_data = $db->query("SELECT country_id, country_name FROM system_countries");
+          if ($country_get_data->num_rows > 0) {
+            while ($row = $country_get_data->fetch_assoc()) {
+              $country_data[] = $row;
+            }
+          }
+
+          // assign variables
+          $smarty->assign('country_data', $country_data);
+
+          // page header
+          page_header($control_panel['title'] . " &rsaquo; " . __("Provinces") . " &rsaquo; " . __("Add New"));
+          break;
+
+        default:
+          _error(404);
+          break;
+      }
+      break;
+
     case 'timezones':
       // check admin|moderator permission
       if ($user->_is_moderator) {

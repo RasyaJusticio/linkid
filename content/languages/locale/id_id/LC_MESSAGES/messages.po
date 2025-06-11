@@ -16836,7 +16836,7 @@ msgstr "Transaksi"
 
 #: content/themes/default/templates/wallet.tpl:210
 msgid "From / To"
-msgstr "Dari untuk"
+msgstr "Dari / Kepada"
 
 #: content/themes/default/templates/wallet.tpl:235
 #: content/themes/default/templates/__feeds_post.tpl:209

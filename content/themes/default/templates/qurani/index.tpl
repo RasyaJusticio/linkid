@@ -68,3 +68,5 @@
   });
 </script>
 {/literal}
+
+{include file='_footer.tpl'}

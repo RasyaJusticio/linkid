@@ -7777,7 +7777,7 @@ msgstr "Tindakan"
 #: content/themes/default/templates/_publisher.tpl:634
 #: content/themes/default/templates/_publisher.tpl:650
 msgid "Public"
-msgstr "Tersedia untuk semua orang"
+msgstr "Publik"
 
 #: content/themes/default/templates/admin.events.tpl:95
 #: content/themes/default/templates/admin.events.tpl:145
@@ -8401,19 +8401,7 @@ msgstr "Ditetapkan sebagai kategori orang tua"
 msgid "CoinPayments is disabled"
 msgstr "Pembayaran koin dinonaktifkan"
 
-#: content/themes/default/templates/admin.coinpayments.tpl:14
-#: content/themes/default/templates/admin.settings.tpl:960
-#: content/themes/default/templates/admin.settings.tpl:1233
-#: content/themes/default/templates/admin.settings.tpl:1929
-#: content/themes/default/templates/admin.settings.tpl:2055
-#: content/themes/default/templates/admin.settings.tpl:2109
-#: content/themes/default/templates/admin.settings.tpl:6220
-#: content/themes/default/templates/admin.pro.tpl:35
-#: content/themes/default/templates/admin.monetization.tpl:19
-#: content/themes/default/templates/admin.bank.tpl:14
-#: content/themes/default/templates/admin.wallet.tpl:15
-msgid "Make sure you have configured"
-msgstr "Pastikan anda telah mengonfigurasi"
+
 
 #: content/themes/default/templates/admin.coinpayments.tpl:24
 msgid ""
@@ -10187,7 +10175,7 @@ msgstr "Penghasilan Bulan ini"
 #: content/themes/default/templates/settings.monetization.tpl:354
 #, fuzzy
 msgid "History"
-msgstr "History"
+msgstr "Riwayat"
 
 #: content/themes/default/templates/settings.monetization.tpl:365
 #: content/themes/default/templates/admin.monetization.tpl:151
@@ -10223,7 +10211,7 @@ msgstr "Perasaan/Aktivitas"
 #: content/themes/default/templates/ajax.album.add_photos.tpl:105
 #: content/themes/default/templates/_publisher.tpl:308
 msgid "Check In"
-msgstr "Aula"
+msgstr "Masuk"
 
 #: content/themes/default/templates/ajax.album.add_photos.tpl:131
 #: content/themes/default/templates/admin.settings.tpl:1559
@@ -10235,7 +10223,7 @@ msgstr "Aula"
 #: content/themes/default/templates/_publisher.tpl:622
 #: content/themes/default/templates/_publisher.tpl:641
 msgid "Only Me"
-msgstr "Hanya untukku"
+msgstr "Hanya Untukku"
 
 #: content/themes/default/templates/ajax.album.add_photos.tpl:141
 msgid "Custom"
@@ -10248,7 +10236,7 @@ msgstr "Sepertinya Anda belum memiliki transaksi apa pun"
 #: content/themes/default/templates/ajax.album.edit_title.tpl:2
 #: content/themes/default/templates/_album.tpl:5
 msgid "Edit Album"
-msgstr "Memerintah album"
+msgstr "Ubah Album"
 
 #: content/themes/default/templates/ajax.album.edit_title.tpl:18
 #: content/themes/default/templates/ajax.product.editor.tpl:96
@@ -10285,13 +10273,13 @@ msgstr "Batal"
 #: content/themes/default/templates/_js_templates.tpl:1653
 #: content/themes/default/templates/ajax.offer.editor.tpl:162
 msgid "Save"
-msgstr "Menyimpan"
+msgstr "Simpan"
 
 #: content/themes/default/templates/settings.privacy.tpl:13
 #: content/themes/default/templates/admin.settings.tpl:4203
 #: content/themes/default/templates/admin.users.tpl:909
 msgid "Chat Enabled"
-msgstr "Menyalakan obrolan"
+msgstr "Menyalakan Obrolan"
 
 # msgid ""
 # "If chat disabled you will appear offline and will no see who is online too"
@@ -10319,7 +10307,7 @@ msgstr "Dari waktu ke waktu kami mengirim email ke semua pengguna kami"
 #: content/themes/default/templates/admin.users.tpl:943
 #, fuzzy
 msgid "Tips Enabled"
-msgstr "Poin di"
+msgstr "Menyalakan Tips"
 
 #: content/themes/default/templates/settings.privacy.tpl:48
 #: content/themes/default/templates/admin.users.tpl:944
@@ -10332,7 +10320,7 @@ msgstr "Izinkan tombol Kirim Tips di Profil Anda"
 #: content/themes/default/templates/admin.users.tpl:957
 #, fuzzy
 msgid "Who can message you"
-msgstr "Siapa yang bisa melihat"
+msgstr "Siapa yang bisa mengirim pesan kepadamu"
 
 #: content/themes/default/templates/settings.privacy.tpl:67
 #: content/themes/default/templates/settings.privacy.tpl:87
@@ -10392,7 +10380,7 @@ msgstr "Siapa yang bisa melihat"
 #: content/themes/default/templates/admin.users.tpl:1289
 #: content/themes/default/templates/admin.users.tpl:1309
 msgid "Everyone"
-msgstr "Untuk semua orang"
+msgstr "Semua Orang"
 
 #: content/themes/default/templates/settings.privacy.tpl:70
 #: content/themes/default/templates/settings.privacy.tpl:90
@@ -10467,7 +10455,7 @@ msgstr "Untuk semua orang"
 #: content/themes/default/templates/admin.users.tpl:1292
 #: content/themes/default/templates/admin.users.tpl:1312
 msgid "Followers"
-msgstr "Pelanggan"
+msgstr "Pengikut"
 
 #: content/themes/default/templates/settings.privacy.tpl:73
 #: content/themes/default/templates/settings.privacy.tpl:93
@@ -10479,7 +10467,7 @@ msgstr "Pelanggan"
 #: content/themes/default/templates/admin.users.tpl:987
 #: content/themes/default/templates/admin.users.tpl:1007
 msgid "No One"
-msgstr "Bukan siapa-siapa"
+msgstr "Tidak Ada"
 
 #: content/themes/default/templates/settings.privacy.tpl:82
 #: content/themes/default/templates/admin.settings.tpl:3171
@@ -10491,13 +10479,13 @@ msgstr "Siapa yang bisa menyapamu"
 #: content/themes/default/templates/admin.settings.tpl:3189
 #: content/themes/default/templates/admin.users.tpl:996
 msgid "Who can send you gifts"
-msgstr "Siapa yang bisa mengirimkan hadiah"
+msgstr "Siapa yang bisa mengirimkanmu hadiah"
 
 #: content/themes/default/templates/settings.privacy.tpl:122
 #: content/themes/default/templates/admin.settings.tpl:3207
 #: content/themes/default/templates/admin.users.tpl:1016
 msgid "Who can post on your wall"
-msgstr "Siapa yang dapat memposting di dinding Anda"
+msgstr "Siapa yang dapat memposting di profil Anda"
 
 #: content/themes/default/templates/settings.privacy.tpl:133
 #: content/themes/default/templates/settings.privacy.tpl:153
@@ -10548,7 +10536,7 @@ msgstr "Siapa yang dapat memposting di dinding Anda"
 #: content/themes/default/templates/admin.users.tpl:1295
 #: content/themes/default/templates/admin.users.tpl:1315
 msgid "Just Me"
-msgstr "Untukku"
+msgstr "Hanya Aku"
 
 #: content/themes/default/templates/settings.privacy.tpl:142
 #: content/themes/default/templates/settings.privacy.tpl:162
@@ -10610,49 +10598,49 @@ msgstr "Kelamin"
 #: content/themes/default/templates/admin.settings.tpl:3243
 #: content/themes/default/templates/admin.users.tpl:1054
 msgid "relationship"
-msgstr "hubungan"
+msgstr "Hubungan"
 
 #: content/themes/default/templates/settings.privacy.tpl:181
 #: content/themes/default/templates/admin.settings.tpl:3261
 #: content/themes/default/templates/admin.users.tpl:1073
 msgid "birthdate"
-msgstr "hari ulang tahun"
+msgstr "Hari Ulang Tahun"
 
 #: content/themes/default/templates/settings.privacy.tpl:199
 #: content/themes/default/templates/admin.settings.tpl:3279
 #: content/themes/default/templates/admin.users.tpl:1091
 msgid "basic info"
-msgstr "Informasi dasar"
+msgstr "Informasi Dasar"
 
 #: content/themes/default/templates/settings.privacy.tpl:218
 #: content/themes/default/templates/admin.settings.tpl:3297
 #: content/themes/default/templates/admin.users.tpl:1110
 msgid "work info"
-msgstr "Pekerjaan"
+msgstr "Informasi Pekerjaan"
 
 #: content/themes/default/templates/settings.privacy.tpl:238
 #: content/themes/default/templates/admin.settings.tpl:3315
 #: content/themes/default/templates/admin.users.tpl:1130
 msgid "location info"
-msgstr "Lokasi"
+msgstr "Informasi Lokasi"
 
 #: content/themes/default/templates/settings.privacy.tpl:258
 #: content/themes/default/templates/admin.settings.tpl:3333
 #: content/themes/default/templates/admin.users.tpl:1150
 msgid "education info"
-msgstr "pendidikan"
+msgstr "Informasi Pendidikan"
 
 #: content/themes/default/templates/settings.privacy.tpl:277
 #: content/themes/default/templates/admin.settings.tpl:3351
 #: content/themes/default/templates/admin.users.tpl:1169
 msgid "other info"
-msgstr "Lainnya"
+msgstr "Informasi Lainnya"
 
 #: content/themes/default/templates/settings.privacy.tpl:296
 #: content/themes/default/templates/admin.settings.tpl:3370
 #: content/themes/default/templates/admin.users.tpl:1188
 msgid "friends"
-msgstr "Teman-teman"
+msgstr "Teman-Teman"
 
 # msgid "Your Followings"
 #: content/themes/default/templates/settings.privacy.tpl:315
@@ -10660,7 +10648,7 @@ msgstr "Teman-teman"
 #: content/themes/default/templates/admin.users.tpl:1207
 #, fuzzy
 msgid "followers/followings"
-msgstr "Pelanggan Anda"
+msgstr "Pengikut/Mengikuti"
 
 # msgid "Subscription"
 #: content/themes/default/templates/settings.privacy.tpl:334
@@ -10677,7 +10665,7 @@ msgstr "Berlangganan"
 #: content/themes/default/templates/__feeds_album.tpl:11
 #: content/themes/default/templates/admin.users.tpl:1245
 msgid "photos"
-msgstr "foto"
+msgstr "Foto"
 
 #: content/themes/default/templates/settings.privacy.tpl:372
 #: content/themes/default/templates/admin.settings.tpl:3443
@@ -10689,29 +10677,29 @@ msgstr "Halaman yang disukai"
 #: content/themes/default/templates/admin.settings.tpl:3461
 #: content/themes/default/templates/admin.users.tpl:1284
 msgid "joined groups"
-msgstr "Undang Grup"
+msgstr "Bergabung dengan Grup"
 
 #: content/themes/default/templates/settings.privacy.tpl:412
 #: content/themes/default/templates/admin.settings.tpl:3479
 #: content/themes/default/templates/admin.users.tpl:1304
 msgid "joined events"
-msgstr "Undang ke acara"
+msgstr "Bergabung ke Acara"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:4
 #: content/themes/default/templates/__feeds_post.body.tpl:178
 #, fuzzy
 msgid "Edit Job"
-msgstr "Mengubah"
+msgstr "Ubah Pekerjaan"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:13
 #, fuzzy
 msgid "Job Title"
-msgstr "Judul pekerjaan"
+msgstr "Judul Pekerjaan"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:26
 #: content/themes/default/templates/ajax.job.publisher.tpl:26
 msgid "Salary Range"
-msgstr "Rentang gaji"
+msgstr "Rentang Gaji"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:49
 #: content/themes/default/templates/ajax.job.publisher.tpl:49
@@ -10733,18 +10721,18 @@ msgstr "Pekan"
 #: content/themes/default/templates/ajax.job.publisher.tpl:52
 #, fuzzy
 msgid "Per Month"
-msgstr "Bulan"
+msgstr "Per Bulan"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:53
 #: content/themes/default/templates/ajax.job.publisher.tpl:53
 #, fuzzy
 msgid "Per Year"
-msgstr "Tahun"
+msgstr "Per Tahun"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:61
 #, fuzzy
 msgid "Job Type"
-msgstr "Jenis"
+msgstr "Jenis Pekerjaan"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:87
 #: content/themes/default/templates/ajax.job.publisher.tpl:87
@@ -10755,13 +10743,13 @@ msgstr "Jelaskan tanggung jawab dan keterampilan yang disukai untuk pekerjaan in
 #: content/themes/default/templates/ajax.job.publisher.tpl:98
 #, fuzzy
 msgid "Questions"
-msgstr "Sesi Anda"
+msgstr "Pertanyaan"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:102
 #: content/themes/default/templates/ajax.job.publisher.tpl:101
 #, fuzzy
 msgid "Add Question"
-msgstr "Teks pengumuman"
+msgstr "Tambahkan Pertanyaan"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:107
 #: content/themes/default/templates/ajax.job.editor.tpl:130
@@ -10771,7 +10759,7 @@ msgstr "Teks pengumuman"
 #: content/themes/default/templates/ajax.job.publisher.tpl:151
 #, fuzzy
 msgid "Question"
-msgstr "Bab"
+msgstr "Pertanyaan"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:109
 #: content/themes/default/templates/ajax.job.editor.tpl:132
@@ -10781,7 +10769,7 @@ msgstr "Bab"
 #: content/themes/default/templates/ajax.job.publisher.tpl:153
 #, fuzzy
 msgid "Free Text Question"
-msgstr "Pasokan teman"
+msgstr "Pertanyaan Teks Bebas"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:110
 #: content/themes/default/templates/ajax.job.editor.tpl:133
@@ -10790,7 +10778,7 @@ msgstr "Pasokan teman"
 #: content/themes/default/templates/ajax.job.publisher.tpl:131
 #: content/themes/default/templates/ajax.job.publisher.tpl:154
 msgid "Yes/No Question"
-msgstr "YA/TIDAK PERTANYAAN"
+msgstr "Pertanyaan Iya/Tidak"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:111
 #: content/themes/default/templates/ajax.job.editor.tpl:134
@@ -10799,7 +10787,7 @@ msgstr "YA/TIDAK PERTANYAAN"
 #: content/themes/default/templates/ajax.job.publisher.tpl:132
 #: content/themes/default/templates/ajax.job.publisher.tpl:155
 msgid "Multiple Choice Question"
-msgstr "Pertanyaan pilihan ganda"
+msgstr "Pertanyaan Pilihan Ganda"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:114
 #: content/themes/default/templates/ajax.job.editor.tpl:137
@@ -10809,7 +10797,7 @@ msgstr "Pertanyaan pilihan ganda"
 #: content/themes/default/templates/ajax.job.publisher.tpl:158
 #, fuzzy
 msgid "Select the type of your question"
-msgstr "Jenis bidang Custom -Pade"
+msgstr "Pilih jenis pertanyaan anda"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:118
 #: content/themes/default/templates/ajax.job.editor.tpl:141
@@ -10819,7 +10807,7 @@ msgstr "Jenis bidang Custom -Pade"
 #: content/themes/default/templates/ajax.job.publisher.tpl:162
 #, fuzzy
 msgid "Ask your question"
-msgstr "Tambahkan hubungan Anda"
+msgstr "Ajukan Pertanyaan Anda"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:123
 #: content/themes/default/templates/ajax.job.editor.tpl:146
@@ -10830,7 +10818,7 @@ msgstr "Tambahkan hubungan Anda"
 #: content/themes/default/templates/ajax.job.publisher.tpl:144
 #: content/themes/default/templates/ajax.job.publisher.tpl:167
 msgid "One option per line"
-msgstr "1 opsi per baris"
+msgstr "Ssatu opsi per baris"
 
 #: content/themes/default/templates/ajax.job.editor.tpl:179
 #: content/themes/default/templates/ajax.course.publisher.tpl:77
@@ -11509,264 +11497,6 @@ msgstr "Deskripsi Situs Anda"
 msgid "Description of your forums module"
 msgstr "Deskripsi Modul Forum Anda"
 
-
-
-#: content/themes/default/templates/admin.settings.tpl:1862
-#: content/themes/default/templates/admin.settings.tpl:1903
-msgid "Registration"
-msgstr "Pendaftaran"
-
-#: content/themes/default/templates/admin.settings.tpl:1875
-msgid "Social Login"
-msgstr "Otorisasi melalui jejaring sosial"
-
-# msgid ""
-#: content/themes/default/templates/admin.settings.tpl:1894
-#, fuzzy
-msgid ""
-"If Registration is Free and Pro Packages enabled they will be used as "
-"optional upgrading plans"
-msgstr ""
-"Jika pendaftaran gratis dan paket pro disertakan, mereka akan digunakan "
-"sebagai rencana pembaruan tambahan"
-
-#: content/themes/default/templates/admin.settings.tpl:1904
-msgid "Allow users to create accounts"
-msgstr "Izinkan pengguna membuat akun"
-
-#: content/themes/default/templates/admin.settings.tpl:1916
-msgid "Registration Type"
-msgstr "Jenis pendaftaran"
-
-#: content/themes/default/templates/admin.settings.tpl:1921
-#: content/themes/default/templates/__feeds_post.body.tpl:748
-#: content/themes/default/templates/packages.tpl:49
-#: content/themes/default/templates/__feeds_product.tpl:20
-#: content/themes/default/templates/_order.tpl:174
-#: content/themes/default/templates/market.tpl:256
-msgid "Free"
-msgstr "Bebas"
-
-#: content/themes/default/templates/admin.settings.tpl:1925
-msgid "Subscriptions Only"
-msgstr "Hanya dengan berlangganan"
-
-#: content/themes/default/templates/admin.settings.tpl:1928
-msgid "Allow users to create accounts Free or via Subscriptions only"
-msgstr ""
-"Izinkan pengguna untuk membuat akun secara gratis atau hanya dengan "
-"berlangganan"
-
-#: content/themes/default/templates/admin.settings.tpl:1941
-msgid "User Can Select Custom User Group"
-msgstr "Pengguna dapat memilih grup pengguna khusus"
-
-#: content/themes/default/templates/admin.settings.tpl:1942
-msgid "Allow users to select custom user group during registration"
-msgstr "Izinkan pengguna untuk memilih grup pengguna khusus selama pendaftaran"
-
-#: content/themes/default/templates/admin.settings.tpl:1957
-msgid "Show Custom User Group Badge"
-msgstr "Tampilkan Lencana Grup Pengguna Kustom"
-
-# msgid "You must upload gift image"
-#: content/themes/default/templates/admin.settings.tpl:1958
-#, fuzzy
-msgid "Show user group badge on profile page"
-msgstr "Anda harus mengunduh gambar hadiah"
-
-# msgid "Delete Group"
-#: content/themes/default/templates/admin.settings.tpl:1970
-#, fuzzy
-msgid "Default User Group"
-msgstr "Hapus grup"
-
-#: content/themes/default/templates/admin.settings.tpl:1984
-msgid "Select the default user group for new accounts"
-msgstr "Pilih grup pengguna default untuk akun baru"
-
-#: content/themes/default/templates/admin.settings.tpl:1985
-msgid "You can manage users groups from"
-msgstr "Anda dapat mengelola grup pengguna dari"
-
-# msgid "User Group"
-#: content/themes/default/templates/admin.settings.tpl:1985
-#, fuzzy
-msgid "User Groups"
-msgstr "Grup pengguna"
-
-#: content/themes/default/templates/admin.settings.tpl:1997
-msgid "Invitation System"
-msgstr "Sistem Undangan"
-
-#: content/themes/default/templates/admin.settings.tpl:1999
-msgid "This option is used to register the users by invitation codes only"
-msgstr "Opsi ini digunakan untuk mendaftarkan pengguna dengan kode undangan saja"
-
-#: content/themes/default/templates/admin.settings.tpl:2012
-msgid "Invitations/User"
-msgstr "Undangan/Pengguna"
-
-#: content/themes/default/templates/admin.settings.tpl:2030
-msgid "Number of invitation codes allowed to each user (0 for unlimited) "
-msgstr ""
-"Jumlah kode undangan yang diizinkan untuk setiap pengguna (0 untuk tidak "
-"terbatas)"
-
-#: content/themes/default/templates/admin.settings.tpl:2031
-msgid "For example 1 code per day, 5 codes per month"
-msgstr "Misalnya 1 kode per hari, 5 kode per bulan"
-
-#: content/themes/default/templates/admin.settings.tpl:2038
-msgid "Send Method"
-msgstr "Kirim metode"
-
-#: content/themes/default/templates/admin.settings.tpl:2047
-#: content/themes/default/templates/admin.settings.tpl:2105
-#: content/themes/default/templates/admin.settings.tpl:3669
-#: content/themes/default/templates/admin.settings.tpl:6212
-#: content/themes/default/templates/ajax.invitations.tpl:49
-#: content/themes/default/templates/admin.users.tpl:451
-msgid "SMS"
-msgstr "SMS"
-
-#: content/themes/default/templates/admin.settings.tpl:2051
-msgid "Both"
-msgstr "Keduanya"
-
-#: content/themes/default/templates/admin.settings.tpl:2054
-msgid "Select Email or SMS to send invitation link to new user's email/phone"
-msgstr ""
-"Pilih email atau SMS untuk mengirim tautan undangan ke email/telepon "
-"pengguna baru"
-
-#: content/themes/default/templates/admin.settings.tpl:2067
-msgid "Activation Enabled"
-msgstr "Aktivasi diaktifkan"
-
-#: content/themes/default/templates/admin.settings.tpl:2068
-msgid "Enable account activation to send activation code to user's email/phone"
-msgstr ""
-"Aktifkan aktivasi akun untuk mengirim kode aktivasi ke alamat / telepon "
-"email pengguna"
-
-# msgid "If enabled users will be able to withdraw earned money"
-#: content/themes/default/templates/admin.settings.tpl:2084
-#, fuzzy
-msgid "Enable this and user will not be able to access without activation"
-msgstr "Jika pengguna dapat menarik uang yang diperoleh"
-
-#: content/themes/default/templates/admin.settings.tpl:2096
-msgid "Activation Type"
-msgstr "Jenis aktivasi"
-
-#: content/themes/default/templates/admin.settings.tpl:2108
-msgid "Select Email or SMS activation to send activation code to user's email/phone"
-msgstr ""
-"Pilih Aktivasi dengan E -Mail atau SMS untuk mengirim kode aktivasi ke "
-"alamat email / telepon pengguna"
-
-# msgid "Post Approval"
-#: content/themes/default/templates/admin.settings.tpl:2121
-#, fuzzy
-msgid "Users Approval System"
-msgstr "Setelah persetujuan"
-
-#: content/themes/default/templates/admin.settings.tpl:2123
-msgid ""
-"Turn the approval system On and Off (If disabled all users will be approved "
-"by default)"
-msgstr ""
-"Nyalakan dan mematikan sistem persetujuan (jika dinonaktifkan, semua "
-"pengguna akan disetujui secara default)"
-
-# msgid "If enabled users will be able to withdraw earned money"
-#: content/themes/default/templates/admin.settings.tpl:2124
-#, fuzzy
-msgid "If enabled, users will be pending for approval by the admin or moderators"
-msgstr "Jika pengguna dapat menarik uang yang diperoleh"
-
-#: content/themes/default/templates/admin.settings.tpl:2142
-msgid "Age Restriction"
-msgstr "Pembatasan usia"
-
-#: content/themes/default/templates/admin.settings.tpl:2143
-msgid "Enable/Disable age restriction"
-msgstr "Menyalakan / menonaktifkan batas usia"
-
-#: content/themes/default/templates/admin.settings.tpl:2155
-msgid "Minimum Age"
-msgstr "Usia minimum"
-
-#: content/themes/default/templates/admin.settings.tpl:2160
-msgid "The minimum age required to register (in years)"
-msgstr "Usia minimum yang diperlukan untuk pendaftaran (dalam beberapa tahun)"
-
-#: content/themes/default/templates/admin.settings.tpl:2172
-#: content/themes/default/templates/started.tpl:10
-#: content/themes/default/templates/signup_social.tpl:10 modules/started.php:54
-msgid "Getting Started"
-msgstr "Awal pekerjaan"
-
-#: content/themes/default/templates/admin.settings.tpl:2173
-msgid "Enable/Disable getting started page after registration"
-msgstr "Nyalakan/Nonaktifkan Halaman Mulai Setelah Pendaftaran"
-
-#: content/themes/default/templates/admin.settings.tpl:2185
-msgid "Required Data"
-msgstr "Data yang diperlukan"
-
-# msgid "Profile Background"
-#: content/themes/default/templates/admin.settings.tpl:2190
-#, fuzzy
-msgid "Profile Image Required"
-msgstr "Latar belakang profil"
-
-# msgid "Activation Code"
-#: content/themes/default/templates/admin.settings.tpl:2194
-#, fuzzy
-msgid "Location Data Required"
-msgstr "Kode Aktivasi"
-
-#: content/themes/default/templates/admin.settings.tpl:2198
-msgid "Work Data Required"
-msgstr "Data kerja diperlukan"
-
-# msgid "Activation Code"
-#: content/themes/default/templates/admin.settings.tpl:2202
-#, fuzzy
-msgid "Education Data Required"
-msgstr "Kode Aktivasi"
-
-#: content/themes/default/templates/admin.settings.tpl:2205
-msgid "Such data will be mandatory when user getting started"
-msgstr "Data seperti itu akan wajib saat memulai pengguna"
-
-#: content/themes/default/templates/admin.settings.tpl:2217
-msgid "Newsletter Consent"
-msgstr "Menyetujui buletin"
-
-#: content/themes/default/templates/admin.settings.tpl:2218
-msgid "Enable/Disable newsletter consent during the registration"
-msgstr "Nyalakan / Nonaktifkan Persetujuan ke Newsletter Selama Pendaftaran"
-
-#: content/themes/default/templates/admin.settings.tpl:2232
-msgid "Max Accounts/IP"
-msgstr "Akun Max / IP"
-
-#: content/themes/default/templates/admin.settings.tpl:2237
-msgid "The Maximum number of accounts allowed to register per IP (0 for unlimited)"
-msgstr ""
-"Jumlah perseptor yang diizinkan untuk mendaftar untuk satu alamat IP (0 - "
-"tanpa batasan)"
-
-#: content/themes/default/templates/admin.settings.tpl:2244
-msgid "Name Minimum Length"
-msgstr "Nama panjang minimum"
-
-#: content/themes/default/templates/admin.settings.tpl:2249
-msgid "The First and Last name minimum length"
-msgstr "Nama minimum nama pertama dan belakang"
 
 #: content/themes/default/templates/admin.settings.tpl:2278
 msgid "Social Logins"
@@ -14070,7 +13800,7 @@ msgstr "Rezim harian"
 #: content/themes/default/templates/admin.settings.tpl:7428
 #, fuzzy
 msgid "Public Key"
-msgstr "Tersedia untuk semua orang"
+msgstr "Kunci Publik"
 
 # msgid "Privacy"
 #: content/themes/default/templates/admin.settings.tpl:7377
@@ -14091,13 +13821,13 @@ msgstr "Aktifkan pembayaran melalui Alipay"
 
 #: content/themes/default/templates/admin.settings.tpl:7412
 msgid "Flutterwave Mode"
-msgstr "Mode FLUTTERWAVE"
+msgstr "Mode Flutterwave"
 
 # msgid "Translate"
 #: content/themes/default/templates/admin.settings.tpl:7454
 #, fuzzy
 msgid "Encryption Key"
-msgstr "Terjemahan"
+msgstr "Kunci Enkripsi"
 
 # msgid "Video Call Enabled"
 #: content/themes/default/templates/admin.settings.tpl:7476
@@ -15937,94 +15667,94 @@ msgstr "Batalkan publikasi"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:90
 msgid "Save Post"
-msgstr "Menyimpan"
+msgstr "Simpan Postingan"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:102
 msgid "Unboost Post"
-msgstr "Dapatkan publikasi"
+msgstr "Kurangi Postingan"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:110
 #: content/themes/default/templates/__feeds_post.body.tpl:117
 msgid "Boost Post"
-msgstr "Naikkan publikasi"
+msgstr "Tingkatkan Postingan"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:131
 msgid "Unpin Post"
-msgstr "Rensure"
+msgstr "Lepas Sematan Postingan"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:138
 msgid "Pin Post"
-msgstr "Postingan yang disematkan"
+msgstr "Sematkan Postingan"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:157
 #: content/themes/default/templates/ajax.product.editor.tpl:4
 msgid "Edit Product"
-msgstr "Edit"
+msgstr "Edit Produk"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:164
 msgid "Edit Funding"
-msgstr "Edit dana"
+msgstr "Edit Dana"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:171
 #: content/themes/default/templates/ajax.offer.editor.tpl:3
 #, fuzzy
 msgid "Edit Offer"
-msgstr "Ubah stiker"
+msgstr "Edit Penawaran"
 
 # msgid "Edit Post"
 #: content/themes/default/templates/__feeds_post.body.tpl:185
 #: content/themes/default/templates/ajax.course.editor.tpl:4
 #, fuzzy
 msgid "Edit Course"
-msgstr "Mengubah"
+msgstr "Edit Kursus"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:192
 msgid "Edit Post"
-msgstr "Mengubah"
+msgstr "Edit Postingan"
 
 # msgid "Everyone"
 #: content/themes/default/templates/__feeds_post.body.tpl:203
 #, fuzzy
 msgid "For Everyone"
-msgstr "Untuk semua orang"
+msgstr "Untuk Semua Orang"
 
 # msgid "Subscribers"
 #: content/themes/default/templates/__feeds_post.body.tpl:210
 #, fuzzy
 msgid "For Subscribers Only"
-msgstr "Langganan"
+msgstr "Hanya untuk Langganan"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:220
 msgid "Delete Post"
-msgstr "Menghapus"
+msgstr "Hapus Postingan"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:230
 msgid "Allow on Timeline"
-msgstr "Izinkan pada garis waktu"
+msgstr "Izinkan untuk Linimasa"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:237
 msgid "Hide from Timeline"
-msgstr "Sembunyikan dari Timeline"
+msgstr "Sembunyikan dari Linimasa"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:248
 msgid "Turn on Commenting"
-msgstr "Nyalakan komentar"
+msgstr "Aktifkan Komentar"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:255
 msgid "Turn off Commenting"
-msgstr "Putuskan berkomentar"
+msgstr "Nonaktifkan Komentar"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:265
 msgid "Unfollow"
-msgstr "Berhenti berlangganan dari"
+msgstr "Berhenti Mengikuti"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:267
 msgid "Stop seeing posts but stay friends"
-msgstr "Sembunyikan dari rekaman itu"
+msgstr "Berhenti melihat postingan namun tetap berteman"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:273
 msgid "Hide this post"
-msgstr "Sembunyikan postingan ini"
+msgstr "Sembunyikan Postingan Ini"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:275
 msgid "See fewer posts like this"
@@ -16032,15 +15762,15 @@ msgstr "Ini tidak menarik"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:280
 msgid "Report post"
-msgstr "Mengeluh"
+msgstr "Laporkan Postingan"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:288
 msgid "Open post in new tab"
-msgstr "Buka di tab baru"
+msgstr "Buka di Tab Baru"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:296
 msgid "Open Author Profile"
-msgstr "Buka profil penulis"
+msgstr "Buka Profil Penulis"
 
 #: content/themes/default/templates/__feeds_post.body.tpl:328
 msgid "shared"
@@ -24801,6 +24531,232 @@ msgstr "belum memiliki video"
 #~ msgstr "Sempurna"
 
 # \---------------- #
+
+#: done
+msgid "You can advertise for a URL or one of your posts, pages, groups or events"
+msgstr "Anda dapat mengiklankan URL atau salah satu postingan, halaman, grup, atau acara Anda"
+
+#: done
+msgid "sent merit"
+msgstr "kirim penghargaan"
+
+#: done
+msgid "Verified Status"
+msgstr "Status Terverifikasi"
+
+#: done
+msgid "at location"
+msgstr "di lokasi"
+
+#: done
+msgid "Schedule Post"
+msgstr "Jadwal Postingan"
+
+#: done
+msgid "Schedule your post for later"
+msgstr "Jadwalkan postingan anda untuk nanti"
+
+#: done
+msgid "Anonymous post"
+msgstr "Postingan Anonim"
+
+msgid "Anonymous Post"
+msgstr "Postingan Anonim"
+
+msgid "Share your post as anonymous post"
+msgstr "Bagikan postingan anda sebagai anonim"
+
+msgid "Adult Content"
+msgstr "Konten Dewasa"
+
+msgid "Share your post as adult content"
+msgstr "Bagikan postingan anda sebagai konten dewasa"
+
+msgid "Enable Tips"
+msgstr "Aktifkan Tip"
+
+----------------------------------------------------------------------------->
+msgid "Cars and Vehicles"
+msgstr "Mobil dan Kendaraan"
+
+msgid "Comedy"
+msgstr "Komedi"
+
+msgid "Economics and Trade"
+msgstr "Ekonomi dan Perdagangan"
+
+msgid "Entertainment"
+msgstr "Hiburan"
+
+msgid "Movies and Animation"
+msgstr "Film dan Animasi"
+
+msgid "Gaming"
+msgstr "Permainan"
+
+msgid "History and Facts"
+msgstr "Sejarah dan Fakta"
+
+msgid "Live Style"
+msgstr "Gaya Hidup"
+
+msgid "News and Politics"
+msgstr "Berita dan Politik"
+
+msgid "People and Nations"
+msgstr "Orang dan Bangsa"
+
+msgid "Pets and Animals"
+msgstr "Hewan Peliharaan dan Satwa"
+
+msgid "Places and Regions"
+msgstr "Tempat dan Wilayah"
+
+msgid "Science and Technology"
+msgstr "Sains dan Teknologi"
+
+msgid "Sport"
+msgstr "Olahraga"
+
+msgid "Travel and Events"
+msgstr "Perjalanan dan Acara"
+
+msgid "Art"
+msgstr "Seni"
+
+msgid "Causes"
+msgstr "Penyebab"
+
+msgid "Crafts"
+msgstr "Kerajinan"
+
+msgid "Dance"
+msgstr "Tarian"
+
+msgid "Drinks"
+msgstr "Minuman"
+
+msgid "Fitness"
+msgstr "Kebugaran"
+
+msgid "Food"
+msgstr "Makanan"
+
+msgid "Gardening"
+msgstr "Berkebun"
+
+msgid "Health"
+msgstr "Kesehatan"
+
+msgid "Literature"
+msgstr "Sastra"
+
+msgid "Music"
+msgstr "Musik"
+
+msgid "Networking"
+msgstr "Jaringan"
+
+msgid "Party"
+msgstr "Pesta"
+
+msgid "Religion"
+msgstr "Agama"
+
+msgid "Shopping"
+msgstr "Belanja"
+
+msgid "Sports"
+msgstr "Olahraga"
+
+msgid "Theater"
+msgstr "Teater"
+
+msgid "Wellness"
+msgstr "Kesejahteraan"
+
+msgid "Admin & Office"
+msgstr "Admin & Kantor"
+
+msgid "Art & Design"
+msgstr "Seni & Desain"
+
+msgid "Business Operations"
+msgstr "Operasi Bisnis"
+
+msgid "Cleaning & Facilities"
+msgstr "Pembersihan & Fasilitas"
+
+msgid "Community & Social Services"
+msgstr "Komunitas & Layanan Sosial"
+
+msgid "Computer & Data"
+msgstr "Komputer & Data"
+
+msgid "Construction & Mining"
+msgstr "Konstruksi & Pertambangan"
+
+msgid "Pendidikan"
+msgstr "Pendidikan"
+
+msgid "Farming & Forestry"
+msgstr "Pertanian & Kehutanan"
+
+msgid "Healthcare"
+msgstr "Kesehatan"
+
+msgid "Installation, Maintenance & Repair"
+msgstr "Instalasi, Pemeliharaan & Perbaikan"
+
+msgid "Legal"
+msgstr "Hukum"
+
+msgid "Management"
+msgstr "Manajemen"
+
+msgid "Manufacturing"
+msgstr "Manufaktur"
+
+msgid "Media & Communication"
+msgstr "Media & Komunikasi"
+
+msgid "Personal Care"
+msgstr "Perawatan Pribadi"
+
+msgid "Protective Services"
+msgstr "Layanan Perlindungan"
+
+msgid "Restaurant & Hospitality"
+msgstr "Restoran & Perhotelan"
+
+msgid "Retail & Sales"
+msgstr "Ritel & Penjualan"
+
+msgid "Science & Engineering"
+msgstr "Sains & Teknik"
+
+msgid "Sports & Entertainment"
+msgstr "Olahraga & Hiburan"
+
+msgid "Transportation"
+msgstr "Transportasi"
+----------------------------------------------------------------------------->
+
+# \---------------- #
+# Package Trial
+
+msgid "Trial Enabled"
+msgstr "Trial Dinyalakan"
+
+msgid "You have to enter valid trial enabled number"
+msgstr "Anda harus memasukkan nomor trial dinyalakan yang valid"
+
+msgid "Enable trial package. Trial package can only be bought once"
+msgstr "Nyalakan paket trial. Paket trial hanya bisa dibeli sekali"
+
+# ----------------\ #
+
+# \---------------- #
 # QRCode
 msgid "QR Request"
 msgstr "QR Terima"
@@ -25840,33 +25796,45 @@ msgstr "Postingan populer adalah postingan publik yang diurutkan berdasarkan rea
 
 #: content/themes/default/templates/admin.settings.tpl:1172
 msgid "Turn the discover posts On and Off"
-msgstr "Nyalakan dan mematikan deteksi pesan"
+msgstr "Mengaktifkan dan menonaktifkan postingan temukan"
 
 #: content/themes/default/templates/admin.settings.tpl:1173
 msgid "Discover posts are public posts ordered from most recent to old"
-msgstr ""
-"Temukan pesan adalah pesan publik yang dipesan dari yang terakhir ke yang "
-"lama"
+msgstr "Temukan postingan adalah postingan publik yang diurutkan dari yang terbaru ke yang lama"
 
 #: content/themes/default/templates/admin.settings.tpl:1193
 msgid "Turn the memories On and Off"
-msgstr "Nyalakan dan matikan kenangan"
+msgstr "Mengaktifkan dan menonaktifkan memori"
 
 #: content/themes/default/templates/admin.settings.tpl:1194
 msgid "Memories are posts from the same day on last year"
-msgstr "Kenangan posting dari hari yang sama tahun lalu"
+msgstr "Kenangan adalah postingan dari hari yang sama pada tahun lalu"
 
 #: content/themes/default/templates/admin.settings.tpl:1212
 msgid "Wall Posts"
-msgstr "Dinding pesan"
+msgstr "Postingan Profil"
 
 #: content/themes/default/templates/admin.settings.tpl:1213
 msgid "Users can publish posts on their friends walls"
-msgstr "Pengguna dapat mempublikasikan pesan di dinding teman mereka"
+msgstr "Pengguna dapat mempublikasi postingan di profil teman mereka"
 
 #: content/themes/default/templates/admin.settings.tpl:1232
 msgid "Turn the colored posts On and Off"
-msgstr "Nyalakan dan mematikan pesan warna"
+msgstr "Mengaktifkan dan menonaktifkan warna postingan"
+
+#: content/themes/default/templates/admin.coinpayments.tpl:14
+#: content/themes/default/templates/admin.settings.tpl:960
+#: content/themes/default/templates/admin.settings.tpl:1233
+#: content/themes/default/templates/admin.settings.tpl:1929
+#: content/themes/default/templates/admin.settings.tpl:2055
+#: content/themes/default/templates/admin.settings.tpl:2109
+#: content/themes/default/templates/admin.settings.tpl:6220
+#: content/themes/default/templates/admin.pro.tpl:35
+#: content/themes/default/templates/admin.monetization.tpl:19
+#: content/themes/default/templates/admin.bank.tpl:14
+#: content/themes/default/templates/admin.wallet.tpl:15
+msgid "Make sure you have configured"
+msgstr "Pastikan anda telah mengonfigurasi"
 
 #: content/themes/default/templates/admin.settings.tpl:1251
 #: content/themes/default/templates/admin.permissions_groups.tpl:474
@@ -25880,33 +25848,33 @@ msgstr "Mengaktifkan dan menonaktifkan postingan perasaan dan aktivitas"
 
 #: content/themes/default/templates/admin.settings.tpl:1271
 msgid "Voice Notes in Posts"
-msgstr "Catatan suara di postingan"
+msgstr "Pesan Suara di Postingan"
 
 #: content/themes/default/templates/admin.settings.tpl:1273
 msgid "Turn the voice notes in posts On and Off"
-msgstr "Nyalakan catatan suara di dan dimatikan"
+msgstr "Mengaktifkan dan menonaktifkan pesan suara di postingan"
 
 #: content/themes/default/templates/admin.settings.tpl:1289
 msgid "Voice Notes in Comments"
-msgstr "Catatan Suara di Komentar"
+msgstr "Pesan Suara di Komentar"
 
 #: content/themes/default/templates/admin.settings.tpl:1291
 msgid "Turn the voice notes in comments On and Off"
-msgstr "Menghidupkan dan mematikan catatan suara"
+msgstr "Mengaktifkan dan menonaktifkan pesan suara di komentar"
 
 #: content/themes/default/templates/admin.settings.tpl:1304
 msgid "Voice Notes Max Duration"
-msgstr "Nada suara durasi maksimal"
+msgstr "Durasi Maksimal Pesan Suara"
 
 # msgid "The maximim value is one day = 86400 seconds"
 #: content/themes/default/templates/admin.settings.tpl:1309
 #, fuzzy
 msgid "The maximum length for voice note in seconds"
-msgstr "Nilai Maximim - Satu Hari = 86400 Detik"
+msgstr "Panjang maksimum durasi pesan suara dalam detik"
 
 #: content/themes/default/templates/admin.settings.tpl:1316
 msgid "Voice Notes Encoding"
-msgstr "Pengkodean catatan suara"
+msgstr "Pengkodean Catatan Suara"
 
 #: content/themes/default/templates/admin.settings.tpl:1334
 #: content/themes/default/templates/_posts.tpl:82
@@ -25915,7 +25883,7 @@ msgstr "Pemungutan Suara"
 
 #: content/themes/default/templates/admin.settings.tpl:1335
 msgid "Turn the poll posts On and Off"
-msgstr "Menyalakan atau menonaktifkan pemungutan suara"
+msgstr "Mengaktifkan dan menonaktifkan pemungutan suara"
 
 #: content/themes/default/templates/admin.settings.tpl:1352
 msgid "Geolocation"
@@ -25923,17 +25891,17 @@ msgstr "Geolokasi"
 
 #: content/themes/default/templates/admin.settings.tpl:1353
 msgid "Turn the post Geolocation On and Off"
-msgstr "Nyalakan dan Nonaktifkan Geolokasi"
+msgstr "Nyalakan dan nonaktifkan geolokasi"
 
 #: content/themes/default/templates/admin.settings.tpl:1365
 msgid "Geolocation Google Key"
-msgstr "GeoGle Key Geolocation"
+msgstr "Kunci Google Geolokasi"
 
 #: content/themes/default/templates/admin.settings.tpl:1374
 #: content/themes/default/templates/admin.settings.tpl:1408
 #: content/themes/default/templates/admin.settings.tpl:1460
 msgid "Check the documentation to learn how to get this key"
-msgstr "Periksa dokumentasi untuk mengetahui cara mendapatkan kunci ini"
+msgstr "Periksa dokumen untuk mempelajari cara mendapatkan kunci ini"
 
 #: content/themes/default/templates/admin.settings.tpl:1386
 #: content/themes/default/templates/_publisher.tpl:333
@@ -25942,27 +25910,33 @@ msgstr "GIF"
 
 #: content/themes/default/templates/admin.settings.tpl:1387
 msgid "Turn the gif posts On and Off"
-msgstr "Nyalakan dan keluarkan catatan dalam format GIF"
+msgstr "Mengaktifkan dan menonaktifkan postingan dalam format GIF"
 
 #: content/themes/default/templates/admin.settings.tpl:1399
 msgid "Giphy API Key"
-msgstr "API Giphy Key"
+msgstr "Kunci API Giphy"
 
 #: content/themes/default/templates/admin.settings.tpl:1420
 msgid "Disable Profile Posts Updates"
-msgstr "Nonaktifkan Pembaruan Posting Profil"
+msgstr "Nonaktifkan Pembaruan Postingan Profil"
 
 #: content/themes/default/templates/admin.settings.tpl:1421
 msgid "Turn it on to disable changing profile picture and cover posts"
-msgstr "Nyalakannya untuk menonaktifkan ganti gambar profil dan posting sampul"
+msgstr "Aktifkan untuk menonaktifkan pengubahan gambar profil dan sampul postingan"
 
 #: content/themes/default/templates/admin.settings.tpl:1438
 msgid "Post Translation"
-msgstr "Terjemahan pos"
+msgstr "Terjemahan Postingan"
 
 #: content/themes/default/templates/admin.settings.tpl:1439
 msgid "Turn the post translation On and Off"
-msgstr "Menyalakan dan mematikan ongkos kirim surat"
+msgstr "Mengaktifkan dan menonaktifkan translate postingan"
+
+msgid "Google Translation Key"
+msgstr "Kunci Terjemahan Google"
+
+msgid "Yandex Translation Key"
+msgstr "Kunci Terjemahan Yandex"
 
 #: content/themes/default/templates/admin.settings.tpl:1451
 msgid "Yandex Key"
@@ -25970,231 +25944,216 @@ msgstr "Kunci Yandex"
 
 #: content/themes/default/templates/admin.settings.tpl:1472
 msgid "Smart YouTube Player"
-msgstr "Pemutar YouTube yang cerdas"
+msgstr "Pemutar YouTube Pintar"
 
 #: content/themes/default/templates/admin.settings.tpl:1473
 msgid "Smart YouTube player will save a lot of bandwidth"
-msgstr "Pemain YouTube yang cerdas akan mempertahankan throughput besar"
+msgstr "Pemutar YouTube Pintar akan menghemat banyak bandwidth"
+
+msgid "Disable YouTube Player"
+msgstr "Nonaktifkan Pemutar YouTube"
 
 #: content/themes/default/templates/admin.settings.tpl:1490
 msgid "Social Media Share"
-msgstr "Bagikan di jejaring sosial"
+msgstr "Berbagi di Media Sosial"
 
 #: content/themes/default/templates/admin.settings.tpl:1491
 msgid "Turn the social media share for posts On and Off"
-msgstr "Nyalakan dan matikan publikasi di jejaring sosial"
+msgstr "Mengaktifkan dan menonaktifkan berbagi di media sosial"
 
 #: content/themes/default/templates/admin.settings.tpl:1505
 msgid "Max Post Characters"
-msgstr "Max Post Chick"
+msgstr "Karakter Postingan Maksimal"
 
 #: content/themes/default/templates/admin.settings.tpl:1510
 msgid "The Maximum allowed post characters length (0 for unlimited)"
-msgstr "Panjang maksimum yang diizinkan dari simbol pos (0 untuk tidak terbatas)"
+msgstr "Panjang karakter postingan maksimum yang diizinkan (0 untuk tidak terbatas)"
 
 #: content/themes/default/templates/admin.settings.tpl:1517
 msgid "Max Comment Characters"
-msgstr "Jumlah komentar maksimum"
+msgstr "Karakter Komentar Maksimum"
 
 #: content/themes/default/templates/admin.settings.tpl:1522
 msgid "The Maximum allowed comment characters length (0 for unlimited)"
-msgstr "Simbol komentar maksimum yang diizinkan (0 untuk tidak terbatas)"
+msgstr "Panjang karakter komentar maksimum yang diizinkan (0 untuk tidak terbatas)"
 
 #: content/themes/default/templates/admin.settings.tpl:1529
 msgid "Max Posts/Hour"
-msgstr "Pesan Max / Jam"
+msgstr "Postingan Maksimal / Jam"
 
 #: content/themes/default/templates/admin.settings.tpl:1534
 msgid "The Maximum number of posts that user can publish per hour (0 for unlimited)"
-msgstr ""
-"Jumlah maksimum pesan yang dapat dipublikasikan pengguna per jam (0 untuk "
-"tidak terbatas)"
+msgstr "Jumlah maksimum postingan yang dapat dipublikasikan pengguna per jam (0 untuk tidak terbatas)"
 
 #: content/themes/default/templates/admin.settings.tpl:1541
 msgid "Max Comments/Hour"
-msgstr "Max. Komentar / Jam"
+msgstr "Komentar Maksimal / Jam"
 
 #: content/themes/default/templates/admin.settings.tpl:1546
 #, fuzzy
-msgid ""
-"The Maximum number of comments that user can publish per hour (0 for "
-"unlimited)"
-msgstr ""
-"Jumlah maksimum komentar yang dapat dipublikasikan pengguna per jam (0 "
-"untuk tidak terbatas)"
+msgid "The Maximum number of comments that user can publish per hour (0 for unlimited)"
+msgstr "Jumlah maksimum komentar yang dapat dipublikasikan pengguna per jam (0 untuk tidak terbatas)"
 
 #: content/themes/default/templates/admin.settings.tpl:1553
 msgid "Default Posts Privacy"
-msgstr "Laporan default"
+msgstr "Privasi Postingan Default"
 
 #: content/themes/default/templates/admin.settings.tpl:1571
 msgid "Post As Anonymous"
-msgstr "Posting sebagai anonim"
+msgstr "Posting Sebagai Anonim"
 
 #: content/themes/default/templates/admin.settings.tpl:1573
 msgid "Turn Anonymous mode On and Off"
-msgstr "Menghidupkan dan mematikan mode anonim"
+msgstr "Mengaktifkan dan Menonaktifkan mode Anonim"
 
 #: content/themes/default/templates/admin.settings.tpl:1574
 msgid "Note: Admins and Moderators will able to see the real post author"
-msgstr ""
-"Catatan: Admin dan moderator akan dapat melihat penulis posting yang "
-"sebenarnya"
+msgstr "Catatan: Admin dan Moderator akan dapat melihat penulis postingan yang sebenarnya"
 
 # msgid "Night Mode"
 #: content/themes/default/templates/admin.settings.tpl:1592
 #, fuzzy
 msgid "Adult Mode"
-msgstr "Mode dewasa"
+msgstr "Mode Dewasa"
 
 #: content/themes/default/templates/admin.settings.tpl:1594
-msgid ""
-"Adult mode will hide content that marked for adult from users under 18 "
-"years old"
-msgstr ""
-"Mode dewasa akan menyembunyikan konten yang ditandai untuk orang dewasa "
-"dari pengguna di bawah 18 tahun"
+msgid "Adult mode will hide content that marked for adult from users under 18 years old"
+msgstr "Mode dewasa akan menyembunyikan konten yang ditandai untuk dewasa dari pengguna di bawah 18 tahun"
 
 #: content/themes/default/templates/admin.settings.tpl:1612
 msgid "Online Status on Posts"
-msgstr "Status online pada posting"
+msgstr "Status Online pada Postingan"
 
 #: content/themes/default/templates/admin.settings.tpl:1613
-msgid ""
-"Turn online indicator on Posts On and Off (User must be online and enabled "
-"the chat)"
-msgstr ""
-"Nyalakan indikator online pada posting dan mati (pengguna harus online dan "
-"mengaktifkan obrolan)"
+msgid "Turn online indicator on Posts On and Off (User must be online and enabled the chat)"
+msgstr "Mengaktifkan dan menonaktifkan indikator online pada Postingan (Pengguna harus online dan mengaktifkan obrolan)"
 
 #: content/themes/default/templates/admin.settings.tpl:1630
 msgid "Desktop Infinite Scroll"
-msgstr "Gulungan tak terbatas desktop"
+msgstr "Desktop Gulir Tanpa Batas"
 
 #: content/themes/default/templates/admin.settings.tpl:1631
 msgid "Turn infinite scroll on desktop screens On and Off"
-msgstr "Nyalakan gulir tak terbatas di layar desktop"
+msgstr "Mengaktifkan dan menonaktifkan gulir tak terbatas pada layar desktop"
 
 #: content/themes/default/templates/admin.settings.tpl:1646
 msgid "Mobile Infinite Scroll"
-msgstr "Gulir Mobile Infinite"
+msgstr "Gulir Tanpa Batas Seluler"
 
 #: content/themes/default/templates/admin.settings.tpl:1647
 msgid "Turn infinite scroll on mobile screens On and Off"
-msgstr "Nyalakan gulir tak terbatas di layar seluler"
+msgstr "Mengaktifkan dan menonaktifkan gulir tanpa batas pada layar ponsel"
 
 #: content/themes/default/templates/admin.settings.tpl:1664
 msgid "Auto Play Videos"
-msgstr "Video Putar Otomatis"
+msgstr "Putar Video Otomatis"
 
 # msgid "Turn the movies On and Off"
 #: content/themes/default/templates/admin.settings.tpl:1665
 #, fuzzy
 msgid "Turn auto play videos On and Off"
-msgstr "Menyalakan dan mematikan film"
+msgstr "Mengaktifkan dan menonaktifkan pemutaran video otomatis"
 
 # msgid "Video Upload"
 #: content/themes/default/templates/admin.settings.tpl:1680
 #, fuzzy
 msgid "Videos Fluid Mode"
-msgstr "Unduh video"
+msgstr "Video Mode Cairan"
 
 #: content/themes/default/templates/admin.settings.tpl:1681
 msgid "Enable video player fluid mode"
-msgstr "Aktifkan mode cairan pemutar video"
+msgstr "Mengaktifkan mode cairan pemutar video"
 
 # msgid "Cost by View"
 #: content/themes/default/templates/admin.settings.tpl:1698
 #, fuzzy
 msgid "Posts Views"
-msgstr "Biaya berdasarkan Jenis"
+msgstr "Tampilan Postingan"
 
 # msgid "Turn the video call system On and Off"
 #: content/themes/default/templates/admin.settings.tpl:1699
 #, fuzzy
 msgid "Turn posts views system On and Off"
-msgstr "Menyalakan dan mematikan sistem panggilan video"
+msgstr "Mengaktifkan dan menonaktifkan sistem tampilan postingan"
 
 # msgid "File Type"
 #: content/themes/default/templates/admin.settings.tpl:1711
 #, fuzzy
 msgid "Views Type"
-msgstr "Jenis file"
+msgstr "Tipe Tampilan"
 
 # msgid "Views"
 #: content/themes/default/templates/admin.settings.tpl:1716
 #, fuzzy
 msgid "All Views"
-msgstr "Tampilan"
+msgstr "Semua Tampilan"
 
 #: content/themes/default/templates/admin.settings.tpl:1720
 msgid "Unique Views Only"
-msgstr "Tampilan unik saja"
+msgstr "Hanya Tampilan Unik"
 
 #: content/themes/default/templates/admin.settings.tpl:1723
 msgid "Note: All views will count all views including the same user multiple views"
-msgstr ""
-"Catatan: Semua tampilan akan menghitung semua tampilan termasuk pengguna "
-"yang sama dengan beberapa tampilan"
+msgstr "Catatan: Semua tampilan akan menghitung semua tampilan termasuk beberapa tampilan dari pengguna yang sama"
 
 # msgid "Cost by View"
 #: content/themes/default/templates/admin.settings.tpl:1735
 #, fuzzy
 msgid "Posts Reviews"
-msgstr "Biaya berdasarkan Jenis"
+msgstr "Ulasan Postingan"
 
 # msgid "Turn the stories On and Off"
 #: content/themes/default/templates/admin.settings.tpl:1736
 #, fuzzy
 msgid "Turn the posts reviews On and Off"
-msgstr "Menyalakan dan mematikan cerita"
+msgstr "Mengaktifkan dan menonaktifkan ulasan postingan"
 
 #: content/themes/default/templates/admin.settings.tpl:1751
 msgid "Posts Review Replacement"
-msgstr "Posting Tinjau Penggantian"
+msgstr "Penggantian Ulasan Postingan"
 
 #: content/themes/default/templates/admin.settings.tpl:1769
 msgid "Trending Hashtags"
-msgstr "Tagar populer"
+msgstr "Tagar Populer"
 
 #: content/themes/default/templates/admin.settings.tpl:1770
 msgid "Turn the trending hashtags feature On and Off"
-msgstr "Nyalakan dan keluarkan fitur tren tagar"
+msgstr "Mengaktifkan dan menonaktifkan fitur tagar yang sedang tren"
 
 #: content/themes/default/templates/admin.settings.tpl:1782
 msgid "Trending Interval"
-msgstr "Interval tren"
+msgstr "Interval Tren"
 
 
 #: content/themes/default/templates/admin.settings.tpl:1787
 msgid "Last Week"
-msgstr "Minggu lalu"
+msgstr "Minggu Lalu"
 
 #: content/themes/default/templates/admin.settings.tpl:1788
 msgid "Last Month"
-msgstr "Bulan lalu"
+msgstr "Bulan Lalu"
 
 #: content/themes/default/templates/admin.settings.tpl:1791
 msgid "Select the interval of trending hashtags"
-msgstr "Pilih interval tagar tren"
+msgstr "Pilih interval tagar yang sedang tren"
 
 #: content/themes/default/templates/admin.settings.tpl:1798
 msgid "Hashtags Limit"
-msgstr "Batas hashteg"
+msgstr "Batas Tagar"
 
 #: content/themes/default/templates/admin.settings.tpl:1803
 msgid "How many hashtags you want to display"
-msgstr "Berapa banyak tagar yang ingin Anda tampilkan"
+msgstr "Berapa banyak hashtag yang ingin anda tampilkan"
 
 # msgid "User Gender"
 #: content/themes/default/templates/admin.settings.tpl:1815
 #, fuzzy
 msgid "Disable Download Images"
-msgstr "Pengguna Paul"
+msgstr "Nonaktifkan Unduh Gambar"
 
 #: content/themes/default/templates/admin.settings.tpl:1816
 msgid "Enable this to disable download images in lightbox modal"
-msgstr "Aktifkan ini untuk menonaktifkan gambar unduhan dalam modal LightBox"
+msgstr "Aktifkan ini untuk menonaktifkan pengunduhan gambar di modal lightbox"
 
 #: content/themes/default/templates/admin.settings.tpl:1831
 msgid "Disable Mouse Right Click"
@@ -26202,233 +26161,266 @@ msgstr "Nonaktifkan Klik Kanan Mouse"
 
 #: content/themes/default/templates/admin.settings.tpl:1832
 msgid "Enable this to disable mouse right click on images"
-msgstr "Aktifkan ini untuk menonaktifkan mouse klik kanan pada gambar"
-#----------------------------------------------------------------------------------------------->
+msgstr "Aktifkan ini untuk menonaktifkan klik kanan mouse pada gambar"
+# ----------------\ #
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+#: content/themes/default/templates/admin.settings.tpl:1862
+#: content/themes/default/templates/admin.settings.tpl:1903
+msgid "Registration"
+msgstr "Pendaftaran"
+
+#: content/themes/default/templates/admin.settings.tpl:1875
+msgid "Social Login"
+msgstr "Login Sosial"
+
+# msgid ""
+#: content/themes/default/templates/admin.settings.tpl:1894
+#, fuzzy
+msgid "If Registration is Free and Pro Packages enabled they will be used as optional upgrading plans"
+msgstr "Jika Pendaftaran Gratis dan Paket Pro diaktifkan, maka paket tersebut akan digunakan sebagai paket peningkatan opsional"
+
+#: content/themes/default/templates/admin.settings.tpl:1904
+msgid "Allow users to create accounts"
+msgstr "Izinkan pengguna untuk membuat akun"
+
+#: content/themes/default/templates/admin.settings.tpl:1916
+msgid "Registration Type"
+msgstr "Jenis Pendaftaran"
+
+#: content/themes/default/templates/admin.settings.tpl:1921
+#: content/themes/default/templates/__feeds_post.body.tpl:748
+#: content/themes/default/templates/packages.tpl:49
+#: content/themes/default/templates/__feeds_product.tpl:20
+#: content/themes/default/templates/_order.tpl:174
+#: content/themes/default/templates/market.tpl:256
+msgid "Free"
+msgstr "Gratis"
+
+#: content/themes/default/templates/admin.settings.tpl:1925
+msgid "Subscriptions Only"
+msgstr "Khusus Langganan"
+
+#: content/themes/default/templates/admin.settings.tpl:1928
+msgid "Allow users to create accounts Free or via Subscriptions only"
+msgstr "Izinkan pengguna untuk membuat akun gratis atau melalui langganan saja"
+
+#: content/themes/default/templates/admin.settings.tpl:1941
+msgid "User Can Select Custom User Group"
+msgstr "Pengguna dapat memilih grup pengguna"
+
+#: content/themes/default/templates/admin.settings.tpl:1942
+msgid "Allow users to select custom user group during registration"
+msgstr "Izinkan pengguna untuk memilih grup pengguna selama pendaftaran"
+
+#: content/themes/default/templates/admin.settings.tpl:1957
+msgid "Show Custom User Group Badge"
+msgstr "Tampilkan Lencana Grup Pengguna"
+
+# msgid "You must upload gift image"
+#: content/themes/default/templates/admin.settings.tpl:1958
+#, fuzzy
+msgid "Show user group badge on profile page"
+msgstr "Anda harus mengunduh gambar hadiah"
+
+# msgid "Delete Group"
+#: content/themes/default/templates/admin.settings.tpl:1970
+#, fuzzy
+msgid "Default User Group"
+msgstr "Hapus grup"
+
+#: content/themes/default/templates/admin.settings.tpl:1984
+msgid "Select the default user group for new accounts"
+msgstr "Pilih grup pengguna default untuk akun baru"
+
+#: content/themes/default/templates/admin.settings.tpl:1985
+msgid "You can manage users groups from"
+msgstr "Anda dapat mengelola grup pengguna dari"
+
+# msgid "User Group"
+#: content/themes/default/templates/admin.settings.tpl:1985
+#, fuzzy
+msgid "User Groups"
+msgstr "Grup pengguna"
+
+#: content/themes/default/templates/admin.settings.tpl:1997
+msgid "Invitation System"
+msgstr "Sistem Undangan"
+
+#: content/themes/default/templates/admin.settings.tpl:1999
+msgid "This option is used to register the users by invitation codes only"
+msgstr "Opsi ini digunakan untuk mendaftarkan pengguna dengan kode undangan saja"
+
+#: content/themes/default/templates/admin.settings.tpl:2012
+msgid "Invitations/User"
+msgstr "Undangan/Pengguna"
+
+#: content/themes/default/templates/admin.settings.tpl:2030
+msgid "Number of invitation codes allowed to each user (0 for unlimited) "
+msgstr ""
+"Jumlah kode undangan yang diizinkan untuk setiap pengguna (0 untuk tidak "
+"terbatas)"
+
+#: content/themes/default/templates/admin.settings.tpl:2031
+msgid "For example 1 code per day, 5 codes per month"
+msgstr "Misalnya 1 kode per hari, 5 kode per bulan"
+
+#: content/themes/default/templates/admin.settings.tpl:2038
+msgid "Send Method"
+msgstr "Kirim metode"
+
+#: content/themes/default/templates/admin.settings.tpl:2047
+#: content/themes/default/templates/admin.settings.tpl:2105
+#: content/themes/default/templates/admin.settings.tpl:3669
+#: content/themes/default/templates/admin.settings.tpl:6212
+#: content/themes/default/templates/ajax.invitations.tpl:49
+#: content/themes/default/templates/admin.users.tpl:451
+msgid "SMS"
+msgstr "SMS"
+
+#: content/themes/default/templates/admin.settings.tpl:2051
+msgid "Both"
+msgstr "Keduanya"
+
+#: content/themes/default/templates/admin.settings.tpl:2054
+msgid "Select Email or SMS to send invitation link to new user's email/phone"
+msgstr ""
+"Pilih email atau SMS untuk mengirim tautan undangan ke email/telepon "
+"pengguna baru"
+
+#: content/themes/default/templates/admin.settings.tpl:2067
+msgid "Activation Enabled"
+msgstr "Aktivasi diaktifkan"
+
+#: content/themes/default/templates/admin.settings.tpl:2068
+msgid "Enable account activation to send activation code to user's email/phone"
+msgstr ""
+"Aktifkan aktivasi akun untuk mengirim kode aktivasi ke alamat / telepon "
+"email pengguna"
+
+# msgid "If enabled users will be able to withdraw earned money"
+#: content/themes/default/templates/admin.settings.tpl:2084
+#, fuzzy
+msgid "Enable this and user will not be able to access without activation"
+msgstr "Jika pengguna dapat menarik uang yang diperoleh"
+
+#: content/themes/default/templates/admin.settings.tpl:2096
+msgid "Activation Type"
+msgstr "Jenis aktivasi"
+
+#: content/themes/default/templates/admin.settings.tpl:2108
+msgid "Select Email or SMS activation to send activation code to user's email/phone"
+msgstr ""
+"Pilih Aktivasi dengan E -Mail atau SMS untuk mengirim kode aktivasi ke "
+"alamat email / telepon pengguna"
+
+# msgid "Post Approval"
+#: content/themes/default/templates/admin.settings.tpl:2121
+#, fuzzy
+msgid "Users Approval System"
+msgstr "Setelah persetujuan"
+
+#: content/themes/default/templates/admin.settings.tpl:2123
+msgid ""
+"Turn the approval system On and Off (If disabled all users will be approved "
+"by default)"
+msgstr ""
+"Nyalakan dan mematikan sistem persetujuan (jika dinonaktifkan, semua "
+"pengguna akan disetujui secara default)"
+
+# msgid "If enabled users will be able to withdraw earned money"
+#: content/themes/default/templates/admin.settings.tpl:2124
+#, fuzzy
+msgid "If enabled, users will be pending for approval by the admin or moderators"
+msgstr "Jika pengguna dapat menarik uang yang diperoleh"
+
+#: content/themes/default/templates/admin.settings.tpl:2142
+msgid "Age Restriction"
+msgstr "Pembatasan usia"
+
+#: content/themes/default/templates/admin.settings.tpl:2143
+msgid "Enable/Disable age restriction"
+msgstr "Menyalakan / menonaktifkan batas usia"
+
+#: content/themes/default/templates/admin.settings.tpl:2155
+msgid "Minimum Age"
+msgstr "Usia minimum"
+
+#: content/themes/default/templates/admin.settings.tpl:2160
+msgid "The minimum age required to register (in years)"
+msgstr "Usia minimum yang diperlukan untuk pendaftaran (dalam beberapa tahun)"
+
+#: content/themes/default/templates/admin.settings.tpl:2172
+#: content/themes/default/templates/started.tpl:10
+#: content/themes/default/templates/signup_social.tpl:10 modules/started.php:54
+msgid "Getting Started"
+msgstr "Awal pekerjaan"
+
+#: content/themes/default/templates/admin.settings.tpl:2173
+msgid "Enable/Disable getting started page after registration"
+msgstr "Nyalakan/Nonaktifkan Halaman Mulai Setelah Pendaftaran"
+
+#: content/themes/default/templates/admin.settings.tpl:2185
+msgid "Required Data"
+msgstr "Data yang diperlukan"
+
+# msgid "Profile Background"
+#: content/themes/default/templates/admin.settings.tpl:2190
+#, fuzzy
+msgid "Profile Image Required"
+msgstr "Latar belakang profil"
+
+# msgid "Activation Code"
+#: content/themes/default/templates/admin.settings.tpl:2194
+#, fuzzy
+msgid "Location Data Required"
+msgstr "Kode Aktivasi"
+
+#: content/themes/default/templates/admin.settings.tpl:2198
+msgid "Work Data Required"
+msgstr "Data kerja diperlukan"
+
+# msgid "Activation Code"
+#: content/themes/default/templates/admin.settings.tpl:2202
+#, fuzzy
+msgid "Education Data Required"
+msgstr "Kode Aktivasi"
+
+#: content/themes/default/templates/admin.settings.tpl:2205
+msgid "Such data will be mandatory when user getting started"
+msgstr "Data seperti itu akan wajib saat memulai pengguna"
+
+#: content/themes/default/templates/admin.settings.tpl:2217
+msgid "Newsletter Consent"
+msgstr "Menyetujui buletin"
+
+#: content/themes/default/templates/admin.settings.tpl:2218
+msgid "Enable/Disable newsletter consent during the registration"
+msgstr "Nyalakan / Nonaktifkan Persetujuan ke Newsletter Selama Pendaftaran"
+
+#: content/themes/default/templates/admin.settings.tpl:2232
+msgid "Max Accounts/IP"
+msgstr "Akun Max / IP"
+
+#: content/themes/default/templates/admin.settings.tpl:2237
+msgid "The Maximum number of accounts allowed to register per IP (0 for unlimited)"
+msgstr ""
+"Jumlah perseptor yang diizinkan untuk mendaftar untuk satu alamat IP (0 - "
+"tanpa batasan)"
+
+#: content/themes/default/templates/admin.settings.tpl:2244
+msgid "Name Minimum Length"
+msgstr "Nama panjang minimum"
+
+#: content/themes/default/templates/admin.settings.tpl:2249
+msgid "The First and Last name minimum length"
+msgstr "Nama minimum nama pertama dan belakang"
+---------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# \---------------- #
-
-#: done
-msgid "You can advertise for a URL or one of your posts, pages, groups or events"
-msgstr "Anda dapat mengiklankan URL atau salah satu postingan, halaman, grup, atau acara Anda"
-
-#: done
-msgid "sent merit"
-msgstr "kirim penghargaan"
-
-#: done
-msgid "Verified Status"
-msgstr "Status Terverifikasi"
-
-#: done
-msgid "at location"
-msgstr "di lokasi"
-
-#: done
-msgid "Schedule Post"
-msgstr "Jadwal Postingan"
-
-#: done
-msgid "Schedule your post for later"
-msgstr "Jadwalkan postingan anda untuk nanti"
-
-#: done
-msgid "Anonymous post"
-msgstr "Postingan Anonim"
-
-msgid "Anonymous Post"
-msgstr "Postingan Anonim"
-
-msgid "Share your post as anonymous post"
-msgstr "Bagikan postingan anda sebagai anonim"
-
-msgid "Adult Content"
-msgstr "Konten Dewasa"
-
-msgid "Share your post as adult content"
-msgstr "Bagikan postingan anda sebagai konten dewasa"
-
-msgid "Enable Tips"
-msgstr "Aktifkan Tip"
-
------------------------------------------------------------------------------>
-msgid "Cars and Vehicles"
-msgstr "Mobil dan Kendaraan"
-
-msgid "Comedy"
-msgstr "Komedi"
-
-msgid "Economics and Trade"
-msgstr "Ekonomi dan Perdagangan"
-
-msgid "Entertainment"
-msgstr "Hiburan"
-
-msgid "Movies and Animation"
-msgstr "Film dan Animasi"
-
-msgid "Gaming"
-msgstr "Permainan"
-
-msgid "History and Facts"
-msgstr "Sejarah dan Fakta"
-
-msgid "Live Style"
-msgstr "Gaya Hidup"
-
-msgid "News and Politics"
-msgstr "Berita dan Politik"
-
-msgid "People and Nations"
-msgstr "Orang dan Bangsa"
-
-msgid "Pets and Animals"
-msgstr "Hewan Peliharaan dan Satwa"
-
-msgid "Places and Regions"
-msgstr "Tempat dan Wilayah"
-
-msgid "Science and Technology"
-msgstr "Sains dan Teknologi"
-
-msgid "Sport"
-msgstr "Olahraga"
-
-msgid "Travel and Events"
-msgstr "Perjalanan dan Acara"
-
-msgid "Art"
-msgstr "Seni"
-
-msgid "Causes"
-msgstr "Penyebab"
-
-msgid "Crafts"
-msgstr "Kerajinan"
-
-msgid "Dance"
-msgstr "Tarian"
-
-msgid "Drinks"
-msgstr "Minuman"
-
-msgid "Fitness"
-msgstr "Kebugaran"
-
-msgid "Food"
-msgstr "Makanan"
-
-msgid "Gardening"
-msgstr "Berkebun"
-
-msgid "Health"
-msgstr "Kesehatan"
-
-msgid "Literature"
-msgstr "Sastra"
-
-msgid "Music"
-msgstr "Musik"
-
-msgid "Networking"
-msgstr "Jaringan"
-
-msgid "Party"
-msgstr "Pesta"
-
-msgid "Religion"
-msgstr "Agama"
-
-msgid "Shopping"
-msgstr "Belanja"
-
-msgid "Sports"
-msgstr "Olahraga"
-
-msgid "Theater"
-msgstr "Teater"
-
-msgid "Wellness"
-msgstr "Kesejahteraan"
-
-msgid "Admin & Office"
-msgstr "Admin & Kantor"
-
-msgid "Art & Design"
-msgstr "Seni & Desain"
-
-msgid "Business Operations"
-msgstr "Operasi Bisnis"
-
-msgid "Cleaning & Facilities"
-msgstr "Pembersihan & Fasilitas"
-
-msgid "Community & Social Services"
-msgstr "Komunitas & Layanan Sosial"
-
-msgid "Computer & Data"
-msgstr "Komputer & Data"
-
-msgid "Construction & Mining"
-msgstr "Konstruksi & Pertambangan"
-
-msgid "Pendidikan"
-msgstr "Pendidikan"
-
-msgid "Farming & Forestry"
-msgstr "Pertanian & Kehutanan"
-
-msgid "Healthcare"
-msgstr "Kesehatan"
-
-msgid "Installation, Maintenance & Repair"
-msgstr "Instalasi, Pemeliharaan & Perbaikan"
-
-msgid "Legal"
-msgstr "Hukum"
-
-msgid "Management"
-msgstr "Manajemen"
-
-msgid "Manufacturing"
-msgstr "Manufaktur"
-
-msgid "Media & Communication"
-msgstr "Media & Komunikasi"
-
-msgid "Personal Care"
-msgstr "Perawatan Pribadi"
-
-msgid "Protective Services"
-msgstr "Layanan Perlindungan"
-
-msgid "Restaurant & Hospitality"
-msgstr "Restoran & Perhotelan"
-
-msgid "Retail & Sales"
-msgstr "Ritel & Penjualan"
-
-msgid "Science & Engineering"
-msgstr "Sains & Teknik"
-
-msgid "Sports & Entertainment"
-msgstr "Olahraga & Hiburan"
-
-msgid "Transportation"
-msgstr "Transportasi"
------------------------------------------------------------------------------>
-
-# \---------------- #
-# Package Trial
-
-msgid "Trial Enabled"
-msgstr "Trial Dinyalakan"
-
-msgid "You have to enter valid trial enabled number"
-msgstr "Anda harus memasukkan nomor trial dinyalakan yang valid"
-
-msgid "Enable trial package. Trial package can only be bought once"
-msgstr "Nyalakan paket trial. Paket trial hanya bisa dibeli sekali"
-
-# ----------------\ #
+msgid "Respect"
+msgstr "Hormat"
+
+msgid "Quality"
+msgstr "Kualitas"

@@ -27,6 +27,14 @@ try {
       return_json(['success' => true, 'message' => __("Your info has been updated")]);
       break;
 
+    case 'transfer-pin':
+      // update transfer pin
+      $user->getting_started_transfer_pin($_POST);
+
+      // return
+      return_json(['success' => true, 'message' => __("Your transfer PIN has been updated")]);
+      break;
+
     case 'finish':
       // finish getting started
       $user->getting_satrted_finish();

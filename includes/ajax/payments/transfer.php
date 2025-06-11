@@ -48,8 +48,6 @@ try {
             return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/wallet?transfer_send_failed"']);
             break;
         }
-        
-        $target_user['user_picture'] = get_picture($target_user['user_picture'], $target_user['user_gender']);
 
         return_json(['result' => 'valid', 'user' => $target_user]);
         break;

@@ -741,6 +741,95 @@ function getCookie(cname) {
   return "";
 }
 
+// Formatting
+function formatNumber(amount) {
+  const formatter = new Intl.NumberFormat('de-DE', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+
+  const formatted = formatter.format(amount);
+
+  return formatted;
+}
+
+function printMoney(amount, symbol = "Rp", dir = "left") {
+  const formatted = amount;
+  return dir === "right" ? formatted + ' ' + symbol : symbol + ' ' + formatted;
+}
+
+function openWalletConfirmation(event, userIdField, modalTarget) {
+  event.preventDefault();
+
+  const $form = $(event.target);
+  const $error = $form.find('.alert.alert-danger');
+  const formData = new FormData($form[0]);
+  const data = {};
+  
+  if ($error.is(":visible")) $error.hide();
+
+  for (let [key, value] of formData.entries()) {
+    data[key] = value;
+  }
+
+  const amount = data.amount;
+  if (Number(amount) <= 0) {
+    $error.html(__['You must enter valid amount of money']).slideDown();
+    return;
+  }
+
+  const userId = data[userIdField];
+  if (!userId) {
+    $error.html(__['You must search for a user to send money to']).slideDown();
+    return;
+  }
+
+  $.post(ajax_path + "payments/wallet.php?do=get_user_info", {
+    user_id: userId
+  }, function(response) {
+    if (response.result === "valid") {
+      const user = response.user;
+      modal(modalTarget, {
+        'amount': data.amount,
+        'user_id': user.user_id,
+        'user_name': user.user_name,
+        'user_fullname': `${user.user_firstname} ${user.user_lastname}`,
+        'user_picture': user.user_picture
+      });
+    } else {
+      $error.html(__["You can't send money to this user!"]).slideDown();
+    }
+  });
+}
+
+function openWalletQRConfirmation(event, targetUserData, modalTarget) {
+  event.preventDefault();
+
+  const $form = $(event.target);
+  const $error = $form.find('.alert.alert-danger');
+  const formData = new FormData($form[0]);
+  const data = {};
+  
+  if ($error.is(":visible")) $error.hide();
+
+  for (let [key, value] of formData.entries()) {
+    data[key] = value;
+  }
+
+  const amount = data.amount;
+  if (Number(amount) <= 0) {
+    $error.html(__['You must enter valid amount of money']).slideDown();
+    return;
+  }
+
+  modal(modalTarget, {
+    'amount': data.amount,
+    'user_id': targetUserData.user_id,
+    'user_name': targetUserData.user_name,
+    'user_fullname': targetUserData.user_fullname,
+    'user_picture': targetUserData.user_picture
+  });
+}
 
 $(function () {
 
@@ -2407,7 +2496,14 @@ $(function () {
       $('.table').addClass('table-dark');
       _this.data('mode', 'day');
       $('.js_theme-mode-text').text(__['Day Mode']);
-      $.post(api['core/theme'], { 'mode': mode });
+      $.post(api['core/theme'], { 'mode': mode }).then(() => {
+        // TODO: Send an event to the qurani iframe instead
+        if (current_page == 'qurani/index') {
+          setTimeout(() => {
+            window.location.reload();
+          }, 50);
+        }
+      });
 
     } else {
       $('body').removeClass('night-mode');
@@ -2415,7 +2511,14 @@ $(function () {
       $('.table').removeClass('table-dark');
       _this.data('mode', 'night');
       $('.js_theme-mode-text').text(__['Night Mode']);
-      $.post(api['core/theme'], { 'mode': mode });
+      $.post(api['core/theme'], { 'mode': mode }).then(() => {
+        // TODO: Send an event to the qurani iframe instead
+        if (current_page == 'qurani/index') {
+          setTimeout(() => {
+            window.location.reload();
+          }, 50);
+        }
+      });
     }
   });
 
@@ -2472,6 +2575,7 @@ $(function () {
     input.val(setAmount);
   });
 
+  // group sluggify
   $('body').on('input', '.form-group-title', function () {
     var _this = $(this);
     var usernameInput = _this.closest('.form-group').next('.form-group').find('.form-group-username');
@@ -2486,4 +2590,60 @@ $(function () {
     }
   });
 
+  // keypad
+  $('body').on('click', '.keypad-buttons button', function () {
+    var $button = $(this);
+    var digit = $button.data('amount');
+    var action = $button.data('action');
+    var $wrapper = $button.closest('.keypad-wrapper');
+    var $input = $wrapper.find('input[type="password"]');
+
+    var currentVal = $input.val();
+
+    if (typeof digit == 'number') {
+      if (currentVal.length < 6) {
+        $input.val(currentVal + digit).trigger('input');
+      }
+    }
+
+    if (action == "BACKSPACE") {
+      if (currentVal.length > 0) {
+        const newVal = currentVal.slice(0, -1);
+        $input.val(newVal).trigger('input');
+      }
+    }
+
+    if (action == "CLEAR") {
+      if (currentVal.length > 0) {
+        $input.val("").trigger('input');
+      }
+    }
+
+  });
+
+  $('body').on('input', '.keypad-input input', function () {
+    var $input = $(this);
+    var value = $input.val();
+
+    var numericValue = value.replace(/\D/g, '');
+
+    if (numericValue.length > 6) {
+      numericValue = numericValue.substring(0, 6);
+    }
+
+    $input.val(numericValue);
+  });
+
+  $('body').on('input', '.pin-input', function () {
+    var $input = $(this);
+    var value = $input.val();
+
+    var numericValue = value.replace(/\D/g, '');
+
+    if (numericValue.length > 6) {
+      numericValue = numericValue.substring(0, 6);
+    }
+
+    $input.val(numericValue);
+  });
 });

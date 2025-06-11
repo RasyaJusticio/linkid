@@ -1742,6 +1742,33 @@ class User
     return $_user;
   }
 
+  /**
+   * get_user_by_username
+   * 
+   * @param string $username
+   * @return array
+   */
+  public function get_user_by_username($username, $full_info = true, $is_raw = true)
+  {
+    global $db, $system;
+    if ($full_info) {
+      $requested_info = sprintf("users.*, (users.user_last_seen >= SUBTIME(NOW(), SEC_TO_TIME(%s))) AS user_is_online, users_groups.permissions_group_id, packages.package_permissions_group_id", secure($system['online_status_timeout'], 'int'));
+    } else {
+      $requested_info = sprintf("users.user_id, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture, users.user_subscribed, users.user_verified, users.user_last_seen, (users.user_last_seen >= SUBTIME(NOW(), SEC_TO_TIME(%s))) AS user_is_online", secure($system['offline_time'], 'int'));
+    }
+    $get_user = $db->query(sprintf("SELECT %s FROM users LEFT JOIN packages ON users.user_subscribed = '1' AND users.user_package = packages.package_id LEFT JOIN users_groups ON users.user_group = '3' AND users.user_group_custom != '0' AND users.user_group_custom = users_groups.user_group_id WHERE users.user_name = %s", $requested_info, secure($username)));
+    if ($get_user->num_rows == 0) {
+      return false;
+    }
+    $_user = $get_user->fetch_assoc();
+
+    if ($is_raw) {
+      $_user['user_picture'] = get_picture($_user['user_picture'], $_user['user_gender']);
+      $_user['user_fullname'] = ($system['show_usernames_enabled']) ? $_user['user_name'] : $_user['user_firstname'] . " " . $_user['user_lastname'];
+    }
+    return $_user;
+  }
+
 
 
   /* ------------------------------- */
@@ -17194,7 +17221,7 @@ class User
       throw new Exception(__("You must enter valid amount of money"));
     }
     if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
-      throw new Exception(__("You can't transfer more than") . " " . print_money($system['wallet_max_transfer']));
+      throw new Exception(__("You can't transfer more than") . " " . print_money(format_number($system['wallet_max_transfer'])));
     }
     /* validate target user */
     if (is_empty($user_id) || !is_numeric($user_id)) {
@@ -17222,6 +17249,74 @@ class User
     /* wallet transaction */
     $this->wallet_set_transaction($user_id, 'user', $this->_data['user_id'], $amount, 'in');
     $_SESSION['wallet_transfer_amount'] = $amount;
+  }
+
+  /**
+   * wallet_receive
+   * 
+   * @param integer $user_id
+   * @param integer $amount
+   * @return void
+   */
+  public function wallet_receive($user_id, $amount, $pin)
+  {
+    global $db, $system;
+    /* check if wallet enabled */
+    if (!$system['wallet_enabled']) {
+      throw new Exception(__("The wallet system has been disabled by the admin"));
+    }
+    /* check if wallet transfer enabled */
+    if (!$system['wallet_transfer_enabled']) {
+      throw new Exception(__("The wallet transfer feature has been disabled by the admin"));
+    }
+
+    $get_user = $db->query(sprintf("SELECT user_wallet_balance, user_transfer_pin FROM users WHERE user_id = %s", secure($user_id, 'int')));
+    $user_data = $get_user->fetch_assoc();
+
+    /* validate pin */
+    if (is_empty($pin) || !is_numeric($pin)) {
+      throw new Exception(__("You must enter a valid transfer PIN"));
+    }
+    if (is_empty($user_data['user_transfer_pin']) || !isset($user_data['user_transfer_pin'])) {
+      throw new Exception(__("This user doesn't have a transfer PIN"));
+    }
+    if (md5($pin) != $user_data['user_transfer_pin'] && !password_verify($pin, $user_data['user_transfer_pin'])) {
+      throw new Exception(__("The given transfer PIN is incorrect"));
+    }
+    /* validate amount */
+    if (is_empty($amount) || !is_numeric($amount) || $amount <= 0) {
+      throw new Exception(__("You must enter valid amount of money"));
+    }
+    if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
+      throw new Exception(__("You can't transfer more than") . " " . print_money(format_number($system['wallet_max_transfer'])));
+    }
+    /* validate target user */
+    if (is_empty($user_id) || !is_numeric($user_id)) {
+      throw new Exception(__("You must search for a user to send money to"));
+    }
+    if ($this->_data['user_id'] == $user_id) {
+      throw new Exception(__("You can't receive money from yourself!"));
+    }
+    $check_user = $db->query(sprintf("SELECT COUNT(*) as count FROM users WHERE user_id = %s", secure($user_id, 'int')));
+    if ($check_user->fetch_assoc()['count'] == 0) {
+      throw new Exception(__("You can't receive money from this user!"));
+    }
+    // Check balance of the user_id
+    if ($user_data['user_wallet_balance'] < $amount) {
+      throw new Exception(__("There is not enough credit in their wallet"));
+    }
+
+    /* decrease user id wallet balance */
+    $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($user_id, 'int')));
+    /* log this transaction */
+    $this->wallet_set_transaction($user_id, 'user', $this->_data['user_id'], $amount, 'out');
+    /* increase viewer user wallet balance */
+    $db->query(sprintf("UPDATE users SET user_wallet_balance = user_wallet_balance + %s WHERE user_id = %s", secure($amount), secure($this->_data['user_id'], 'int')));
+    /* send notification (money sent) to the target user */
+    $this->post_notification(['to_user_id' => $this->_data['user_id'], 'action' => 'money_sent', 'node_type' => $amount]);
+    /* wallet transaction */
+    $this->wallet_set_transaction($this->_data['user_id'], 'user', $user_id, $amount, 'in');
+    $_SESSION['wallet_receive_amount'] = $amount;
   }
 
 
@@ -17864,8 +17959,11 @@ class User
     global $db;
     
     $get_user = $db->query(sprintf("SELECT user_id, user_name, user_firstname, user_lastname, user_gender, user_picture FROM users WHERE user_transfer_token = %s", secure($transfer_token)));
-      
-    return $get_user->fetch_assoc();
+    $_user = $get_user->fetch_assoc();
+    $_user['user_picture'] = get_picture($_user['user_picture'], $_user['user_gender']);
+    $_user['user_fullname'] = ($system['show_usernames_enabled']) ? $_user['user_name'] : $_user['user_firstname'] . " " . $_user['user_lastname'];
+
+    return $_user;
   }
 
   public function transfer_money($user_id, $amount)
@@ -17884,7 +17982,7 @@ class User
       throw new Exception(__("You must enter valid amount of money"));
     }
     if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
-      throw new Exception(__("You can't transfer more than") . " " . print_money($system['wallet_max_transfer']));
+      throw new Exception(__("You can't transfer more than") . " " . print_money(format_number($system['wallet_max_transfer'])));
     }
     /* validate target user */
     if (is_empty($user_id) || !is_numeric($user_id)) {
@@ -22463,6 +22561,32 @@ class User
         $db->query(sprintf("DELETE FROM users_sessions WHERE session_id != %s AND user_id = %s", secure($this->_data['active_session_id']), secure($this->_data['user_id'], 'int')));
         break;
 
+      case 'transfer-pin':
+        /* validate all fields */
+        if (!is_empty($this->_data['user_transfer_pin'])) {
+          if (is_empty($args['current']) || is_empty($args['new']) || is_empty($args['confirm'])) {
+            throw new Exception(__("You must fill in all of the fields"));
+          }
+
+          /* validate current pin (MD5 check for versions < v2.5) */
+          if (md5($args['current']) != $this->_data['user_transfer_pin'] && !password_verify($args['current'], $this->_data['user_transfer_pin'])) {
+            throw new Exception(__("Your current transfer PIN is incorrect"));
+          }
+        } else {
+          if (is_empty($args['new']) || is_empty($args['confirm'])) {
+            throw new Exception(__("You must fill in all of the fields"));
+          }
+        }
+        /* validate new pin */
+        if ($args['new'] != $args['confirm']) {
+          throw new Exception(__("Your transfer PINs do not match"));
+        }
+        /* check password */
+        $this->check_pin($args['new']);
+        /* update user */
+        $db->query(sprintf("UPDATE users SET user_transfer_pin = %s WHERE user_id = %s", secure(_password_hash($args['new'])), secure($this->_data['user_id'], 'int')));
+        break;
+
       case 'two-factor':
         if ($system['two_factor_type'] != $args['type']) {
           _error(400);
@@ -23699,6 +23823,29 @@ class User
     $db->query(sprintf("UPDATE users SET user_country = %s, user_work_title = %s, user_work_place = %s, user_work_url = %s, user_city = %s, user_hometown = %s, user_edu_major = %s, user_edu_school = %s, user_edu_class = %s WHERE user_id = %s", secure($args['country'], 'int'), secure($args['work_title']), secure($args['work_place']), secure($args['work_url']), secure($args['city']), secure($args['hometown']), secure($args['edu_major']), secure($args['edu_school']), secure($args['edu_class']), secure($this->_data['user_id'], 'int')));
   }
 
+  /**
+   * getting_started_transfer_pin
+   * 
+   * @param array $args
+   * @return void
+   */
+  public function getting_started_transfer_pin($args)
+  {
+    global $db;
+
+    /* validate all fields */
+    if (is_empty($args['new']) || is_empty($args['confirm'])) {
+      throw new ValidationException(__("You must fill in all of the fields"));
+    }
+    /* validate new pin */
+    if ($args['new'] != $args['confirm']) {
+      throw new ValidationException(__("Your transfer PINs do not match"));
+    }
+    /* check password */
+    $this->check_pin($args['new']);
+    /* update user */
+    $db->query(sprintf("UPDATE users SET user_transfer_pin = %s WHERE user_id = %s", secure(_password_hash($args['new'])), secure($this->_data['user_id'], 'int')));
+  }
 
   /**
    * getting_satrted_finish
@@ -23719,7 +23866,7 @@ class User
       if ($system['getting_started_location_required'] && is_empty($user_info['user_country'])) {
         throw new Exception(__("You must enter your location info"));
       }
-      if ($system['getting_started_location_required'] && is_empty($user_info['user_current_city'])) {
+      if ($system['getting_started_location_required'] && is_empty($user_info['user_city'])) {
         throw new Exception(__("You must enter your location info"));
       }
       if ($system['getting_started_location_required'] && $system['location_info_enabled'] && is_empty($user_info['user_hometown'])) {
@@ -23732,6 +23879,9 @@ class User
       /* check if education data required */
       if ($system['getting_started_education_required'] && (is_empty($user_info['user_edu_major']) || is_empty($user_info['user_edu_school']) || is_empty($user_info['user_edu_class']))) {
         throw new Exception(__("You must enter your education info"));
+      }
+      if (is_empty($user_info['user_transfer_pin'])) {
+        throw new Exception(__("You must enter your transfer PIN"));
       }
     }
     // update user info
@@ -24418,6 +24568,26 @@ class User
       if (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/', $password)) {
         throw new ValidationException(__("Your password must contain at least one special character. Please try another"));
       }
+    }
+  }
+
+  /**
+   * check_pin ✅
+   *
+   * @param string $pin
+   * @return void
+   */
+  public function check_pin($pin)
+  {
+    global $system;
+    /* check pin length */
+    if (strlen($pin) != 6) {
+      throw new ValidationException(__("Your transfer PIN must be 6 characters long. Please try another"));
+    }
+
+    /* check if PIN is only numeric */
+    if (!preg_match('/^\d+$/', $pin)) {
+      throw new ValidationException(__("Your PIN must contain only numbers. Please try another"));
     }
   }
 

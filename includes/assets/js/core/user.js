@@ -827,6 +827,14 @@ $(function () {
   $('body').on('click', '.js_autocomplete', function () {
     var input = $(this).find('input').trigger('focus');
   });
+  /* replicate inputs into the actual input */
+  $('body').on('input', '.js_autocomplete input', function () {
+    var _this = $(this);
+    var query = _this.val();
+    var parent = _this.parents('.js_autocomplete');
+
+    parent.find('input[type="hidden"]').val(query);
+  });
   /* show and get the results if any */
   $('body').on('keyup', '.js_autocomplete input', function () {
     var _this = $(this);

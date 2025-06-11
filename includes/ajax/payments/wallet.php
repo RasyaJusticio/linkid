@@ -26,10 +26,32 @@ try {
       }
 
       // process
-      $user->wallet_transfer($_POST['send_to_id'], $_POST['amount']);
+      if (is_numeric($_POST['send_to_id'])) {
+        $user->wallet_transfer($_POST['send_to_id'], $_POST['amount']);
+      } else {
+        $sendToId = $user->get_user_by_username($_POST['send_to_id'], false, false);
+
+        $user->wallet_transfer($sendToId['user_id'] ?? "", $_POST['amount']);
+      }
 
       // return
       return_json(['callback' => 'window.location = site_path + "/wallet?wallet_transfer_succeed"']);
+      break;
+
+    case 'wallet_receive':
+      // valid inputs
+      if (!isset($_POST['pin']) || !is_numeric($_POST['pin'])) {
+        throw new Exception(__("Enter a valid transfer PIN"));
+      }
+      if (!isset($_POST['amount']) || !is_numeric($_POST['amount']) || $_POST['amount'] < 0) {
+        throw new Exception(__("Enter valid amount of money"));
+      }
+
+      // process
+      $user->wallet_receive($_POST['receive_from_id'], $_POST['amount'], $_POST['pin']);
+
+      // return
+      return_json(['callback' => 'window.location = site_path + "/wallet?wallet_receive_succeed"']);
       break;
 
     case 'send_tip':
@@ -167,15 +189,24 @@ try {
 
     case 'get_user_info':
       // valid inputs
-      if (!isset($_POST['user_id']) || !is_numeric($_POST['user_id']) || $_POST['user_id'] < 0) {
+      if (!isset($_POST['user_id'])) {
         throw new Exception(__("Enter valid user id"));
       }
 
-      $target_user = $user->wallet_get_user($_POST['user_id']);
-      if (!isset($target_user)) {
-            $_SESSION['transfer_fail_message'] = "Scanned QR Code invalid";
-            return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/wallet?transfer_send_failed"']);
-            break;
+      if (is_numeric($_POST['user_id'])) {
+        $target_user = $user->wallet_get_user($_POST['user_id']);
+      } else {
+        $target_user = $user->get_user_by_username($_POST['user_id'], false, false);
+      }
+
+      if (!isset($target_user) || empty($target_user)) {
+        if ($_POST['is_from_qr']) {
+          $_SESSION['transfer_fail_message'] = "Scanned QR Code invalid";
+          return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/wallet?transfer_send_failed"']);
+          break;
+        } else {
+          throw new Exception(__("User not found"));
+        }
       }
         
       $target_user['user_picture'] = get_picture($target_user['user_picture'], $target_user['user_gender']);

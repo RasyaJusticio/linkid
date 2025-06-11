@@ -267,6 +267,9 @@ msgstr "Pengaturan"
 msgid "Change Password"
 msgstr "Ubah Kata Sandi"
 
+msgid "Change Transfer PIN"
+msgstr "Ubah PIN Transfer"
+
 #: settings.php:103 content/themes/default/templates/settings.tpl:92
 #: content/themes/default/templates/settings.security.tpl:53
 msgid "Manage Sessions"
@@ -3532,6 +3535,9 @@ msgstr "Fungsi ini terputus oleh administrator"
 msgid "There is no enough credit in your wallet, Recharge your wallet to continue"
 msgstr "Dompet Anda tidak cukup untuk dibeli"
 
+msgid "There is no enough credit in their wallet"
+msgstr "Dompet tujuan tidak memiliki kredit yang cukup"
+
 # msgid "Upgrade Now"
 #: includes/class-user.php:5419 includes/class-user.php:16586
 #: includes/class-user.php:17134 includes/class-user.php:17195
@@ -4448,7 +4454,7 @@ msgstr "Anda harus memasukkan jumlah aktual"
 #: includes/class-user.php:17119
 #, fuzzy
 msgid "You can't transfer more than"
-msgstr "Anda tidak dapat mengunggah file yang melebihi"
+msgstr "Anda tidak dapat transfer yang melebihi"
 
 #: includes/class-user.php:17123
 msgid "You must search for a user to send money to"
@@ -4458,10 +4464,16 @@ msgstr "Anda perlu mencari pengguna untuk mengirim uang"
 msgid "You can't send money to yourself!"
 msgstr "Anda tidak dapat mengirim uang kepada diri sendiri!"
 
+msgid "You can't receive money to yourself!"
+msgstr "Anda tidak dapat menerima uang dari diri sendiri!"
+
 #: includes/class-user.php:17130 includes/class-user.php:17180
 #: includes/class-user.php:17187
 msgid "You can't send money to this user!"
 msgstr "Anda tidak dapat mengirim uang kepada pengguna ini!"
+
+msgid "You can't receive money from this user!"
+msgstr "Anda tidak dapat menerima uang dari pengguna ini!"
 
 # msgid "This feature has been disabled by the admin"
 #: includes/class-user.php:17166
@@ -4979,6 +4991,9 @@ msgstr "Undangan SMS tidak dapat dikirim"
 msgid "Your current password is incorrect"
 msgstr "Kata sandi yang salah"
 
+msgid "Your current transfer PIN is incorrect"
+msgstr "Transfer PIN Anda yang sekarang salah"
+
 #: includes/class-user.php:21575 includes/ajax/admin/users.php:164
 msgid "You must enter first name"
 msgstr "Anda harus memasukkan nama Anda"
@@ -5055,11 +5070,17 @@ msgstr "Fungsi ini terputus oleh administrator"
 msgid "Your passwords do not match"
 msgstr "Kata sandi tidak cocok"
 
+msgid "Your transfer PINs do not match"
+msgstr "Kedua transfer PIN anda tidak sama"
+
 #: includes/class-user.php:21746 includes/class-user.php:22351
 #: includes/class-user.php:23189 includes/class-user.php:23411
 #: includes/ajax/admin/users.php:113
 msgid "Your password must be at least 6 characters long. Please try another"
 msgstr "Kata sandi harus setidaknya 6 karakter. Tolong coba yang lain"
+
+msgid "Your transfer PIN must be 6 characters long. Please try another"
+msgstr "Transfer PIN Anda harus memiliki 6 karakter. Mohon coba yang lain"
 
 # msgid "Your password must be at least 6 characters long. Please try another"
 #: includes/class-user.php:21749 includes/class-user.php:22354
@@ -5068,6 +5089,9 @@ msgstr "Kata sandi harus setidaknya 6 karakter. Tolong coba yang lain"
 #, fuzzy
 msgid "Your password must be less than 64 characters long. Please try another"
 msgstr "Kata sandi harus setidaknya 6 karakter. Tolong coba yang lain"
+
+msgid "Your PIN must contain only numbers. Please try another"
+msgstr "Transfer PIN Anda hanya diperbolehkan untuk memiliki nomor. Mohon coba yang lain"
 
 #: includes/class-user.php:21766
 msgid ""
@@ -5671,6 +5695,9 @@ msgstr "File diunggah"
 #: includes/ajax/payments/wallet.php:41
 msgid "Enter valid amount of money for example '50'"
 msgstr "Masukkan jumlah uang yang valid misalnya '50'"
+
+msgid "Enter a valid transfer PIN"
+msgstr "Masukkan sebuah transfer PIN yang valid"
 
 #: includes/ajax/payments/authorize.php:47
 #: includes/ajax/payments/authorize.php:71
@@ -7033,6 +7060,9 @@ msgstr "Informasi tentang profil Anda diperbarui"
 #: includes/ajax/users/settings.php:131
 msgid "Your password has been updated"
 msgstr "Kata sandi Anda diperbarui"
+
+msgid "Your transfer PIN has been updated"
+msgstr "Transfer PIN Anda telah diperbarui"
 
 #: includes/ajax/users/settings.php:139
 msgid "Your two-factor authentication settings have been updated"
@@ -14808,6 +14838,9 @@ msgstr "Pesan hanya akan dikirim ke alamat email situs web"
 msgid "Send to"
 msgstr "Kirim ke"
 
+msgid "Receive From"
+msgstr "Terima dari"
+
 #: content/themes/default/templates/admin.newsletter.tpl:31
 msgid "All Users"
 msgstr "Semua"
@@ -16684,11 +16717,14 @@ msgstr "Kirim dan Transfer Uang"
 #: content/themes/default/templates/wallet.tpl:118
 #: content/themes/default/templates/wallet.tpl:124
 msgid "Your"
-msgstr "Alamat email Anda"
+msgstr "Anda"
 
 #: content/themes/default/templates/wallet.tpl:64
 msgid "transfer transaction successfuly sent"
-msgstr "Terjemahan berhasil dikirim"
+msgstr "transaksi transfer berhasil dikirim"
+
+msgid "transfer transaction successfuly received"
+msgstr "transaksi transfer berhasil diterima"
 
 #: content/themes/default/templates/wallet.tpl:70
 #: content/themes/default/templates/wallet.tpl:76
@@ -16743,11 +16779,25 @@ msgstr "Kirim dan Terima Uang"
 msgid "Send Money"
 msgstr "Transfer Saldo"
 
+msgid "Sending To"
+msgstr "Mengirim Kepada"
+
+#: content/themes/default/templates/wallet.tpl:154
+#: content/themes/default/templates/_js_templates.tpl:1430
+msgid "Receive Money"
+msgstr "Terima Saldo"
+
+msgid "Receiving From"
+msgstr "Menerima Dari"
+
 #: content/themes/default/templates/wallet.tpl:162
 #: content/themes/default/templates/wallet.tpl:246
 #: content/themes/default/templates/_js_templates.tpl:1402
 msgid "Replenish Credit"
 msgstr "Topup Saldo"
+
+msgid "Top Up Credit"
+msgstr "Isi Saldo"
 
 #: content/themes/default/templates/wallet.tpl:167
 #: content/themes/default/templates/wallet.tpl:250
@@ -16776,6 +16826,9 @@ msgstr "Saldo Galang Dana"
 #, fuzzy
 msgid "Monetization Credit"
 msgstr "Saldo Monetize"
+
+msgid "Withdraw Credit"
+msgstr "Tarik Saldo"
 
 #: content/themes/default/templates/wallet.tpl:201
 msgid "Wallet Transactions"
@@ -21515,7 +21568,15 @@ msgstr "dan maksimum"
 #: content/themes/default/templates/_js_templates.tpl:1439
 #, fuzzy
 msgid "The maximum amount you can transfer is"
-msgstr "Jumlah minimum uang yang dapat ditarik pengguna"
+msgstr "Jumlah maximum yang dapat Anda transfer adalah"
+
+#, fuzzy
+msgid "The maximum amount you can receive is"
+msgstr "Jumlah maximum yang dapat Anda terima adalah"
+
+#, fuzzy
+msgid "Maximum amount"
+msgstr "Jumlah maximum"
 
 #: content/themes/default/templates/_js_templates.tpl:1470
 msgid "Withdraw Affiliates Credit"
@@ -23267,6 +23328,9 @@ msgstr "Keamanan"
 msgid "Current Password"
 msgstr "Konfirmasikan kata sandi saat ini"
 
+msgid "Current Transfer PIN"
+msgstr "Transfer PIN saat ini"
+
 #: content/themes/default/templates/settings.account.tpl:126
 msgid "You need to enter your current password for security check"
 msgstr "Anda harus memasukkan kata sandi Anda saat ini untuk pemeriksaan keamanan"
@@ -23811,6 +23875,12 @@ msgstr "Kata sandi baru Anda"
 #: content/themes/default/templates/settings.security.tpl:28
 msgid "Confirm New Password"
 msgstr "Konfirmasikan kata sandi baru"
+
+msgid "Your New Transfer PIN"
+msgstr "Transfer PIN baru Anda"
+
+msgid "Confirm New Transfer PIN"
+msgstr "Konfirmasi Transfer PIN baru"
 
 #: content/themes/default/templates/settings.security.tpl:50
 msgid "Log Out Of All Sessions"
@@ -24758,8 +24828,14 @@ msgstr "Nyalakan paket trial. Paket trial hanya bisa dibeli sekali"
 
 # \---------------- #
 # QRCode
+msgid "My QR"
+msgstr "QR Saya"
+
 msgid "QR Request"
 msgstr "QR Terima"
+
+msgid "QR Receive"
+msgstr "QR Minta"
 
 msgid "QR Pay"
 msgstr "QR Bayar"
@@ -26424,3 +26500,13 @@ msgstr "Hormat"
 
 msgid "Quality"
 msgstr "Kualitas"
+
+msgid "You must enter valid amount of money"
+msgstr "Anda harus memasukkan sejumlah uang yang benar"
+
+msgid "You must enter a valid transfer PIN"
+msgstr "Anda harus memasukkan transfer PIN yang benar"
+
+msgid "The given transfer PIN is incorrect"
+msgstr "Transfer PIN yang dimasukkan salah"
+

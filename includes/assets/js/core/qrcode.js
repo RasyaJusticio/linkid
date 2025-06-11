@@ -9,6 +9,7 @@ const QR_CANVAS_HEIGHT = 1748;
 let bgImage = new Image();
 let containerImage = new Image();
 let logoImage = new Image();
+let verifiedImage = new Image();
 let isImagesReady = false;
 
 // TODO: Translate error messages
@@ -162,6 +163,7 @@ function initiateQRScanner(modalId, nextModalId) {
  * @param {string} options.transferToken - The token associated with the transfer (potentially encoded in the QR).
  * @param {string} options.fullName - The full name of the user (for display or encoding).
  * @param {string} options.userName - The username of the user (for display or encoding).
+ * @param {string} options.userVerified - The verified state of the user, either '0' or '1'.
  *
  * @returns {Promise<void>} Resolves when the QR code has been successfully drawn to the canvas.
  *
@@ -202,6 +204,7 @@ async function drawQRToCanvas(canvasId, options) {
  * @param {Object} options - Data used to personalize the QR code with user-specific info.
  * @param {string} options.fullName - The full name of the user to display above the QR code.
  * @param {string} options.userName - The username of the user, displayed with an `@` prefix.
+ * @param {string} options.userVerified - The verified state of the user, either '0' or '1'.
  * @param {string} options.transferToken - A token identifying the QR code, shown beneath the username.
  *
  * @returns {void}
@@ -312,6 +315,21 @@ async function drawQR(context, canvas, qrImage, options) {
       context.restore();
     })();
 
+    // Verified
+    if (options.userVerified === "1") {
+      (function () {
+        const Y = 360;
+        const SIZE = 188;
+
+        context.save();
+
+        context.globalAlpha = 0.4;
+        context.drawImage(verifiedImage, QR_CANVAS_WIDTH - 100 - SIZE, Y, SIZE, SIZE);
+
+        context.restore();
+      })();
+    }
+
     canvas.dataset.transferToken = options.transferToken;
     canvas.dataset.isReady = "true";
   } catch (error) {
@@ -333,6 +351,7 @@ async function loadImages() {
   bgImage = await loadImage("qr-gradient.jpeg");
   containerImage = await loadImage("qr-gradient-2.png");
   logoImage = await loadImage("linkid_full_logo_white.png");
+  verifiedImage = await loadImage("svg/verified_badge.svg");
 
   isImagesReady = true;
 }

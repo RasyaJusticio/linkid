@@ -1863,6 +1863,7 @@
               (function () {
                 const userFullname = "{$user->_data['user_firstname']} {$user->_data['user_lastname']}";
                 const userName = "{$user->_data['user_name']}";
+                const userVerified = "{$user->_data['user_verified']}";
                 const transferToken = "{$user->_data['user_transfer_token']}";
                 const qrCodeUri = "{{$qrcode_uri}}";
 
@@ -1870,7 +1871,8 @@
                     qrCodeURI: qrCodeUri,
                     transferToken,
                     fullName: userFullname,
-                    userName
+                    userName,
+                    userVerified
                 });
               })();
             </script>

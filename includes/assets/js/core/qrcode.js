@@ -15,10 +15,10 @@ let isImagesReady = false;
 // TODO: Translate error messages
 function initiateQRScanner(modalId, nextModalId) {
   const baseModalElem = document.getElementById("modal");
-  const modalElem = document.getElementById(modalId);
-  const readerElem = modalElem.querySelector(".video-qr-reader");
-  const $error = $(modalElem.querySelector(".alert.alert-danger"));
+  const readerElem = baseModalElem.querySelector("#reader");
+  const $error = $(baseModalElem.querySelector(".alert.alert-danger"));
 
+  let initialStart = true;
   let isSuccessfull = false;
   let isProcessing = false;
 
@@ -31,13 +31,13 @@ function initiateQRScanner(modalId, nextModalId) {
     $.post(
       ajax_path + "payments/transfer.php?do=check_token",
       {
-        transfer_token: result.data,
+        transfer_token: result,
       },
       function (response) {
         isProcessing = false;
-        qrScanner.stop();
-
+        
         if (response.result == "valid") {
+          qrScanner.stop();
           isSuccessfull = true;
 
           const user = response.user;
@@ -60,17 +60,13 @@ function initiateQRScanner(modalId, nextModalId) {
     });
   };
 
-  var qrScanner = new QrScanner(readerElem, onSuccess, {
-    returnDetailedScanResult: true,
-    highlightScanRegion: true,
-    highlightCodeOutline: true,
-  });
+  var qrScanner = new Html5Qrcode("reader", false);
 
   const closedObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.attributeName === "class") {
         if (!baseModalElem.classList.contains("show")) {
-          cleanUp();
+          stop();
         }
       }
     });
@@ -79,10 +75,7 @@ function initiateQRScanner(modalId, nextModalId) {
   const deletedObserver = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       for (const removedNode of mutation.removedNodes) {
-        if (
-          removedNode === readerElem ||
-          removedNode.contains(readerElem)
-        ) {
+        if (removedNode === readerElem || removedNode.contains(readerElem)) {
           cleanUp();
           return;
         }
@@ -100,76 +93,42 @@ function initiateQRScanner(modalId, nextModalId) {
     subtree: true,
   });
 
+  function start() {
+    qrScanner
+      .start(
+        { facingMode: "environment" },
+        {
+          fps: 60,
+          qrbox: { width: 250, height: 250 }
+        },
+        onSuccess
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function stop() {
+    if (qrScanner.getState() !== 2) {
+      return;
+    }
+
+    qrScanner.stop().catch((err) => {
+      console.log(err);
+    });
+  }
+
   function cleanUp() {
-    qrScanner.stop();
-    qrScanner.destroy();
+    stop();
     qrScanner = null;
     closedObserver.disconnect();
     deletedObserver.disconnect();
   }
 
-  if (
-    !navigator.mediaDevices ||
-    typeof navigator.mediaDevices.getUserMedia !== "function"
-  ) {
-    $error
-      .html(
-        "Camera access is not supported in this browser or context. Please use a modern browser (e.g. Chrome, Firefox) and open this site via HTTPS.",
-      )
-      .slideDown();
-    return;
+  if (qrScanner.getState() === 1 && initialStart) {
+    initialStart = false;
+    start();
   }
-
-  navigator.mediaDevices
-    .getUserMedia({ video: true })
-    .then((stream) => {
-      stream.getTracks().forEach((track) => track.stop());
-      qrScanner.start();
-    })
-    .catch((err) => {
-      switch (err.name) {
-        case "NotAllowedError":
-          $error
-            .html(
-              "Camera access was denied. Please enable camera permissions in your browser settings to scan QR codes.",
-            )
-            .slideDown();
-          break;
-        case "PermissionDeniedError":
-          $error
-            .html(
-              "Camera access was denied. Please enable camera permissions in your browser settings to scan QR codes.",
-            )
-            .slideDown();
-          break;
-        case "NotFoundError":
-          $error
-            .html(
-              "No camera detected. Please connect a camera or try again on a different device.",
-            )
-            .slideDown();
-          console.log(
-            "No camera detected. Please connect a camera or try again on a different device.",
-          );
-          break;
-        case "NotReadableError":
-          $error
-            .html(
-              "Camera is currently unavailable or being used by another application.",
-            )
-            .slideDown();
-          break;
-        case "OverconstrainedError":
-          $error
-            .html("Unable to access the camera with the required settings.")
-            .slideDown();
-          break;
-        default:
-          $error
-            .html("An unexpected error occurred while accessing the camera.")
-            .slideDown();
-      }
-    });
 }
 
 /**

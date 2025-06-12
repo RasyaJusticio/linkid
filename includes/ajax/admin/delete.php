@@ -67,6 +67,14 @@ try {
       $db->query(sprintf("DELETE FROM system_provinces WHERE province_id = %s", secure($_POST['id'], 'int')));
       break;
 
+    case 'city':
+      // check admin|moderator permission
+      if (!$user->_is_admin) {
+        modal("MESSAGE", __("System Message"), __("You don't have the right permission to access this"));
+      }
+      $db->query(sprintf("DELETE FROM system_cities WHERE city_id = %s", secure($_POST['id'], 'int')));
+      break;
+
     case 'timezone':
       // check admin|moderator permission
       if (!$user->_is_admin) {

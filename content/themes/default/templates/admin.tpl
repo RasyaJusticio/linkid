@@ -136,7 +136,7 @@
               <!-- Languages -->
 
               <!-- Locations -->
-              {assign var="location_views" value=["countries", "provinces"]}
+              {assign var="location_views" value=["countries", "provinces", "cities"]}
               <li {if in_array($view, $location_views)}class="active" {/if}>
                 <a href="#locations" data-bs-toggle="collapse" {if in_array($view, $location_views)}aria-expanded="true" {/if}>
                   <i class="fa fa-cog fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Locations")}
@@ -153,6 +153,12 @@
                     <li {if $view == 'provinces'}class="active" {/if}>
                       <a href="{$system['system_url']}/{$control_panel['url']}/provinces">
                         <i class="fa fa-globe fa-lg fa-fw mr10"></i>{__("Provinces")}
+                      </a>
+                    </li>
+                    <!-- Cities -->
+                    <li {if $view == 'cites'}class="active" {/if}>
+                      <a href="{$system['system_url']}/{$control_panel['url']}/cities">
+                        <i class="fa fa-globe fa-lg fa-fw mr10"></i>{__("Cities")}
                       </a>
                     </li>
                   </ul>

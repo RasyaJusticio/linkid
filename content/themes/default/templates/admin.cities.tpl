@@ -2,20 +2,20 @@
   <div class="card-header with-icon">
     {if $sub_view == ""}
       <div class="float-end">
-        <a href="{$system['system_url']}/{$control_panel['url']}/provinces/add" class="btn btn-md btn-primary">
-          <i class="fa fa-plus mr5"></i>{__("Add New Provinces")}
+        <a href="{$system['system_url']}/{$control_panel['url']}/cities/add" class="btn btn-md btn-primary">
+          <i class="fa fa-plus mr5"></i>{__("Add New Cities")}
         </a>
       </div>
     {elseif $sub_view == "add" || $sub_view == "edit"}
       <div class="float-end">
-        <a href="{$system['system_url']}/{$control_panel['url']}/provinces" class="btn btn-md btn-light">
+        <a href="{$system['system_url']}/{$control_panel['url']}/cities" class="btn btn-md btn-light">
           <i class="fa fa-arrow-circle-left mr5"></i>{__("Go Back")}
         </a>
       </div>
     {/if}
-    <i class="fa fa-globe mr10"></i>{__("Provinces")}
-    {if $sub_view == "edit"} &rsaquo; {$data['province_name']}{/if}
-    {if $sub_view == "add"} &rsaquo; {__("Add New Provinces")}{/if}
+    <i class="fa fa-globe mr10"></i>{__("Cities")}
+    {if $sub_view == "edit"} &rsaquo; {$data['city_name']}{/if}
+    {if $sub_view == "add"} &rsaquo; {__("Add New Cities")}{/if}
   </div>
 
   {if $sub_view == ""}
@@ -30,20 +30,20 @@
               <th>{__("Alt Name")}</th>
               <th>{__("Default")}</th>
               <th>{__("Enabled")}</th>
-              <th>{__("Country")}</th>
+              <th>{__("Province")}</th>
               <th>{__("Actions")}</th>
             </tr>
           </thead>
           <tbody>
             {foreach $rows as $row}
               <tr>
-                <td>{$row['province_id']}</td>
+                <td>{$row['city_id']}</td>
                 <td>
-                  <a href="{$system['system_url']}/{$control_panel['url']}/provinces/edit/{$row['province_id']}">
-                    {$row['province_name']}
+                  <a href="{$system['system_url']}/{$control_panel['url']}/cities/edit/{$row['city_id']}">
+                    {$row['city_name']}
                   </a>
                 </td>
-                <td>{$row['province_alt_name']}</td>
+                <td>{$row['city_alt_name']}</td>
                 <td>
                   {if $row['default']}
                     <span class="badge rounded-pill badge-lg bg-success">{__("Yes")}</span>
@@ -59,15 +59,15 @@
                   {/if}
                 </td>
                 <td>
-                  <a href="{$system['system_url']}/{$control_panel['url']}/countries/edit/{$row['country_id']}">
-                    {$row['country_name']}
+                  <a href="{$system['system_url']}/{$control_panel['url']}/provinces/edit/{$row['province_id']}">
+                    {$row['province_name']}
                   </a>
                 </td>
                 <td>
-                  <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$system['system_url']}/{$control_panel['url']}/provinces/edit/{$row['province_id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
+                  <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$system['system_url']}/{$control_panel['url']}/cities/edit/{$row['city_id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
                     <i class="fa fa-pencil-alt"></i>
                   </a>
-                  <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_admin-deleter" data-handle="province" data-id="{$row['province_id']}">
+                  <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_admin-deleter" data-handle="city" data-id="{$row['city_id']}">
                     <i class="fa fa-trash-alt"></i>
                   </button>
                 </td>
@@ -80,7 +80,7 @@
 
   {elseif $sub_view == "edit"}
 
-    <form class="js_ajax-forms" data-url="admin/provinces.php?do=edit&id={$data['province_id']}">
+    <form class="js_ajax-forms" data-url="admin/cities.php?do=edit&id={$data['city_id']}">
       <div class="card-body">
         <div class="row form-group">
           <label class="col-md-3 form-label">
@@ -92,7 +92,7 @@
               <span class="slider round"></span>
             </label>
             <div class="form-text">
-              {__("Make it the default province of the site")}
+              {__("Make it the default city of the site")}
             </div>
           </div>
         </div>
@@ -114,35 +114,35 @@
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
-            {__("Province Name")}
+            {__("City Name")}
           </label>
           <div class="col-md-9">
-            <input class="form-control" name="province_name" value="{$data['province_name']}">
+            <input class="form-control" name="city_name" value="{$data['city_name']}">
           </div>
         </div>
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
-            {__("Province Alternative Name")}
+            {__("City Alt Name")}
           </label>
           <div class="col-md-9">
-            <input class="form-control" name="province_alt_name" value="{$data['province_alt_name']}">
+            <input class="form-control" name="city_alt_name" value="{$data['city_alt_name']}">
           </div>
         </div>
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
-            {__("Country")}
+            {__("Province")}
           </label>
           <div class="col-md-9">
-            <div class="combobox-container w-100" data-default="{$data['country_id']}" data-options="#country-combobox" data-hidden="#country">
-              <input type="text" id="_country" class="combobox form-control" placeholder="{__('Select Country')}" autocomplete="off" spellcheck="false">
-              <div id="country-combobox" class="combobox-options">
-                {foreach $country_data as $country}
-                <div class="combobox-option" data-value="{$country['country_id']}">{$country['country_name']}</div>
+            <div class="combobox-container w-100" data-default="{$data['province_id']}" data-options="#province-combobox" data-hidden="#province">
+              <input type="text" id="_province" class="combobox form-control" placeholder="{__('Select Province')}" autocomplete="off" spellcheck="false">
+              <div id="province-combobox" class="combobox-options">
+                {foreach $provinces as $province}
+                <div class="combobox-option" data-value="{$province['province_id']}">{$province['province_name']}</div>
                 {/foreach}
               </div>
-              <input type="hidden" id="country" name="country_id">
+              <input type="hidden" id="province" name="province_id">
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@
 
   {elseif $sub_view == "add"}
 
-    <form class="js_ajax-forms" data-url="admin/provinces.php?do=add">
+    <form class="js_ajax-forms" data-url="admin/cities.php?do=add">
       <div class="card-body">
         <div class="row form-group">
           <label class="col-md-3 form-label">
@@ -174,7 +174,7 @@
               <span class="slider round"></span>
             </label>
             <div class="form-text">
-              {__("Make it the default province of the site")}
+              {__("Make it the default city of the site")}
             </div>
           </div>
         </div>
@@ -196,35 +196,35 @@
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
-            {__("Province Name")}
+            {__("City Name")}
           </label>
           <div class="col-md-9">
-            <input class="form-control" name="province_name">
+            <input class="form-control" name="city_name">
           </div>
         </div>
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
-            {__("Province Alt Name")}
+            {__("City Alt Name")}
           </label>
           <div class="col-md-9">
-            <input class="form-control" name="province_alt_name">
+            <input class="form-control" name="city_alt_name">
           </div>
         </div>
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
-            {__("Country")}
+            {__("Province")}
           </label>
           <div class="col-md-9">
-            <div class="combobox-container w-100" data-default="{$data['country_id']}" data-options="#country-combobox" data-hidden="#country">
-              <input type="text" id="_country" class="combobox form-control" placeholder="{__('Select Country')}" autocomplete="off" spellcheck="false">
-              <div id="country-combobox" class="combobox-options">
-                {foreach $country_data as $country}
-                <div class="combobox-option" data-value="{$country['country_id']}">{$country['country_name']}</div>
+            <div class="combobox-container w-100" data-default="{$data['province_id']}" data-options="#province-combobox" data-hidden="#province">
+              <input type="text" id="_province" class="combobox form-control" placeholder="{__('Select Province')}" autocomplete="off" spellcheck="false">
+              <div id="province-combobox" class="combobox-options">
+                {foreach $provinces as $province}
+                <div class="combobox-option" data-value="{$province['province_id']}">{$province['province_name']}</div>
                 {/foreach}
               </div>
-              <input type="hidden" id="country" name="country_id">
+              <input type="hidden" id="province" name="province_id">
             </div>
           </div>
         </div>

@@ -66,7 +66,7 @@ function initiateQRScanner(modalId, nextModalId) {
     highlightCodeOutline: true,
   });
 
-  const observer = new MutationObserver((mutations) => {
+  const closedObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.attributeName === "class") {
         if (!baseModalElem.classList.contains("show")) {
@@ -76,16 +76,36 @@ function initiateQRScanner(modalId, nextModalId) {
     });
   });
 
-  observer.observe(baseModalElem, {
+  const deletedObserver = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      for (const removedNode of mutation.removedNodes) {
+        if (
+          removedNode === readerElem ||
+          removedNode.contains(readerElem)
+        ) {
+          cleanUp();
+          return;
+        }
+      }
+    }
+  });
+
+  closedObserver.observe(baseModalElem, {
     attributes: true,
     attributeFilter: ["class"],
+  });
+
+  deletedObserver.observe(baseModalElem, {
+    childList: true,
+    subtree: true,
   });
 
   function cleanUp() {
     qrScanner.stop();
     qrScanner.destroy();
     qrScanner = null;
-    observer.disconnect();
+    closedObserver.disconnect();
+    deletedObserver.disconnect();
   }
 
   if (
@@ -324,7 +344,13 @@ async function drawQR(context, canvas, qrImage, options) {
         context.save();
 
         context.globalAlpha = 0.4;
-        context.drawImage(verifiedImage, QR_CANVAS_WIDTH - 100 - SIZE, Y, SIZE, SIZE);
+        context.drawImage(
+          verifiedImage,
+          QR_CANVAS_WIDTH - 100 - SIZE,
+          Y,
+          SIZE,
+          SIZE,
+        );
 
         context.restore();
       })();

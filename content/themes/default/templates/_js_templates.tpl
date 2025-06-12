@@ -1894,7 +1894,7 @@
           </div>
           <div class="modal-body">
             <div class="video-container rounded">
-              <video class="video-qr-reader"></video>
+              <div class="video-qr-reader" id="reader"></div>
             </div>
             <!-- error -->
             <div class="alert alert-danger mb0 mt10 x-hidden"></div>
@@ -1910,25 +1910,23 @@
       </script>
 
       <script id="wallet-qr-scan-receive" type="text/template">
-        <div id="wallet-qr-scan-receive">
-          <div class="modal-header modal-qr-scanner">
-            <h6 class="modal-title">
-              {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
-              {__("QR Receive")}
-            </h6>
-            <button type="button" class="btn-action" data-toggle="modal" data-url="#wallet-receive">
-              {include file='__svg_icons.tpl' icon="money_receive_mono" width="24px" height="24px"}
-            </button>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-header modal-qr-scanner">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
+            {__("QR Receive")}
+          </h6>
+          <button type="button" class="btn-action" data-toggle="modal" data-url="#wallet-receive">
+            {include file='__svg_icons.tpl' icon="money_receive_mono" width="24px" height="24px"}
+          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="video-container rounded">
+            <div class="video-qr-reader" id="reader"></div>
           </div>
-          <div class="modal-body">
-            <div class="video-container rounded">
-              <video class="video-qr-reader"></video>
-            </div>
-            <!-- error -->
-            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
-            <!-- error -->
-          </div>
+          <!-- error -->
+          <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+          <!-- error -->
         </div>
 
         <script>

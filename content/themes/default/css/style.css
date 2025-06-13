@@ -414,7 +414,7 @@ body.night-mode .dropdown-divider {
   box-shadow:
     rgb(0 0 0 / 10%) 0px 10px 15px -3px,
     rgb(0 0 0 / 10%) 0px 4px 6px -4px;
-  background: "#ffffff";
+  background: #ffffff;
 }
 
 body.night-mode .combobox-options {
@@ -430,6 +430,11 @@ body.night-mode .combobox-options {
 
 body.night-mode .combobox-option {
   color: var(--body-color-dark);
+}
+
+.combobox-option:hover {
+  background-color: #f6f7f8;
+  cursor: pointer;
 }
 
 body.night-mode .combobox-option:focus,

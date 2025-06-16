@@ -189,6 +189,18 @@
           </div>
         </div>
 
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            {__("Withdrawal Request Fee")} ({$system['system_currency']})
+          </label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="wallet_fee_withdrawal" value="{$system['wallet_fee_withdrawal']}">
+            <div class="form-text">
+              {__("The fee charged for every withdrawal request")}
+            </div>
+          </div>
+        </div>
+
         <!-- success -->
         <div class="alert alert-success mt15 mb0 x-hidden"></div>
         <!-- success -->

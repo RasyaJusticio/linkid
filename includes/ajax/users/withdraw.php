@@ -35,10 +35,10 @@ try {
       if (is_empty($_POST['amount']) || !is_numeric($_POST['amount']) || $_POST['amount'] <= 0) {
         throw new Exception(__("You have to enter valid amount"));
       }
-      if ($_POST['amount'] < $system['wallet_min_withdrawal']) {
+      if ($_POST['amount'] < $system['wallet_min_withdrawal'] + $system['wallet_fee_withdrawal']) {
         throw new Exception(__("Your balance is less than the minimum withdrawal request amount"));
       }
-      if ($_POST['amount'] > $user->_data['user_wallet_balance']) {
+      if ($_POST['amount'] > $user->_data['user_wallet_balance'] + $system['wallet_fee_withdrawal']) {
         throw new Exception(__("Your balance is less than the requested amount"));
       }
       /* valid method */

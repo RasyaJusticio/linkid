@@ -1106,7 +1106,8 @@ try {
         'wallet_withdrawal_enabled' => secure($_POST['wallet_withdrawal_enabled']),
         'wallet_payment_method' => secure($wallet_payment_method),
         'wallet_payment_method_custom' => secure($_POST['wallet_payment_method_custom']),
-        'wallet_min_withdrawal' => secure($_POST['wallet_min_withdrawal'])
+        'wallet_min_withdrawal' => secure($_POST['wallet_min_withdrawal']),
+        'wallet_fee_withdrawal' => secure($_POST['wallet_fee_withdrawal'])
       ]);
       break;
 

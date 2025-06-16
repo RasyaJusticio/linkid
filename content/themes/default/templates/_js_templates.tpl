@@ -1407,7 +1407,7 @@
                 <span>{$system['system_currency_symbol']}</span>
                 <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
-              {include file="__money_amounts.tpl"}
+              {include file="__money_amounts.tpl" view="topup"}
             </div>
             <!-- error -->
             <div class="alert alert-danger mb0 mt10 x-hidden"></div>
@@ -1812,7 +1812,7 @@
                 <span>{$system['system_currency_symbol']}</span>
                 <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
                 <div class="form-text">
-                  {__("The minimum withdrawal request amount is")} {print_money($system['wallet_min_withdrawal']|format_number)}
+                  {__("The minimum withdrawal request amount is")} {print_money(($system['wallet_min_withdrawal'] + $system['wallet_fee_withdrawal'])|format_number)}
                 </div>
               </div>
               {include file="__money_amounts.tpl" view="withdraw" balance="{$user->_data['user_wallet_balance']}"}

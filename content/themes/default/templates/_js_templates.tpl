@@ -1525,6 +1525,7 @@
             {include file="__wallet_user_info.tpl"}
 
             <span class="money-total" id="send-money-total">Rp 0</span>
+            <span class="fee-total" id="send-fee-total">Rp 0</span>
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="send_to_id" value="{literal}{{user_id}}{/literal}">
@@ -1540,9 +1541,20 @@
         <script>
           (function () {
             const amount = "{literal}{{amount}}{/literal}";
+            const fee = "{literal}{{fee}}{/literal}";
+            const feePercent = "{$system['wallet_transfer_fee_percent']}";
+
             const sendMoneyTotal = document.getElementById('send-money-total');
+            const sendFeeTotal = document.getElementById('send-fee-total');
 
             sendMoneyTotal.innerText = printMoney(formatNumber(Number(amount)));
+
+            if (Number(fee) > 0) {
+              sendFeeTotal.classList.remove('hidden');
+              sendFeeTotal.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 10 + "%)";
+            } else {
+              sendFeeTotal.classList.add('hidden');
+            }
           })();
         </script>
       </script>
@@ -1564,6 +1576,7 @@
             {include file="__wallet_user_info.tpl"}
 
             <span class="money-total" id="receive-money-total">Rp 0</span>
+            <span class="fee-total" id="receive-fee-total">Rp 0</span>
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="receive_from_id" value="{literal}{{user_id}}{/literal}">
@@ -1578,9 +1591,20 @@
         <script>
           (function () {
             const amount = "{literal}{{amount}}{/literal}";
+            const fee = "{literal}{{fee}}{/literal}";
+            const feePercent = "{$system['wallet_transfer_fee_percent']}";
+
             const receiveMoneyTotal = document.getElementById('receive-money-total');
+            const receiveFeeTotal = document.getElementById('receive-fee-total');
 
             receiveMoneyTotal.innerText = printMoney(formatNumber(Number(amount)));
+
+            if (Number(fee) > 0) {
+              receiveFeeTotal.classList.remove('hidden');
+              receiveFeeTotal.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 10 + "%)";
+            } else {
+              receiveFeeTotal.classList.add('hidden');
+            }
 
             const pinInput = document.getElementById("pin");
             const form = pinInput.closest(".js_ajax-forms");

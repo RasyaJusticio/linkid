@@ -6942,6 +6942,36 @@
         <form class="js_ajax-forms" data-url="admin/settings.php?edit=payments_settings">
           <div class="card-body">
             <div class="heading-small mb20">
+              {__("Top Up")}
+            </div>
+            <div class="pl-md-4">
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Maximum Top Up Amount")} ({$system['system_currency']})
+                </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="payment_max_topup" value="{$system['payment_max_topup']}">
+                  <div class="form-text">
+                    {__("The maximum amount of money that the user can do (0 for unlimited)")}
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <label class="col-md-3 form-label">
+                  {__("Minimum Top Up Amount")} ({$system['system_currency']})
+                </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="payment_min_topup" value="{$system['payment_min_topup']}">
+                  <div class="form-text">
+                    {__("The minimum amount of money that the user can do")}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="heading-small mb20">
               {__("Fees")}
             </div>
             <div class="pl-md-4">

@@ -864,6 +864,8 @@ try {
       $_POST['payment_country_vat_enabled'] = (isset($_POST['payment_country_vat_enabled'])) ? '1' : '0';
       /* update */
       update_system_options([
+        'payment_max_topup' => secure($_POST['payment_max_topup']),
+        'payment_min_topup' => secure($_POST['payment_min_topup']),
         'payment_fees_enabled' => secure($_POST['payment_fees_enabled']),
         'payment_fees_percentage' => secure($_POST['payment_fees_percentage']),
         'payment_vat_enabled' => secure($_POST['payment_vat_enabled']),

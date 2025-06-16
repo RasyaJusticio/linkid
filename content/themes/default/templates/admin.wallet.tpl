@@ -54,7 +54,7 @@
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
-            {__("Maximum Transfer Amount")} ({$system['system_currency']})
+            {__("Maximum Top Up Amount")} ({$system['system_currency']})
           </label>
           <div class="col-md-9">
             <input type="text" class="form-control" name="wallet_max_transfer" value="{$system['wallet_max_transfer']}">

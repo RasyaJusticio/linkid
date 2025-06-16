@@ -66,6 +66,12 @@ try {
         if (!isset($_POST['amount']) || !is_numeric($_POST['amount']) || $_POST['amount'] < 0) {
             throw new Exception(__("Enter valid amount of money"));
         }
+        if ($_POST['amount'] < $system['payment_min_topup']) {
+            throw new Exception(__("The amount of money must be at least" . " " . print_money(format_number($system['payment_min_topup']))));
+        }
+        if ($_POST['amount'] > $system['payment_max_topup'] && $system['payment_max_topup'] != 0) {
+            throw new Exception(__("The amount of money must be less than" . " " . print_money(format_number($system['payment_max_topup']))));
+        }
 
         // return
         modal("#payment", "{'handle': 'wallet', 'price': '" . $_POST['amount'] . "', 'price_printed': '" . print_money(format_number($_POST['amount'])) . "', 'vat': '" . get_payment_vat_value($_POST['amount']) . "', 'vat_printed': '" . print_money(format_number(get_payment_vat_value($_POST['amount']))) . "', 'fees': '" . get_payment_fees_value($_POST['amount']) . "', 'fees': '" . print_money(format_number(get_payment_fees_value($_POST['amount']))) . "', 'total': '" . get_payment_total_value($_POST['amount']) . "', 'total_printed': '" . get_payment_total_value($_POST['amount'], true) . "'}");

@@ -8237,3 +8237,13 @@ function format_number($number, int $decimals = 0, string $decimal_separator = "
     return number_format((float)$number, $decimals, $decimal_separator, $thousands_separator);
 }
 
+function calculate_fee($amount, $fee_threshold, $fee_percent, $fee_min)
+{
+  if ($amount < $fee_threshold) {
+    return 0;
+  } else {
+    $calculated_fee = $amount * ($fee_percent / 100);
+    return max($calculated_fee, $fee_min);
+  }
+}
+

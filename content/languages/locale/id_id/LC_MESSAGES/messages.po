@@ -19534,10 +19534,26 @@ msgstr "Menghidupkan dan mematikan uang transfer antara pengguna"
 msgid "Maximum Transfer Amount"
 msgstr "Catatan transfer"
 
+#, fuzzy
+msgid "Maximum Top Up Amount"
+msgstr "Jumlah Maximum Top Up"
+
+#, fuzzy
+msgid "Minimum Top Up Amount"
+msgstr "Jumlah Minimum Top Up"
+
 # msgid "The minimum amount of money so user can send a withdrawal request"
 #: content/themes/default/templates/admin.wallet.tpl:62
 #, fuzzy
 msgid "The maximum amount of money so user can transfer to another user"
+msgstr "Jumlah minimum uang yang dapat ditarik pengguna"
+
+#, fuzzy
+msgid "The maximum amount of money that the user can do (0 for unlimited)"
+msgstr "Jumlah minimum uang yang dapat ditarik pengguna"
+
+#, fuzzy
+msgid "The minimum amount of money that the user can do"
 msgstr "Jumlah minimum uang yang dapat ditarik pengguna"
 
 #: content/themes/default/templates/admin.wallet.tpl:62

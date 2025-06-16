@@ -784,13 +784,15 @@ function openWalletConfirmation(event, userIdField, modalTarget) {
     return;
   }
 
-  $.post(ajax_path + "payments/wallet.php?do=get_user_info", {
-    user_id: userId
+  $.post(ajax_path + "payments/wallet.php?do=process_transaction", {
+    user_id: userId,
+    amount: data.amount,
   }, function(response) {
     if (response.result === "valid") {
       const user = response.user;
       modal(modalTarget, {
         'amount': data.amount,
+        'fee': response.fee,
         'user_id': user.user_id,
         'user_name': user.user_name,
         'user_fullname': `${user.user_firstname} ${user.user_lastname}`,
@@ -823,13 +825,24 @@ function openWalletQRConfirmation(event, targetUserData, modalTarget) {
     return;
   }
 
-  modal(modalTarget, {
-    'amount': data.amount,
-    'user_id': targetUserData.user_id,
-    'user_name': targetUserData.user_name,
-    'user_fullname': targetUserData.user_fullname,
-    'user_verified': targetUserData.user_verified === "1" ? true : false,
-    'user_picture': targetUserData.user_picture
+  $.post(ajax_path + "payments/wallet.php?do=process_transaction", {
+    user_id: targetUserData.user_id,
+    amount: data.amount,
+  }, function(response) {
+    if (response.result === "valid") {
+      const user = response.user;
+      modal(modalTarget, {
+        'amount': data.amount,
+        'fee': response.fee,
+        'user_id': user.user_id,
+        'user_name': user.user_name,
+        'user_fullname': `${user.user_firstname} ${user.user_lastname}`,
+        'user_verified': user.user_verified === "1" ? true : false,
+        'user_picture': user.user_picture
+      });
+    } else {
+      $error.html(__["You can't send money to this user!"]).slideDown();
+    }
   });
 }
 

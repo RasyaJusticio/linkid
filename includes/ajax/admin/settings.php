@@ -864,6 +864,8 @@ try {
       $_POST['payment_country_vat_enabled'] = (isset($_POST['payment_country_vat_enabled'])) ? '1' : '0';
       /* update */
       update_system_options([
+        'payment_max_topup' => secure($_POST['payment_max_topup']),
+        'payment_min_topup' => secure($_POST['payment_min_topup']),
         'payment_fees_enabled' => secure($_POST['payment_fees_enabled']),
         'payment_fees_percentage' => secure($_POST['payment_fees_percentage']),
         'payment_vat_enabled' => secure($_POST['payment_vat_enabled']),
@@ -1096,11 +1098,16 @@ try {
       update_system_options([
         'wallet_enabled' => secure($_POST['wallet_enabled']),
         'wallet_transfer_enabled' => secure($_POST['wallet_transfer_enabled']),
+        'wallet_min_transfer' => secure($_POST['wallet_min_transfer']),
         'wallet_max_transfer' => secure($_POST['wallet_max_transfer']),
+        'wallet_transfer_fee_threshold' => secure($_POST['wallet_transfer_fee_threshold']),
+        'wallet_transfer_fee_percent' => secure($_POST['wallet_transfer_fee_percent']),
+        'wallet_transfer_fee_min' => secure($_POST['wallet_transfer_fee_min']),
         'wallet_withdrawal_enabled' => secure($_POST['wallet_withdrawal_enabled']),
         'wallet_payment_method' => secure($wallet_payment_method),
         'wallet_payment_method_custom' => secure($_POST['wallet_payment_method_custom']),
-        'wallet_min_withdrawal' => secure($_POST['wallet_min_withdrawal'])
+        'wallet_min_withdrawal' => secure($_POST['wallet_min_withdrawal']),
+        'wallet_fee_withdrawal' => secure($_POST['wallet_fee_withdrawal'])
       ]);
       break;
 

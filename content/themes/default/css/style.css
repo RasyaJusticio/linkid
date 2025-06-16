@@ -11678,6 +11678,18 @@ body.night-mode .pwa_install_banner {
   display: block;
 }
 
+.fee-total {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-top: -0.7rem;
+  width: 100%;
+  display: block;
+
+  &.hidden {
+    display: none;
+  }
+}
+
 /* -- */
 
 /* KEYPAD */

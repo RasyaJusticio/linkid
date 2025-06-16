@@ -1551,7 +1551,7 @@
 
             if (Number(fee) > 0) {
               sendFeeTotal.classList.remove('hidden');
-              sendFeeTotal.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 10 + "%)";
+              sendFeeTotal.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 100 + "%)";
             } else {
               sendFeeTotal.classList.add('hidden');
             }
@@ -1601,7 +1601,7 @@
 
             if (Number(fee) > 0) {
               receiveFeeTotal.classList.remove('hidden');
-              receiveFeeTotal.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 10 + "%)";
+              receiveFeeTotal.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 100 + "%)";
             } else {
               receiveFeeTotal.classList.add('hidden');
             }
@@ -2050,7 +2050,7 @@
 
             if (Number(fee) > 0) {
               walletQRFee.classList.remove('hidden');
-              walletQRFee.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 10 + "%)";
+              walletQRFee.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 100 + "%)";
             } else {
               walletQRFee.classList.add('hidden');
             }
@@ -2146,7 +2146,7 @@
 
             if (Number(fee) > 0) {
               walletQRFee.classList.remove('hidden');
-              walletQRFee.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 10 + "%)";
+              walletQRFee.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 100 + "%)";
             } else {
               walletQRFee.classList.add('hidden');
             }

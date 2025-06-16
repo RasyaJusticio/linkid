@@ -54,12 +54,60 @@
 
         <div class="row form-group">
           <label class="col-md-3 form-label">
-            {__("Maximum Top Up Amount")} ({$system['system_currency']})
+            {__("Minimum Transfer Amount")} ({$system['system_currency']})
+          </label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="wallet_min_transfer" value="{$system['wallet_min_transfer']}">
+            <div class="form-text">
+              {__("The minimum amount of money so user can transfer to another user")} (0 {__("for unlimited")})
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            {__("Maximum Transfer Amount")} ({$system['system_currency']})
           </label>
           <div class="col-md-9">
             <input type="text" class="form-control" name="wallet_max_transfer" value="{$system['wallet_max_transfer']}">
             <div class="form-text">
               {__("The maximum amount of money so user can transfer to another user")} (0 {__("for unlimited")})
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            {__("Free Transfer Threshold")} ({$system['system_currency']})
+          </label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="wallet_transfer_fee_threshold" value="{$system['wallet_transfer_fee_threshold']}">
+            <div class="form-text">
+              {__("Transfers below this amount are free of charge")}
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            {__("Transfer Fee Percentage")}
+          </label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="wallet_transfer_fee_percent" value="{$system['wallet_transfer_fee_percent']}">
+            <div class="form-text">
+              {__("Applied to transfers equal to or above the threshold. Enter as a percentage (e.g. 0.3 for 0.3%)")}
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            {__("Minimum Transfer Fee")} ({$system['system_currency']})
+          </label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="wallet_transfer_fee_min" value="{$system['wallet_transfer_fee_min']}">
+            <div class="form-text">
+              {__("The minimum fee charged for transfers above the threshold")}
             </div>
           </div>
         </div>

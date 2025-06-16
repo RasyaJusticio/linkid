@@ -1098,7 +1098,11 @@ try {
       update_system_options([
         'wallet_enabled' => secure($_POST['wallet_enabled']),
         'wallet_transfer_enabled' => secure($_POST['wallet_transfer_enabled']),
+        'wallet_min_transfer' => secure($_POST['wallet_min_transfer']),
         'wallet_max_transfer' => secure($_POST['wallet_max_transfer']),
+        'wallet_transfer_fee_threshold' => secure($_POST['wallet_transfer_fee_threshold']),
+        'wallet_transfer_fee_percent' => secure($_POST['wallet_transfer_fee_percent']),
+        'wallet_transfer_fee_min' => secure($_POST['wallet_transfer_fee_min']),
         'wallet_withdrawal_enabled' => secure($_POST['wallet_withdrawal_enabled']),
         'wallet_payment_method' => secure($wallet_payment_method),
         'wallet_payment_method_custom' => secure($_POST['wallet_payment_method_custom']),

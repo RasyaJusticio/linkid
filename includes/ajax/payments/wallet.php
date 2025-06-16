@@ -187,8 +187,11 @@ try {
         return_json(['callback' => 'window.location = site_path + "/wallet?wallet_marketplace_succeed"']);
         break;
 
-    case 'get_user_info':
+    case 'process_transaction':
         // valid inputs
+        if (!isset($_POST['amount'])) {
+            throw new Exception(__("Enter valid amount"));
+        }
         if (!isset($_POST['user_id'])) {
             throw new Exception(__("Enter valid user id"));
         }
@@ -211,7 +214,7 @@ try {
         
         $target_user['user_picture'] = get_picture($target_user['user_picture'], $target_user['user_gender']);
 
-        return_json(['result' => 'valid', 'user' => $target_user]);
+        return_json(['result' => 'valid', 'fee' => calculate_fee($_POST['amount'], $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_min']), 'user' => $target_user]);
         break;
       
     default:

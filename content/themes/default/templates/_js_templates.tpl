@@ -1791,7 +1791,7 @@
                   {__("The minimum withdrawal request amount is")} {print_money($system['wallet_min_withdrawal']|format_number)}
                 </div>
               </div>
-              {include file="__money_amounts.tpl"}
+              {include file="__money_amounts.tpl" view="withdraw" balance="{$user->_data['user_wallet_balance']}"}
             </div>
             <div class="form-group">
               <label class="form-label">{__("Payment Method")}</label>

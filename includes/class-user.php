@@ -17195,6 +17195,9 @@ class User
     if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
       throw new Exception(__("You can't transfer more than") . " " . print_money(format_number($system['wallet_max_transfer'])));
     }
+    if ($system['wallet_min_transfer'] != 0 && $amount < $system['wallet_min_transfer']) {
+      throw new Exception(__("You can't transfer less than") . " " . print_money(format_number($system['wallet_min_transfer'])));
+    }
     /* validate target user */
     if (is_empty($user_id) || !is_numeric($user_id)) {
       throw new Exception(__("You must search for a user to send money to"));
@@ -17210,6 +17213,9 @@ class User
     if ($this->_data['user_wallet_balance'] < $amount) {
       throw new Exception(__("There is no enough credit in your wallet, Recharge your wallet to continue"). " " ."<strong class='text-link' data-toggle='modal' data-url='#wallet-replenish'>". __("Recharge Now") . "</strong>");
     }
+    /* calculate fee */
+    $fee = calculate_fee($amount, $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_percent']);
+    $amount += $fee;
     /* decrease viewer user wallet balance */
     $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($this->_data['user_id'], 'int')));
     /* log this transaction */
@@ -17277,6 +17283,9 @@ class User
     if ($user_data['user_wallet_balance'] < $amount) {
       throw new Exception(__("There is not enough credit in their wallet"));
     }
+    /* calculate fee */
+    $fee = calculate_fee($amount, $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_percent']);
+    $amount += $fee;
 
     /* decrease user id wallet balance */
     $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($user_id, 'int')));

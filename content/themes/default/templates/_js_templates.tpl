@@ -2024,6 +2024,7 @@
             {include file="__wallet_user_info.tpl"}
 
             <span class="money-total" id="wallet-qr-total">Rp 0</span>
+            <span class="fee-total" id="wallet-qr-fee">Rp 0</span>
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="send_to_id" value="{literal}{{user_id}}{/literal}">
@@ -2039,9 +2040,20 @@
         <script>
           (function () {
             const amount = "{literal}{{amount}}{/literal}";
+            const fee = "{literal}{{fee}}{/literal}";
+            const feePercent = "{$system['wallet_transfer_fee_percent']}";
+
             const walletQRTotal = document.getElementById('wallet-qr-total');
+            const walletQRFee = document.getElementById('wallet-qr-fee');
 
             walletQRTotal.innerText = printMoney(formatNumber(Number(amount)));
+
+            if (Number(fee) > 0) {
+              walletQRFee.classList.remove('hidden');
+              walletQRFee.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 10 + "%)";
+            } else {
+              walletQRFee.classList.add('hidden');
+            }
           })();
         </script>
       </script>
@@ -2124,9 +2136,20 @@
         <script>
           (function () {
             const amount = "{literal}{{amount}}{/literal}";
+            const fee = "{literal}{{fee}}{/literal}";
+            const feePercent = "{$system['wallet_transfer_fee_percent']}";
+
             const walletQRTotal = document.getElementById('wallet-qr-receive-total');
+            const walletQRFee = document.getElementById('wallet-qr-receive-fee');
 
             walletQRTotal.innerText = printMoney(formatNumber(Number(amount)));
+
+            if (Number(fee) > 0) {
+              walletQRFee.classList.remove('hidden');
+              walletQRFee.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 10 + "%)";
+            } else {
+              walletQRFee.classList.add('hidden');
+            }
 
             const pinInput = document.getElementById("pin");
             const form = pinInput.closest(".js_ajax-forms");

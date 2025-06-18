@@ -406,6 +406,46 @@ class User
   }
 
   /* ------------------------------- */
+  /* System Provinces */
+  /* ------------------------------- */
+  /**
+   * get_provinces ✅
+   * 
+   * @return array
+   */
+  public function get_provinces()
+  {
+    global $db, $system;
+    $provinces = [];
+    $get_provinces = $db->query("SELECT * FROM system_provinces ORDER BY province_name ASC");
+    if ($get_provinces->num_rows > 0) {
+      while ($province = $get_provinces->fetch_assoc()) {
+        $provinces[] = $province;
+      }
+    }
+    return $provinces;
+  }
+
+  /**
+   * get_provinces_by_country ✅
+   * 
+   * @param integer $country_id
+   * @return array
+   */
+  public function get_provinces_by_country($country_id)
+  {
+    global $db, $system;
+    $provinces = [];
+    $get_provinces = $db->query(sprintf("SELECT province_id as id, province_name as name FROM system_provinces WHERE country_id = %s ORDER BY province_name ASC", secure($country_id, 'int')));
+    if ($get_provinces->num_rows > 0) {
+      while ($province = $get_provinces->fetch_assoc()) {
+        $provinces[] = $province;
+      }
+    }
+    return $provinces;
+  }
+
+  /* ------------------------------- */
   /* System City */
   /* ------------------------------- */
   /**
@@ -437,6 +477,25 @@ class User
   }
 
   /**
+   * get_cities_by_province ✅
+   * 
+   * @param integer $province_id
+   * @return array
+   */
+  public function get_cities_by_province($province_id)
+  {
+    global $db, $system;
+    $cities = [];
+    $get_cities = $db->query(sprintf("SELECT city_id as id, city_name as name FROM system_cities WHERE province_id = %s ORDER BY city_name ASC", secure($province_id, 'int')));
+    if ($get_cities->num_rows > 0) {
+      while ($city = $get_cities->fetch_assoc()) {
+        $cities[] = $city;
+      }
+    }
+    return $cities;
+  }
+
+  /**
    * check_city 
    * 
    * @param integer $city_id
@@ -450,6 +509,28 @@ class User
       return true;
     }
     return false;
+  }
+
+  /* ------------------------------- */
+  /* System Districts */
+  /* ------------------------------- */
+  /**
+   * get_districts_by_city ✅
+   * 
+   * @param integer $city_id
+   * @return array
+   */
+  public function get_districts_by_city($city_id)
+  {
+    global $db, $system;
+    $districts = [];
+    $get_districts = $db->query(sprintf("SELECT district_id as id, district_name as name FROM system_districts WHERE city_id = %s ORDER BY district_name ASC", secure($city_id, 'int')));
+    if ($get_districts->num_rows > 0) {
+      while ($district = $get_districts->fetch_assoc()) {
+        $districts[] = $district;
+      }
+    }
+    return $districts;
   }
 
   /* ------------------------------- */

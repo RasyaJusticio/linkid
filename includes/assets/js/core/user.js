@@ -405,6 +405,22 @@ function tagify_ajax(selector) {
   });
 }
 
+function emptyLocationCombobox($input) {
+  $input.trigger("combobox:setvalue", { value: null });
+
+  const $parent = $input.parents('.combobox-container');
+  const $options = $($parent.data('options'));
+
+  $options.empty();
+
+  const nextInputId = $parent.data('next-input');
+
+  if (nextInputId) {
+    const $nextInput = $(nextInputId);
+    emptyLocationCombobox($nextInput);
+  }
+}
+
 
 $(function () {
 
@@ -892,12 +908,11 @@ $(function () {
     const locationType = $nextInputParent.data('loc-type');
 
     if (data.hasChanged && data.value) {
-      $nextInput.trigger("combobox:setvalue", { value: null });
-
       $.get(api[`location/${locationType}`], { id: data.value, view: "by_parent_id" }, 'json')
         .then(response => {
           const $nextOptions = $($nextInputParent.data('options'));
-          $nextOptions.empty();
+
+          emptyLocationCombobox($nextInput);
 
           response.data.forEach(item => {
             const html = `<div class="combobox-option" data-value="${item.id}">${item.name}</div>`;

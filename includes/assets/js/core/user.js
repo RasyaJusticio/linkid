@@ -875,8 +875,6 @@ $(function () {
     const $parent = $input.parents('.combobox-container');
 
     const locationType = $parent.data('loc-type');
-    const nextInputId = $parent.data('next-input');
-    const $nextInput = $(nextInputId);
 
     const defaultValue = $parent.data('default');
 
@@ -885,6 +883,25 @@ $(function () {
         $.get(api[`location/${locationType}`], { id: defaultValue, view: "by_id" }, 'json')
           .then(response => {
             const $options = $($parent.data('options'));
+
+            $options.empty();
+
+            response.data.forEach(item => {
+              const html = `<div class="combobox-option" data-value="${item.id}">${item.name}</div>`;
+              $options.append(html);
+            });
+          });
+      } else {
+        const nextInputId = $parent.data('next-input');
+        const $nextInput = $(nextInputId);
+        const $nextParent = $nextInput.parents('.combobox-container');
+        const nextLocationType = $nextParent.data('loc-type');
+
+        $.get(api[`location/${nextLocationType}`], { id: defaultValue, view: "by_parent_id" }, 'json')
+          .then(response => {
+            const $options = $($nextParent.data('options'));
+
+            $options.empty();
 
             response.data.forEach(item => {
               const html = `<div class="combobox-option" data-value="${item.id}">${item.name}</div>`;

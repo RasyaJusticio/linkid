@@ -23963,19 +23963,35 @@ class User
   {
     global $db;
     /* validate country */
-    if ($args['country'] == "none") {
+    if ($args['country'] == "none" || empty($args['country'])) {
       throw new ValidationException(__("You must select valid country"));
     } else {
       if (!$this->check_country($args['country'])) {
         throw new ValidationException(__("You must select valid country"));
       }
     }
+    /* validate province */
+    if ($args['province'] == "none" || empty($args['province'])) {
+      throw new ValidationException(__("You must select valid province"));
+    } else {
+      if (!$this->check_province($args['province'])) {
+        throw new ValidationException(__("You must select valid province"));
+      }
+    }
     /* validate city */
-    if ($args['city'] == "none") {
+    if ($args['city'] == "none" || empty($args['city'])) {
       throw new ValidationException(__("You must select valid city"));
     } else {
       if (!$this->check_city($args['city'])) {
         throw new ValidationException(__("You must select valid city"));
+      }
+    }
+    /* validate district */
+    if ($args['district'] == "none" || empty($args['district'])) {
+      throw new ValidationException(__("You must select valid district"));
+    } else {
+      if (!$this->check_district($args['district'])) {
+        throw new ValidationException(__("You must select valid district"));
       }
     }
     /* validate work website */
@@ -23991,7 +24007,7 @@ class User
       $args['work_url'] = 'null';
     }
     /* update user */
-    $db->query(sprintf("UPDATE users SET user_country = %s, user_work_title = %s, user_work_place = %s, user_work_url = %s, user_city = %s, user_hometown = %s, user_edu_major = %s, user_edu_school = %s, user_edu_class = %s WHERE user_id = %s", secure($args['country'], 'int'), secure($args['work_title']), secure($args['work_place']), secure($args['work_url']), secure($args['city']), secure($args['hometown']), secure($args['edu_major']), secure($args['edu_school']), secure($args['edu_class']), secure($this->_data['user_id'], 'int')));
+    $db->query(sprintf("UPDATE users SET user_country = %s, user_province = %s, user_city = %s, user_district = %s, user_work_title = %s, user_work_place = %s, user_work_url = %s, user_edu_major = %s, user_edu_school = %s, user_edu_class = %s WHERE user_id = %s", secure($args['country'], 'int'), secure($args['province'], 'int'), secure($args['city'], 'int'), secure($args['district'], 'int'), secure($args['work_title']), secure($args['work_place']), secure($args['work_url']), secure($args['edu_major']), secure($args['edu_school']), secure($args['edu_class']), secure($this->_data['user_id'], 'int')));
   }
 
   /**
@@ -24037,10 +24053,13 @@ class User
       if ($system['getting_started_location_required'] && is_empty($user_info['user_country'])) {
         throw new Exception(__("You must enter your location info"));
       }
+      if ($system['getting_started_location_required'] && is_empty($user_info['user_province'])) {
+        throw new Exception(__("You must enter your location info"));
+      }
       if ($system['getting_started_location_required'] && is_empty($user_info['user_city'])) {
         throw new Exception(__("You must enter your location info"));
       }
-      if ($system['getting_started_location_required'] && $system['location_info_enabled'] && is_empty($user_info['user_hometown'])) {
+      if ($system['getting_started_location_required'] && is_empty($user_info['user_district'])) {
         throw new Exception(__("You must enter your location info"));
       }
       /* check if work data required */

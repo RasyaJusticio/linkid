@@ -57,12 +57,24 @@
           </div>
         {/if}
 
-        <div class="form-group col-md-6">
+        {if $system['website_info_enabled']}
+          <div class="form-group col">
+            <label class="form-label">{__("Website")}</label>
+            <input type="text" class="form-control" name="website" value="{$user->_data['user_website']}">
+            <div class="form-text">
+              {__("Website link must start with http:// or https://")}
+            </div>
+          </div>
+        {/if}
+      </div>
+
+      <div class="row">
+        <div class="form-group col">
           {assign var="defaultCountryValue" value=$user->_data['user_country']|default:101}
 
           <label class="form-label" for="_country">{__("Country")}</label>
-          <div class="combobox-container w-100" data-default="{$defaultCountryValue}" data-options="#country-combobox" data-hidden="#country">
-            <input type="text" id="_country" class="combobox form-control" placeholder="{__('Select Country')}" autocomplete="off" spellcheck="false">
+          <div class="combobox-container w-100" data-default="{$defaultCountryValue}" data-options="#country-combobox" data-hidden="#country" data-loc-type="country" data-next-input="#_province">
+            <input type="text" id="_country" class="combobox location-combobox form-control"  placeholder="{__('Select Country')}" autocomplete="off" spellcheck="false">
             <div id="country-combobox" class="combobox-options">
               {foreach $countries as $country}
               <div class="combobox-option" data-value="{$country['country_id']}">{$country['country_name']}</div>
@@ -72,15 +84,38 @@
           </div>
         </div>
 
-        {if $system['website_info_enabled']}
-          <div class="form-group col-md-6">
-            <label class="form-label">{__("Website")}</label>
-            <input type="text" class="form-control" name="website" value="{$user->_data['user_website']}">
-            <div class="form-text">
-              {__("Website link must start with http:// or https://")}
-            </div>
+        <div class="form-group col">
+          {assign var="defaultProvinceValue" value=$user->_data['user_province']|default:35}
+
+          <label class="form-label" for="_province">{__("Province")}</label>
+          <div class="combobox-container w-100" data-default="{$defaultProvinceValue}" data-options="#province-combobox" data-hidden="#province" data-loc-type="province" data-next-input="#_city">
+            <input type="text" id="_province" class="combobox location-combobox form-control" placeholder="{__('Select Province')}" autocomplete="off" spellcheck="false">
+            <div id="province-combobox" class="combobox-options"></div>
+            <input type="hidden" id="province" name="province">
           </div>
-        {/if}
+        </div>
+
+        <div class="form-group col">
+          {assign var="defaultCityValue" value=$user->_data['user_city']|default:3573}
+
+          <label class="form-label" for="_city">{__("City")}</label>
+          <div class="combobox-container w-100" data-default="{$defaultCityValue}" data-options="#city-combobox" data-hidden="#city" data-loc-type="city" data-next-input="#_district">
+            <input type="text" id="_city" class="combobox location-combobox form-control" placeholder="{__('Select City')}" autocomplete="off" spellcheck="false">
+            <div id="city-combobox" class="combobox-options"></div>
+            <input type="hidden" id="city" name="city">
+          </div>
+        </div>
+
+        <div class="form-group col">
+          {assign var="defaultDistrictValue" value=$user->_data['user_district']|default:357305}
+
+          <label class="form-label" for="_district">{__("District")}</label>
+          <div class="combobox-container w-100" data-default="{$defaultDistrictValue}" data-options="#district-combobox" data-hidden="#district" data-loc-type="district">
+            <input type="text" id="_district" class="combobox location-combobox form-control" placeholder="{__('Select District')}" autocomplete="off" spellcheck="false">
+            <div id="district-combobox" class="combobox-options"></div>
+            <input type="hidden" id="district" name="district">
+          </div>
+        </div>
       </div>
 
       <div class="form-group">

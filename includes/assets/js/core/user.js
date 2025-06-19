@@ -31,6 +31,10 @@ api['users/shopping'] = ajax_path + "users/shopping.php";
 api['users/orders'] = ajax_path + "users/orders.php";
 api['users/addresses'] = ajax_path + "users/addresses.php";
 api['users/login_as'] = ajax_path + "users/login_as.php";
+/* location */
+api['location/province'] = ajax_path + "location/province.php";
+api['location/city'] = ajax_path + "location/city.php";
+api['location/district'] = ajax_path + "location/district.php";
 /* modules */
 api['modules/review'] = ajax_path + "modules/review.php";
 api['modules/delete'] = ajax_path + "modules/delete.php";
@@ -401,6 +405,22 @@ function tagify_ajax(selector) {
   });
 }
 
+function emptyLocationCombobox($input) {
+  $input.trigger("combobox:setvalue", { value: null });
+
+  const $parent = $input.parents('.combobox-container');
+  const $options = $($parent.data('options'));
+
+  $options.empty();
+
+  const nextInputId = $parent.data('next-input');
+
+  if (nextInputId) {
+    const $nextInput = $(nextInputId);
+    emptyLocationCombobox($nextInput);
+  }
+}
+
 
 $(function () {
 
@@ -739,25 +759,23 @@ $(function () {
   });
 
   // run combobox
-  $('.combobox').each(function() {
+  $('.combobox').each(function () {
     const $input = $(this);
     const $parent = $input.parents('.combobox-container');
     const optionsSelector = $parent.data('options');
     const hiddenSelector = $parent.data('hidden');
 
-    if (!optionsSelector || !hiddenSelector) {
-      console.error("Unable to find:", optionsSelector, hiddenSelector, ">>", $parent[0]);
-      return;
-    };
+    if (!optionsSelector || !hiddenSelector) return;
 
     const $options = $(optionsSelector);
     const $hiddenInput = $(hiddenSelector);
 
     function bindItems() {
-      $options.find('.combobox-option').off('click').on('click', function() {
+      $options.find('.combobox-option').off('click').on('click', function () {
         const $item = $(this);
         const value = $item.data('value');
         const text = $item.text();
+        const oldValue = $hiddenInput.val();
 
         $input.val(text);
         $hiddenInput.val(value);
@@ -767,26 +785,31 @@ $(function () {
         $item.addClass('selected');
 
         $input.trigger('combobox:selected', {
-          value: value,
+          value,
           label: text,
-          extra: $item.data()
+          hasChanged: oldValue !== value,
         });
       });
 
       const defaultValue = $parent.data('default');
       if (defaultValue !== undefined) {
         const $defaultItem = $options.find(`.combobox-option[data-value="${defaultValue}"]`);
-        if ($defaultItem.length >= 1) {
+        if ($defaultItem.length) {
           $defaultItem.trigger('click');
+          $input.trigger('combobox:selected', {
+            value: defaultValue,
+            label: $defaultItem.text(),
+            hasChanged: true,
+          });
         }
       }
     }
 
     bindItems();
 
-    $input.on('focus input', function() {
+    $input.on('focus input', function () {
       const filter = $input.val().toLowerCase();
-      $options.find('.combobox-option').each(function() {
+      $options.find('.combobox-option').each(function () {
         const $item = $(this);
         const text = $item.text().toLowerCase();
         $item.toggle(text.includes(filter));
@@ -794,13 +817,13 @@ $(function () {
       $options.show();
     });
 
-    $(document).on('click', function(e) {
+    $(document).on('click', function (e) {
       if (!$(e.target).closest($input).length && !$(e.target).closest($options).length) {
         $options.hide();
       }
     });
 
-    $input.on('keydown', function(e) {
+    $input.on('keydown', function (e) {
       const $visibleItems = $options.find('.combobox-option:visible');
       let $focused = $options.find('.combobox-option:focus');
 
@@ -818,9 +841,103 @@ $(function () {
       }
     });
 
+    $input.on('combobox:setvalue', function (e, detail) {
+      const value = detail?.value ?? null;
+
+      if (value === null || value === '') {
+        $input.val('');
+        $hiddenInput.val('');
+        $options.find('.combobox-option').removeClass('selected');
+
+        if (!detail.preventDefault) {
+          $input.trigger('combobox:selected', {
+            value: null,
+            label: '',
+            extra: {}
+          });
+        }
+        return;
+      }
+
+      const $targetItem = $options.find(`.combobox-option[data-value="${value}"]`);
+      if ($targetItem.length) {
+        $targetItem.trigger('click');
+      } else {
+        console.warn("combobox:setvalue — No matching item for value:", value);
+      }
+    });
+
     new MutationObserver(bindItems).observe($options[0], { childList: true });
   });
 
+  $('.location-combobox').each(function () {
+    const $input = $(this);
+    const $parent = $input.parents('.combobox-container');
+
+    const locationType = $parent.data('loc-type');
+
+    const defaultValue = $parent.data('default');
+
+    if (defaultValue != undefined || (typeof defaultValue === "string" && defaultValue.trim() !== "")) {
+      if (locationType !== 'country') {
+        $.get(api[`location/${locationType}`], { id: defaultValue, view: "by_id" }, 'json')
+          .then(response => {
+            const $options = $($parent.data('options'));
+
+            $options.empty();
+
+            response.data.forEach(item => {
+              const html = `<div class="combobox-option" data-value="${item.id}">${item.name}</div>`;
+              $options.append(html);
+            });
+          });
+      } else {
+        const nextInputId = $parent.data('next-input');
+        const $nextInput = $(nextInputId);
+        const $nextParent = $nextInput.parents('.combobox-container');
+        const nextLocationType = $nextParent.data('loc-type');
+
+        $.get(api[`location/${nextLocationType}`], { id: defaultValue, view: "by_parent_id" }, 'json')
+          .then(response => {
+            const $options = $($nextParent.data('options'));
+
+            $options.empty();
+
+            response.data.forEach(item => {
+              const html = `<div class="combobox-option" data-value="${item.id}">${item.name}</div>`;
+              $options.append(html);
+            });
+          });
+      }
+    }
+  });
+
+  // Location chaining
+  $('body').on('combobox:selected', '.location-combobox', function (event, data) {
+    const $input = $(this);
+    const $parent = $input.parents('.combobox-container');
+    const nextInputId = $parent.data('next-input');
+    const $nextInput = $(nextInputId);
+
+    if (!nextInputId || !$nextInput.length) return;
+
+    const $nextInputParent = $nextInput.parents('.combobox-container');
+    const locationType = $nextInputParent.data('loc-type');
+
+    if (data.hasChanged && data.value) {
+      $.get(api[`location/${locationType}`], { id: data.value, view: "by_parent_id" }, 'json')
+        .then(response => {
+          const $nextOptions = $($nextInputParent.data('options'));
+
+          emptyLocationCombobox($nextInput);
+
+          response.data.forEach(item => {
+            const html = `<div class="combobox-option" data-value="${item.id}">${item.name}</div>`;
+            $nextOptions.append(html);
+          });
+        });
+    }
+  });
 
   // run autocomplete
   /* focus the input */

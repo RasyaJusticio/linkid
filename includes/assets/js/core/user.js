@@ -864,7 +864,7 @@ $(function () {
 
     const defaultValue = $parent.data('default');
 
-    if (defaultValue != undefined) {
+    if (defaultValue != undefined && (typeof defaultValue === "string" && defaultValue.trim() !== "")) {
       if (locationType !== 'country') {
         $.get(api[`location/${locationType}`], { id: defaultValue, view: "by_id" }, 'json')
           .then(response => {
@@ -875,8 +875,6 @@ $(function () {
               $options.append(html);
             });
           });
-      } else {
-
       }
     }
   });

@@ -85,7 +85,7 @@
         </div>
 
         <div class="form-group col">
-          {assign var="defaultProvinceValue" value=$user->_data['user_province']}
+          {assign var="defaultProvinceValue" value=$user->_data['user_province']|default:35}
 
           <label class="form-label" for="_province">{__("Province")}</label>
           <div class="combobox-container w-100" data-default="{$defaultProvinceValue}" data-options="#province-combobox" data-hidden="#province" data-loc-type="province" data-next-input="#_city">
@@ -96,7 +96,7 @@
         </div>
 
         <div class="form-group col">
-          {assign var="defaultCityValue" value=$user->_data['user_city']}
+          {assign var="defaultCityValue" value=$user->_data['user_city']|default:3573}
 
           <label class="form-label" for="_city">{__("City")}</label>
           <div class="combobox-container w-100" data-default="{$defaultCityValue}" data-options="#city-combobox" data-hidden="#city" data-loc-type="city" data-next-input="#_district">
@@ -107,13 +107,13 @@
         </div>
 
         <div class="form-group col">
-          {assign var="defaultDistrictValue" value=$user->_data['user_district']}
+          {assign var="defaultDistrictValue" value=$user->_data['user_district']|default:357305}
 
           <label class="form-label" for="_district">{__("District")}</label>
           <div class="combobox-container w-100" data-default="{$defaultDistrictValue}" data-options="#district-combobox" data-hidden="#district" data-loc-type="district">
             <input type="text" id="_district" class="combobox location-combobox form-control" placeholder="{__('Select District')}" autocomplete="off" spellcheck="false">
             <div id="district-combobox" class="combobox-options"></div>
-            <input type="hidden" id="city" name="city">
+            <input type="hidden" id="district" name="district">
           </div>
         </div>
       </div>

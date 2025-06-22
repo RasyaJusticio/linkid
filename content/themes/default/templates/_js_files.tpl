@@ -938,9 +938,22 @@
     <!-- Admin Code Editor -->
   {/if}
 
+  <!-- Qurani -->
+  {if $page == "qurani/index"}
+    <script>
+      var QUR_APP_URL = "{$system['qurani_url']}";
+      var QUR_USER_ID = "{$user->_data['user_id']}";
+      var QUR_LANGUAGE = "{$system['current_language']}";
+      var QUR_APPEARANCE = "{$system['theme_mode_night']}";
+      var QUR_SESSION = "{$user->_data['session_token']}";
+    </script>
+    <script src="{$system['system_url']}/includes/assets/js/core/qurani.js"></script>
+  {/if}
+  <!-- Qurani -->
+
   <!-- QRCode -->
   {if $page == "wallet"}
-    <script src="{$system['system_url']}/includes/assets/js/core/qrcode.js?v=4"></script>
+    <script src="{$system['system_url']}/includes/assets/js/core/qrcode.js"></script>
   {/if}
   <!-- QRCode -->
 

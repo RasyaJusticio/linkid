@@ -796,11 +796,6 @@ $(function () {
         const $defaultItem = $options.find(`.combobox-option[data-value="${defaultValue}"]`);
         if ($defaultItem.length) {
           $defaultItem.trigger('click');
-          $input.trigger('combobox:selected', {
-            value: defaultValue,
-            label: $defaultItem.text(),
-            hasChanged: true,
-          });
         }
       }
     }
@@ -879,19 +874,7 @@ $(function () {
     const defaultValue = $parent.data('default');
 
     if (defaultValue != undefined || (typeof defaultValue === "string" && defaultValue.trim() !== "")) {
-      if (locationType !== 'country') {
-        $.get(api[`location/${locationType}`], { id: defaultValue, view: "by_id" }, 'json')
-          .then(response => {
-            const $options = $($parent.data('options'));
-
-            $options.empty();
-
-            response.data.forEach(item => {
-              const html = `<div class="combobox-option" data-value="${item.id}">${item.name}</div>`;
-              $options.append(html);
-            });
-          });
-      } else {
+      if (locationType === 'country') {
         const nextInputId = $parent.data('next-input');
         const $nextInput = $(nextInputId);
         const $nextParent = $nextInput.parents('.combobox-container');

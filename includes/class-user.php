@@ -490,7 +490,7 @@ class User
   {
     global $db, $system;
     $cities = [];
-    $get_cities = $db->query("SELECT * FROM kota ORDER BY nama ASC");
+    $get_cities = $db->query("SELECT * FROM system_cities ORDER BY city_name ASC");
     if ($get_cities->num_rows > 0) {
       while ($city = $get_cities->fetch_assoc()) {
         $cities[] = $city;
@@ -622,7 +622,7 @@ class User
   {
     global $db;
 
-    $get_city = $db->query(sprintf("SELECT time_zone_id FROM kota WHERE id = %s", secure($city_id, 'int')));
+    $get_city = $db->query(sprintf("SELECT time_zone_id FROM system_cities WHERE city_id = %s", secure($city_id, 'int')));
     if ($get_city->num_rows == 0) {
       return null;
     }

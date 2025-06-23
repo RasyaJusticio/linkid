@@ -7840,6 +7840,8 @@ if (isset($_POST['submit'])) {
   // add the admin account
   $db->query(sprintf("INSERT INTO users (user_group, user_email, user_name, user_firstname, user_password, user_gender, user_email_verified, user_activated, user_approved, user_verified, user_started, user_registered) VALUES ('1', %s, %s, %s, %s, '1', '1', '1', '1', '1', '1', %s)", secure($_POST['admin_email']), secure($_POST['admin_username']), secure($_POST['admin_username']), secure(_password_hash($_POST['admin_password'])), secure(gmdate('Y-m-d H:i:s')))) or _error("Error", $db->error);
 
+  $cron_key = bin2hex(random_bytes(32));
+  $sub_app_token = bin2hex(random_bytes(32));
 
   // create config file
   $config_string = '<?php  
@@ -7853,6 +7855,8 @@ if (isset($_POST['submit'])) {
     define("DEBUGGING", false);
     define("DEFAULT_LOCALE", \'en_us\');
     define("LICENCE_KEY", \'' . $licence_key . '\');
+    define("CRON_KEY", \'' . $cron_key . '\');
+    define("SUB_APP_TOKEN", \'' . $sub_app_token . '\');
     ?>';
   $config_file = 'includes/config.php';
   $handle = fopen($config_file, 'w') or _error("Error", "Intsaller wizard cannot create the config file");

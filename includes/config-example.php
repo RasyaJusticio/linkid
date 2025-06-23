@@ -59,3 +59,6 @@ define('LICENCE_KEY', '');
 
 // ** Qurani URL ** //
 define("QURANI_URL", 'https://example.com');
+
+// ** SUB-APP TOKEN KEY ** //
+define('SUB_APP_TOKEN', '');

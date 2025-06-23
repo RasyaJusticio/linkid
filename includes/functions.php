@@ -8247,3 +8247,19 @@ function calculate_fee($amount, $fee_threshold, $fee_percent, $fee_min)
   }
 }
 
+function generate_sub_app_token($expiresIn = 180): string
+{
+  global $user;
+    $payload = [
+        'user_id'    => $user->_data['user_id'],
+        'expires_at' => time() + $expiresIn,
+        'nonce'      => bin2hex(random_bytes(8))
+    ];
+
+    $json      = json_encode($payload);
+    $encoded   = base64_encode($json);
+    $signature = hash_hmac('sha256', $encoded, SUB_APP_TOKEN);
+
+    return $encoded . '.' . $signature;
+}
+

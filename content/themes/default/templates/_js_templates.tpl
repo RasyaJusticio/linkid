@@ -1405,7 +1405,7 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl" view="topup"}
             </div>
@@ -1443,7 +1443,7 @@
               <label class="form-label">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
@@ -1487,7 +1487,7 @@
               <label class="form-label">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
@@ -1638,7 +1638,7 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
@@ -1674,7 +1674,7 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
@@ -1708,7 +1708,7 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
@@ -1742,7 +1742,7 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
@@ -1776,7 +1776,7 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
@@ -1810,7 +1810,7 @@
               <label class="form-label" for="amount">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
                 <div class="form-text">
                   {__("The minimum withdrawal request amount is")} {print_money(($system['wallet_min_withdrawal'] + $system['wallet_fee_withdrawal'])|format_number)}
                 </div>
@@ -1980,7 +1980,7 @@
               <label class="form-label">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
@@ -2078,7 +2078,7 @@
               <label class="form-label">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>

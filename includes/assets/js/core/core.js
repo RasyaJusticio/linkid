@@ -779,7 +779,8 @@ function openWalletConfirmation(event, userIdField, modalTarget) {
     data[key] = value;
   }
 
-  const amount = data.amount;
+  const anInstance = AutoNumeric.getAutoNumericElement($form.find('[name=amount]')[0]);
+  const amount = anInstance.getNumber();
   if (Number(amount) <= 0) {
     $error.html(__['You must enter valid amount of money']).slideDown();
     return;
@@ -793,12 +794,12 @@ function openWalletConfirmation(event, userIdField, modalTarget) {
 
   $.post(ajax_path + "payments/wallet.php?do=process_transaction", {
     user_id: userId,
-    amount: data.amount,
+    amount: amount,
   }, function(response) {
     if (response.result === "valid") {
       const user = response.user;
       modal(modalTarget, {
-        'amount': data.amount,
+        'amount': amount,
         'fee': response.fee,
         'user_id': user.user_id,
         'user_name': user.user_name,
@@ -826,7 +827,8 @@ function openWalletQRConfirmation(event, targetUserData, modalTarget) {
     data[key] = value;
   }
 
-  const amount = data.amount;
+  const anInstance = AutoNumeric.getAutoNumericElement($form.find('[name=amount]')[0]);
+  const amount = anInstance.getNumber();
   if (Number(amount) <= 0) {
     $error.html(__['You must enter valid amount of money']).slideDown();
     return;
@@ -834,12 +836,12 @@ function openWalletQRConfirmation(event, targetUserData, modalTarget) {
 
   $.post(ajax_path + "payments/wallet.php?do=process_transaction", {
     user_id: targetUserData.user_id,
-    amount: data.amount,
+    amount: amount,
   }, function(response) {
     if (response.result === "valid") {
       const user = response.user;
       modal(modalTarget, {
-        'amount': data.amount,
+        'amount': amount,
         'fee': response.fee,
         'user_id': user.user_id,
         'user_name': user.user_name,

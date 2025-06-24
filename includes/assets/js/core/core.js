@@ -378,6 +378,13 @@ function modal() {
   if (typeof initialize_modal === "function") {
     initialize_modal();
   }
+
+  AutoNumeric.multiple('.input_money-IDR', {
+    digitGroupSeparator: '.',
+    decimalCharacter: ',',
+    decimalPlaces: 0,
+    unformatOnSubmit: true,
+  });
 }
 
 
@@ -2587,7 +2594,13 @@ $(function () {
 
     const setAmount = $(this).data("amount"); 
 
-    input.val(setAmount);
+    const anInstance = AutoNumeric.getAutoNumericElement(input[0]);
+
+    if (anInstance) {
+      anInstance.set(setAmount);
+    } else {
+      input.val(setAmount);
+    }
   });
 
   // group sluggify

@@ -17367,7 +17367,7 @@ class User
       throw new Exception(__("There is no enough credit in your wallet, Recharge your wallet to continue"). " " ."<strong class='text-link' data-toggle='modal' data-url='#wallet-replenish'>". __("Recharge Now") . "</strong>");
     }
     /* calculate fee */
-    $fee = calculate_fee($amount, $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_percent']);
+    $fee = calculate_fee($amount, $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_min']);
     $amount += $fee;
     /* decrease viewer user wallet balance */
     $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($this->_data['user_id'], 'int')));
@@ -17437,9 +17437,8 @@ class User
       throw new Exception(__("There is not enough credit in their wallet"));
     }
     /* calculate fee */
-    $fee = calculate_fee($amount, $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_percent']);
+    $fee = calculate_fee($amount, $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_min']);
     $amount += $fee;
-
     /* decrease user id wallet balance */
     $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($user_id, 'int')));
     /* log this transaction */

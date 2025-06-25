@@ -1540,18 +1540,18 @@
         </form>
         <script>
           (function () {
-            const amount = "{literal}{{amount}}{/literal}";
-            const fee = "{literal}{{fee}}{/literal}";
+            const amount = Number("{literal}{{amount}}{/literal}");
+            const fee = Number("{literal}{{fee}}{/literal}");
             const feePercent = "{$system['wallet_transfer_fee_percent']}";
 
             const sendMoneyTotal = document.getElementById('send-money-total');
             const sendFeeTotal = document.getElementById('send-fee-total');
 
-            sendMoneyTotal.innerText = printMoney(formatNumber(Number(amount)));
+            sendMoneyTotal.innerText = printMoney(formatNumber(amount + fee));
 
             if (Number(fee) > 0) {
               sendFeeTotal.classList.remove('hidden');
-              sendFeeTotal.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 100 + "%)";
+              sendFeeTotal.innerText = printMoney(formatNumber(amount)) + " + Admin fee " + printMoney(formatNumber(fee));
             } else {
               sendFeeTotal.classList.add('hidden');
             }
@@ -1590,18 +1590,18 @@
         </form>
         <script>
           (function () {
-            const amount = "{literal}{{amount}}{/literal}";
-            const fee = "{literal}{{fee}}{/literal}";
+            const amount = Number("{literal}{{amount}}{/literal}");
+            const fee = Number("{literal}{{fee}}{/literal}");
             const feePercent = "{$system['wallet_transfer_fee_percent']}";
 
             const receiveMoneyTotal = document.getElementById('receive-money-total');
             const receiveFeeTotal = document.getElementById('receive-fee-total');
 
-            receiveMoneyTotal.innerText = printMoney(formatNumber(Number(amount)));
+            receiveMoneyTotal.innerText = printMoney(formatNumber(amount + fee));
 
             if (Number(fee) > 0) {
               receiveFeeTotal.classList.remove('hidden');
-              receiveFeeTotal.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 100 + "%)";
+              receiveFeeTotal.innerText = printMoney(formatNumber(amount)) + " + Admin fee " + printMoney(formatNumber(fee));
             } else {
               receiveFeeTotal.classList.add('hidden');
             }
@@ -2039,18 +2039,18 @@
         </form>
         <script>
           (function () {
-            const amount = "{literal}{{amount}}{/literal}";
-            const fee = "{literal}{{fee}}{/literal}";
+            const amount = Number("{literal}{{amount}}{/literal}");
+            const fee = Number("{literal}{{fee}}{/literal}");
             const feePercent = "{$system['wallet_transfer_fee_percent']}";
 
             const walletQRTotal = document.getElementById('wallet-qr-total');
             const walletQRFee = document.getElementById('wallet-qr-fee');
 
-            walletQRTotal.innerText = printMoney(formatNumber(Number(amount)));
+            walletQRTotal.innerText = printMoney(formatNumber(amount + fee));
 
             if (Number(fee) > 0) {
               walletQRFee.classList.remove('hidden');
-              walletQRFee.innerText = "+ " + printMoney(formatNumber(Number(fee))) + " (" + Number(feePercent) * 100 + "%)";
+              walletQRFee.innerText = printMoney(formatNumber(amount)) + " + Admin fee " + printMoney(formatNumber(fee));
             } else {
               walletQRFee.classList.add('hidden');
             }

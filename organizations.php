@@ -21,6 +21,11 @@ try {
       // page header
       page_header(__("Organization") . " &rsaquo; " . __("Apply"));
 
+      if ($user->is_organization_user($user->_data['user_id'])) {
+        redirect('/settings');
+        break;
+      }
+
       page_footer("organization.apply");
       break;
   

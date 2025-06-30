@@ -20,6 +20,11 @@ user_access(true);
 if ($user->_data['user_demo']) {
   modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
 }
+// check if is organization account
+if ($user->is_organization_user($user->_data['user_id'])) {
+  modal("ERROR", __("Already Applied"), __("You already applied to be an organization account"));
+}
+
 
 try {
 

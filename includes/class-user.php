@@ -24884,6 +24884,23 @@ class User
   /* ------------------------------- */
 
   /**
+   * is_organization_user
+   * 
+   * @param number $user_id
+   * @return void
+   */
+  public function is_organization_user($user_id)
+  {
+    global $db;
+    $query = $db->query(sprintf("SELECT COUNT(*) as count FROM org_organizations WHERE created_by = %s", secure($user_id)));
+    if ($query->fetch_assoc()['count'] > 0) {
+      return true;
+    }
+    return false;
+
+  }
+
+  /**
    * apply_to_be_organization
    * 
    * @param array $args
@@ -24919,11 +24936,13 @@ class User
             name, 
             slug,
             balance,
+            status,
             created_by
       ) VALUES (%s, %s, %s, %s)",
       secure($args['name']),
       secure($args['slug']),
       0,
+      'active',
       secure($this->_data['user_id'], 'int')
     ));
   }

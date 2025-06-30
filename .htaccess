@@ -329,6 +329,9 @@ RewriteRule ^admincp/([^/]+)/?$ admin.php?view=$1 [L,QSA]
 RewriteRule ^admincp/([^/]+)/([^/]+)/?$ admin.php?view=$1&sub_view=$2 [L,QSA]
 RewriteRule ^admincp/([^/]+)/([^/]+)/([^/]+)/?$ admin.php?view=$1&sub_view=$2&id=$3 [L,QSA]
 
+# Organizations
+RewriteRule ^organizations/apply/?$ organizations.php?view=apply [L,QSA]
+
 # Qurani
 RewriteRule ^qurani/?$ qurani/index.php [L,QSA]
 RewriteRule ^qurani/riwayat?$ qurani/riwayat.php [L,QSA]

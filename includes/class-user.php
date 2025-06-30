@@ -24837,6 +24837,10 @@ class User
         $query = $db->query(sprintf("SELECT * FROM `groups` WHERE group_name = %s", secure($username)));
         break;
 
+      case 'organization':
+        $query = $db->query(sprintf("SELECT * FROM `org_organizations` WHERE name = %s", secure($username)));
+        break;
+
       default:
         $query = $db->query(sprintf("SELECT * FROM users WHERE user_name = %s", secure($username)));
         break;
@@ -24873,5 +24877,54 @@ class User
       return true;
     }
     return false;
+  }
+
+  /* ------------------------------- */
+  /* Organization ✅ */
+  /* ------------------------------- */
+
+  /**
+   * apply_to_be_organization
+   * 
+   * @param array $args
+   * @return void
+   */
+  public function apply_to_be_organization($args = [])
+  {
+    global $db;
+
+    /* validate name */
+    if (is_empty($args['name'])) {
+      throw new Exception(__("You must enter the name of your organization"));
+    }
+    if (strlen($args['name']) < 3) {
+      throw new Exception(__("Organization name must be at least 3 characters long. Please try another"));
+    }
+    /* validate slug */
+    if (is_empty($args['slug'])) {
+      throw new Exception(__("You must enter a slug for your organization"));
+    }
+    if (!valid_username($args['slug'], '.-')) {
+      throw new Exception(__("Please enter a valid slug (a-z0-9.-) with minimum 3 characters long"));
+    }
+    if ($this->reserved_username($args['slug'])) {
+      throw new Exception(__("You can't use") . " " . $args['slug'] . " " . __("as slug"));
+    }
+    if ($this->check_username($args['slug'], 'organization')) {
+      throw new Exception(__("Sorry, it looks like this slug") . " " . $args['slug'] . " " . __("belongs to an existing organization"));
+    }
+
+    $db->query(sprintf(
+      "INSERT INTO org_organizations (
+            name, 
+            slug,
+            balance,
+            created_by
+      ) VALUES (%s, %s, %s, %s)",
+      secure($args['name']),
+      secure($args['slug']),
+      0,
+      secure($this->_data['user_id'], 'int')
+    ));
   }
 }

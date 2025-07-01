@@ -22764,6 +22764,31 @@ class User
         $db->query(sprintf("UPDATE users SET user_two_factor_enabled = %s, user_two_factor_type = %s WHERE user_id = %s", secure($args['two_factor_enabled']), secure($system['two_factor_type']), secure($this->_data['user_id'], 'int')));
         break;
 
+      case 'org_info':
+        /* validate name */
+        if (is_empty($args['name'])) {
+          throw new Exception(__("You must enter the name of your organization"));
+        }
+        if (strlen($args['name']) < 3) {
+          throw new Exception(__("Organization name must be at least 3 characters long. Please try another"));
+        }
+        /* validate slug */
+        if (is_empty($args['slug'])) {
+          throw new Exception(__("You must enter a slug for your organization"));
+        }
+        if (!valid_username($args['slug'], '.-')) {
+          throw new Exception(__("Please enter a valid slug (a-z0-9.-) with minimum 3 characters long"));
+        }
+        if ($this->reserved_username($args['slug'])) {
+          throw new Exception(__("You can't use") . " " . $args['slug'] . " " . __("as slug"));
+        }
+        if ($this->check_username($args['slug'], 'organization')) {
+          throw new Exception(__("Sorry, it looks like this slug") . " " . $args['slug'] . " " . __("belongs to an existing organization"));
+        }
+        /* update organization */
+        $db->query(sprintf("UPDATE org_organizations SET name = %s, slug = %s WHERE created_by = %s", secure($args['name']), secure($system['slug']), secure($this->_data['user_id'], 'int')));
+        break;
+
       case 'privacy':
         /* prepare */
         $privacy = ['me', 'friends', 'public'];
@@ -24842,7 +24867,7 @@ class User
         break;
 
       default:
-        $query = $db->query(sprintf("SELECT * FROM users WHERE user_name = %s", secure($username)));
+        $query = $db->query(sprintf("SELECT * FROM users WHERE user_name = %s WHERE NOT created_by = %s", secure($username), secure($this->_data['user_id'], 'int')));
         break;
     }
     if ($query->num_rows > 0) {
@@ -24897,7 +24922,22 @@ class User
       return true;
     }
     return false;
+  }
 
+  /**
+   * get_organization_from_user ✅
+   * 
+   * @param integer $user_id
+   * @return array
+   */
+  public function get_organization_from_user($user_id)
+  {
+    global $db;
+    $get_org = $db->query(sprintf("SELECT * FROM org_organizations WHERE created_by = %s", secure($user_id, 'int')));
+    if ($get_org->num_rows == 0) {
+      return null;
+    }
+    return $get_org->fetch_assoc();
   }
 
   /**

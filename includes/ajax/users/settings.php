@@ -172,6 +172,14 @@ try {
       }
       break;
 
+    case 'org_info':
+      // change settings
+      $user->settings($_GET['edit'], $_POST);
+
+      // return
+      return_json(['success' => true, 'message' => __("Your organizations settings have been updated")]);
+      break;
+
     case 'notifications':
       // change settings
       $user->settings($_GET['edit'], $_POST);

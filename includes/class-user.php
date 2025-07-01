@@ -94,6 +94,7 @@ class User
   public $_is_admin = false;
   public $_is_moderator = false;
   public $_is_banned = false;
+  public $_is_organization = false;
   public $_data = [];
   public $_master_data = [];
 
@@ -183,6 +184,7 @@ class User
         $this->_is_admin = ($this->_data['user_group'] == 1) ? true : false;
         $this->_is_moderator = ($this->_data['user_group'] == 2) ? true : false;
         $this->_is_banned = (!$this->_is_admin && $this->_data['user_banned']) ? true : false;
+        $this->_is_organization = $this->is_organization_user($this->_data['user_id']);
         $this->_data['user_banned_message'] = ($this->_data['user_banned_message']) ? $this->_data['user_banned_message'] : __("Your account has been banned");
         /* check if user adult */
         $this->_data['user_age'] = get_user_age($this->_data['user_birthdate']);

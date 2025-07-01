@@ -40,6 +40,18 @@
     {include file='__svg_icons.tpl' icon="settings" class="main-icon mr10" width="20px" height="20px"}
     {__("Settings")}
   </a>
+  {if $user->_is_organization}
+    <a class="dropdown-item" href="{$system['system_url']}/organizations">
+      {include file='__svg_icons.tpl' icon="org" class="main-icon mr10" width="20px" height="20px"}
+      {__("Organizations")}
+    </a>
+  {else}
+    <a class="dropdown-item" href="{$system['system_url']}/organizations/apply">
+      {include file='__svg_icons.tpl' icon="org" class="main-icon mr10" width="20px" height="20px"}
+      {__("Become an Organization")}
+    </a>
+  {/if}
+
   {if $user->_is_admin}
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="{$system['system_url']}/admincp">

@@ -948,7 +948,7 @@
   <!-- QRCode -->
 
   <!-- Slugify -->
-  {if in_array($page, ["group", "groups", "organization.apply", "settings", "settings.organization"])}
+  {if in_array($page, ["group", "groups", "organizations", "organizations.apply"])}
     <script src="{$system['system_url']}/node_modules/slugify/slugify.js"></script>
   {/if}
   <!-- Slugify -->

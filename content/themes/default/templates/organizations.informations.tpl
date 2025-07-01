@@ -1,5 +1,5 @@
   <div class="card-header with-icon">
-    {include file='__svg_icons.tpl' icon="work" class="main-icon mr15" width="24px" height="24px"}{__("Organization Info")}
+    {include file='__svg_icons.tpl' icon="company" class="main-icon no-fill mr15" width="24px" height="24px"}{__("Organization Info")}
   </div>
   <form class="js_ajax-forms" data-url="users/settings.php?edit=org_info">
     <div class="card-body">

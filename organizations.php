@@ -14,23 +14,42 @@ require('bootloader.php');
 user_access(false, true);
 
 try {
+  $org = $user->get_organization_from_user($user->_data['user_id']);
+
   switch ($_GET['view']) {
     case "":
+      // page header
+      page_header(__("Organizations") . " &rsaquo; " . __("Dashboard"));
+
+      break;
+    case "informations":
+      // page header
+      page_header(__("Organizations") . " &rsaquo; " . __("Informations"));
+
       break;
     case "apply":
       // page header
-      page_header(__("Organization") . " &rsaquo; " . __("Apply"));
+      page_header(__("Organizations") . " &rsaquo; " . __("Apply"));
 
-      if ($user->is_organization_user($user->_data['user_id'])) {
-        redirect('/settings');
+      if ($user->_is_organization) {
+        redirect('/organizations');
         break;
       }
 
-      page_footer("organization.apply");
+      page_footer('organizations.apply');
+
       break;
-  
   }
 
+  /* assign variables */
+  $smarty->assign('org', $org);
+  $smarty->assign('view', $_GET['view']);
+  $smarty->assign('sub_view', $_GET['sub_view']);
 } catch (Exception $e) {
   _error(__("Error"), $e->getMessage());
+}
+
+// page footer
+if ($_GET['view'] != "apply") {
+  page_footer('organizations');
 }

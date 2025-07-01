@@ -22788,7 +22788,7 @@ class User
           throw new Exception(__("Sorry, it looks like this slug") . " " . $args['slug'] . " " . __("belongs to an existing organization"));
         }
         /* update organization */
-        $db->query(sprintf("UPDATE org_organizations SET name = %s, slug = %s WHERE created_by = %s", secure($args['name']), secure($system['slug']), secure($this->_data['user_id'], 'int')));
+        $db->query(sprintf("UPDATE org_organizations SET name = %s, slug = %s WHERE created_by = %s", secure($args['name']), secure($args['slug']), secure($this->_data['user_id'], 'int')));
         break;
 
       case 'privacy':

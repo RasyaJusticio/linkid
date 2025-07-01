@@ -143,18 +143,24 @@ body.night-mode .header-icon.active * {
 /* == */
 
 /* main-icons */
-.main-icon,
-.main-icon *,
-.x-form-tools {
+.main-icon, .x-form-tools {
   color: #5e72e4 !important;
-  fill: #5e72e4 !important;
 }
 
-body.night-mode .main-icon,
-body.night-mode .main-icon *,
-body.night-mode .x-form-tools {
-  color: #5e72e4 !important;
+.main-icon.no-fill, .x-form-tools {
+  fill: none !important;
+
+  * {
+    fill: none !important;
+  }
+}
+
+.main-icon:not(.no-fill), .x-form-tools {
   fill: #5e72e4 !important;
+
+  * {
+    fill: #5e72e4 !important;
+  }
 }
 
 /* == */

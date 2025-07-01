@@ -1072,6 +1072,10 @@
 
     {include file='../images/svg/org.svg'}
 
+  {elseif $icon == "company"}
+
+    {include file='../images/svg/company.svg'}
+
   {/if}
 
 </div>

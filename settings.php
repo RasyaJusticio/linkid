@@ -333,27 +333,6 @@ try {
       }
       break;
 
-    case 'organization':
-      // get content
-      switch ($_GET['sub_view']) {
-        case '':
-          // page header
-          page_header(__("Settings") . " &rsaquo; " . __("Organization"));
-
-          $org = $user->get_organization_from_user($user->_data['user_id']);
-
-          $smarty->assign('org', $org);
-          
-          break;
-
-        default:
-          _error(404);
-          break;
-      }
-
-
-      break;
-
     case 'notifications':
       // page header
       page_header(__("Settings") . " &rsaquo; " . __("Notifications"));

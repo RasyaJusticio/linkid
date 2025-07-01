@@ -22787,6 +22787,7 @@ class User
         if ($this->check_username($args['slug'], 'organization')) {
           throw new Exception(__("Sorry, it looks like this slug") . " " . $args['slug'] . " " . __("belongs to an existing organization"));
         }
+
         /* update organization */
         $db->query(sprintf("UPDATE org_organizations SET name = %s, slug = %s WHERE created_by = %s", secure($args['name']), secure($args['slug']), secure($this->_data['user_id'], 'int')));
         break;
@@ -24865,11 +24866,11 @@ class User
         break;
 
       case 'organization':
-        $query = $db->query(sprintf("SELECT * FROM `org_organizations` WHERE name = %s", secure($username)));
+        $query = $db->query(sprintf("SELECT * FROM `org_organizations` WHERE name = %s AND NOT created_by = %s", secure($username), secure($this->data['user_id'])));
         break;
 
       default:
-        $query = $db->query(sprintf("SELECT * FROM users WHERE user_name = %s WHERE NOT created_by = %s", secure($username), secure($this->_data['user_id'], 'int')));
+        $query = $db->query(sprintf("SELECT * FROM users WHERE user_name = %s", secure($username)));
         break;
     }
     if ($query->num_rows > 0) {
@@ -24927,6 +24928,22 @@ class User
   }
 
   /**
+   * get_organization ✅
+   * 
+   * @param integer $org_id
+   * @return array
+   */
+  public function get_organization($org_id)
+  {
+    global $db;
+    $get_org = $db->query(sprintf("SELECT * FROM org_organizations WHERE id = %s", secure($org_id, 'int')));
+    if ($get_org->num_rows == 0) {
+      return null;
+    }
+    return $get_org->fetch_assoc();
+  }
+
+  /**
    * get_organization_from_user ✅
    * 
    * @param integer $user_id
@@ -24978,14 +24995,51 @@ class User
             name, 
             slug,
             balance,
-            status,
             created_by
       ) VALUES (%s, %s, %s, %s)",
       secure($args['name']),
       secure($args['slug']),
       0,
-      'active',
       secure($this->_data['user_id'], 'int')
     ));
+  }
+
+  /**
+   * get_org_sub_accounts
+   * 
+   * @param array $args
+   * @return array
+   */
+  public function get_org_sub_accounts($org_id)
+  {
+    global $db;
+
+    $org = $this->get_organization($org_id);
+
+    if (empty($org)) {
+      return null;
+    }
+
+    $accounts = [];
+    
+    $get_accounts = $db->query(sprintf(
+      "SELECT org_users.*, users.* 
+       FROM org_users 
+       JOIN users ON org_users.user_id = users.user_id 
+       WHERE org_users.organization_id = %s 
+         AND org_users.role = 'sub-account'",
+      secure($org_id, 'int')
+    ));
+    
+    if ($get_accounts && $get_accounts->num_rows > 0) {
+      while ($row = $get_accounts->fetch_assoc()) {
+        $row['user_picture'] = get_picture($row['user_picture'], $row['user_gender']);
+        $row['user_fullname'] = ($system['show_usernames_enabled']) ? $row['user_name'] : $row['user_firstname'] . " " . $row['user_lastname'];
+
+        $accounts[] = $row;
+      }
+    }
+
+    return $accounts;
   }
 }

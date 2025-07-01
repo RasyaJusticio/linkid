@@ -18,9 +18,26 @@
             </li>
             <li {if $view == "informations"}class="active" {/if}>
               <a href="{$system['system_url']}/organizations/informations">
-                <i class="fas fa-book fa-lg fa-fw main-icon mr10"></i>
+                {include file='__svg_icons.tpl' icon="company" class="main-icon no-fill mr10" width="24px" height="24px"}
                 {__("Informations")}
               </a>
+            </li>
+
+            {assign var="is_accounts" value="{in_array($view, ['sub-accounts'])}"}
+            <li {if $is_accounts}class="active" {/if}>
+              <a href="#accounts" data-bs-toggle="collapse" {if $is_accounts}aria-expanded="true" {/if}>
+                {include file='__svg_icons.tpl' icon="edit_profile" class="main-icon mr10" width="24px" height="24px"}
+                {__("Accounts")}
+              </a>
+              <div class='collapse {if $is_accounts}show{/if}' id="accounts">
+                <ul>
+                  <li {if $view == "sub-accounts"}class="active" {/if}>
+                    <a href="{$system['system_url']}/organizations/sub-accounts">
+                      {__("Sub-Accounts")}
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </div>
@@ -40,6 +57,8 @@
           {include file='settings.account.tpl'}
         {elseif $view == "informations"}
           {include file='organizations.informations.tpl'}
+        {elseif $view == "sub-accounts"}
+          {include file='organizations.sub-accounts.tpl'}
         {elseif $view == "apply"}
           {include file='organizations.apply.tpl'}
         {/if}

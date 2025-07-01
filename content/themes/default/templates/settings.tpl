@@ -113,33 +113,6 @@
               </div>
             </li>
 
-            {if $user->is_organization_user($user->_data['user_id'])}
-              <div class="divider mtb5"></div>
-
-              <li {if $view == "organization"}class="active" {/if}>
-                <a href="#org-settings" data-bs-toggle="collapse" {if $view == "organization"}aria-expanded="true" {/if}>
-                  {include file='__svg_icons.tpl' icon="" class="main-icon mr10" width="24px" height="24px"}
-                  {__("Organization")}
-                </a>
-                <div class='collapse {if $view == "organization"}show{/if}' id="org-settings">
-                  <ul>
-                    <li {if $view == "organization" && $sub_view == ""}class="active" {/if}>
-                      <a href="{$system['system_url']}/settings/organization">
-                        {__("Information")}
-                      </a>
-                    </li>
-                    {if $system['work_info_enabled']}
-                      <li {if $view == "profile" && $sub_view == "work"}class="active" {/if}>
-                        <a href="{$system['system_url']}/settings/profile/work">
-                          {__("Work")}
-                        </a>
-                      </li>
-                    {/if}
-                  </ul>
-                </div>
-              </li>
-            {/if}
-
             <div class="divider mtb5"></div>
 
             <li {if $view == "notifications"}class="active" {/if}>
@@ -397,8 +370,6 @@
           {include file='settings.profile.tpl'}
         {elseif $view == "security"}
           {include file='settings.security.tpl'}
-        {elseif $view == "organization"}
-          {include file='settings.organization.tpl'}
         {elseif $view == "privacy"}
           {include file='settings.privacy.tpl'}
         {elseif $view == "notifications"}

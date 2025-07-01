@@ -1,3 +1,4 @@
+{if $sub_view == ""}
   <div class="card-header with-icon">
     {include file='__svg_icons.tpl' icon="company" class="main-icon no-fill mr15" width="24px" height="24px"}{__("Organization Info")}
   </div>
@@ -43,3 +44,5 @@
       <button type="submit" class="btn btn-primary">{__("Save Changes")}</button>
     </div>
   </form>
+{elseif $sub_view == "create"}
+{/if}

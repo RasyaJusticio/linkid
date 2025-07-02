@@ -24966,6 +24966,23 @@ class User
   }
 
   /**
+   * is_in_organization ✅
+   * 
+   * @param integer $user_id
+   * @param integer $org_id
+   * @return array
+   */
+  public function is_in_organization($user_id, $org_id)
+  {
+    global $db;
+    $query = $db->query(sprintf("SELECT COUNT(*) as count FROM org_users WHERE user_id = %s AND organization_id = %s", secure($user_id, 'int'), secure($org_id, 'int')));
+    if ($query->fetch_assoc()['count'] > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * apply_to_be_organization
    * 
    * @param array $args
@@ -25001,11 +25018,13 @@ class User
             name, 
             slug,
             balance,
+            status,
             created_by
       ) VALUES (%s, %s, %s, %s)",
       secure($args['name']),
       secure($args['slug']),
       0,
+      secure('active'),
       secure($this->_data['user_id'], 'int')
     ));
   }
@@ -25013,7 +25032,7 @@ class User
   /**
    * get_org_sub_accounts
    * 
-   * @param array $args
+   * @param integer $org_id
    * @return array
    */
   public function get_org_sub_accounts($org_id)
@@ -25047,5 +25066,29 @@ class User
     }
 
     return $accounts;
+  }
+
+
+  /**
+   * add_org_sub_account
+   * 
+   * @param integer $user_id
+   * @param integer $org_id
+   * @return array
+   */
+  public function add_org_sub_account($user_id, $org_id)
+  {
+    global $db;
+
+    $db->query(sprintf(
+      "INSERT INTO org_users (
+            organization_id, 
+            user_id,
+            role
+      ) VALUES (%s, %s, %s)",
+      secure($org_id, 'int'),
+      secure($user_id, 'int'),
+      secure("sub-account")
+    ));
   }
 }

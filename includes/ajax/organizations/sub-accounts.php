@@ -25,6 +25,7 @@ if (!$user->_is_organization) {
 }
 
 try {
+  $org = $user->get_organization_from_user($user->_data['user_id']);
 
   // initialize the return array
   $return = [];
@@ -42,6 +43,16 @@ try {
         _error(400);
       }
 
+      $target_user = $user->get_user($_POST['user_id']);
+      if (empty($target_user) || !isset($target_user)) {
+        throw new Exception(__("User not found"));
+      }
+
+      if ($user->is_in_organization($_POST['user_id'], $org['id'])) {
+        throw new Exception(__("User is already invited"));
+      }
+
+      $user->add_org_sub_account($_POST['user_id'], $org['id']);
       $user->post_notification(['to_user_id' => $_POST['user_id'], 'action' => 'org_sub_account_add', 'node_url' => $user->_data['user_name']]);
 
       return_json(['callback' => 'window.location = site_path + "/organizations/sub-accounts"']);

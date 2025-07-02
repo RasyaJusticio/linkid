@@ -3395,6 +3395,12 @@ class User
             $notification['message'] = $notification['message'];
             break;
 
+          case 'org_sub_account_add':
+            $notification['icon'] = "fa fa-user-plus";
+            $notification['url'] = $system['system_url'] . '/' . $notification['user_name'];
+            $notification['message'] = __("sent you an invite into their organization");
+            break;
+
           case 'friend_add':
             $notification['icon'] = "fa fa-user-plus";
             $notification['url'] = $system['system_url'] . '/' . $notification['user_name'];

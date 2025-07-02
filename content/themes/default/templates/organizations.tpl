@@ -52,17 +52,15 @@
           <i class="fa-solid fa-chevron-left mr5"></i>{__("Back To Settings")}
         </small>
       </div>
-      <div class="card">
-        {if $view == ""}
-          {include file='settings.account.tpl'}
-        {elseif $view == "informations"}
-          {include file='organizations.informations.tpl'}
-        {elseif $view == "sub-accounts"}
-          {include file='organizations.sub-accounts.tpl'}
-        {elseif $view == "apply"}
-          {include file='organizations.apply.tpl'}
-        {/if}
-      </div>
+      {if $view == ""}
+        {include file='settings.account.tpl'}
+      {elseif $view == "informations"}
+        {include file='organizations.informations.tpl'}
+      {elseif $view == "sub-accounts"}
+        {include file='organizations.sub-accounts.tpl'}
+      {elseif $view == "apply"}
+        {include file='organizations.apply.tpl'}
+      {/if}
     </div>
     <!-- right panel -->
 

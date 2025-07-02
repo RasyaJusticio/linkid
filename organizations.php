@@ -115,6 +115,12 @@ try {
           $smarty->assign('pager', $pager->getPager());
           $smarty->assign('query', $_GET['query']);
           break;
+
+        case "add":
+          // page header
+          page_header(__("Organizations") . " &rsaquo; " . __("Sub-Accounts") . " &rsaquo; " . __("Add"));
+
+          break;
       }
       break;
  

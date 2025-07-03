@@ -14,6 +14,15 @@
     width: 100%;
     height: 100vh;
   }
+
+  .main-header {
+    transition: opacity ease-in-out 300ms, transform ease-in-out 300ms;
+  }
+
+  .main-header.hidden {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
 </style>
 
 {include file='_footer.tpl'}

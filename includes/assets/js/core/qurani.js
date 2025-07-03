@@ -21,6 +21,8 @@ window.addEventListener("message", function (event) {
   const eventMethod = event.data.method;
   const eventType = event.data.type;
 
+  console.log("Received message from iframe:", event);
+
   if (!eventMethod || !eventType) {
     return;
   }
@@ -41,6 +43,8 @@ window.addEventListener("message", function (event) {
   if (eventMethod === "POST") {
     const eventData = event.data.data;
 
+    console.log("Received POST data:", eventData);
+
     if (!eventData) {
       return;
     }
@@ -48,10 +52,10 @@ window.addEventListener("message", function (event) {
     switch (eventType) {
       case "route_change": {
         const header = document.querySelector(".main-header");
-        if (eventData.path === "/") {
-          header.classList.remove("header-hidden");
+        if (eventData.path === "/" || eventData.path === "/home") {
+          header.classList.remove("hidden");
         } else {
-          header.classList.add("header-hidden");
+          header.classList.add("hidden");
         }
         break;
       }

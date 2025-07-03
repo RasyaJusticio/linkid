@@ -42,17 +42,24 @@ try {
       if (!isset($_POST['user_id']) || !is_numeric($_POST['user_id'])) {
         _error(400);
       }
+      if (!isset($_POST['va_number']) || !is_numeric($_POST['va_number'])) {
+        _error(400);
+      }
 
       $target_user = $user->get_user($_POST['user_id']);
       if (empty($target_user) || !isset($target_user)) {
         throw new Exception(__("User not found"));
       }
 
+      if ($user->get_account_from_va($_POST['va_number'])) {
+        throw new ValidationException(__("That VA number is in use. Please use another one."));
+      }
+
       if ($user->is_in_organization($_POST['user_id'], $org['id'])) {
         throw new Exception(__("User is already invited"));
       }
 
-      $user->add_org_sub_account($_POST['user_id'], $org['id']);
+      $user->add_org_sub_account($_POST['user_id'], $org['id'], $_POST['va_number']);
       $user->post_notification(['to_user_id' => $_POST['user_id'], 'action' => 'org_sub_account_add', 'node_url' => $user->_data['user_name']]);
 
       return_json(['callback' => 'window.location = site_path + "/organizations/sub-accounts"']);

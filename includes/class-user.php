@@ -25068,18 +25068,43 @@ class User
     return $accounts;
   }
 
+  /**
+   * get_account_from_va ✅
+   * 
+   * @param integer $va_number
+   * @return array|null
+   */
+  public function get_account_from_va($va_number)
+  {
+    global $db;
+    $get_account = $db->query(sprintf(
+      "SELECT org_va_accounts.*, users.* 
+       FROM org_va_accounts 
+       JOIN users ON org_va_accounts.user_id = users.user_id 
+       WHERE org_va_accounts.va_number = %s",
+      secure($va_number, 'int')
+    ));
+  
+    if ($get_account->num_rows == 0) {
+      return null;
+    }
+  
+    return $get_account->fetch_assoc();
+  }
+
 
   /**
    * add_org_sub_account
    * 
    * @param integer $user_id
    * @param integer $org_id
-   * @return array
+   * @param integer|null $va_number
+   * @return null
    */
-  public function add_org_sub_account($user_id, $org_id)
+  public function add_org_sub_account($user_id, $org_id, $va_number)
   {
     global $db;
-
+  
     $db->query(sprintf(
       "INSERT INTO org_users (
             organization_id, 
@@ -25090,5 +25115,51 @@ class User
       secure($user_id, 'int'),
       secure("sub-account")
     ));
+
+    $account_id = $db->insert_id;
+
+    if (isset($va_number) && !is_empty($va_number)) {
+      $db->query(sprintf(
+        "INSERT INTO org_va_accounts (
+              organization_id, 
+              user_id,
+              va_number,
+              balance
+        ) VALUES (%s, %s, %s, %s)",
+        secure($org_id, 'int'),
+        secure($account_id, 'int'),
+        secure($va_number, 'int'),
+        secure(0, 'int'),
+      ));
+    }
+  }
+
+  /**
+   * add_org_va_account
+   * 
+   * @param integer $user_id
+   * 
+   * @param integer $va_number
+   * @param integer $balance
+   * @return array
+   */
+  public function add_org_va_account($user_id, $org_id, $va_number, $balance = 0)
+  {
+    global $db;
+
+    $db->query(sprintf(
+      "INSERT INTO org_va_accounts (
+            organization_id, 
+            user_id,
+            va_number,
+            balance
+      ) VALUES (%s, %s, %s, %s)",
+      secure($org_id, 'int'),
+      secure($user_id, 'int'),
+      secure($va_number, 'int'),
+      secure($balance, 'int'),
+    ));
+
+    return $this->get_account_from_va($va_number);
   }
 }

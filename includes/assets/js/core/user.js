@@ -985,7 +985,7 @@ $(function () {
     var uid = $(this).data('uid');
     var name = $(this).data('name');
     var parent = $(this).parents('.js_autocomplete');
-    parent.find('input').val(name).data('uid', uid);
+    parent.find('input').val(name).data('uid', uid).trigger('input');
     parent.find('input[type="hidden"]').val(uid);
   });
 
@@ -3067,5 +3067,19 @@ $(function () {
           modal('#modal-message', { title: __['Error'], message: __['There is something that went wrong!'] });
         });
     });
+  });
+
+  // automatic VA Number generation
+  $('body').on('input change', '.js_auto-va-input', function () {
+    var $this = $(this);
+    
+    var orgID = $this.data('va-org-id');
+    var autoVaID = $this.data('auto-va-id');
+
+    var $output = $(`.js_auto-va-output[data-auto-va-id="${autoVaID}"]`);
+
+    if ($output.length) {
+      $output.val(generateVaNumber(orgID, $this.data('uid')));
+    }
   });
 });

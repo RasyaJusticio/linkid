@@ -112,10 +112,17 @@
           <label class="form-label" for="user_id_ac">{__("User")}</label>
           <div class="position-relative js_autocomplete">
             <input class="form-control" type="text" placeholder="{__("Search for user name or email")}" name="user_id_ac" id="user_id_ac" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
-            <input type="hidden" name="user_id">
+            <input type="hidden" class="js_auto-va-input" data-va-org-id="{$org['id']}" data-auto-va-id="user_id" name="user_id">
           </div>
         </div>
 
+        <div class="form-group">
+          <label class="form-label" for="va_number">{__("VA Number")}</label>
+          <input type="text" class="form-control js_digit-only js_auto-va-output" data-auto-va-id="user_id" name="va_number">
+          <div class="form-text">
+            {__("Assign this account a unique virtual account number")}
+          </div>
+        </div>
 
         <!-- success -->
         <div class="alert alert-success mt15 mb0 x-hidden"></div>

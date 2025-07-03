@@ -95,7 +95,7 @@
                     <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$system['system_url']}/organizations/sub-accounts/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
                       <i class="fa fa-pencil-alt"></i>
                     </a>
-                    <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_admin-deleter" data-handle="user" data-id="{$row['user_id']}">
+                    <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_org-deleter" data-handle="account" data-id="{$row['id']}">
                       <i class="fa fa-trash-alt"></i>
                     </button>
                   </td>

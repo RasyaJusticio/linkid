@@ -51,12 +51,12 @@ try {
         throw new ValidationException(__("User not found"));
       }
 
-      if ($user->get_org_account_from_va($_POST['va_number'])) {
-        throw new ValidationException(__("That VA number is in use. Please use another one."));
-      }
-
       if ($user->is_in_organization($_POST['user_id'], $org['id'])) {
         throw new ValidationException(__("User is already invited"));
+      }
+
+      if ($user->get_org_account_from_va($_POST['va_number'])) {
+        throw new ValidationException(__("That VA number is in use. Please use another one."));
       }
 
       $user->add_org_sub_account($_POST['user_id'], $org['id'], $_POST['va_number']);

@@ -24958,7 +24958,16 @@ class User
   public function get_organization_from_user($user_id)
   {
     global $db;
-    $get_org = $db->query(sprintf("SELECT * FROM org_organizations WHERE created_by = %s", secure($user_id, 'int')));
+    $get_org = $db->query(sprintf(
+      "SELECT DISTINCT org_organizations.* 
+       FROM org_organizations
+       LEFT JOIN org_users 
+         ON org_organizations.id = org_users.organization_id
+       WHERE org_organizations.created_by = %s
+          OR org_users.user_id = %s",
+      secure($user_id, 'int'),
+      secure($user_id, 'int')
+    ));
     if ($get_org->num_rows == 0) {
       return null;
     }

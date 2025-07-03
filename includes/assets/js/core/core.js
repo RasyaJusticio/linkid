@@ -855,11 +855,6 @@ function openWalletQRConfirmation(event, targetUserData, modalTarget) {
   });
 }
 
-function generateVaNumber(orgId, userId, prefix = '62') {
-  const vaCore = orgId.toString().padStart(4, '0') + userId.toString().padStart(6, '0');
-  return prefix + vaCore;
-}
-
 $(function () {
 
   // init plugins
@@ -2705,10 +2700,6 @@ $(function () {
     var value = $input.val();
 
     var numericValue = value.replace(/\D/g, '');
-
-    if (numericValue.length > 6) {
-      numericValue = numericValue.substring(0, 6);
-    }
 
     $input.val(numericValue);
   });

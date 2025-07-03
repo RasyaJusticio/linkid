@@ -333,6 +333,7 @@ RewriteRule ^admincp/([^/]+)/([^/]+)/([^/]+)/?$ admin.php?view=$1&sub_view=$2&id
 RewriteRule ^organizations/?$ organizations.php [L,QSA]
 RewriteRule ^organizations/([^/]+)/?$ organizations.php?view=$1 [L,QSA]
 RewriteRule ^organizations/([^/]+)/([^/]+)/?$ organizations.php?view=$1&sub_view=$2 [L,QSA]
+RewriteRule ^organizations/([^/]+)/([^/]+)/([^/]+)/?$ organizations.php?view=$1&sub_view=$2&id=$3 [L,QSA]
 
 # Qurani
 RewriteRule ^qurani/?$ qurani/index.php [L,QSA]

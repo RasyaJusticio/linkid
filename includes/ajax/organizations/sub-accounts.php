@@ -48,19 +48,54 @@ try {
 
       $target_user = $user->get_user($_POST['user_id']);
       if (empty($target_user) || !isset($target_user)) {
-        throw new Exception(__("User not found"));
+        throw new ValidationException(__("User not found"));
       }
 
-      if ($user->get_account_from_va($_POST['va_number'])) {
+      if ($user->get_org_account_from_va($_POST['va_number'])) {
         throw new ValidationException(__("That VA number is in use. Please use another one."));
       }
 
       if ($user->is_in_organization($_POST['user_id'], $org['id'])) {
-        throw new Exception(__("User is already invited"));
+        throw new ValidationException(__("User is already invited"));
       }
 
       $user->add_org_sub_account($_POST['user_id'], $org['id'], $_POST['va_number']);
       $user->post_notification(['to_user_id' => $_POST['user_id'], 'action' => 'org_sub_account_add', 'node_url' => $user->_data['user_name']]);
+
+      return_json(['callback' => 'window.location = site_path + "/organizations/sub-accounts"']);
+
+      break;
+
+    case 'edit':
+      // valid inputs
+      if (!isset($_POST['user_id']) || !is_numeric($_POST['user_id'])) {
+        _error(400);
+      }
+      if (!isset($_POST['va_number']) || !is_numeric($_POST['va_number'])) {
+        _error(400);
+      }
+
+      $target_user = $user->get_user($_POST['user_id']);
+      if (empty($target_user) || !isset($target_user)) {
+        throw new ValidationException(__("User not found"));
+      }
+
+      $account = $user->get_org_account_from_user($_POST['user_id']);
+      if (empty($account) || !isset($account)) {
+        throw new ValidationException(__("User not found"));
+      }
+
+      $va_account = $user->get_org_account_from_va($_POST['va_number']);
+      if (isset($va_account) && !empty($va_account) && $va_account['user_id'] != $account['id']) {
+        throw new ValidationException(__("That VA number is in use. Please use another one"));
+      }
+
+      if (isset($va_account) && !empty($va_account)) {
+        $balance = $va_account['balance'];
+        $user->close_org_va_account($va_account['id']);
+      }
+
+      $user->add_org_va_account($account['id'], $org['id'], $_POST['va_number']);
 
       return_json(['callback' => 'window.location = site_path + "/organizations/sub-accounts"']);
 

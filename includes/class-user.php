@@ -25048,10 +25048,11 @@ class User
     $accounts = [];
     
     $get_accounts = $db->query(sprintf(
-      "SELECT org_users.*, users.* 
-       FROM org_users 
-       JOIN users ON org_users.user_id = users.user_id 
-       WHERE org_users.organization_id = %s 
+      "SELECT org_users.*, users.*, org_va_accounts.va_number, org_va_accounts.balance 
+       FROM org_users
+       JOIN users ON org_users.user_id = users.user_id
+       LEFT JOIN org_va_accounts ON org_users.id = org_va_accounts.user_id
+       WHERE org_users.organization_id = %s
          AND org_users.role = 'sub-account'",
       secure($org_id, 'int')
     ));
@@ -25069,12 +25070,64 @@ class User
   }
 
   /**
-   * get_account_from_va ✅
+   * get_org_account ✅
+   * 
+   * @param integer $org_account_id
+   * @return array|null
+   */
+  public function get_org_account($org_account_id)
+  {
+    global $db;
+  
+    $get_account = $db->query(sprintf(
+      "SELECT org_va_accounts.*, org_users.*, users.* 
+       FROM org_users 
+       LEFT JOIN org_va_accounts ON org_va_accounts.user_id = org_users.id
+       JOIN users ON org_users.user_id = users.user_id
+       WHERE org_users.id = %s",
+      secure($org_account_id, 'int')
+    ));
+  
+    if ($get_account->num_rows == 0) {
+      return null;
+    }
+  
+    return $get_account->fetch_assoc();
+  }
+
+  /**
+   * get_org_account_from_user ✅
+   * 
+   * @param integer $user_id
+   * @return array|null
+   */
+  public function get_org_account_from_user($user_id)
+  {
+    global $db;
+  
+    $get_account = $db->query(sprintf(
+      "SELECT org_va_accounts.*, org_users.*, users.* 
+       FROM org_users 
+       LEFT JOIN org_va_accounts ON org_va_accounts.user_id = org_users.id
+       JOIN users ON org_users.user_id = users.user_id
+       WHERE org_users.user_id = %s",
+      secure($user_id, 'int')
+    ));
+  
+    if ($get_account->num_rows == 0) {
+      return null;
+    }
+  
+    return $get_account->fetch_assoc();
+  }
+
+  /**
+   * get_org_account_from_va ✅
    * 
    * @param integer $va_number
    * @return array|null
    */
-  public function get_account_from_va($va_number)
+  public function get_org_account_from_va($va_number)
   {
     global $db;
     $get_account = $db->query(sprintf(
@@ -25138,7 +25191,7 @@ class User
    * add_org_va_account
    * 
    * @param integer $user_id
-   * 
+   * @param integer $org_id
    * @param integer $va_number
    * @param integer $balance
    * @return array
@@ -25159,7 +25212,21 @@ class User
       secure($va_number, 'int'),
       secure($balance, 'int'),
     ));
-
-    return $this->get_account_from_va($va_number);
   }
+
+  /**
+   * close_org_va_account
+   * 
+   * @param integer $id
+   * @return array
+   */
+    public function close_org_va_account($id)
+    {
+      global $db;
+    
+      $db->query(sprintf(
+        "DELETE FROM org_va_accounts WHERE id = %s",
+        secure($id, 'int')
+      ));
+    }
 }

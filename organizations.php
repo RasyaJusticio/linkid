@@ -121,6 +121,21 @@ try {
           page_header(__("Organizations") . " &rsaquo; " . __("Sub-Accounts") . " &rsaquo; " . __("Add"));
 
           break;
+
+        case "edit":
+          // page header
+          page_header(__("Organizations") . " &rsaquo; " . __("Sub-Accounts") . " &rsaquo; " . __("Edit"));
+
+          // valid inputs
+          if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+            _error(404);
+          }
+
+          $org_account = $user->get_org_account($_GET['id']);
+
+          $smarty->assign('account', $org_account);
+
+          break;
       }
       break;
  

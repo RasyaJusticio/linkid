@@ -3068,18 +3068,4 @@ $(function () {
         });
     });
   });
-
-  // automatic VA Number generation
-  $('body').on('input change', '.js_auto-va-input', function () {
-    var $this = $(this);
-    
-    var orgID = $this.data('va-org-id');
-    var autoVaID = $this.data('auto-va-id');
-
-    var $output = $(`.js_auto-va-output[data-auto-va-id="${autoVaID}"]`);
-
-    if ($output.length) {
-      $output.val(generateVaNumber(orgID, $this.data('uid')));
-    }
-  });
 });

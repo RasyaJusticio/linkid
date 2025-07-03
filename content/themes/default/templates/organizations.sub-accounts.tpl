@@ -64,6 +64,8 @@
               <th>{__("ID")}</th>
               <th>{__("Name")}</th>
               <th>{__("Username")}</th>
+              <th>{__("VA Number")}</th>
+              <th>{__("Balance")}</th>
               <th>{__("Actions")}</th>
             </tr>
           </thead>
@@ -84,7 +86,13 @@
                     </a>
                   </td>
                   <td>
-                    <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$system['system_url']}/{$control_panel['url']}/users/edit/{$row['user_id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
+                    {$row['va_number'] ?? '-'}
+                  </td>
+                  <td>
+                    {print_money($row['balance']|format_number)}
+                  </td>
+                  <td>
+                    <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$system['system_url']}/organizations/sub-accounts/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
                       <i class="fa fa-pencil-alt"></i>
                     </a>
                     <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_admin-deleter" data-handle="user" data-id="{$row['user_id']}">
@@ -119,6 +127,37 @@
         <div class="form-group">
           <label class="form-label" for="va_number">{__("VA Number")}</label>
           <input type="text" class="form-control js_digit-only js_auto-va-output" data-auto-va-id="user_id" name="va_number">
+          <div class="form-text">
+            {__("Assign this account a unique virtual account number")}
+          </div>
+        </div>
+
+        <!-- success -->
+        <div class="alert alert-success mt15 mb0 x-hidden"></div>
+        <!-- success -->
+
+        <!-- error -->
+        <div class="alert alert-danger mt15 mb0 x-hidden"></div>
+        <!-- error -->
+      </div>
+      <div class="card-footer text-end">
+        <button type="submit" class="btn btn-primary">{__("Save Changes")}</button>
+      </div>
+    </form>
+  {elseif $sub_view == "edit"}
+    <form class="js_ajax-forms" data-url="organizations/sub-accounts.php?do=edit">
+      <div class="card-body">
+        <div class="form-group">
+          <label class="form-label" for="user_id_ac">{__("User")}</label>
+          <div class="position-relative js_autocomplete">
+            <input class="form-control opacity-50" type="text" value="{$account['user_firstname']} {$account['user_lastname']}" name="user_id_ac" id="user_id_ac" disabled>
+            <input type="hidden" name="user_id" value="{$account['user_id']}" class="js_auto-va-input" data-uid="{$account['user_id']}" data-va-org-id="{$org['id']}" data-auto-va-id="user_id" data-disabled>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="va_number">{__("VA Number")}</label>
+          <input type="text" class="form-control js_digit-only js_auto-va-output" data-auto-va-id="user_id" name="va_number" value="{$account['va_number']}">
           <div class="form-text">
             {__("Assign this account a unique virtual account number")}
           </div>

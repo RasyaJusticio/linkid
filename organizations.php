@@ -21,6 +21,14 @@ try {
       // page header
       page_header(__("Organizations") . " &rsaquo; " . __("Dashboard"));
 
+      $accounts = $user->get_org_sub_accounts($org['id']);
+      $insights = [
+        'accounts' => count($accounts),
+        'balance' => $user->_data['user_organization_balance'],
+      ];
+      
+      $smarty->assign('insights', $insights);
+
       break;
     case "informations":
       // page header

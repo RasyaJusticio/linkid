@@ -12,7 +12,7 @@
           <ul class="side-nav">
             <li {if $view == ""}class="active" {/if}>
               <a href="{$system['system_url']}/organizations">
-                {include file='__svg_icons.tpl' icon="settings" class="main-icon mr10" width="24px" height="24px"}
+                <i class="fa fa-tachometer-alt fa-lg fa-fw mr10" style="color: #5e72e4"></i>
                 {__("Dashboard")}
               </a>
             </li>
@@ -53,7 +53,7 @@
         </small>
       </div>
       {if $view == ""}
-        {include file='settings.account.tpl'}
+        {include file='organizations.dashboard.tpl'}
       {elseif $view == "informations"}
         {include file='organizations.informations.tpl'}
       {elseif $view == "sub-accounts"}

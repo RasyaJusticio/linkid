@@ -17342,9 +17342,10 @@ class User
    * 
    * @param integer $user_id
    * @param integer $amount
+   * @param boolean $is_org
    * @return void
    */
-  public function wallet_transfer($user_id, $amount)
+  public function wallet_transfer($user_id, $amount, $is_org)
   {
     global $db, $system;
     /* check if wallet enabled */
@@ -17376,6 +17377,12 @@ class User
     if ($check_user->fetch_assoc()['count'] == 0) {
       throw new Exception(__("You can't send money to this user!"));
     }
+    $va_account = $this->get_va_from_user($user_id);
+    if ($is_org) {
+      if (empty($va_account) || !isset($va_account)) {
+        throw new Exception(__("You can't send money to this user!"));
+      }
+    }
     /* check viewer balance */
     if ($this->_data['user_wallet_balance'] < $amount) {
       throw new Exception(__("There is no enough credit in your wallet, Recharge your wallet to continue"). " " ."<strong class='text-link' data-toggle='modal' data-url='#wallet-replenish'>". __("Recharge Now") . "</strong>");
@@ -17388,7 +17395,11 @@ class User
     /* log this transaction */
     $this->wallet_set_transaction($this->_data['user_id'], 'user', $user_id, $amount, 'out');
     /* increase target user wallet balance */
-    $db->query(sprintf("UPDATE users SET user_wallet_balance = user_wallet_balance + %s WHERE user_id = %s", secure($amount), secure($user_id, 'int')));
+    if (!$is_org) {
+      $db->query(sprintf("UPDATE users SET user_wallet_balance = user_wallet_balance + %s WHERE user_id = %s", secure($amount), secure($user_id, 'int')));
+    } else {
+      $db->query(sprintf("UPDATE org_va_accounts SET balance = balance + %s WHERE id = %s", secure($amount), secure($va_account['id'], 'int')));
+    }
     /* send notification (money sent) to the target user */
     $this->post_notification(['to_user_id' => $user_id, 'action' => 'money_sent', 'node_type' => $amount]);
     /* wallet transaction */
@@ -17401,9 +17412,11 @@ class User
    * 
    * @param integer $user_id
    * @param integer $amount
+   * @param integer $pin
+   * @param boolean $is_org
    * @return void
    */
-  public function wallet_receive($user_id, $amount, $pin)
+  public function wallet_receive($user_id, $amount, $pin, $is_org)
   {
     global $db, $system;
     /* check if wallet enabled */
@@ -17418,6 +17431,23 @@ class User
     $get_user = $db->query(sprintf("SELECT user_wallet_balance, user_transfer_pin FROM users WHERE user_id = %s", secure($user_id, 'int')));
     $user_data = $get_user->fetch_assoc();
 
+    /* validate target user */
+    if (is_empty($user_id) || !is_numeric($user_id)) {
+      throw new Exception(__("You must search for a user to send money to"));
+    }
+    if ($this->_data['user_id'] == $user_id) {
+      throw new Exception(__("You can't receive money from yourself!"));
+    }
+    $check_user = $db->query(sprintf("SELECT COUNT(*) as count FROM users WHERE user_id = %s", secure($user_id, 'int')));
+    if ($check_user->fetch_assoc()['count'] == 0) {
+      throw new Exception(__("You can't receive money from this user!"));
+    }
+    $va_account = $this->get_va_from_user($user_id);
+    if ($is_org) {
+      if (empty($va_account) || !isset($va_account)) {
+        throw new Exception(__("You can't receive money to this user!"));
+      }
+    }
     /* validate pin */
     if (is_empty($pin) || !is_numeric($pin)) {
       throw new Exception(__("You must enter a valid transfer PIN"));
@@ -17435,26 +17465,26 @@ class User
     if ($system['wallet_max_transfer'] != 0 && $amount > $system['wallet_max_transfer']) {
       throw new Exception(__("You can't transfer more than") . " " . print_money(format_number($system['wallet_max_transfer'])));
     }
-    /* validate target user */
-    if (is_empty($user_id) || !is_numeric($user_id)) {
-      throw new Exception(__("You must search for a user to send money to"));
-    }
-    if ($this->_data['user_id'] == $user_id) {
-      throw new Exception(__("You can't receive money from yourself!"));
-    }
-    $check_user = $db->query(sprintf("SELECT COUNT(*) as count FROM users WHERE user_id = %s", secure($user_id, 'int')));
-    if ($check_user->fetch_assoc()['count'] == 0) {
-      throw new Exception(__("You can't receive money from this user!"));
-    }
     // Check balance of the user_id
-    if ($user_data['user_wallet_balance'] < $amount) {
-      throw new Exception(__("There is not enough credit in their wallet"));
+    if (!$is_org) {
+      if ($user_data['user_wallet_balance'] < $amount) {
+        throw new Exception(__("There is not enough credit in their wallet"));
+      }
+    } else {
+      if ($va_account['balance'] < $amount) {
+        throw new Exception(__("There is not enough credit in their wallet"));
+      }
     }
+    
     /* calculate fee */
     $fee = calculate_fee($amount, $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_min']);
     $amount += $fee;
     /* decrease user id wallet balance */
-    $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($user_id, 'int')));
+    if (!$is_org) {
+      $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($user_id, 'int')));
+    } else {
+      $db->query(sprintf('UPDATE org_va_accounts SET balance = IF(balance-%1$s<=0,0,balance-%1$s) WHERE id = %2$s', secure($amount), secure($va_account['id'], 'int')));
+    }
     /* log this transaction */
     $this->wallet_set_transaction($user_id, 'user', $this->_data['user_id'], $amount, 'out');
     /* increase viewer user wallet balance */
@@ -24953,6 +24983,34 @@ class User
     return null;
   }
 
+  /**
+   * get_va_from_user ✅
+   * 
+   * @param string $user_id
+   * @return array|null
+   */
+    public function get_va_from_user($user_id)
+  {
+    global $db;
+    $user_id = secure($user_id, 'int');
+
+    $query = "
+      SELECT va.*
+      FROM users u
+      JOIN org_users ou ON u.user_id = ou.user_id
+      JOIN org_va_accounts va ON ou.id = va.user_id
+      WHERE u.user_id = $user_id
+      LIMIT 1
+    ";
+
+    $result = $db->query($query);
+
+    if ($result && $result->num_rows > 0) {
+      return $result->fetch_assoc();
+    }
+
+    return null;
+  }
 
   /**
    * is_organization_user

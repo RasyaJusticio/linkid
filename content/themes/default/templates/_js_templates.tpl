@@ -1533,6 +1533,7 @@
             {literal}
             {{#org_name}}
               {{#va_number}}
+                <input type="hidden" name="is_org" value="true">
                 <div class="org-info">
                   <span class="org-title">{{org_name}}</span>
                   <span class="va-number">VA: {{va_number}}</span>
@@ -1595,6 +1596,7 @@
             {literal}
             {{#org_name}}
               {{#va_number}}
+                <input type="hidden" name="is_org" value="true">
                 <div class="org-info">
                   <span class="org-title">{{org_name}}</span>
                   <span class="va-number">VA: {{va_number}}</span>
@@ -2054,6 +2056,7 @@
             {literal}
             {{#org_name}}
               {{#va_number}}
+                <input type="hidden" name="is_org" value="true">
                 <div class="org-info">
                   <span class="org-title">{{org_name}}</span>
                   <span class="va-number">VA: {{va_number}}</span>
@@ -2162,6 +2165,7 @@
             {literal}
             {{#org_name}}
               {{#va_number}}
+                <input type="hidden" name="is_org" value="true">
                 <div class="org-info">
                   <span class="org-title">{{org_name}}</span>
                   <span class="va-number">VA: {{va_number}}</span>

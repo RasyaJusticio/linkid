@@ -26,7 +26,7 @@ try {
         }
 
         // process
-        $user->wallet_transfer($_POST['send_to_id'], $_POST['amount']);
+        $user->wallet_transfer($_POST['send_to_id'], $_POST['amount'], !is_empty($_POST['is_org']));
 
         // return
         return_json(['callback' => 'window.location = site_path + "/wallet?wallet_transfer_succeed"']);
@@ -55,7 +55,7 @@ try {
         }
 
         // process
-        $user->wallet_receive($_POST['receive_from_id'], $_POST['amount'], $_POST['pin']);
+        $user->wallet_receive($_POST['receive_from_id'], $_POST['amount'], $_POST['pin'], $_POST['is_org']);
 
         // return
         return_json(['callback' => 'window.location = site_path + "/wallet?wallet_receive_succeed"']);

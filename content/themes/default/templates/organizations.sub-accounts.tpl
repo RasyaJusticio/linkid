@@ -105,6 +105,9 @@
                     <button data-bs-toggle="tooltip" title='{__("Top up")}' class="btn btn-sm btn-icon btn-rounded btn-primary" data-toggle="modal" data-url="#account-transfer" data-options='{ "id": {$row['id']} }'>
                       <i class="fa fa-credit-card"></i>
                     </button>
+                    <button data-bs-toggle="tooltip" title='{__("QR Code")}' class="btn btn-sm btn-icon btn-rounded btn-primary">
+                      <i class="fa fa-qrcode"></i>
+                    </button>
                     <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_org-deleter" data-handle="account" data-id="{$row['id']}">
                       <i class="fa fa-trash-alt"></i>
                     </button>

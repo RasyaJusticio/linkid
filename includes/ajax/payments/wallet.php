@@ -215,6 +215,11 @@ try {
             $target_user = $user->wallet_get_user_by_name($_POST['user_id']);
         }
 
+        if (empty($target_user) && !isset($target_user)) {
+            $target_user = $user->get_user_from_va($_POST['user_id']);
+            $target_organization = $user->get_organization_from_user($target_user['user_id']);
+        }
+
         if (!isset($target_user) || empty($target_user)) {
             if ($_POST['is_from_qr']) {
                 $_SESSION['transfer_fail_message'] = "Scanned QR Code invalid";
@@ -227,7 +232,14 @@ try {
         
         $target_user['user_picture'] = get_picture($target_user['user_picture'], $target_user['user_gender']);
 
-        return_json(['result' => 'valid', 'fee' => calculate_fee($_POST['amount'], $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_min']), 'user' => $target_user]);
+        return_json([
+            'result' => 'valid',
+            'fee' => calculate_fee($_POST['amount'], $system['wallet_transfer_fee_threshold'],
+            $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_min']),
+            'user' => $target_user,
+            'organization' => $target_organization ?? null,
+            'va_number' => !empty($target_organization) ? $_POST['user_id'] : null,
+        ]);
         break;
       
     default:

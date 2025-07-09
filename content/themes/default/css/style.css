@@ -11639,6 +11639,23 @@ body.night-mode .pwa_install_banner {
   margin-bottom: 0.6rem;
 }
 
+.org-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-block: 8px;
+
+  .org-title {
+    font-size: 18px;
+  }
+
+  span {
+    text-align: center;
+    opacity: 0.8;
+  }
+}
+
 .user-info {
   display: flex;
   flex-direction: column;

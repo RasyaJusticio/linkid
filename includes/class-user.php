@@ -24923,6 +24923,37 @@ class User
   /* Organization ✅ */
   /* ------------------------------- */
 
+  
+  /**
+   * get_user_from_va ✅
+   * 
+   * @param string $va_number
+   * @return array|null
+   */
+  public function get_user_from_va($va_number)
+  {
+    global $db;
+    $va_number = secure($va_number, 'int');
+
+    $query = "
+      SELECT u.*
+      FROM org_va_accounts va
+      JOIN org_users ou ON va.user_id = ou.id
+      JOIN users u ON ou.user_id = u.user_id
+      WHERE va.va_number = $va_number
+      LIMIT 1
+    ";
+
+    $result = $db->query($query);
+
+    if ($result && $result->num_rows > 0) {
+      return $result->fetch_assoc();
+    }
+
+    return null;
+  }
+
+
   /**
    * is_organization_user
    * 
@@ -24959,7 +24990,7 @@ class User
    * get_organization_from_user ✅
    * 
    * @param integer $user_id
-   * @return array
+   * @return array|null
    */
   public function get_organization_from_user($user_id)
   {

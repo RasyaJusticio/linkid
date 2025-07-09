@@ -1529,6 +1529,17 @@
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="send_to_id" value="{literal}{{user_id}}{/literal}">
+            
+            {literal}
+            {{#org_name}}
+              {{#va_number}}
+                <div class="org-info">
+                  <span class="org-title">{{org_name}}</span>
+                  <span class="va-number">VA: {{va_number}}</span>
+                </div>
+              {{/va_number}}
+            {{/org_name}}
+            {/literal}
 
             <!-- error -->
             <div class="alert alert-danger mb0 mt10 x-hidden"></div>
@@ -1580,6 +1591,17 @@
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="receive_from_id" value="{literal}{{user_id}}{/literal}">
+
+            {literal}
+            {{#org_name}}
+              {{#va_number}}
+                <div class="org-info">
+                  <span class="org-title">{{org_name}}</span>
+                  <span class="va-number">VA: {{va_number}}</span>
+                </div>
+              {{/va_number}}
+            {{/org_name}}
+            {/literal}
 
             {include file="__wallet_keypad.tpl" keypad_name="pin" keypad_id="pin"}
 
@@ -2028,6 +2050,17 @@
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="send_to_id" value="{literal}{{user_id}}{/literal}">
+            
+            {literal}
+            {{#org_name}}
+              {{#va_number}}
+                <div class="org-info">
+                  <span class="org-title">{{org_name}}</span>
+                  <span class="va-number">VA: {{va_number}}</span>
+                </div>
+              {{/va_number}}
+            {{/org_name}}
+            {/literal}
 
             <!-- error -->
             <div class="alert alert-danger mb0 mt10 x-hidden"></div>
@@ -2125,6 +2158,17 @@
             
             <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
             <input type="hidden" name="receive_from_id" value="{literal}{{user_id}}{/literal}">
+
+            {literal}
+            {{#org_name}}
+              {{#va_number}}
+                <div class="org-info">
+                  <span class="org-title">{{org_name}}</span>
+                  <span class="va-number">VA: {{va_number}}</span>
+                </div>
+              {{/va_number}}
+            {{/org_name}}
+            {/literal}
 
             {include file="__wallet_keypad.tpl" keypad_name="pin" keypad_id="pin"}
 

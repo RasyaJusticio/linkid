@@ -798,6 +798,7 @@ function openWalletConfirmation(event, userIdField, modalTarget) {
   }, function(response) {
     if (response.result === "valid") {
       const user = response.user;
+      console.log(response);
       modal(modalTarget, {
         'amount': amount,
         'fee': response.fee,
@@ -805,7 +806,9 @@ function openWalletConfirmation(event, userIdField, modalTarget) {
         'user_name': user.user_name,
         'user_fullname': `${user.user_firstname} ${user.user_lastname}`,
         'user_verified': user.user_verified === "1" ? true : false,
-        'user_picture': user.user_picture
+        'user_picture': user.user_picture,
+        'org_name': response.organization?.name,
+        'va_number': response.va_number
       });
     } else {
       $error.html(__["You can't send money to this user!"]).slideDown();

@@ -22,9 +22,21 @@ try {
       page_header(__("Organizations") . " &rsaquo; " . __("Dashboard"));
 
       $accounts = $user->get_org_sub_accounts($org['id']);
+      $total_balance_query = $db->query(sprintf(
+        "SELECT SUM(balance) AS total FROM org_va_accounts WHERE organization_id = %s",
+        secure($org['id'], 'int')
+      ));
+
+      $total_balance = 0;
+      
+      if ($total_balance_query && $total_balance_query->num_rows > 0) {
+        $row = $total_balance_query->fetch_assoc();
+        $total_balance = (float) $row['total'];
+      }
+
       $insights = [
         'accounts' => count($accounts),
-        'balance' => $user->_data['user_organization_balance'],
+        'balance' => $total_balance,
       ];
       
       $smarty->assign('insights', $insights);
@@ -41,6 +53,14 @@ try {
         case "":
           // page header
           page_header(__("Organizations") . " &rsaquo; " . __("Sub-Accounts"));
+
+          // get organization notifications
+          if (isset($_SESSION['org_topup_amount'])) {
+            /* assign variables */
+            $smarty->assign('org_topup_amount', $_SESSION['org_topup_amount']);
+            /* unset session */
+            unset($_SESSION['org_topup_amount']);
+          }
 
           $sub_accounts = $user->get_org_sub_accounts($org['id']);
           $insights = [

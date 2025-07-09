@@ -18,6 +18,13 @@
   </div>
   {if $sub_view == "" || $sub_view == "find"}
     <div class="card-body">
+      {if $org_topup_amount}
+        <div class="alert alert-success mb20">
+          <i class="fas fa-check-circle mr5"></i>
+          {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($org_topup_amount|format_number)}</span> {__(" top up successfuly sent")}
+        </div>
+      {/if}
+
       {if $sub_view == ""}
         <div class="row">
           <div class="col-md-6 col-lg-6 col-xl-6">
@@ -95,6 +102,9 @@
                     <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$system['system_url']}/organizations/sub-accounts/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
                       <i class="fa fa-pencil-alt"></i>
                     </a>
+                    <button data-bs-toggle="tooltip" title='{__("Top up")}' class="btn btn-sm btn-icon btn-rounded btn-primary" data-toggle="modal" data-url="#account-transfer" data-options='{ "id": {$row['id']} }'>
+                      <i class="fa fa-credit-card"></i>
+                    </button>
                     <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_org-deleter" data-handle="account" data-id="{$row['id']}">
                       <i class="fa fa-trash-alt"></i>
                     </button>

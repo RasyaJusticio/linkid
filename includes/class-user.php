@@ -3395,12 +3395,6 @@ class User
             $notification['message'] = $notification['message'];
             break;
 
-          case 'org_sub_account_add':
-            $notification['icon'] = "fa fa-user-plus";
-            $notification['url'] = $system['system_url'] . '/' . $notification['user_name'];
-            $notification['message'] = __("sent you an invite into their organization");
-            break;
-
           case 'friend_add':
             $notification['icon'] = "fa fa-user-plus";
             $notification['url'] = $system['system_url'] . '/' . $notification['user_name'];
@@ -4118,6 +4112,18 @@ class User
             $notification['name'] = __("System") . " " . __("Message");
             $notification['url'] = $system['system_url'];
             $notification['message'] = __("You still have ").$notification['node_url'].__(" merits to send");
+            break;
+
+          case 'org_sub_account_add':
+            $notification['icon'] = "fa fa-user-plus";
+            $notification['url'] = $system['system_url'] . '/' . $notification['user_name'];
+            $notification['message'] = __("sent you an invite into their organization");
+            break;
+
+          case 'org_account_topup':
+            $notification['icon'] = "fa fa-credit-card";
+            $notification['url'] = $system['system_url'] . '/organizations';
+            $notification['message'] = __("sent you") . " " . print_money(format_number($notification['node_type']));
             break;
         }
         /* prepare message */
@@ -25154,6 +25160,29 @@ class User
     return $get_account->fetch_assoc();
   }
 
+  /**
+   * get_org_va ✅
+   * 
+   * @param integer $va_account_id
+   * @return array|null
+   */
+  public function get_org_va($va_account_id)
+  {
+    global $db;
+    $get_account = $db->query(sprintf(
+      "SELECT org_va_accounts.* 
+       FROM org_va_accounts 
+       WHERE org_va_accounts.id = %s",
+      secure($va_account_id, 'int')
+    ));
+  
+    if ($get_account->num_rows == 0) {
+      return null;
+    }
+  
+    return $get_account->fetch_assoc();
+  }
+
 
   /**
    * add_org_sub_account
@@ -25193,6 +25222,14 @@ class User
         secure($va_number, 'int'),
         secure(0, 'int'),
       ));
+
+      $va_account_id = $db->insert_id;
+
+      $db->query(sprintf(
+        "UPDATE org_users SET va_account_id = %s WHERE id = %s",
+        secure($va_account_id, 'int'),
+        secure($account_id, 'int')
+      ));
     }
   }
 
@@ -25221,6 +25258,14 @@ class User
       secure($va_number, 'int'),
       secure($balance, 'int'),
     ));
+
+    $va_account_id = $db->insert_id;
+
+    $db->query(sprintf(
+      "UPDATE org_users SET va_account_id = %s WHERE id = %s",
+      secure($va_account_id, 'int'),
+      secure($user_id, 'int')
+    ));
   }
 
   /**
@@ -25238,4 +25283,51 @@ class User
         secure($id, 'int')
       ));
     }
+
+  /**
+   * account_topup
+   * 
+   * @param integer $account_id
+   * @param integer $amount
+   * @return void
+   */
+  public function account_topup($account_id, $amount)
+  {
+    global $db, $system;
+    /* check if wallet enabled */
+    if (!$system['wallet_enabled']) {
+      throw new Exception(__("The wallet system has been disabled by the admin"));
+    }
+    /* check if wallet transfer enabled */
+    if (!$system['wallet_transfer_enabled']) {
+      throw new Exception(__("The wallet transfer feature has been disabled by the admin"));
+    }
+    /* validate amount */
+    if (is_empty($amount) || !is_numeric($amount) || $amount <= 0) {
+      throw new Exception(__("You must enter valid amount of money"));
+    }
+    /* validate account */
+    $viewer_account = $this->get_org_account_from_user($this->_data['user_id']);
+    $target_account = $this->get_org_account($account_id);
+
+    if (!isset($target_account) || empty($target_account) || empty($target_account['va_account_id'])) {
+      throw new Exception(__("You can't top up into this account"));
+    }
+    
+    /* check viewer balance */
+    if ($this->_data['user_wallet_balance'] < $amount) {
+      throw new Exception(__("There is no enough credit in your wallet, Recharge your wallet to continue"). " " ."<strong class='text-link' data-toggle='modal' data-url='#wallet-replenish'>". __("Recharge Now") . "</strong>");
+    }
+    /* decrease viewer user wallet balance */
+    $db->query(sprintf('UPDATE users SET user_wallet_balance = IF(user_wallet_balance-%1$s<=0,0,user_wallet_balance-%1$s) WHERE user_id = %2$s', secure($amount), secure($this->_data['user_id'], 'int')));
+    /* log this transaction */
+    $this->wallet_set_transaction($this->_data['user_id'], 'user', $target_account['user_id'], $amount, 'out');
+    /* increase target user wallet balance */
+    $db->query(sprintf("UPDATE org_va_accounts SET balance = balance + %s WHERE id = %s", secure($amount), secure($target_account['va_account_id'], 'int')));
+    /* send notification (money sent) to the target user */
+    $this->post_notification(['to_user_id' => $target_account['user_id'], 'action' => 'org_account_topup', 'node_type' => $amount]);
+    /* wallet transaction */
+    $this->wallet_set_transaction($target_account['user_id'], 'user', $this->_data['user_id'], $amount, 'in');
+    $_SESSION['org_topup_amount'] = $amount;
+  }
 }

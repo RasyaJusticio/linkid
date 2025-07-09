@@ -2163,6 +2163,36 @@
         </script>
       </script>
     {/if}
+    {if in_array($page, ['organizations'])}
+      <script id="account-transfer" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {__("Top Up Account")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="js_ajax-forms" data-url="payments/wallet.php?do=account_replenish">
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label">{__("Amount")}</label>
+              <div class="input-money {$system['system_currency_dir']}">
+                <span>{$system['system_currency_symbol']}</span>
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              {include file="__money_amounts.tpl"}
+            </div>
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
+          </div>
+          <div class="modal-footer">
+            <input type="hidden" name="send_to_id" value="{literal}{{id}}{/literal}">
+            <button type="submit" class="btn btn-primary">{__("Top Up")}</button>
+          </div>
+        </form>
+      </script>
+    {/if}
     <!-- Wallet -->
 
     <!-- Crop Profile (Picture|Cover) -->

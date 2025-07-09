@@ -32,6 +32,19 @@ try {
         return_json(['callback' => 'window.location = site_path + "/wallet?wallet_transfer_succeed"']);
         break;
 
+    case 'account_replenish':
+        // valid inputs
+        if (!isset($_POST['amount']) || !is_numeric($_POST['amount']) || $_POST['amount'] < 0) {
+            throw new Exception(__("Enter valid amount of money"));
+        }
+
+        // process
+        $user->account_topup($_POST['send_to_id'], $_POST['amount']);
+
+        // return
+        return_json(['callback' => 'window.location.reload();']);
+        break;
+
     case 'wallet_receive':
         // valid inputs
         if (!isset($_POST['pin']) || !is_numeric($_POST['pin'])) {

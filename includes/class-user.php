@@ -25045,6 +25045,50 @@ class User
   }
 
   /**
+   * get_organization_by_slug ✅
+   * 
+   * @param string $slug
+   * @return array
+   */
+  public function get_organization_by_slug($slug)
+  {
+    global $db;
+    $get_org = $db->query(sprintf("SELECT * FROM org_organizations WHERE slug = %s LIMIT 1", secure($slug)));
+    if ($get_org->num_rows == 0) {
+      return null;
+    }
+    return $get_org->fetch_assoc();
+  }
+
+  /**
+   * get_organizations_from_user ✅
+   * 
+   * @param integer $user_id
+   * @return array|null
+   */
+  public function get_organizations_from_user($user_id)
+  {
+    global $db;
+    $get_org = $db->query(sprintf(
+      "SELECT DISTINCT org_organizations.* 
+       FROM org_organizations
+       LEFT JOIN org_users 
+         ON org_organizations.id = org_users.organization_id
+       WHERE org_organizations.created_by = %s
+          OR org_users.user_id = %s",
+      secure($user_id, 'int'),
+      secure($user_id, 'int')
+    ));
+    $organizations = [];
+    if ($get_org && $get_org->num_rows > 0) {
+      while ($row = $get_org->fetch_assoc()) {
+        $organizations[] = $row;
+      }
+    }
+    return $organizations;
+  }
+
+  /**
    * get_organization_from_user ✅
    * 
    * @param integer $user_id

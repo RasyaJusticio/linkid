@@ -16,7 +16,6 @@ user_access(false, true);
 try {
   // $org = $user->get_organization_from_user($user->_data['user_id']);
   $org = $user->get_organization_by_slug($_GET['username']);
-  $orgs = $user->get_organizations_from_user($user->_data['user_id']);
 
   if (!empty($org) && isset($org)) {
     switch ($_GET['view']) {
@@ -186,6 +185,24 @@ try {
 
     /* assign variables */
     $smarty->assign('org', $org);
+  } else {
+    // page header
+    page_header(__("Organizations"));
+
+    $filters = [];
+    $orgs = [];
+
+    if (!is_empty($_GET['filters'])) {
+      $filters = explode(",", $_GET['filters']);
+      if (in_array('owned', $filters)) {
+        $smarty->assign('owned', 'true');
+      }
+    }
+
+    $orgs = $user->get_organizations_from_user($user->_data['user_id'], $filters);
+
+    /* assign variables */
+    $smarty->assign('orgs', $orgs);
   }
 
   /* assign variables */

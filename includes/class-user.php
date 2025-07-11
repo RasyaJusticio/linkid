@@ -25064,27 +25064,48 @@ class User
    * get_organizations_from_user ✅
    * 
    * @param integer $user_id
+   * @param array|null   $filters
    * @return array|null
    */
-  public function get_organizations_from_user($user_id)
+  public function get_organizations_from_user($user_id, $filters)
   {
     global $db;
-    $get_org = $db->query(sprintf(
-      "SELECT DISTINCT org_organizations.* 
-       FROM org_organizations
-       LEFT JOIN org_users 
-         ON org_organizations.id = org_users.organization_id
-       WHERE org_organizations.created_by = %s
-          OR org_users.user_id = %s",
-      secure($user_id, 'int'),
-      secure($user_id, 'int')
-    ));
+
+    $user_id = secure($user_id, 'int');
+    $filter_clause = "";
+    $filter_vars = [];
+
+    if (in_array('owned', $filters)) {
+      $filter_clause = "org_organizations.created_by = %s";
+      $filter_vars[] = $user_id;
+    } else {
+      $filter_clause = "(org_users.user_id = %s OR org_organizations.created_by = %s)";
+      $filter_vars[] = $user_id;
+      $filter_vars[] = $user_id;
+    }
+
+    $query = vsprintf("
+      SELECT DISTINCT 
+        org_organizations.*, 
+        CASE 
+          WHEN org_organizations.created_by = %s THEN 'owner' 
+          ELSE org_users.role 
+        END AS connection_type
+      FROM org_organizations
+      LEFT JOIN org_users 
+        ON org_organizations.id = org_users.organization_id
+      WHERE $filter_clause
+    ", array_merge([$user_id], $filter_vars));
+
+    $get_org = $db->query($query);
+
     $organizations = [];
     if ($get_org && $get_org->num_rows > 0) {
       while ($row = $get_org->fetch_assoc()) {
         $organizations[] = $row;
       }
     }
+
     return $organizations;
   }
 

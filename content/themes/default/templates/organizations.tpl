@@ -77,17 +77,6 @@
   <div class="circle-3"></div>
   <div class="{if $system['fluid_design']}container-fluid{else}container{/if}">
     <h2>{__("My Organizations")}</h2>
-    <p class="text-xlg">{__($system['system_description_groups'])}</p>
-    <div class="row mt20">
-      <div class="col-sm-9 col-lg-6 mx-sm-auto">
-        <form class="js_search-form" data-filter="groups">
-          <div class="input-group">
-            <input type="text" class="form-control" name="query" placeholder='{__("Search for groups")}'>
-            <button type="submit" class="btn btn-light">{__("Search")}</button>
-          </div>
-        </form>
-      </div>
-    </div>
   </div>
 </div>
 <!-- page header -->
@@ -98,82 +87,54 @@
     <!-- tabs -->
     <div class="content-tabs rounded-sm shadow-sm clearfix">
       <ul>
-        <li {if $view == ""}class="active" {/if}>
-          <a href="{$system['system_url']}/groups">{__("Discover")}</a>
-        </li>
         {if $user->_logged_in}
-          <li {if $view == "joined"}class="active" {/if}>
-            <a href="{$system['system_url']}/groups/joined">{__("Joined Groups")}</a>
+          <li {if !$owned}class="active" {/if}>
+            <a href="{$system['system_url']}/organizations">{__("Joined Organizations")}</a>
           </li>
-          <li {if $view == "manage"}class="active" {/if}>
-            <a href="{$system['system_url']}/groups/manage">{__("My Groups")}</a>
+          <li {if $owned}class="active" {/if}>
+            <a href="{$system['system_url']}/organizations?filters=owned">{__("My Organizations")}</a>
           </li>
         {/if}
       </ul>
-      {if $user->_data['can_create_groups']}
-        <div class="mt10 float-end">
-          <button class="btn btn-md btn-primary d-none d-lg-block" data-toggle="modal" data-url="modules/add.php?type=group">
-            <i class="fa fa-plus-circle mr5"></i>{__("Create Group")}
-          </button>
-          <button class="btn btn-sm btn-icon btn-primary d-block d-lg-none" data-toggle="modal" data-url="modules/add.php?type=group">
-            <i class="fa fa-plus-circle"></i>
-          </button>
-        </div>
-      {/if}
     </div>
     <!-- tabs -->
   </div>
 
   <div class="row">
     <!-- content panel -->
-    <div class="{if $view == "" || $view == "category"} col-12 sg-offcanvas-mainbar{/if}">
-      <!-- location filter -->
-      {if $system['newsfeed_location_filter_enabled']}
-        <div class="posts-filter">
-          <span>{$view_title}</span>
-          <div class="float-end">
-            <a href="#" data-bs-toggle="dropdown" class="countries-filter">
-              <i class="fa fa-globe fa-fw"></i>
-              {if $selected_country}
-                <span>{$selected_country['country_name']}</span>
-              {else}
-                <span>{__("All Countries")}</span>
-              {/if}
-            </a>
-            <div class="dropdown-menu dropdown-menu-end countries-dropdown">
-              <div class="js_scroller">
-                <a class="dropdown-item" href="?country=all">
-                  {__("All Countries")}
-                </a>
-                {foreach $countries as $country}
-                  <a class="dropdown-item" href="?country={$country['country_name_native']}">
-                    {$country['country_name']}
-                  </a>
-                {/foreach}
-              </div>
-            </div>
-          </div>
-        </div>
-      {/if}
-      <!-- location filter -->
-
+    <div class="col-12 sg-offcanvas-mainbar">
       <!-- content -->
       <div>
-        {if $groups}
+        {if $orgs}
           <ul class="row">
-            {foreach $groups as $_group}
-              {include file='__feeds_group.tpl' _tpl='box'}
+            {foreach $orgs as $_group}
+              <li class="col-md-6 col-lg-3">
+                <div class="ui-box">
+                  <div class="img">
+                    <a href="{$system['system_url']}/organizations/{$_group['slug']}">
+                      <img alt="{$_group['name']}" src="{$_group['picture']}" />
+                    </a>
+                  </div>
+
+                  <div class="mt10">
+                    <a class="h6" href="{$system['system_url']}/organizations/{$_group['slug']}">{$_group['name']|truncate:30}</a>
+                    <div>{$_group['connection_type']}</div>
+                  </div>
+                  <div class="mt10">
+                    {if $_group['connection_type'] != 'owner'}
+                      <button type="button" class="btn btn-sm btn-success js_leave-org-plan" data-id="{$_group['id']}">
+                        <i class="fa fa-check mr5"></i> {__("Joined")}
+                      </button>
+                    {else}
+                      <button type="button" class="btn btn-sm btn-success">
+                        <i class="fa fa-check mr5"></i>{__("Owned")}
+                      </button>
+                    {/if}
+                  </div>
+                </div>
+              </li>
             {/foreach}
           </ul>
-
-          <!-- see-more -->
-          {if count($groups) >= $system['groups_results']}
-            <div class="alert alert-post see-more js_see-more" data-get="{$get}" {if $view == "category"}data-id="{$current_category['category_id']}" {/if} {if $view == "joined" || $view == "manage"}data-uid="{$user->_data['user_id']}" {/if} data-country="{if $selected_country}{$selected_country['country_id']}{else}all{/if}">
-              <span>{__("See More")}</span>
-              <div class="loader loader_small x-hidden"></div>
-            </div>
-          {/if}
-          <!-- see-more -->
         {else}
           {include file='_no_data.tpl'}
         {/if}

@@ -62,7 +62,7 @@ try {
       $user->add_org_sub_account($_POST['user_id'], $org['id'], $_POST['va_number']);
       $user->post_notification(['to_user_id' => $_POST['user_id'], 'action' => 'org_sub_account_add', 'node_url' => $user->_data['user_name']]);
 
-      return_json(['callback' => 'window.location = site_path + "/organizations/sub-accounts"']);
+      return_json(['callback' => 'window.location = site_path + "/organizations/' . $org['slug'] . '/sub-accounts"']);
 
       break;
 
@@ -97,7 +97,7 @@ try {
 
       $user->add_org_va_account($account['id'], $org['id'], $_POST['va_number']);
 
-      return_json(['callback' => 'window.location = site_path + "/organizations/sub-accounts"']);
+      return_json(['callback' => 'window.location = site_path + "/organizations/' . $org['slug'] . '/sub-accounts"']);
 
       break;
     default:

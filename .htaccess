@@ -333,9 +333,8 @@ RewriteRule ^admincp/([^/]+)/([^/]+)/([^/]+)/?$ admin.php?view=$1&sub_view=$2&id
 RewriteRule ^organizations/?$ organizations.php [L,QSA]
 RewriteRule ^organizations/([^/]+)/?$ organizations.php?username=$1 [L,QSA]
 RewriteRule ^organizations/([^/]+)/([^/]+)/?$ organizations.php?username=$1&view=$2 [L,QSA]
-RewriteRule ^organizations/([^/]+)/([^/]+)/([^/]+)/?$ organizations.php?username=$1&view=$2&id=$3 [L,QSA]
-RewriteRule ^organizations/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ organizations.php?username=$1&view=$2&sub_view=$3 [L,QSA]
-RewriteRule ^organizations/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ organizations.php?username=$1&view=$2&sub_view=$3$sub_view=$4 [L,QSA]
+RewriteRule ^organizations/([^/]+)/([^/]+)/([^/]+)/?$ organizations.php?username=$1&view=$2&sub_view=$3 [L,QSA]
+RewriteRule ^organizations/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ organizations.php?username=$1&view=$2&sub_view=$3&id=$4 [L,QSA]
 
 # Qurani
 RewriteRule ^qurani/?$ qurani/index.php [L,QSA]

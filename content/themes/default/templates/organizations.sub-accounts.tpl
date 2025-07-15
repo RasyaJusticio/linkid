@@ -2,13 +2,13 @@
   <div class="card-header with-icon">
     {if $sub_view == ""}
       <div class="float-end">
-        <a href="{$system['system_url']}/organizations/sub-accounts/add" class="btn btn-md btn-primary">
-          <i class="fa fa-plus mr5"></i>{__("Add New Accounts")}
+        <a href="{$system['system_url']}/organizations/{$username}/sub-accounts/add" class="btn btn-md btn-primary">
+          <i class="fa fa-plus mr5"></i>{__("Add")}
         </a>
       </div>
     {else}
       <div class="float-end">
-        <a href="{$system['system_url']}/organizations/sub-accounts" class="btn btn-md btn-light">
+        <a href="{$system['system_url']}/organizations/{$username}/sub-accounts" class="btn btn-md btn-light">
           <i class="fa fa-arrow-circle-left"></i><span class="ml5 d-none d-lg-inline-block">{__("Go Back")}</span>
         </a>
       </div>
@@ -50,7 +50,7 @@
 
       <!-- search form -->
       <div class="mb20">
-        <form class="d-flex flex-row align-items-center flex-wrap" action="{$system['system_url']}/organizations/sub-accounts/find" method="get">
+        <form class="d-flex flex-row align-items-center flex-wrap" action="{$system['system_url']}/organizations/{$username}/sub-accounts/find" method="get">
           <div class="form-group mb0">
             <div class="input-group">
               <input type="text" class="form-control" name="query" value="{$query}">
@@ -99,7 +99,7 @@
                     {print_money($row['balance']|format_number)}
                   </td>
                   <td>
-                    <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$system['system_url']}/organizations/sub-accounts/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
+                    <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$system['system_url']}/organizations/{$username}/sub-accounts/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
                       <i class="fa fa-pencil-alt"></i>
                     </a>
                     <button data-bs-toggle="tooltip" title='{__("Top up")}' class="btn btn-sm btn-icon btn-rounded btn-primary" data-toggle="modal" data-url="#account-transfer" data-options='{ "id": {$row['id']} }'>

@@ -11,35 +11,40 @@
       <div class="card">
         <div class="card-body with-nav">
           <ul class="side-nav">
-            <li {if $view == ""}class="active" {/if}>
-              <a href="{$system['system_url']}/organizations/{$username}">
-                <i class="fa fa-tachometer-alt fa-lg fa-fw mr10" style="color: #5e72e4"></i>
-                {__("Dashboard")}
-              </a>
-            </li>
-            <li {if $view == "informations"}class="active" {/if}>
-              <a href="{$system['system_url']}/organizations/{$username}/informations">
-                {include file='__svg_icons.tpl' icon="company" class="main-icon no-fill mr10" width="24px" height="24px"}
-                {__("Informations")}
-              </a>
-            </li>
+            {if in_array($org['connection_type'], ['owner', 'admin', 'staff'])}
+              <li {if $view == ""}class="active" {/if}>
+                <a href="{$system['system_url']}/organizations/{$username}">
+                  <i class="fa fa-tachometer-alt fa-lg fa-fw mr10" style="color: #5e72e4"></i>
+                  {__("Dashboard")}
+                </a>
+              </li>
 
-            {assign var="is_accounts" value="{in_array($view, ['sub-accounts'])}"}
-            <li {if $is_accounts}class="active" {/if}>
-              <a href="#accounts" data-bs-toggle="collapse" {if $is_accounts}aria-expanded="true" {/if}>
-                {include file='__svg_icons.tpl' icon="edit_profile" class="main-icon mr10" width="24px" height="24px"}
-                {__("Accounts")}
-              </a>
-              <div class='collapse {if $is_accounts}show{/if}' id="accounts">
-                <ul>
-                  <li {if $view == "sub-accounts"}class="active" {/if}>
-                    <a href="{$system['system_url']}/organizations/{$username}/sub-accounts">
-                      {__("Sub-Accounts")}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
+              {if in_array($org['connection_type'], ['owner', 'admin'])}
+                <li {if $view == "informations"}class="active" {/if}>
+                  <a href="{$system['system_url']}/organizations/{$username}/informations">
+                    {include file='__svg_icons.tpl' icon="company" class="main-icon no-fill mr10" width="24px" height="24px"}
+                    {__("Informations")}
+                  </a>
+                </li>
+              {/if}
+
+              {assign var="is_accounts" value="{in_array($view, ['sub-accounts'])}"}
+              <li {if $is_accounts}class="active" {/if}>
+                <a href="#accounts" data-bs-toggle="collapse" {if $is_accounts}aria-expanded="true" {/if}>
+                  {include file='__svg_icons.tpl' icon="edit_profile" class="main-icon mr10" width="24px" height="24px"}
+                  {__("Accounts")}
+                </a>
+                <div class='collapse {if $is_accounts}show{/if}' id="accounts">
+                  <ul>
+                    <li {if $view == "sub-accounts"}class="active" {/if}>
+                      <a href="{$system['system_url']}/organizations/{$username}/sub-accounts">
+                        {__("Sub-Accounts")}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            {/if}
           </ul>
         </div>
       </div>
@@ -53,14 +58,16 @@
           <i class="fa-solid fa-chevron-left mr5"></i>{__("Back To Settings")}
         </small>
       </div>
-      {if $view == ""}
-        {include file='organizations.dashboard.tpl'}
-      {elseif $view == "informations"}
-        {include file='organizations.informations.tpl'}
-      {elseif $view == "sub-accounts"}
-        {include file='organizations.sub-accounts.tpl'}
-      {elseif $view == "apply"}
+      {if $view == "apply"}
         {include file='organizations.apply.tpl'}
+      {elseif in_array($org['connection_type'], ['owner', 'admin', 'staff'])}
+        {if $view == ""}
+          {include file='organizations.dashboard.tpl'}
+        {elseif $view == "informations" && in_array($org['connection_type'], ['owner', 'staff'])}
+          {include file='organizations.informations.tpl'}
+        {elseif $view == "sub-accounts"}
+          {include file='organizations.sub-accounts.tpl'}
+        {/if}
       {/if}
     </div>
     <!-- right panel -->

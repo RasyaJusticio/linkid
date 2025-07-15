@@ -25,14 +25,13 @@ if (!$user->_is_organization) {
 }
 
 try {
-  $org = $user->get_organization_from_user($user->_data['user_id']);
+  $org = $user->get_organization_by_slug($_POST['org_username']);
 
   // initialize the return array
   $return = [];
 
   switch ($_GET['do']) {
     case '':
-
       return_json(['callback' => 'window.location.reload();']);
 
       break;
@@ -45,6 +44,12 @@ try {
       if (!isset($_POST['va_number']) || !is_numeric($_POST['va_number'])) {
         _error(400);
       }
+
+      // role control
+      if (!in_array($org['connection_type'], ['owner', 'admin', 'staff'])) {
+        _error(403);
+      }
+      
 
       $target_user = $user->get_user($_POST['user_id']);
       if (empty($target_user) || !isset($target_user)) {
@@ -73,6 +78,11 @@ try {
       }
       if (!isset($_POST['va_number']) || !is_numeric($_POST['va_number'])) {
         _error(400);
+      }
+
+      // role control
+      if (!in_array($org['connection_type'], ['owner', 'admin', 'staff'])) {
+        _error(403);
       }
 
       $target_user = $user->get_user($_POST['user_id']);

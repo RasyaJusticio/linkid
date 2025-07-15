@@ -10,7 +10,7 @@
             <i class="fa fa-users bg-icon"></i>
             <span class="text-xxlg">{$insights['accounts']}</span><br>
             <span class="text-lg">{__("Accounts")}</span><br>
-            <a href="{$system['system_url']}/organizations/sub-accounts">{__("Manage Accounts")}</a>
+            <a href="{$system['system_url']}/organizations/{$username}/sub-accounts">{__("Manage Accounts")}</a>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
             <i class="fa fa-clock bg-icon"></i>
             <span class="text-xxlg">{print_money($insights['balance']|format_number)}</span><br>
             <span class="text-lg">{__("Balance")}</span><br>
-            <a href="{$system['system_url']}/organizations">{__("Top Up")}</a>
+            <a href="{$system['system_url']}/organizations/{$username}">{__("Top Up")}</a>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ try {
     switch ($_GET['view']) {
       case "":
         // page header
-        page_header(__("Organizations") . " &rsaquo; " . __("Dashboard"));
+        page_header($org['name'] . " &rsaquo; " . __("Dashboard"));
 
         $accounts = $user->get_org_sub_accounts($org['id']);
         $total_balance_query = $db->query(sprintf(
@@ -46,7 +46,7 @@ try {
         break;
       case "informations":
         // page header
-        page_header(__("Organizations") . " &rsaquo; " . __("Informations"));
+        page_header($org['name'] . " &rsaquo; " . __("Informations"));
 
         break;
 
@@ -54,7 +54,7 @@ try {
         switch ($_GET['sub_view']) {
           case "":
             // page header
-            page_header(__("Organizations") . " &rsaquo; " . __("Sub-Accounts"));
+            page_header($org['name'] . " &rsaquo; " . __("Sub-Accounts"));
 
             // get organization notifications
             if (isset($_SESSION['org_topup_amount'])) {
@@ -75,10 +75,10 @@ try {
             break;
 
           case "find":
-            page_header(__("Organizations") . " &rsaquo; " . __("Sub-Accounts") . " &rsaquo; " . __("Find"));
+            page_header($org['name'] . " &rsaquo; " . __("Sub-Accounts") . " &rsaquo; " . __("Find"));
 
             if (is_empty($_GET['query'])) {
-              redirect('/organizations/sub-accounts');
+              redirect('/organizations/' . $_GET['username'] . '/sub-accounts');
             }
 
             require('includes/class-pager.php');
@@ -148,13 +148,13 @@ try {
 
           case "add":
             // page header
-            page_header(__("Organizations") . " &rsaquo; " . __("Sub-Accounts") . " &rsaquo; " . __("Add"));
+            page_header($org['name'] . " &rsaquo; " . __("Sub-Accounts") . " &rsaquo; " . __("Add"));
 
             break;
 
           case "edit":
             // page header
-            page_header(__("Organizations") . " &rsaquo; " . __("Sub-Accounts") . " &rsaquo; " . __("Edit"));
+            page_header($org['name'] . " &rsaquo; " . __("Sub-Accounts") . " &rsaquo; " . __("Edit"));
 
             // valid inputs
             if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -171,10 +171,10 @@ try {
    
       case "apply":
         // page header
-        page_header(__("Organizations") . " &rsaquo; " . __("Apply"));
+        page_header($org['name'] . " &rsaquo; " . __("Apply"));
 
         if ($user->_is_organization) {
-          redirect('/organizations');
+          redirect('/organizations/' . $_GET['username']);
           break;
         }
 

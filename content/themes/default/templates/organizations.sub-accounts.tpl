@@ -145,6 +145,10 @@
           </div>
         </div>
 
+        <!-- hidden -->
+        <input type="hidden" name="org_username" value="{$username}">
+        <!-- hidden -->
+
         <!-- success -->
         <div class="alert alert-success mt15 mb0 x-hidden"></div>
         <!-- success -->
@@ -175,6 +179,10 @@
             {__("Assign this account a unique virtual account number")}
           </div>
         </div>
+
+        <!-- hidden -->
+        <input type="hidden" name="org_username" value="{$username}">
+        <!-- hidden -->
 
         <!-- success -->
         <div class="alert alert-success mt15 mb0 x-hidden"></div>

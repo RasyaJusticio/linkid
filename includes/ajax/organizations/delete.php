@@ -31,8 +31,9 @@ try {
       }
 
       $org = $user->get_organization_from_user($account['user_id']);
+      $connection_type = $user->get_connection_type($org['id'], $user->_data['user_id']);
 
-      if ($org['created_by'] != $user->_data['user_id']) {
+      if (!in_array($connection_type, ['owner', 'admin', 'staff'])) {
         modal("MESSAGE", __("System Message"), __("You don't have the right permission to access this"));
         break;
       }

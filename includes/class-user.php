@@ -25029,19 +25029,61 @@ class User
   }
 
   /**
+   * get_connection_type ✅
+   * 
+   * @param integer $org_id
+   * @param integer $user_id
+   * @return string|null
+   */
+  public function get_connection_type($org_id, $user_id)
+  {
+      global $db;
+      $org_id = secure($org_id, 'int');
+      $user_id = secure($user_id, 'int');
+      $query = "SELECT 
+                    CASE 
+                        WHEN org_organizations.created_by = %s THEN 'owner' 
+                        ELSE org_users.role 
+                    END AS connection_type
+                FROM org_organizations 
+                LEFT JOIN org_users 
+                    ON org_organizations.id = org_users.organization_id 
+                    AND org_users.user_id = %s 
+                WHERE org_organizations.id = %s LIMIT 1";
+      $result = $db->query(sprintf($query, $user_id, $user_id, $org_id));
+      if ($result->num_rows == 0) {
+          return null;
+      }
+      $row = $result->fetch_assoc();
+      return $row['connection_type'];
+  }
+
+  /**
    * get_organization ✅
    * 
    * @param integer $org_id
-   * @return array
+   * @return array|null
    */
   public function get_organization($org_id)
   {
-    global $db;
-    $get_org = $db->query(sprintf("SELECT * FROM org_organizations WHERE id = %s", secure($org_id, 'int')));
-    if ($get_org->num_rows == 0) {
-      return null;
-    }
-    return $get_org->fetch_assoc();
+      global $db;
+      $org_id = secure($org_id, 'int');
+      $user_id = secure($this->_data['user_id'], 'int');
+      $query = "SELECT org_organizations.*, 
+                       CASE 
+                           WHEN org_organizations.created_by = %s THEN 'owner' 
+                           ELSE org_users.role 
+                       END AS connection_type
+                FROM org_organizations 
+                LEFT JOIN org_users 
+                    ON org_organizations.id = org_users.organization_id 
+                    AND org_users.user_id = %s 
+                WHERE org_organizations.id = %s LIMIT 1";
+      $get_org = $db->query(sprintf($query, $user_id, $user_id, $org_id));
+      if ($get_org->num_rows == 0) {
+          return null;
+      }
+      return $get_org->fetch_assoc();
   }
 
   /**
@@ -25053,9 +25095,21 @@ class User
   public function get_organization_by_slug($slug)
   {
     global $db;
-    $get_org = $db->query(sprintf("SELECT * FROM org_organizations WHERE slug = %s LIMIT 1", secure($slug)));
+    $slug = secure($slug);
+    $user_id = secure($this->_data['user_id'], 'int');
+    $query = "SELECT org_organizations.*, 
+                     CASE 
+                         WHEN org_organizations.created_by = %s THEN 'owner' 
+                         ELSE org_users.role 
+                     END AS connection_type
+              FROM org_organizations 
+              LEFT JOIN org_users 
+                  ON org_organizations.id = org_users.organization_id 
+                  AND org_users.user_id = %s 
+              WHERE org_organizations.slug = %s LIMIT 1";
+    $get_org = $db->query(sprintf($query, $user_id, $user_id, $slug));
     if ($get_org->num_rows == 0) {
-      return null;
+        return null;
     }
     return $get_org->fetch_assoc();
   }

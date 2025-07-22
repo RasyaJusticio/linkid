@@ -101,11 +101,8 @@
                 {else}
                 <span class="badge rounded-pill badge-lg bg-success mr10">{__("From")}</span>
                 {/if}
-                {if $transaction['node_type'] == "user" || $transaction['node_type'] == "tip"}
-                {if $transaction['node_type'] == "tip"}
-                <span class="badge rounded-pill badge-lg bg-secondary mr10">{__("Tip")}</span>
-                {/if}
-                <a target="_blank" href="{$system['system_url']}/{$transaction['user_name']}">
+                {if $transaction['node_type'] == "member"}
+                <a target="_blank" href="{$org_url}/members/find?query={$transaction['user_name']}">
                   <img class="tbl-image" src="{$transaction['user_picture']}" style="float: none;">
                   {if $system['show_usernames_enabled']}
                   {$transaction['user_name']}
@@ -113,38 +110,6 @@
                   {$transaction['user_firstname']} {$transaction['user_lastname']}
                   {/if}
                 </a>
-                {elseif $transaction['node_type'] == "recharge"}
-                {__("Top Up Credit")}
-                {elseif $transaction['node_type'] == "withdraw_wallet"}
-                {__("Wallet Withdrawal")}
-                {elseif $transaction['node_type'] == "withdraw_affiliates"}
-                {__("Affiliates Credit")}
-                {elseif $transaction['node_type'] == "withdraw_points"}
-                {__("Points Credit")}
-                {elseif $transaction['node_type'] == "withdraw_market"}
-                {__("Market Credit")}
-                {elseif $transaction['node_type'] == "withdraw_funding"}
-                {__("Funding Credit")}
-                {elseif $transaction['node_type'] == "withdraw_monetization"}
-                {__("Monetization Credit")}
-                {elseif $transaction['node_type'] == "package_payment"}
-                {__("Buy Pro Package")}
-                {elseif $transaction['node_type'] == "subscribe_profile" || $transaction['node_type'] == "subscribe_user"}
-                {__("Subscribe to Profile")}
-                {elseif $transaction['node_type'] == "subscribe_page"}
-                {__("Subscribe to Page")}
-                {elseif $transaction['node_type'] == "subscribe_group"}
-                {__("Subscribe to Group")}
-                {elseif $transaction['node_type'] == "paid_post"}
-                {__("Paid Post")}
-                {elseif $transaction['node_type'] == "donate"}
-                {__("Donate")}
-                {elseif $transaction['node_type'] == "market" || $transaction['node_type'] == "market_payment"}
-                {__("Market Purchase")}
-                {elseif $transaction['node_type'] == "paid_chat_message"}
-                {__("Paid Chat Message")}
-                {elseif $transaction['node_type'] == "paid_call"}
-                {__("Paid Call")}
                 {/if}
               </td>
               <td>

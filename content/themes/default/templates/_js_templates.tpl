@@ -2167,6 +2167,142 @@
     
     <!-- Organization -->
     {if in_array($page, ["organization", "organizations"])}
+      <script id="org-va-transfer" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {__("Send Money")}
+          </h6>
+          <button type="button" class="btn-action" data-toggle="modal" data-url="#wallet-qr-scan-pay">
+            {include file='__svg_icons.tpl' icon="qr_scan_mono" width="24px" height="24px"}
+          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form onsubmit="openWalletConfirmation(event, 'send_to_id', '#org-va-transfer-confirm')">
+          <div class="modal-body">
+            {if $system['wallet_max_transfer'] != "0"}
+              <div class="alert alert-info mb20">
+                <i class="fas fa-info-circle mr5"></i>
+                {__("The maximum amount you can transfer is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer']|format_number)}</span>
+              </div>
+            {/if}
+            <div class="form-group">
+              <label class="form-label">{__("Amount")}</label>
+              <div class="input-money {$system['system_currency_dir']}">
+                <span>{$system['system_currency_symbol']}</span>
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              {include file="__money_amounts.tpl"}
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="send_to">{__("Send To")}</label>
+              <div class="position-relative js_autocomplete">
+                <input class="form-control" type="text" placeholder="{__("Search for user name or email")}" name="send_to" id="send_to" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+                <input type="hidden" name="send_to_id">
+              </div>
+            </div>
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Send")}</button>
+          </div>
+        </form>
+      </script>
+
+      <script id="org-transfer-quick" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {__("Send Money")}
+          </h6>
+          <button type="button" class="btn-action" data-toggle="modal" data-url="#wallet-qr-scan-pay">
+            {include file='__svg_icons.tpl' icon="qr_scan_mono" width="24px" height="24px"}
+          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="js_ajax-forms" data-url="payments/wallet.php?do=org-transfer-quick">
+          <div class="modal-body">
+            {if $system['wallet_max_transfer'] != "0"}
+              <div class="alert alert-info mb20">
+                <i class="fas fa-info-circle mr5"></i>
+                {__("The maximum amount you can transfer is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer']|format_number)}</span>
+              </div>
+            {/if}
+            <div class="form-group">
+              <label class="form-label">{__("Amount")}</label>
+              <div class="input-money {$system['system_currency_dir']}">
+                <span>{$system['system_currency_symbol']}</span>
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+              </div>
+              {include file="__money_amounts.tpl"}
+            </div>
+
+            <!-- hidden -->
+            <input type="hidden" name="send_to_id" value="{literal}{{id}}{/literal}">
+            <!-- hidden -->
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Send")}</button>
+          </div>
+        </form>
+      </script>
+
+      <script id="org-va-transfer-confirm" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {__("Send Money")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="js_ajax-forms" data-url="payments/wallet.php?do=wallet_transfer">
+          <div class="modal-body">
+            <p class="modal-label">
+              {__("Send To")}
+            </p>
+
+            {include file="__wallet_user_info.tpl"}
+
+            <span class="money-total" id="send-money-total">Rp 0</span>
+            <span class="fee-total" id="send-fee-total">Rp 0</span>
+            
+            <input class="form-control" type="hidden" name="amount" value="{literal}{{amount}}{/literal}">
+            <input type="hidden" name="send_to_id" value="{literal}{{user_id}}{/literal}">
+
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Send")}</button>
+          </div>
+        </form>
+        <script>
+          (function () {
+            const amount = Number("{literal}{{amount}}{/literal}");
+            const fee = Number("{literal}{{fee}}{/literal}");
+            const feePercent = "{$system['wallet_transfer_fee_percent']}";
+
+            const sendMoneyTotal = document.getElementById('send-money-total');
+            const sendFeeTotal = document.getElementById('send-fee-total');
+
+            sendMoneyTotal.innerText = printMoney(formatNumber(amount + fee));
+
+            if (Number(fee) > 0) {
+              sendFeeTotal.classList.remove('hidden');
+              sendFeeTotal.innerText = printMoney(formatNumber(amount)) + " + Admin fee " + printMoney(formatNumber(fee));
+            } else {
+              sendFeeTotal.classList.add('hidden');
+            }
+          })();
+        </script>
+      </script>
+
       <script id="org-my-qr" type="text/template">
         <div class="modal-wallet-qr">
           <div class="modal-header">

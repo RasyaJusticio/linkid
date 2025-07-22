@@ -25591,6 +25591,61 @@ class User
   }
 
   /**
+   * org_va_transfer ✅
+   * 
+   * @param number $member_id
+   * @param number $amount
+   * @return string
+   */
+  public function org_va_transfer($member_id, $amount)
+  {
+    global $db, $system;
+
+    /* validate amount */
+    if (is_empty($amount) || !is_numeric($amount) || $amount <= 0) {
+      throw new Exception(__("You must enter valid amount of money"));
+    }
+    /* validate target */
+    if (is_empty($member_id) || !is_numeric($member_id)) {
+      throw new Exception(__("You must provide a member to send money to"));
+    }
+
+    /* get data */
+    $target_member = $this->org_get_member($member_id);
+    if (empty($target_member)) {
+      throw new Exception(__("Member not found"));
+    }
+
+    $organization = $this->get_org($target_member['org_id']);
+
+    $member = $this->org_get_member_by_user($target_member['organization_id'], $this->_data['user_id']);
+    if (empty($member)) {
+      throw new Exception(__("You have to be in the same organization as this member"));
+    }
+
+    /* validate target */
+    if ($target_member['id'] == $member['id']) {
+      throw new Exception(__("You can't send money to yourself!"));
+    }
+
+    /* check viewer balance */
+    if ($member['balance'] < $amount) {
+      throw new Exception(__("There is no enough credit in your account"));
+    }
+
+    /* decrease viewer user virtual account balance */
+    $db->query(sprintf('UPDATE org_virtual_accounts SET balance = IF(balance-%1$s<=0,0,balance-%1$s) WHERE va_number = %2$s', secure($amount), secure($member['va_number'], 'int')));
+    /* log this transaction */
+    $this->org_set_transaction($member['id'], $target_member['id'], 'member', $amount, 'out');
+    /* increase target user virtual account balance */
+    $db->query(sprintf("UPDATE org_virtual_accounts SET balance = balance + %s WHERE va_number = %s", secure($amount), secure($target_member['va_number'], 'int')));
+    /* log this transaction */
+    $this->org_set_transaction($target_member['id'], $member['id'], 'member', $amount, 'in');
+
+    $_SESSION['org_transfer_amount'] = $amount;
+  }
+
+  /**
    * org_generate_va_qrcode ✅
    * 
    * @param string $va_number
@@ -25608,6 +25663,60 @@ class User
     $result = $builder->build();
 
     return $result->getDataUri();
+  }
+
+/**
+ * org_get_transactions
+ *
+ * @param integer $org_id
+ * @return array
+ */
+public function org_get_transactions($org_id)
+{
+  global $db;
+  $transactions = [];
+
+  $org_id = secure($org_id, 'int');
+  $user_id = secure($this->_data['user_id'], 'int');
+
+  $get_transactions = $db->query("
+    SELECT org_transactions.*, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture
+    FROM org_transactions
+    LEFT JOIN org_members ON org_transactions.target_user_id = org_members.id
+    LEFT JOIN users ON org_members.user_id = users.user_id
+    WHERE org_members.organization_id = {$org_id}
+      AND (
+        org_transactions.user_id IN (
+          SELECT id FROM org_members WHERE user_id = {$user_id}
+        )
+      )
+    ORDER BY org_transactions.id DESC
+  ");
+
+  if ($get_transactions->num_rows > 0) {
+    while ($transaction = $get_transactions->fetch_assoc()) {
+      $transaction['user_picture'] = get_picture($transaction['user_picture'], $transaction['user_gender']);
+      $transactions[] = $transaction;
+    }
+  }
+
+  return $transactions;
+}
+
+  /**
+   * org_set_transaction
+   * 
+   * @param integer $user_id
+   * @param integer $target_user_id
+   * @param string $node_type
+   * @param integer $amount
+   * @param string $type
+   * @return void
+   */
+  public function org_set_transaction($user_id, $target_user_id, $node_type, $amount, $type)
+  {
+    global $db, $system, $date;
+    $db->query(sprintf("INSERT INTO org_transactions (user_id, target_user_id, node_type, amount, type) VALUES (%s, %s, %s, %s, %s)", secure($user_id, 'int'), secure($target_user_id, 'int'), secure($node_type), secure($amount), secure($type)));
   }
 }
 

@@ -39,8 +39,12 @@ try {
       // get qrcode image
       $qrcode = $user->org_generate_va_qrcode($member['va_number']);
 
+      // get account transactions
+      $transactions = $user->org_get_transactions($organization['id']);
+
       /* assign variables */
       $smarty->assign('data', $member);
+      $smarty->assign('transactions', $transactions);
       $smarty->assign('qrcode_uri', $qrcode);
 
       break;

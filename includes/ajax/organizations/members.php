@@ -16,6 +16,8 @@ is_ajax();
 // user access
 user_access(true);
 
+// TODO prevent trying to doing anything to self
+
 try {
   $organization = $user->get_org_by_slug($_POST['org_username']);
   if (empty($organization)) {

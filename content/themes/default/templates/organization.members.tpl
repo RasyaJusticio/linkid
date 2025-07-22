@@ -73,7 +73,17 @@
             <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$org_url}/members/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
               <i class="fa fa-pencil-alt"></i>
             </a>
-            <a data-bs-toggle="tooltip" title='{__("Transfer")}' href="{$org_url}/members/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
+            <a 
+                 data-bs-toggle="tooltip"
+                 title='{__("Transfer")}'
+                 class="btn btn-sm btn-icon btn-rounded btn-primary" 
+                                                                 
+                data-toggle="modal"
+                data-url="#org-transfer-quick"
+                data-options='{
+                  "id": "{$row['id']}"
+                }'
+              >
               <i class="fa fa-credit-card"></i>
             </a>
             <a

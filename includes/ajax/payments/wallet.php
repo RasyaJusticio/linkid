@@ -216,6 +216,15 @@ try {
 
         return_json(['result' => 'valid', 'fee' => calculate_fee($_POST['amount'], $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_min']), 'user' => $target_user]);
         break;
+
+    case 'org-transfer-quick':
+        // process
+        $user->org_va_transfer($_POST['send_to_id'], $_POST['amount']);
+
+        // return
+        return_json(['callback' => 'window.location.reload()']);
+        break;
+
       
     default:
         _error(400);

@@ -24874,4 +24874,132 @@ class User
     }
     return false;
   }
+
+  /* ------------------------------- */
+  /* Organizations ✅ */
+  /* ------------------------------- */
+
+  /**
+   * get_org_by_user ✅
+   * 
+   * @param number $user_id
+   * @return boolean
+   */
+  public function get_org_by_user($user_id = null)
+  {
+    global $db;
+
+    if (empty($user_id)) {
+      $user_id = $this->_data['user_id'];
+    }
+
+    $get_org = $db->query(sprintf("SELECT * FROM org_organizations WHERE created_by = %s LIMIT 1", secure($user_id)));
+
+    if ($get_org->num_rows == 0) {
+      return null;
+    }
+
+    return $get_org->fetch_assoc();
+  }
+
+  /**
+   * is_org_user ✅
+   * 
+   * @param number $user_id
+   * @return boolean
+   */
+  public function is_org_user($user_id = null)
+  {
+    global $db;
+
+    if (empty($user_id)) {
+      $user_id = $this->_data['user_id'];
+    }
+
+    $get_org = $db->query(sprintf("SELECT id FROM org_organizations WHERE created_by = %s LIMIT 1", secure($user_id)));
+
+    return $get_org->num_rows != 0;
+  }
+
+  /**
+   * check_org_by_slug ✅
+   * 
+   * @param string $slug
+   * @return boolean
+   */
+  public function check_org_by_slug($slug)
+  {
+    global $db;
+
+    $get_org = $db->query(sprintf("SELECT id FROM org_organizations WHERE slug = %s LIMIT 1", secure($slug)));
+
+    return $get_org->num_rows == 0;
+  }
+
+  /**
+   * org_apply ✅
+   * 
+   * @param array $args
+   * @return void 
+   */
+  public function org_apply($args)
+  {
+    global $db;
+    /* validate name */
+    if (is_empty($args['name'])) {
+      throw new Exception(__("You must enter a name for your organization"));
+    }
+    if (strlen($args['name']) < 3) {
+      throw new Exception(__("Organization name must be at least 3 characters long. Please try another"));
+    }
+    /* validate slug */
+    if (is_empty($args['slug'])) {
+      throw new Exception(__("You must enter a username for your organization"));
+    }
+    if (!valid_username($args['slug'], '.-')) {
+      throw new Exception(__("Please enter a valid username (a-z0-9.-) with minimum 3 characters long"));
+    }
+    if ($this->reserved_username($args['slug'])) {
+      throw new Exception(__("You can't use") . " " . $args['slug'] . " " . __("as username"));
+    }
+    if (!$this->check_org_by_slug($args['slug'])) {
+      throw new Exception(__("Sorry, it looks like this username") . " " . $args['slug'] . " " . __("belongs to an existing organization"));
+    }
+
+    /* validate country */
+    if ($args['country'] == "none" || empty($args['country'])) {
+      throw new ValidationException(__("You must select valid country"));
+    } else {
+      if (!$this->check_country($args['country'])) {
+        throw new ValidationException(__("You must select valid country"));
+      }
+    }
+    /* validate province */
+    if ($args['province'] == "none" || empty($args['province'])) {
+      throw new ValidationException(__("You must select valid province"));
+    } else {
+      if (!$this->check_province($args['province'])) {
+        throw new ValidationException(__("You must select valid province"));
+      }
+    }
+    /* validate city */
+    if ($args['city'] == "none" || empty($args['city'])) {
+      throw new ValidationException(__("You must select valid city"));
+    } else {
+      if (!$this->check_city($args['city'])) {
+        throw new ValidationException(__("You must select valid city"));
+      }
+    }
+    /* validate district */
+    if ($args['district'] == "none" || empty($args['district'])) {
+      throw new ValidationException(__("You must select valid district"));
+    } else {
+      if (!$this->check_district($args['district'])) {
+        throw new ValidationException(__("You must select valid district"));
+      }
+    }
+
+    $db->query(sprintf("INSERT INTO org_organizations (name, slug, status, created_by) VALUES (%s, %s, 'active', %s)", secure($args['name']), secure($args['slug']), secure($this->_data['user_id'], 'int')));
+  }
 }
+

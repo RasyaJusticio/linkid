@@ -59,6 +59,17 @@
         <!-- top-bar alert-->
       {/if}
 
+      {if !$system['system_live']}
+        <!-- top-bar alert-->
+        <div class="top-bar danger">
+          <div class="{if $system['fluid_design']}container-fluid{else}container{/if}">
+            <i class="fa fa-exclamation-triangle fa-lg pr5"></i>
+            <span>{__("Turn it on from")}</span> <a href="{$system['system_url']}/admincp/settings">{__("Admin Panel")}</a>
+          </div>
+        </div>
+        <!-- top-bar alert-->
+      {/if}
+
       {if $user->_login_as}
         <!-- bottom-bar alert-->
         <div class="bottom-bar">

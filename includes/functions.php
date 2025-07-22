@@ -2154,7 +2154,7 @@ function upload_file($from_web = false)
       // save each chunk to a temporary file
       $temp_file = $temp_directory . $file_guid . '_' . $file_name .  ".part-" . $chunkIndex;
       if (!@move_uploaded_file($_FILES['file']['tmp_name'], $temp_file)) {
-        throw new Exception(__("Sorry, could not upload the file chunk"));
+        throw new Exception(__("Sorry, could not upload the file chunk") . " " . $_FILES['file']['tmp_name'] . " " . $temp_file);
       }
 
       // if this is the last chunk, reassemble the file

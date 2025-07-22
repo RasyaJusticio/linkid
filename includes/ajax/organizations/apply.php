@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * ajax -> organizations -> apply
+ * 
+ * @package LinkID
+ * @author RasyaJusticio
+ */
+
+// fetch bootstrap
+require('../../../bootstrap.php');
+
+// check AJAX Request
+is_ajax();
+
+// user access
+user_access(true, true, true);
+
+try {
+
+  switch ($_GET['do']) {
+    case '':
+      // update getting started
+      $user->org_apply($_POST);
+
+      // return
+      return_json(['callback' => 'window.location = "' . $system['system_url'] . '";']);
+      break;
+
+    default:
+      _error(400);
+      break;
+  }
+} catch (Exception $e) {
+  return_json(['error' => true, 'message' => $e->getMessage()]);
+}

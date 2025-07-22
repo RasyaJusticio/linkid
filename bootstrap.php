@@ -140,6 +140,8 @@ if ($user->_is_admin) {
   $control_panel['url'] = "modcp";
 }
 
+$org = $user->get_org_by_user();
+
 
 // assign global varibles
 $smarty->assign('secret', $_SESSION['secret']);
@@ -148,6 +150,7 @@ $smarty->assign('date', $date);
 $smarty->assign('system', $system);
 $smarty->assign('local_tz', get_user_timezone());
 $smarty->assign('user', $user);
+$smarty->assign('org', $org);
 $smarty->assign('emojis', $emojis);
 $smarty->assign('reactions', $user->get_reactions());
 $smarty->assign('reactions_enabled', $user->get_reactions(true));

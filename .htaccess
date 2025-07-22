@@ -329,6 +329,14 @@ RewriteRule ^admincp/([^/]+)/?$ admin.php?view=$1 [L,QSA]
 RewriteRule ^admincp/([^/]+)/([^/]+)/?$ admin.php?view=$1&sub_view=$2 [L,QSA]
 RewriteRule ^admincp/([^/]+)/([^/]+)/([^/]+)/?$ admin.php?view=$1&sub_view=$2&id=$3 [L,QSA]
 
+# Organizations
+RewriteRule ^organizations/?$ organizations.php [L,QSA]
+RewriteRule ^organizations/([^/]+)/?$ organizations.php?view=$1 [L,QSA]
+RewriteRule ^org/([^/]+)/?$ organization.php?username=$1 [L,QSA]
+RewriteRule ^org/([^/]+)/([^/]+)/?$ organization.php?username=$1&view=$2 [L,QSA]
+RewriteRule ^org/([^/]+)/([^/]+)/([^/]+)/?$ organization.php?username=$1&view=$2&sub_view=$3 [L,QSA]
+RewriteRule ^org/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ organization.php?username=$1&view=$2&sub_view=$3&id=$4 [L,QSA]
+
 # Qurani
 RewriteRule ^qurani/?$ qurani/index.php [L,QSA]
 RewriteRule ^qurani/riwayat?$ qurani/riwayat.php [L,QSA]

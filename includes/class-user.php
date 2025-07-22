@@ -24880,6 +24880,25 @@ class User
   /* ------------------------------- */
 
   /**
+   * get_org ✅
+   * 
+   * @param number $id
+   * @return array|null
+   */
+  public function get_org($id)
+  {
+    global $db;
+
+    $get_org = $db->query(sprintf("SELECT * FROM org_organizations WHERE id = %s LIMIT 1", secure($id, 'int')));
+
+    if ($get_org->num_rows == 0) {
+      return null;
+    }
+
+    return $get_org->fetch_assoc();
+  }
+
+  /**
    * get_org_by_user ✅
    * 
    * @param number $user_id
@@ -25261,7 +25280,7 @@ class User
   {
     global $db;
 
-    $organization = $this->get_org_by_slug($_POST['org_username']);
+    $organization = $this->get_org($org_id);
     if (empty($organization)) {
         throw new ValidationException(__("Organization not found"));
     } 
@@ -25273,18 +25292,18 @@ class User
     $connection = $this->org_get_connection($organization['id']);
 
     // valid inputs
-    if (!isset($_POST['user_id']) || !is_numeric($_POST['user_id'])) {
+    if (!isset($user_id) || !is_numeric($user_id)) {
       throw new ValidationException(__("Please insert a valid user id"));
     }
-    if (!isset($_POST['va_number']) || !is_numeric($_POST['va_number'])) {
+    if (!isset($va_number) || !is_numeric($va_number)) {
       throw new ValidationException(__("Please insert a valid VA number"));
     }
-    if (!isset($_POST['role']) || !in_array($_POST['role'], ['admin', 'staff', 'account', 'sub-account'])) {
+    if (!isset($role) || !in_array($role, ['admin', 'staff', 'account', 'sub-account'])) {
       throw new ValidationException(__("Please insert a valid role"));
     }
 
     // get user
-    $target_user = $this->get_user($_POST['user_id']);
+    $target_user = $this->get_user($user_id);
     if (empty($target_user) || !isset($target_user)) {
       throw new ValidationException(__("User not found"));
     }
@@ -25293,21 +25312,24 @@ class User
     if (!in_array($connection, ['owner', 'admin', 'staff'])) {
       throw new ValidationException(__("You don't have enough privilege to do this action"));
     }
-    if ($_POST['role'] == 'admin' && !in_array($connection, ['owner'])) {
+    if ($role == 'admin' && !in_array($connection, ['owner'])) {
       throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
     }
-    if ($_POST['role'] == 'staff' && !in_array($connection, ['owner', 'admin'])) {
+    if ($role == 'staff' && !in_array($connection, ['owner', 'admin'])) {
       throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
     }
-    if (in_array($_POST['role'], ['account', 'sub-account']) && !in_array($connection, ['owner', 'admin', 'staff'])) {
+    if (in_array($role, ['account', 'sub-account']) && !in_array($connection, ['owner', 'admin', 'staff'])) {
       throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
     }
 
     // other checks
-    if ($this->org_is_member($organization['id'], $_POST['user_id'])) {
+    if ($this->org_is_member($organization['id'], $user_id)) {
       throw new ValidationException(__("User is already invited"));
     }
-    if ($this->org_get_member_by_va($_POST['va_number'])) {
+    if (strlen($va_number) != 12) {
+      throw new ValidationException(__("VA number must be 12 characters"));
+    }
+    if ($this->org_get_member_by_va($va_number)) {
       throw new ValidationException(__("That VA number is in use. Please use another one."));
     }
 
@@ -25372,7 +25394,7 @@ class User
   function org_update_member($member_id, $org_id, $role, $va_number) {
     global $db;
 
-    $organization = $this->get_org_by_slug($_POST['org_username']);
+    $organization = $this->get_org($org_id);
     if (empty($organization)) {
         throw new ValidationException(__("Organization not found"));
     } 

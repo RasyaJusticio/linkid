@@ -25158,11 +25158,47 @@ class User
   /**
    * org_get_member ✅
    * 
+   * @param number $member_id
+   * @return array|null
+   */
+  public function org_get_member($member_id)
+  {
+    global $db;
+
+    $member_result = $db->query(sprintf(
+      "SELECT
+        m.*,
+        va.va_number, va.balance,
+        u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture, u.user_gender
+      FROM org_members m 
+      JOIN users u on m.user_id = u.user_id
+      LEFT JOIN org_virtual_accounts va on va.id = m.virtual_account_id
+      WHERE m.id = %s
+      LIMIT 1
+      ",
+      secure($member_id),
+    ));
+
+    if ($member_result->num_rows == 0) {
+      return null; // Member not found
+    }
+
+    $member = $member_result->fetch_assoc();
+
+    $member['user_picture'] = get_picture($member['user_picture'], $member['user_gender']);
+    $member['user_fullname'] = ($system['show_usernames_enabled']) ? $member['user_name'] : $member['user_firstname'] . " " . $member['user_lastname'];
+
+    return $member;
+  }
+
+  /**
+   * org_get_member_with_org ✅
+   * 
    * @param number $org_id
    * @param number $member_id
    * @return array|null
    */
-  public function org_get_member($org_id, $member_id)
+  public function org_get_member_with_org($org_id, $member_id)
   {
     global $db;
 
@@ -25414,7 +25450,7 @@ class User
     }
 
     // get member
-    $target_member = $this->org_get_member($organization['id'], $member_id);
+    $target_member = $this->org_get_member_with_org($organization['id'], $member_id);
     if (empty($target_member) || !isset($target_member)) {
       throw new ValidationException(__("Member not found"));
     }

@@ -73,7 +73,7 @@
             <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$org_url}/members/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
               <i class="fa fa-pencil-alt"></i>
             </a>
-            <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_admin-deleter" data-handle="user" data-id="{$row['user_id']}">
+            <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_org-deleter" data-handle="member" data-id="{$row['id']}">
               <i class="fa fa-trash-alt"></i>
             </button>
           </td>
@@ -211,7 +211,7 @@
       <!-- error -->
 
       <div class="card-footer-fake text-end">
-        <button type="button" class="btn btn-danger js_admin-deleter" data-handle="user" data-id="{$data['user_id']}" data-redirect="{$system['system_url']}/{$control_panel['url']}/users">
+        <button type="button" class="btn btn-danger js_org-deleter" data-handle="member" data-id="{$data['id']}" data-redirect="{$org_url}/members">
           <i class="fa fa-trash-alt mr5"></i>{__("Delete Member")}
         </button>
         <button type="submit" class="btn btn-primary">{__("Save Changes")}</button>

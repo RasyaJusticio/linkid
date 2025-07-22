@@ -61,7 +61,7 @@ try {
           page_header($organization['name'] . ' &rsaquo; ' . __("Members") . ' &rsaquo; ' . __("Edit") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
 
           // get data
-          $member = $user->org_get_member($organization['id'], $_GET['id']);
+          $member = $user->org_get_member_with_org($organization['id'], $_GET['id']);
 
           $smarty->assign('data', $member);
 

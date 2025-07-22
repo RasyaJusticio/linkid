@@ -2676,4 +2676,13 @@ $(function () {
 
     $input.val(numericValue);
   });
+
+  $('body').on('input', '.js_digit-only', function () {
+    var $input = $(this);
+    var value = $input.val();
+
+    var numericValue = value.replace(/\D/g, '');
+
+    $input.val(numericValue);
+  });
 });

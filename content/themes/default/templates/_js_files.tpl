@@ -502,6 +502,7 @@
   </script>
   {if $user->_logged_in}
     <script src="{$system['system_url']}/includes/assets/js/core/user.js"></script>
+    <script src="{$system['system_url']}/includes/assets/js/core/organization.js"></script>
     <script src="{$system['system_url']}/includes/assets/js/core/post.js"></script>
     {if $system['chat_enabled']}
       <script src="{$system['system_url']}/includes/assets/js/core/chat.js"></script>

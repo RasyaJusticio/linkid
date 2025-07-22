@@ -24883,7 +24883,7 @@ class User
    * get_org_by_user ✅
    * 
    * @param number $user_id
-   * @return boolean
+   * @return array|null 
    */
   public function get_org_by_user($user_id = null)
   {
@@ -24900,6 +24900,57 @@ class User
     }
 
     return $get_org->fetch_assoc();
+  }
+
+  /**
+   * get_org_by_slug ✅
+   * 
+   * @param string $slug
+   * @return array|null
+   */
+  public function get_org_by_slug($slug)
+  {
+    global $db;
+
+    $get_org = $db->query(sprintf("SELECT * FROM org_organizations WHERE slug = %s LIMIT 1", secure($slug)));
+
+    if ($get_org->num_rows == 0) {
+      return null;
+    }
+
+    return $get_org->fetch_assoc();
+  }
+
+  /**
+   * org_get_connection ✅
+   * 
+   * @param number $org_id
+   * @param number|null $user_id
+   * @return string
+   */
+  public function org_get_connection($org_id, $user_id = null)
+  {
+    global $db;
+    
+    if ($this->org_is_owner($org_id, $user_id)) {
+      return 'owner';
+    }
+
+    if (empty($user_id)) {
+      $user_id = $this->_data['user_id'];
+    }
+
+    $query = $db->query(sprintf(
+      "SELECT role FROM org_members WHERE organization_id = %s AND user_id = %s LIMIT 1",
+      secure($org_id),
+      secure($user_id)
+    ));
+
+    if ($query->num_rows == 1) {
+      $result = $query->fetch_assoc();
+      return $result['role'];
+    }
+    return 'none';
   }
 
   /**
@@ -24920,6 +24971,57 @@ class User
 
     return $get_org->num_rows != 0;
   }
+
+  /**
+   * org_is_owner ✅
+   * 
+   * @param number $org_id
+   * @param number $user_id
+   * @return boolean
+   */
+  public function org_is_owner($org_id, $user_id = null)
+  {
+    global $db;
+
+    if (empty($user_id)) {
+      $user_id = $this->_data['user_id'];
+    }
+
+    $get_org = $db->query(sprintf("SELECT id FROM org_organizations WHERE id = %s AND created_by = %s LIMIT 1",
+      secure($org_id, 'int'),
+      secure($user_id, 'int')
+    ));
+
+    return $get_org->num_rows != 0;
+  }
+
+  /**
+   * org_is_member ✅
+   * 
+   * @param number $org_id
+   * @param number $user_id
+   * @return boolean
+   */
+  public function org_is_member($org_id, $user_id = null)
+  {
+    global $db;
+
+    if ($this->org_is_owner($org_id, $user_id)) {
+      return true;
+    }
+
+    if (empty($user_id)) {
+      $user_id = $this->_data['user_id'];
+    }
+
+    $get_member = $db->query(sprintf("SELECT id FROM org_members WHERE organization_id = %s AND user_id = %s LIMIT 1",
+      secure($org_id, 'int'),
+      secure($user_id, 'int')
+    ));
+
+    return $get_member->num_rows != 0;
+  }
+
 
   /**
    * check_org_by_slug ✅
@@ -25000,6 +25102,100 @@ class User
     }
 
     $db->query(sprintf("INSERT INTO org_organizations (name, slug, status, created_by) VALUES (%s, %s, 'active', %s)", secure($args['name']), secure($args['slug']), secure($this->_data['user_id'], 'int')));
+  }
+
+
+  /**
+   * org_get_member_by_va ✅
+   * 
+   * @param string $va_number
+   * @return boolean
+   */
+  public function org_get_member_by_va($va_number)
+  {
+    global $db;
+
+    $va_result = $db->query(sprintf(
+      "SELECT user_id, organization_id FROM org_virtual_accounts WHERE va_number = %s LIMIT 1",
+      secure($va_number)
+    ));
+
+    if ($va_result->num_rows == 0) {
+      return null; // VA not found
+    }
+
+    $va = $va_result->fetch_assoc();
+
+    $member_result = $db->query(sprintf(
+      "SELECT * FROM org_members WHERE user_id = %s AND organization_id = %s LIMIT 1",
+      secure($va['user_id']),
+      secure($va['organization_id'])
+    ));
+
+    if ($member_result->num_rows == 0) {
+      return null; // Member not found
+    }
+
+    return $member_result->fetch_assoc();
+  }
+
+  /**
+   * org_create_member ✅
+   * 
+   * @param number $user_id
+   * @param number $org_id
+   * @param string $role
+   * @param string $va_number
+   * @return void 
+   */
+  public function org_create_member($user_id, $org_id, $role, $va_number)
+  {
+    global $db;
+
+    $db->query("START TRANSACTION");
+
+    try {
+      $db->query(sprintf(
+        "INSERT INTO org_members (user_id, organization_id, role) VALUES (%s, %s, %s)",
+        secure($user_id),
+        secure($org_id),
+        secure($role)
+      ));
+
+      if ($db->error) {
+        throw new Exception("Failed to create org_member: " . $db->error);
+      }
+
+      $member_id = $db->insert_id;
+
+      $db->query(sprintf(
+        "INSERT INTO org_virtual_accounts (user_id, organization_id, va_number, balance) VALUES (%s, %s, %s, 0)",
+        secure($member_id),
+        secure($org_id),
+        secure($va_number)
+      ));
+
+      if ($db->error) {
+        throw new Exception("Failed to create virtual account: " . $db->error);
+      }
+
+      $va_id = $db->insert_id;
+
+      $db->query(sprintf(
+        "UPDATE org_members SET virtual_account_id = %s WHERE id = %s",
+        secure($va_id),
+        secure($member_id)
+      ));
+
+      if ($db->error) {
+        throw new Exception("Failed to update virtual_account_id: " . $db->error);
+      }
+
+      $db->query("COMMIT");
+    } catch (Exception $e) {
+      $db->query("ROLLBACK");
+      throw $e;
+    }
   }
 }
 

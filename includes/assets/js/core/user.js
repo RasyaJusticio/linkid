@@ -985,7 +985,7 @@ $(function () {
     var uid = $(this).data('uid');
     var name = $(this).data('name');
     var parent = $(this).parents('.js_autocomplete');
-    parent.find('input').val(name).data('uid', uid);
+    parent.find('input').val(name).data('uid', uid).trigger('input');
     parent.find('input[type="hidden"]').val(uid);
   });
 

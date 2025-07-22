@@ -34,22 +34,26 @@ try {
         // return
         return_json(['callback' => 'window.location = site_path + "/wallet?transfer_send_succeed"']);
         break;
-    case 'check_token':
+    case 'check_identity':
         // valid inputs
-        if (!isset($_POST['transfer_token'])) {
-            $_SESSION['transfer_fail_message'] = "Scanned QR Code invalid";
-            return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/wallet?transfer_send_failed"']);
+        if (!isset($_POST['identity'])) {
+            return_json(['result' => 'invalid', 'callback' => 'window.location.reload()']);
             break;
         }
 
-        $target_user = $user->transfer_get_user($_POST['transfer_token']);
-        if (!isset($target_user)) {
-            $_SESSION['transfer_fail_message'] = "Scanned QR Code invalid";
-            return_json(['result' => 'invalid', 'callback' => 'window.location = site_path + "/wallet?transfer_send_failed"']);
+        $target_user = $user->transfer_get_user($_POST['identity']);
+        if (!empty($target_user)) {
+            return_json(['result' => 'valid', 'user' => $target_user]);
             break;
         }
 
-        return_json(['result' => 'valid', 'user' => $target_user]);
+        $member = $user->org_get_member_by_va($_POST['identity']);
+        if (!empty($member)) {
+            return_json(['result' => 'valid', 'user' => $member]);
+            break;
+        }
+
+        return_json(['result' => 'invalid', 'callback' => 'window.location.reload()']);
         break;
     default:
         _error(400);

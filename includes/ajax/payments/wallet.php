@@ -202,6 +202,13 @@ try {
             $target_user = $user->wallet_get_user_by_name($_POST['user_id']);
         }
 
+        if (is_numeric($_POST['va_number'])) {
+            $member = $user->org_get_member_by_va($_POST['va_number']); 
+            if (!empty($member)) {
+              $organization = $user->get_org($member['organization_id']);
+            }
+        }
+
         if (!isset($target_user) || empty($target_user)) {
             if ($_POST['is_from_qr']) {
                 $_SESSION['transfer_fail_message'] = "Scanned QR Code invalid";
@@ -214,7 +221,7 @@ try {
         
         $target_user['user_picture'] = get_picture($target_user['user_picture'], $target_user['user_gender']);
 
-        return_json(['result' => 'valid', 'fee' => calculate_fee($_POST['amount'], $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_min']), 'user' => $target_user]);
+        return_json(['result' => 'valid', 'fee' => calculate_fee($_POST['amount'], $system['wallet_transfer_fee_threshold'], $system['wallet_transfer_fee_percent'], $system['wallet_transfer_fee_min']), 'user' => $target_user, 'organization' => $organization, 'member' => $member]);
         break;
 
     case 'org-transfer-quick':

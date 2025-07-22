@@ -28,10 +28,12 @@ function initiateQRScanner(modalId, nextModalId) {
     }
     isProcessing = true;
 
+    console.log(result);
+
     $.post(
-      ajax_path + "payments/transfer.php?do=check_token",
+      ajax_path + "payments/transfer.php?do=check_identity",
       {
-        transfer_token: result,
+        identity: result,
       },
       function (response) {
         isProcessing = false;
@@ -42,12 +44,15 @@ function initiateQRScanner(modalId, nextModalId) {
 
           const user = response.user;
 
+          console.log(user);
+
           modal(nextModalId, {
             user_id: user["user_id"],
             user_name: user["user_name"],
             user_fullname: user["user_firstname"] + " " + user["user_lastname"],
             user_verified: user["user_verified"],
             user_picture: user["user_picture"],
+            identity: result
           });
           cleanUp();
         } else {
@@ -355,7 +360,7 @@ function generateQRCreatedTime() {
   const now = new Date();
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
-    timeZone: local_timezone,
+    timeZone: "Asia/Jakarta",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

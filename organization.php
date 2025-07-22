@@ -28,6 +28,8 @@ try {
     return;
   }
 
+  $connection = $user->org_get_connection($organization['id']);
+
   // get view content
   switch ($_GET['view']) {
     case '':
@@ -181,6 +183,7 @@ try {
   $smarty->assign('sub_view', $_GET['sub_view']);
   $smarty->assign('id', $_GET['id']);
   $smarty->assign('organization', $organization);
+  $smarty->assign('connection', $connection);
 } catch (Exception $e) {
   _error(__("Error"), $e->getMessage());
 }

@@ -18,19 +18,21 @@
               </a>
             </li>
 
-            <li {if $view == "dashboard"}class="active" {/if}>
-              <a href="{$org_url}/dashboard">
-                <i class="fa fa-tachometer-alt fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Dashboard")}
-              </a>
-            </li>
+            {if in_array($connection, ['owner', 'admin', 'staff'])}
+              <li {if $view == "dashboard"}class="active" {/if}>
+                <a href="{$org_url}/dashboard">
+                  <i class="fa fa-tachometer-alt fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Dashboard")}
+                </a>
+              </li>
 
-            <div class="divider mtb5"></div>
+              <div class="divider mtb5"></div>
 
-            <li {if $view == "members"}class="active" {/if}>
-              <a href="{$org_url}/members">
-                <i class="fa fa-users fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Members")}
-              </a>
-            </li>
+              <li {if $view == "members"}class="active" {/if}>
+                <a href="{$org_url}/members">
+                  <i class="fa fa-users fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Members")}
+                </a>
+              </li>
+            {/if}
 
           </ul>
         </div>

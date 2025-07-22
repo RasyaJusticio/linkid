@@ -18101,7 +18101,13 @@ class User
     global $db;
     
     $get_user = $db->query(sprintf("SELECT user_id, user_name, user_firstname, user_lastname, user_gender, user_picture, user_verified FROM users WHERE user_transfer_token = %s", secure($transfer_token)));
+
+    if ($get_user->num_rows == 0) {
+      return null;
+    }
+
     $_user = $get_user->fetch_assoc();
+
     $_user['user_picture'] = get_picture($_user['user_picture'], $_user['user_gender']);
     $_user['user_fullname'] = ($system['show_usernames_enabled']) ? $_user['user_name'] : $_user['user_firstname'] . " " . $_user['user_lastname'];
 
@@ -25200,7 +25206,7 @@ class User
       SELECT 
       m.*, 
       va.va_number, va.balance,
-      u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture
+      u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_gender, u.user_picture
       FROM org_members AS m
       INNER JOIN org_virtual_accounts AS va ON m.virtual_account_id = va.id
       INNER JOIN users AS u ON m.user_id = u.user_id
@@ -25336,34 +25342,35 @@ class User
    * org_get_member_by_va ✅
    * 
    * @param string $va_number
-   * @return boolean
+   * @return string|null
    */
   public function org_get_member_by_va($va_number)
   {
     global $db;
 
-    $va_result = $db->query(sprintf(
-      "SELECT user_id, organization_id FROM org_virtual_accounts WHERE va_number = %s LIMIT 1",
-      secure($va_number)
-    ));
-
-    if ($va_result->num_rows == 0) {
-      return null; // VA not found
-    }
-
-    $va = $va_result->fetch_assoc();
-
     $member_result = $db->query(sprintf(
-      "SELECT * FROM org_members WHERE user_id = %s AND organization_id = %s LIMIT 1",
-      secure($va['user_id']),
-      secure($va['organization_id'])
+      "SELECT
+        m.*,
+        va.va_number, va.balance,
+        u.user_id, u.user_name, u.user_email, u.user_firstname, u.user_lastname, u.user_gender, u.user_picture, u.user_verified
+      FROM org_members m 
+      JOIN users u on m.user_id = u.user_id
+      LEFT JOIN org_virtual_accounts va on va.id = m.virtual_account_id
+      WHERE va.va_number = %s
+      LIMIT 1
+      ",
+      secure($va_number)
     ));
 
     if ($member_result->num_rows == 0) {
       return null; // Member not found
     }
 
-    return $member_result->fetch_assoc();
+    $member = $member_result->fetch_assoc();
+    $member['user_picture'] = get_picture($member['user_picture'], $member['user_gender']);
+    $member['user_fullname'] = ($system['show_usernames_enabled']) ? $member['user_name'] : $member['user_firstname'] . " " . $member['user_lastname'];
+
+    return $member;
   }
 
 

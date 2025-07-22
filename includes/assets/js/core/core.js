@@ -818,16 +818,9 @@ function openWalletQRConfirmation(event, targetUserData, modalTarget) {
 
   const $form = $(event.target);
   const $error = $form.find('.alert.alert-danger');
-  const formData = new FormData($form[0]);
-  const data = {};
-  
-  if ($error.is(":visible")) $error.hide();
-
-  for (let [key, value] of formData.entries()) {
-    data[key] = value;
-  }
 
   const anInstance = AutoNumeric.getAutoNumericElement($form.find('[name=amount]')[0]);
+  const vaNumber = $form.find('[name=va_number]');
   const amount = anInstance.getNumber();
   if (Number(amount) <= 0) {
     $error.html(__['You must enter valid amount of money']).slideDown();
@@ -836,18 +829,22 @@ function openWalletQRConfirmation(event, targetUserData, modalTarget) {
 
   $.post(ajax_path + "payments/wallet.php?do=process_transaction", {
     user_id: targetUserData.user_id,
+    va_number: vaNumber.val(),
     amount: amount,
   }, function(response) {
     if (response.result === "valid") {
+        console.log(response);
       const user = response.user;
+      const organization = response.organization;
       modal(modalTarget, {
         'amount': amount,
-        'fee': response.fee,
         'user_id': user.user_id,
         'user_name': user.user_name,
         'user_fullname': `${user.user_firstname} ${user.user_lastname}`,
         'user_verified': user.user_verified === "1" ? true : false,
-        'user_picture': user.user_picture
+        'user_picture': user.user_picture,
+        'va_number': vaNumber.val(),
+        'org_name': organization.name
       });
     } else {
       $error.html(__["You can't send money to this user!"]).slideDown();

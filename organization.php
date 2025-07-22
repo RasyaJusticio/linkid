@@ -57,6 +57,16 @@ try {
 
           break;
 
+        case 'edit':
+          page_header($organization['name'] . ' &rsaquo; ' . __("Members") . ' &rsaquo; ' . __("Edit") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
+
+          // get data
+          $member = $user->org_get_member($organization['id'], $_GET['id']);
+
+          $smarty->assign('data', $member);
+
+          break;
+
         case 'find':
           // page header
           page_header($organization['name'] . ' &rsaquo; ' . __("Members") . ' &rsaquo; ' . __("Find") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
@@ -152,6 +162,7 @@ try {
   $smarty->assign('username', $_GET['username']);
   $smarty->assign('view', $_GET['view']);
   $smarty->assign('sub_view', $_GET['sub_view']);
+  $smarty->assign('id', $_GET['id']);
   $smarty->assign('organization', $organization);
 } catch (Exception $e) {
   _error(__("Error"), $e->getMessage());

@@ -25104,6 +25104,114 @@ class User
     $db->query(sprintf("INSERT INTO org_organizations (name, slug, status, created_by) VALUES (%s, %s, 'active', %s)", secure($args['name']), secure($args['slug']), secure($this->_data['user_id'], 'int')));
   }
 
+  /**
+ * org_get_members ✅
+ * 
+ * @param number $org_id
+ * @return array
+ */
+  public function org_get_members($org_id)
+  {
+    global $db, $system;
+
+    $query = $db->query(sprintf("
+      SELECT 
+      m.*, 
+      va.va_number, va.balance,
+      u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture
+      FROM org_members AS m
+      INNER JOIN org_virtual_accounts AS va ON m.virtual_account_id = va.id
+      INNER JOIN users AS u ON m.user_id = u.user_id
+      WHERE m.organization_id = %s
+      ", secure($org_id)));
+
+    $members = [];
+
+    while ($row = $query->fetch_assoc()) {
+      $row['user_picture'] = get_picture($row['user_picture'], $row['user_gender']);
+      $row['user_fullname'] = ($system['show_usernames_enabled']) ? $row['user_name'] : $row['user_firstname'] . " " . $row['user_lastname'];
+      $members[] = $row;
+    }
+
+    return $members;
+  }
+
+  /**
+   * org_get_member ✅
+   * 
+   * @param number $org_id
+   * @param number $member_id
+   * @return array|null
+   */
+  public function org_get_member($org_id, $member_id)
+  {
+    global $db;
+
+    $member_result = $db->query(sprintf(
+      "SELECT
+        m.*,
+        va.va_number, va.balance,
+        u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture, u.user_gender
+      FROM org_members m 
+      JOIN users u on m.user_id = u.user_id
+      LEFT JOIN org_virtual_accounts va on va.id = m.virtual_account_id
+      WHERE m.id = %s AND
+      m.organization_id = %s
+      LIMIT 1
+      ",
+      secure($member_id),
+      secure($org_id)
+    ));
+
+    if ($member_result->num_rows == 0) {
+      return null; // Member not found
+    }
+
+    $member = $member_result->fetch_assoc();
+
+    $member['user_picture'] = get_picture($member['user_picture'], $member['user_gender']);
+    $member['user_fullname'] = ($system['show_usernames_enabled']) ? $member['user_name'] : $member['user_firstname'] . " " . $member['user_lastname'];
+
+    return $member;
+  }
+
+  /**
+   * org_get_member_by_user ✅
+   * 
+   * @param number $org_id
+   * @param number|null $user_id
+   * @return array|null
+   */
+  public function org_get_member_by_user($org_id, $user_id = null)
+  {
+    global $db;
+
+    if (empty($user_id)) {
+      $user_id = $this->_data['user_id'];
+    }
+
+    $member_result = $db->query(sprintf(
+      "SELECT
+        m.*,
+        va.va_number, va.balance,
+        u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture
+      FROM org_members m 
+      JOIN users u on m.user_id = u.user_id
+      LEFT JOIN org_virtual_accounts va on va.id = m.virtual_account_id
+      WHERE user_id = %s AND
+      organization_id = %s
+      LIMIT 1
+      ",
+      secure($user_id),
+      secure($org_id)
+    ));
+
+    if ($member_result->num_rows == 0) {
+      return null; // Member not found
+    }
+
+    return $member_result->fetch_assoc();
+  }
 
   /**
    * org_get_member_by_va ✅
@@ -25139,38 +25247,6 @@ class User
     return $member_result->fetch_assoc();
   }
 
-  /**
- * org_get_members ✅
- * 
- * @param number $org_id
- * @return array
- */
-  public function org_get_members($org_id)
-  {
-    global $db, $system;
-
-    $query = $db->query(sprintf("
-      SELECT 
-      m.*, 
-      va.va_number, va.balance,
-      u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture
-      FROM org_members AS m
-      INNER JOIN org_virtual_accounts AS va ON m.virtual_account_id = va.id
-      INNER JOIN users AS u ON m.user_id = u.user_id
-      WHERE m.organization_id = %s
-      ", secure($org_id)));
-
-    $members = [];
-
-    while ($row = $query->fetch_assoc()) {
-      $row['user_picture'] = get_picture($row['user_picture'], $row['user_gender']);
-      $row['user_fullname'] = ($system['show_usernames_enabled']) ? $row['user_name'] : $row['user_firstname'] . " " . $row['user_lastname'];
-      $members[] = $row;
-    }
-
-    return $members;
-  }
-
 
   /**
    * org_create_member ✅
@@ -25185,6 +25261,57 @@ class User
   {
     global $db;
 
+    $organization = $this->get_org_by_slug($_POST['org_username']);
+    if (empty($organization)) {
+        throw new ValidationException(__("Organization not found"));
+    } 
+
+    if (!$this->org_is_member($organization['id'])) {
+        throw new ValidationException(__("You are not a member of this organization"));
+    }
+
+    $connection = $this->org_get_connection($organization['id']);
+
+    // valid inputs
+    if (!isset($_POST['user_id']) || !is_numeric($_POST['user_id'])) {
+      throw new ValidationException(__("Please insert a valid user id"));
+    }
+    if (!isset($_POST['va_number']) || !is_numeric($_POST['va_number'])) {
+      throw new ValidationException(__("Please insert a valid VA number"));
+    }
+    if (!isset($_POST['role']) || !in_array($_POST['role'], ['admin', 'staff', 'account', 'sub-account'])) {
+      throw new ValidationException(__("Please insert a valid role"));
+    }
+
+    // get user
+    $target_user = $this->get_user($_POST['user_id']);
+    if (empty($target_user) || !isset($target_user)) {
+      throw new ValidationException(__("User not found"));
+    }
+
+    // permission check
+    if (!in_array($connection, ['owner', 'admin', 'staff'])) {
+      throw new ValidationException(__("You don't have enough privilege to do this action"));
+    }
+    if ($_POST['role'] == 'admin' && !in_array($connection, ['owner'])) {
+      throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
+    }
+    if ($_POST['role'] == 'staff' && !in_array($connection, ['owner', 'admin'])) {
+      throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
+    }
+    if (in_array($_POST['role'], ['account', 'sub-account']) && !in_array($connection, ['owner', 'admin', 'staff'])) {
+      throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
+    }
+
+    // other checks
+    if ($this->org_is_member($organization['id'], $_POST['user_id'])) {
+      throw new ValidationException(__("User is already invited"));
+    }
+    if ($this->org_get_member_by_va($_POST['va_number'])) {
+      throw new ValidationException(__("That VA number is in use. Please use another one."));
+    }
+
+    // processing
     $db->query("START TRANSACTION");
 
     try {
@@ -25229,6 +25356,110 @@ class User
       $db->query("ROLLBACK");
       throw $e;
     }
+  }
+
+  /**
+ * org_update_member
+ * 
+ * Update a member's role and virtual account number
+ * 
+ * @param int $member_id
+ * @param int $org_id
+ * @param string $role
+ * @param string $va_number
+ * @return bool
+ */
+  function org_update_member($member_id, $org_id, $role, $va_number) {
+    global $db;
+
+    $organization = $this->get_org_by_slug($_POST['org_username']);
+    if (empty($organization)) {
+        throw new ValidationException(__("Organization not found"));
+    } 
+
+    if (!$this->org_is_member($organization['id'])) {
+        throw new ValidationException(__("You are not a member of this organization"));
+    }
+
+    $connection = $this->org_get_connection($organization['id']);
+
+    // valid inputs
+    if (!isset($va_number) || !is_numeric($va_number)) {
+      throw new ValidationException(__("Please insert a valid VA number"));
+    }
+    if (!isset($role) || !in_array($role, ['admin', 'staff', 'account', 'sub-account'])) {
+      throw new ValidationException(__("Please insert a valid role"));
+    }
+
+    // get member
+    $target_member = $this->org_get_member($organization['id'], $member_id);
+    if (empty($target_member) || !isset($target_member)) {
+      throw new ValidationException(__("Member not found"));
+    }
+
+    // permission check 
+    if (!in_array($connection, ['owner', 'admin', 'staff'])) {
+      throw new ValidationException(__("You don't have enough privilege to do this action"));
+    }
+    if ($target_member['role'] == 'admin' && !in_array($connection, ['owner'])) {
+      throw new ValidationException(__("You don't have enough privilege to do this action"));
+    }
+    if ($target_member['role'] == 'staff' && !in_array($connection, ['owner', 'admin'])) {
+      throw new ValidationException(__("You don't have enough privilege to do this action"));
+    }
+    if (in_array($target_member['role'], ['account', 'sub-account']) && !in_array($connection, ['owner', 'admin', 'staff'])) {
+      throw new ValidationException(__("You don't have enough privilege to do this action"));
+    }
+    if ($role == 'admin' && !in_array($connection, ['owner'])) {
+      throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
+    }
+    if ($role == 'staff' && !in_array($connection, ['owner', 'admin'])) {
+      throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
+    }
+    if (in_array($role, ['account', 'sub-account']) && !in_array($connection, ['owner', 'admin', 'staff'])) {
+      throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
+    }
+
+    // Validate input
+    $user_id = secure($target_member['user_id'], 'int');
+    $org_id = secure($org_id, 'int');
+    $role = secure($role);
+    $va_number = secure($va_number);
+
+    // Fetch the member entry
+    $get_member = $db->query(sprintf(
+      "SELECT id FROM org_members WHERE user_id = %s AND organization_id = %s",
+      $user_id, $org_id
+    ));
+    if ($get_member->num_rows === 0) {
+      return false;
+    }
+    $member = $get_member->fetch_assoc();
+
+    // Find or create the virtual account
+    $get_va = $db->query(sprintf(
+      "SELECT id FROM org_virtual_accounts WHERE va_number = %s AND organization_id = %s",
+      $va_number, $org_id
+    ));
+    if ($get_va->num_rows > 0) {
+      $va = $get_va->fetch_assoc();
+      $va_id = $va['id'];
+    } else {
+      $db->query(sprintf(
+        "INSERT INTO org_virtual_accounts (organization_id, user_id, va_number, balance)
+        VALUES (%s, %s, %s, 0)",
+        $org_id, $member['id'], $va_number
+      ));
+      $va_id = $db->insert_id;
+    }
+
+    // Update the member
+    $db->query(sprintf(
+      "UPDATE org_members SET role = %s, virtual_account_id = %s WHERE id = %s",
+      $role, secure($va_id, 'int'), $member['id']
+    ));
+
+    return true;
   }
 }
 

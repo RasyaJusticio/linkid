@@ -25317,8 +25317,8 @@ class User
       FROM org_members m 
       JOIN users u on m.user_id = u.user_id
       LEFT JOIN org_virtual_accounts va on va.id = m.virtual_account_id
-      WHERE user_id = %s AND
-      organization_id = %s
+      WHERE u.user_id = %s AND
+      m.organization_id = %s
       LIMIT 1
       ",
       secure($user_id),

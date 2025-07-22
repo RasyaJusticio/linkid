@@ -12,7 +12,7 @@
     </a>
   </div>
   {/if}
-  <i class="fa fa-users mr10"></i>{__("Members")}
+  <i class="fa fa-users fa-lg fa-fw mr10"></i>{__("Members")}
   {if $sub_view == "find"} &rsaquo; <span>{__("Find")}</span>{/if}
   {if $sub_view == "add"} &rsaquo; <span>{__("Add")}</span>{/if}
   {if $sub_view == "edit"} &rsaquo; <a href="{$system['system_url']}/{$data['user_name']}">{$data['user_fullname']}</a>{/if}

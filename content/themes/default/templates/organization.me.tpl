@@ -1,7 +1,6 @@
 <div class="card-header with-icon wallet-header">
   <div class="header-title">
-    {include file='__svg_icons.tpl' icon="wallet" class="main-icon mr10" width="24px" height="24px"}
-    {__("Wallet")}
+    <i class="fa fa-user fa-lg fa-fw mr10"></i>{__("Me")}
   </div>
 
   <div class="qr-btns-container">
@@ -20,102 +19,20 @@
   </div>
 </div>
 <div class="card-body page-content">
-  {if $wallet_transfer_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_transfer_amount|format_number)}</span> {__("transfer transaction successfuly sent")}
-  </div>
-  {/if}
-  {if $wallet_receive_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_receive_amount|format_number)}</span> {__("transfer transaction successfuly received")}
-  </div>
-  {/if}
-  {if $wallet_replenish_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Congratulation! Your wallet credit replenished successfully with")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_replenish_amount|format_number)}</span>
-  </div>
-  {/if}
-  {if $wallet_withdraw_affiliates_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Congratulation! Your wallet credit replenished successfully with")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_withdraw_affiliates_amount|format_number)}</span> {__("from your affiliates credit")}
-  </div>
-  {/if}
-  {if $wallet_withdraw_points_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Congratulation! Your wallet credit replenished successfully with")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_withdraw_points_amount|format_number)}</span> {__("from your points credit")}
-  </div>
-  {/if}
-  {if $wallet_withdraw_market_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Congratulation! Your wallet credit replenished successfully with")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_withdraw_market_amount|format_number)}</span> {__("from your market credit")}
-  </div>
-  {/if}
-  {if $wallet_withdraw_funding_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Congratulation! Your wallet credit replenished successfully with")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_withdraw_funding_amount|format_number)}</span> {__("from your funding credit")}
-  </div>
-  {/if}
-  {if $wallet_withdraw_monetization_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Congratulation! Your wallet credit replenished successfully with")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_withdraw_monetization_amount|format_number)}</span> {__("from your monetization credit")}
-  </div>
-  {/if}
-  {if $wallet_package_payment_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_package_payment_amount|format_number)}</span> {__("payment transaction successfuly done")}
-  </div>
-  {/if}
-  {if $wallet_monetization_payment_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_monetization_payment_amount|format_number)}</span> {__("payment transaction successfuly done")}
-  </div>
-  {/if}
-  {if $wallet_paid_post_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_paid_post_amount|format_number)}</span> {__("payment transaction successfuly done")}
-  </div>
-  {/if}
-  {if $wallet_donate_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_donate_amount|format_number)}</span> {__("payment transaction successfuly done")}
-  </div>
-  {/if}
-  {if $wallet_marketplace_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($wallet_marketplace_amount|format_number)}</span> {__("payment transaction successfuly done")}
-  </div>
-  {/if}
-  {if $transfer_send_amount}
-  <div class="alert alert-success mb20">
-    <i class="fas fa-check-circle mr5"></i>
-    {__("Your")} <span class="badge rounded-pill badge-lg bg-secondary">{print_money($transfer_send_amount|format_number)}</span> {__("transfer transaction successfuly sent")}
-  </div>
-  {/if}
-
   <div class="row">
     <!-- credit -->
     <div class="col-md-5">
       <div class="section-title d-none d-md-block mb20">
-        {__("Your Credit")}
+        {__("Your Balance")}
       </div>
       <div class="stat-panel bg-gradient-info">
         <div class="stat-cell small">
           <i class="fa fa-money-bill-alt bg-icon"></i>
           <div class="h3 mtb10">
-            {print_money($user->_data['user_wallet_balance']|format_number)}
+            {print_money($data['balance']|format_number)}
+          </div>
+          <div class="h6">
+            {$data['va_number']|format_va_number}
           </div>
         </div>
       </div>
@@ -144,56 +61,13 @@
         </button>
         {/if}
       </div>
-
-      <div class="d-grid withdraws">
-        <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-replenish">
-          {include file='__svg_icons.tpl' icon="payments" class="main-icon mr10" width="24px" height="24px"}
-          {__("Top Up Credit")}
-        </button>
-        {if $system['affiliates_enabled'] && $system['affiliates_money_transfer_enabled']}
-        <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-withdraw-affiliates">
-          {include file='__svg_icons.tpl' icon="affiliates" class="main-icon mr10" width="24px" height="24px"}
-          {__("Affiliates Credit")}
-        </button>
-        {/if}
-        {if $system['points_enabled'] && $system['points_per_currency'] > 0 && $system['points_money_transfer_enabled']}
-        <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-withdraw-points">
-          {include file='__svg_icons.tpl' icon="points" class="main-icon mr10" width="24px" height="24px"}
-          {__("Points Credit")}
-        </button>
-        {/if}
-        {if $user->_data['can_sell_products'] && $system['market_money_transfer_enabled'] && $system['market_shopping_cart_enabled']}
-        <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-withdraw-market">
-          {include file='__svg_icons.tpl' icon="market" class="main-icon mr10" width="24px" height="24px"}
-          {__("Marketplace Credit")}
-        </button>
-        {/if}
-        {if $user->_data['can_raise_funding'] && $system['funding_money_transfer_enabled']}
-        <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-withdraw-funding">
-          {include file='__svg_icons.tpl' icon="funding" class="main-icon mr10" width="24px" height="24px"}
-          {__("Funding Credit")}
-        </button>
-        {/if}
-        {if $user->_data['can_monetize_content'] && $system['monetization_money_transfer_enabled']}
-        <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-withdraw-monetization">
-          {include file='__svg_icons.tpl' icon="monetization" class="main-icon mr10" width="24px" height="24px"}
-          {__("Monetization Credit")}
-        </button>
-        {/if}
-        {if $system['wallet_withdrawal_enabled']}
-        <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-withdraw">
-          {include file='__svg_icons.tpl' icon="payments" class="main-icon mr10" width="24px" height="24px"}
-          {__("Withdraw Credit")}
-        </button>
-        {/if}
-      </div>
     </div>
     <!-- send & recieve money -->
 
     <!-- wallet transactions -->
     <div class="col-12 mt20">
       <div class="section-title mt10 mb20">
-        {__("Wallet Transactions")}
+        {__("Account Transactions")}
       </div>
       {if $transactions}
       <div class="table-responsive">

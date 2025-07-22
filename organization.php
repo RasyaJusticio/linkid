@@ -34,6 +34,10 @@ try {
       // page header
       page_header($organization['name'] . ' &rsaquo; ' . __("Me") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
 
+      $member = $user->org_get_member_by_user($organization['id']);
+
+      $smarty->assign('data', $member);
+
       break;
 
     case 'dashboard':

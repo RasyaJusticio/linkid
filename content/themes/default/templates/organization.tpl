@@ -14,17 +14,13 @@
           <ul class="side-nav">
             <li {if $view == ""}class="active" {/if}>
               <a href="{$org_url}">
-                {include file='__svg_icons.tpl' icon="user_information" class="main-icon mr10" width="24px" height="24px"}
-                {__("Me")}
+                <i class="fa fa-user fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Me")}
               </a>
             </li>
 
-            <li {if ($user->org_is_owner($organization['id']) && $view == "") || $view == "dashboard"}class="active" {/if}>
-              <a
-                {if $user->org_is_owner($organization['id'])}href="{$org_url}/"{else}href="{$org_url}/dashboard"{/if}
-              >
-                {include file='__svg_icons.tpl' icon="notifications" class="main-icon mr10" width="24px" height="24px"}
-                {__("Dashboard")}
+            <li {if $view == "dashboard"}class="active" {/if}>
+              <a href="{$org_url}/dashboard">
+                <i class="fa fa-tachometer-alt fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Dashboard")}
               </a>
             </li>
 

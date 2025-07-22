@@ -139,7 +139,7 @@ function initiateQRScanner(modalId, nextModalId) {
  * @param {string} canvasId - The ID of the `<canvas>` element to draw the QR code onto.
  * @param {Object} options - An object containing data for generating the QR code (currently unused in this function, but may be used by `getQRCodeImage` or future enhancements).
  * @param {string} options.qrCodeURI - The URI used to generate the QR code image.
- * @param {string} options.transferToken - The token associated with the transfer (potentially encoded in the QR).
+ * @param {string} options.content - The content associated with the QR code (potentially encoded in the QR).
  * @param {string} options.fullName - The full name of the user (for display or encoding).
  * @param {string} options.userName - The username of the user (for display or encoding).
  * @param {string} options.userVerified - The verified state of the user, either '0' or '1'.
@@ -184,7 +184,7 @@ async function drawQRToCanvas(canvasId, options) {
  * @param {string} options.fullName - The full name of the user to display above the QR code.
  * @param {string} options.userName - The username of the user, displayed with an `@` prefix.
  * @param {string} options.userVerified - The verified state of the user, either '0' or '1'.
- * @param {string} options.transferToken - A token identifying the QR code, shown beneath the username.
+ * @param {string} options.content - The content of the QR code, shown beneath the username.
  *
  * @returns {void}
  *
@@ -259,7 +259,7 @@ async function drawQR(context, canvas, qrImage, options) {
 
       context.font = "42px Poppins";
       context.textAlign = "center";
-      context.fillText(`ID: ${options.transferToken}`, HALF_WIDTH, 630);
+      context.fillText(`${options.content}`, HALF_WIDTH, 630);
 
       context.restore();
 
@@ -315,7 +315,7 @@ async function drawQR(context, canvas, qrImage, options) {
       })();
     }
 
-    canvas.dataset.transferToken = options.transferToken;
+    canvas.dataset.content = options.content;
     canvas.dataset.isReady = "true";
   } catch (error) {
     console.warn("[drawQR]: Failed to draw QR. Error:", error);
@@ -379,7 +379,7 @@ $(function () {
     const qrCodeCanvas = $("#qrcode").get(0);
 
     const isReady = $("#qrcode").data("isReady");
-    const transferToken = $("#qrcode").data("transferToken");
+    const content = $("#qrcode").data("content");
 
     if (!isReady) {
       return;
@@ -390,7 +390,7 @@ $(function () {
     const linkEl = document.createElement("a");
     linkEl.href = canvasUrl;
 
-    linkEl.download = `Linkid-QR-${transferToken}`;
+    linkEl.download = `Linkid-QR-${content}`;
 
     linkEl.click();
     linkEl.remove();

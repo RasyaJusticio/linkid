@@ -25589,5 +25589,25 @@ class User
 
     return true;
   }
+
+  /**
+   * org_generate_va_qrcode ✅
+   * 
+   * @param string $va_number
+   * @return string
+   */
+  public function org_generate_va_qrcode($va_number)
+  {
+    $builder = new \Endroid\QrCode\Builder\Builder(
+      writer: new \Endroid\QrCode\Writer\PngWriter(),
+      data: $va_number,
+      encoding: new \Endroid\QrCode\Encoding\Encoding('UTF-8'),
+      errorCorrectionLevel: \Endroid\QrCode\ErrorCorrectionLevel::High,
+    );
+    
+    $result = $builder->build();
+
+    return $result->getDataUri();
+  }
 }
 

@@ -943,7 +943,7 @@
   {/if}
 
   <!-- QRCode -->
-  {if $page == "wallet"}
+  {if in_array($page, ['wallet', 'organization', 'organizations'])}
     <script src="{$system['system_url']}/includes/assets/js/core/qrcode.js?v=4"></script>
   {/if}
   <!-- QRCode -->

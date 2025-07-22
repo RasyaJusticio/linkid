@@ -1893,7 +1893,7 @@
 
                 drawQRToCanvas("qrcode", {
                     qrCodeURI: qrCodeUri,
-                    transferToken,
+                    content: transferToken,
                     fullName: userFullname,
                     userName,
                     userVerified
@@ -2164,6 +2164,46 @@
       </script>
     {/if}
     <!-- Wallet -->
+    
+    <!-- Organization -->
+    {if in_array($page, ["organization", "organizations"])}
+      <script id="org-my-qr" type="text/template">
+        <div class="modal-wallet-qr">
+          <div class="modal-header">
+            <h6 class="modal-title">
+              {include file='__svg_icons.tpl' icon="qr_code" class="mr10" width="24px" height="24px"}
+              {__("My QR")}
+            </h6>
+            <button type="button" class="btn-action btn-download">
+              <i class="fas fa-download"></i>
+            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body"> 
+            <div class="spinner-grow"></div>
+            <canvas id="qrcode"></canvas>
+            <script type="text/javascript">
+              (function () {
+                const userFullname = "{literal}{{full_name}}{/literal}";
+                const userName = "{literal}{{user_name}}{/literal}";
+                const userVerified = "{literal}{{user_verified}}{/literal}";
+                const vaNumber = "{literal}{{va_number}}{/literal}";
+                const qrCodeUri = "{literal}{{{qrcode_uri}}}{/literal}";
+
+                drawQRToCanvas("qrcode", {
+                    qrCodeURI: qrCodeUri,
+                    content: vaNumber,
+                    fullName: userFullname,
+                    userName,
+                    userVerified
+                });
+              })();
+            </script>
+          </div>
+        </div>
+      </script>
+    {/if}
+    <!-- Organization -->
 
     <!-- Crop Profile (Picture|Cover) -->
     {if in_array($page, ["started", "profile", "page", "group", "event"])}

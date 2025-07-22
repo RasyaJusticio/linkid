@@ -36,7 +36,12 @@ try {
 
       $member = $user->org_get_member_by_user($organization['id']);
 
+      // get qrcode image
+      $qrcode = $user->org_generate_va_qrcode($member['va_number']);
+
+      /* assign variables */
       $smarty->assign('data', $member);
+      $smarty->assign('qrcode_uri', $qrcode);
 
       break;
 
@@ -52,6 +57,10 @@ try {
           page_header($organization['name'] . ' &rsaquo; ' . __("Members") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
 
           $members = $user->org_get_members($organization['id']);
+
+          foreach ($members as &$member) {
+            $member['qrcode_uri'] = $user->org_generate_va_qrcode($member['va_number']); 
+          }
 
           $smarty->assign('rows', $members);
           break;

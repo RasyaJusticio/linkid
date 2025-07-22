@@ -73,6 +73,25 @@
             <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$org_url}/members/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
               <i class="fa fa-pencil-alt"></i>
             </a>
+            <a data-bs-toggle="tooltip" title='{__("Transfer")}' href="{$org_url}/members/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
+              <i class="fa fa-credit-card"></i>
+            </a>
+            <a
+                data-bs-toggle="tooltip"
+                title='{__("QR Code")}'
+                class="btn btn-sm btn-icon btn-rounded btn-primary"
+                data-toggle="modal"
+                data-url="#org-my-qr"
+                data-options='{
+                  "full_name": "{$row['user_firstname']} {$user->_data['user_lastname']}",
+                  "user_name": "{$row['user_name']}",
+                  "user_verified": "{$row['user_verified']}",
+                  "qrcode_uri": "{$row['qrcode_uri']}",
+                  "va_number": "{$row['va_number']|format_va_number}"
+                }'
+            >
+              <i class="fa fa-qrcode"></i>
+            </a>
             <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_org-deleter" data-handle="member" data-id="{$row['id']}">
               <i class="fa fa-trash-alt"></i>
             </button>

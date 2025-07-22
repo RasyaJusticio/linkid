@@ -12,9 +12,20 @@
       {include file='__svg_icons.tpl' icon="money_receive" width="24px" height="24px"}
       {__("QR Receive")}
     </button>
-    <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-qr" data-options='{ "qrcode_uri": "$qrcode_uri" }'>
-      {include file='__svg_icons.tpl' icon="qr_code" width="24px" height="24px"}
-      {__("My QR")}
+    <button
+        class="btn btn-outline-primary"
+        data-toggle="modal"
+        data-url="#org-my-qr"
+        data-options='{
+          "full_name": "{$user->_data['user_firstname']} {$user->_data['user_lastname']}",
+          "user_name": "{$user->_data['user_name']}",
+          "user_verified": "{$user->_data['user_verified']}",
+          "qrcode_uri": "{$qrcode_uri}",
+          "va_number": "{$data['va_number']|format_va_number}"
+        }'
+    >
+        {include file='__svg_icons.tpl' icon="qr_code" width="24px" height="24px"}
+        {__("My QR")}
     </button>
   </div>
 </div>

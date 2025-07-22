@@ -5,13 +5,7 @@
       <i class="fa fa-plus-circle mr5"></i>{__("Add")}
     </a>
   </div>
-  {elseif $sub_view == "find"}
-  <div class="float-end">
-    <a href="{$system['system_url']}/{$control_panel['url']}/users" class="btn btn-md btn-light">
-      <i class="fa fa-arrow-circle-left mr5"></i>{__("Go Back")}
-    </a>
-  </div>
-  {elseif in_array($sub_view, ['add', 'edit'])}
+  {elseif in_array($sub_view, ['add', 'edit', 'find'])}
   <div class="float-end">
     <a href="{$org_url}/members" class="btn btn-md btn-light">
       <i class="fa fa-arrow-circle-left"></i><span class="ml5 d-none d-lg-inline-block">{__("Go Back")}</span>
@@ -19,25 +13,26 @@
   </div>
   {/if}
   <i class="fa fa-users mr10"></i>{__("Members")}
+  {if $sub_view == "find"} &rsaquo; <span>{__("Find")}</span>{/if}
   {if $sub_view == "add"} &rsaquo; <span>{__("Add")}</span>{/if}
   {if $sub_view == "edit"} &rsaquo; <a href="{$system['system_url']}/{$data['user_name']}">{$data['user_fullname']}</a>{/if}
 </div>
 
-{if $sub_view == ""}
+{if $sub_view == "" || $sub_view == "find"}
 
 <div class="card-body">
   <!-- search form -->
   <div class="mb20">
-    <form class="d-flex flex-row align-items-center flex-wrap" action="{$system['system_url']}/{$control_panel['url']}/users/find" method="get">
+    <form class="d-flex flex-row align-items-center flex-wrap" action="{$org_url}/members/find" method="get">
       <div class="form-group mb0">
         <div class="input-group">
-          <input type="text" class="form-control" name="query">
+          <input type="text" class="form-control" name="query" value="{$query}">
           <button type="submit" class="btn btn-sm btn-light"><i class="fas fa-search mr5"></i>{__("Search")}</button>
         </div>
       </div>
     </form>
     <div class="form-text small">
-      {__("Search by Username, First Name, Last Name, Email or Phone")}
+      {__("Search by Username, First Name, Last Name, Email, VA Number, or Role")}
     </div>
   </div>
   <!-- search form -->

@@ -25140,6 +25140,39 @@ class User
   }
 
   /**
+ * org_get_members ✅
+ * 
+ * @param number $org_id
+ * @return array
+ */
+  public function org_get_members($org_id)
+  {
+    global $db, $system;
+
+    $query = $db->query(sprintf("
+      SELECT 
+      m.*, 
+      va.va_number, va.balance,
+      u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture
+      FROM org_members AS m
+      INNER JOIN org_virtual_accounts AS va ON m.virtual_account_id = va.id
+      INNER JOIN users AS u ON m.user_id = u.user_id
+      WHERE m.organization_id = %s
+      ", secure($org_id)));
+
+    $members = [];
+
+    while ($row = $query->fetch_assoc()) {
+      $row['user_picture'] = get_picture($row['user_picture'], $row['user_gender']);
+      $row['user_fullname'] = ($system['show_usernames_enabled']) ? $row['user_name'] : $row['user_firstname'] . " " . $row['user_lastname'];
+      $members[] = $row;
+    }
+
+    return $members;
+  }
+
+
+  /**
    * org_create_member ✅
    * 
    * @param number $user_id

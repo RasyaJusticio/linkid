@@ -661,6 +661,7 @@ function init_smarty()
   $smarty->registerPlugin('modifier', 'implode', 'implode');
   $smarty->registerPlugin('modifier', 'trim', 'trim');
   $smarty->registerPlugin('modifier', 'filemtime', 'filemtime');
+  $smarty->registerPlugin('modifier', 'format_org_role', 'format_org_role');
 
   $smarty->registerPlugin("modifier", "to_local_timezone", function($value) use ($user) {
       return convert_timezone($value, "UTC", get_user_timezone());
@@ -8190,6 +8191,28 @@ function calculate_fee($amount, $fee_threshold, $fee_percent, $fee_min)
   } else {
     $calculated_fee = $amount * ($fee_percent / 100);
     return max($calculated_fee, $fee_min);
+  }
+}
+
+/**
+ * format_org_role
+ *
+ * @param string $role
+ * @return string
+ */
+function format_org_role($role)
+{
+  switch ($role) {
+    case "owner":
+      return "Owner";
+    case "admin":
+      return "Admin";
+    case "staff":
+      return "Staff";
+    case "account":
+      return "Account";
+    case "sub-account":
+      return "Sub-Account";
   }
 }
 

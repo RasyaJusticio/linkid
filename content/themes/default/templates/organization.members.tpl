@@ -19,7 +19,7 @@
   </div>
   {/if}
   <i class="fa fa-users mr10"></i>{__("Members")}
-  {if $sub_view == "add"} &rsaquo; <a href="{$system['system_url']}/{$data['user_name']}">{$data['user_fullname']}</a>{/if}
+  {if $sub_view == "add"} &rsaquo; <span>{__("Add")}</span>{/if}
   {if $sub_view == "edit"} &rsaquo; <a href="{$system['system_url']}/{$data['user_name']}">{$data['user_fullname']}</a>{/if}
 </div>
 
@@ -71,28 +71,11 @@
               {$row['user_name']}
             </a>
           </td>
-          <td>{$row['user_registered']|date_format:"%e %B %Y"}</td>
+          <td>{$row['va_number']}</td>
+          <td>{print_money($row['balance']|format_number)}</td>
+          <td>{$row['role']|format_org_role}</td>
           <td>
-            {if $row['user_activated']}
-            <span class="badge rounded-pill badge-lg bg-success">{__("Yes")}</span>
-            {else}
-            <span class="badge rounded-pill badge-lg bg-danger">{__("No")}</span>
-            {/if}
-          </td>
-          <td>
-            {if $row['user_approved']}
-            <span class="badge rounded-pill badge-lg bg-success">{__("Yes")}</span>
-            {else}
-            <span class="badge rounded-pill badge-lg bg-danger">{__("No")}</span>
-            {/if}
-          </td>
-          <td>
-            {if $sub_view == "pending"}
-            <button data-bs-toggle="tooltip" title='{__("Approve")}' class="btn btn-sm btn-icon btn-rounded btn-success js_user-approve" data-id="{$row['user_id']}">
-              <i class="fa fa-check"></i>
-            </button>
-            {/if}
-            <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$system['system_url']}/{$control_panel['url']}/users/edit/{$row['user_id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
+            <a data-bs-toggle="tooltip" title='{__("Edit")}' href="{$org_url}/members/edit/{$row['id']}" class="btn btn-sm btn-icon btn-rounded btn-primary">
               <i class="fa fa-pencil-alt"></i>
             </a>
             <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_admin-deleter" data-handle="user" data-id="{$row['user_id']}">

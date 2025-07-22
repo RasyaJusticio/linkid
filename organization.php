@@ -33,6 +33,7 @@ try {
     case '':
       // page header
       page_header($organization['name'] . ' &rsaquo; ' . __("Me") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
+
       break;
 
     case 'dashboard':
@@ -44,17 +45,17 @@ try {
       switch ($_GET['sub_view']) {
         case '':
         // page header
-
         page_header($organization['name'] . ' &rsaquo; ' . __("Members") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
+
+        $members = $user->org_get_members($organization['id']);
+
+        $smarty->assign('rows', $members);
         break;
 
         case 'add':
         page_header($organization['name'] . ' &rsaquo; ' . __("Members") . ' &rsaquo; ' . __("Add") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
 
         break;
-
-
-      
       }
       break;
 

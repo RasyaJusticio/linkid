@@ -662,6 +662,7 @@ function init_smarty()
   $smarty->registerPlugin('modifier', 'trim', 'trim');
   $smarty->registerPlugin('modifier', 'filemtime', 'filemtime');
   $smarty->registerPlugin('modifier', 'format_org_role', 'format_org_role');
+  $smarty->registerPlugin('modifier', 'format_va_number', 'format_va_number');
 
   $smarty->registerPlugin("modifier", "to_local_timezone", function($value) use ($user) {
       return convert_timezone($value, "UTC", get_user_timezone());
@@ -8214,5 +8215,24 @@ function format_org_role($role)
     case "sub-account":
       return "Sub-Account";
   }
+}
+
+/**
+ * format_va_number
+ *
+ * @param string $input
+ * @return string
+ */
+function format_va_number($input)
+{
+    if (strlen($input) < 12) {
+        return "";
+    }
+
+    $part1 = substr($input, 0, 2);     // first 2 chars
+    $part2 = substr($input, 2, 4);     // next 4 chars
+    $part3 = substr($input, 6, 6);     // next 6 chars
+
+    return "$part1 $part2 $part3";
 }
 

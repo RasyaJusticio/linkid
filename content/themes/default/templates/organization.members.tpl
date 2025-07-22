@@ -66,7 +66,7 @@
               {$row['user_name']}
             </a>
           </td>
-          <td>{$row['va_number']}</td>
+          <td>{$row['va_number']|format_va_number}</td>
           <td>{print_money($row['balance']|format_number)}</td>
           <td>{$row['role']|format_org_role}</td>
           <td>
@@ -163,7 +163,7 @@
           {__("User ID")}
         </li>
         <li class="list-group-item">
-          <span class="float-end badge badge-lg rounded-pill bg-secondary">{$data['va_number']}</span>
+          <span class="float-end badge badge-lg rounded-pill bg-secondary">{$data['va_number']|format_va_number}</span>
           {__("Virtual Account")}
         </li>
       </ul>

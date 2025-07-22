@@ -8196,6 +8196,20 @@ function calculate_fee($amount, $fee_threshold, $fee_percent, $fee_min)
 }
 
 /**
+ * generate_va_number
+ *
+ * @param int|string $org_id   Organization ID
+ * @param int|string $user_id  User ID
+ * @param string     $prefix   Prefix for the VA number (default: '62')
+ *
+ * @return string Virtual account number (e.g., "620006000001")
+ */
+function generate_va_number($org_id, $user_id, $prefix = '62') {
+    $va_core = str_pad($org_id, 4, '0', STR_PAD_LEFT) . str_pad($user_id, 6, '0', STR_PAD_LEFT);
+    return $prefix . $va_core;
+}
+
+/**
  * format_org_role
  *
  * @param string $role

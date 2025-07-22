@@ -25041,7 +25041,6 @@ class User
     return $get_member->num_rows != 0;
   }
 
-
   /**
    * check_org_by_slug ✅
    * 
@@ -25055,6 +25054,69 @@ class User
     $get_org = $db->query(sprintf("SELECT id FROM org_organizations WHERE slug = %s LIMIT 1", secure($slug)));
 
     return $get_org->num_rows == 0;
+  }
+
+  /**
+   * org_create ✅
+   * 
+   * @param array $args
+   * @return void
+   */
+  public function org_create($args)
+  {
+    global $db;
+
+    $db->query(sprintf("INSERT INTO org_organizations (name, slug, status, created_by) VALUES (%s, %s, 'active', %s)", secure($args['name']), secure($args['slug']), secure($this->_data['user_id'], 'int')));
+
+    $user_id = $this->_data['user_id'];
+    $org_id = $db->insert_id;
+
+    // processing
+    $db->query("START TRANSACTION");
+
+    try {
+      $db->query(sprintf(
+        "INSERT INTO org_members (user_id, organization_id, role) VALUES (%s, %s, %s)",
+        secure($user_id),
+        secure($org_id),
+        secure("owner")
+      ));
+
+      if ($db->error) {
+        throw new Exception("Failed to create org_member: " . $db->error);
+      }
+
+      $member_id = $db->insert_id;
+
+      $db->query(sprintf(
+        "INSERT INTO org_virtual_accounts (user_id, organization_id, va_number, balance) VALUES (%s, %s, %s, 0)",
+        secure($member_id),
+        secure($org_id),
+        secure(generate_va_number($org_id, $user_id))
+      ));
+
+      if ($db->error) {
+        throw new Exception("Failed to create virtual account: " . $db->error);
+      }
+
+      $va_id = $db->insert_id;
+
+      $db->query(sprintf(
+        "UPDATE org_members SET virtual_account_id = %s WHERE id = %s",
+        secure($va_id),
+        secure($member_id)
+      ));
+
+      if ($db->error) {
+        throw new Exception("Failed to update virtual_account_id: " . $db->error);
+      }
+
+      $db->query("COMMIT");
+    } catch (Exception $e) {
+      $db->query("ROLLBACK");
+      throw $e;
+    }
+  
   }
 
   /**
@@ -25120,7 +25182,8 @@ class User
       }
     }
 
-    $db->query(sprintf("INSERT INTO org_organizations (name, slug, status, created_by) VALUES (%s, %s, 'active', %s)", secure($args['name']), secure($args['slug']), secure($this->_data['user_id'], 'int')));
+    $this->org_create($args);
+
   }
 
   /**
@@ -25141,7 +25204,8 @@ class User
       FROM org_members AS m
       INNER JOIN org_virtual_accounts AS va ON m.virtual_account_id = va.id
       INNER JOIN users AS u ON m.user_id = u.user_id
-      WHERE m.organization_id = %s
+      WHERE m.organization_id = %s AND
+      NOT m.role = 'owner'
       ", secure($org_id)));
 
     $members = [];
@@ -25348,6 +25412,9 @@ class User
     if (!in_array($connection, ['owner', 'admin', 'staff'])) {
       throw new ValidationException(__("You don't have enough privilege to do this action"));
     }
+    if ($role == 'owner') {
+      throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
+    }
     if ($role == 'admin' && !in_array($connection, ['owner'])) {
       throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
     }
@@ -25467,6 +25534,9 @@ class User
     }
     if (in_array($target_member['role'], ['account', 'sub-account']) && !in_array($connection, ['owner', 'admin', 'staff'])) {
       throw new ValidationException(__("You don't have enough privilege to do this action"));
+    }
+    if ($role == 'owner') {
+      throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));
     }
     if ($role == 'admin' && !in_array($connection, ['owner'])) {
       throw new ValidationException(__("You don't have enough privilege to assign this role to this user"));

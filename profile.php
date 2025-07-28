@@ -56,6 +56,10 @@ try {
   $profile['user_cover'] = ($profile['user_cover']) ? $system['system_uploads'] . '/' . $profile['user_cover'] : $profile['user_cover'];
   $profile['user_cover_full'] = ($profile['user_cover_full']) ? $system['system_uploads'] . '/' . $profile['user_cover_full'] : $profile['user_cover_full'];
   $profile['user_cover_lightbox'] = $user->check_privacy($profile['cover_photo_privacy'], $profile['user_id']);
+  /* get organization */
+  $organization = $user->get_org_by_user($profile['user_id']);
+  $profile['is_org'] = $user->is_org_user($profile['user_id']);
+  $profile['members_count'] = $user->org_get_members_count($organization['id']);
   /* get user gender */
   $profile['user_gender'] = $user->get_gender($profile['user_gender']);
   /* get profile background */
@@ -287,6 +291,14 @@ try {
       $profile['friends'] = $user->get_friends($profile['user_id']);
       if ($profile['friends']) {
         $profile['friends_count'] = $friends_count;
+      }
+      break;
+
+    case 'members':
+      /* get members */
+      $profile['members'] = $user->org_get_members($organization['id']);
+      if ($profile['members']) {
+        $profile['members_count'] = $user->org_get_members_count($organization['id']);
       }
       break;
 

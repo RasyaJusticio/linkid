@@ -25261,6 +25261,32 @@ class User
     return $member;
   }
 
+/**
+ * org_get_members_count ✅
+ * 
+ * @param number $org_id
+ * @return int
+ */
+public function org_get_members_count($org_id)
+{
+  global $db;
+
+  $query = sprintf(
+    "SELECT COUNT(*) AS count
+     FROM org_members
+     WHERE organization_id = %s",
+    secure($org_id)
+  );
+
+  $result = $db->query($query);
+  
+  if ($result && $row = $result->fetch_assoc()) {
+    return (int) $row['count'];
+  }
+
+  return 0;
+}
+
   /**
    * org_get_member_with_org ✅
    * 

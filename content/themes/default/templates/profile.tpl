@@ -152,7 +152,7 @@
         <!-- profile-buttons -->
         <div class="profile-buttons-wrapper">
           {if $user->_logged_in}
-            {if $user->_data['user_id'] != $profile['user_id']}
+            {if $user->_data['user_id'] != $profile['user_id'] && !$profile['is_org']}
               <!-- add friend -->
               {if $system['friends_enabled']}
                 {if $profile['we_friends']}
@@ -291,10 +291,18 @@
           {include file='__svg_icons.tpl' icon="newsfeed" class="main-icon mr5" width="24px" height="24px"}
           <span class="ml5 d-none d-xxl-inline-block">{__("Timeline")}</span>
         </a>
+        {if !$profile['is_org']}
         <a href="{$system['system_url']}/{$profile['user_name']}/{if $system['friends_enabled']}friends{else}followers{/if}" {if $view == "friends" || $view == "followers" || $view == "followings"}class="active" {/if}>
           {include file='__svg_icons.tpl' icon="friends" class="main-icon mr5" width="24px" height="24px"}
           <span class="ml5 d-none d-xxl-inline-block">{if $system['friends_enabled']}{__("Friends")}{else}{__("Followers")}{/if}</span>
         </a>
+        {/if}
+        {if $profile['is_org']}
+        <a href="{$system['system_url']}/{$profile['user_name']}/members" {if $view == "members"}class="active" {/if}>
+          {include file='__svg_icons.tpl' icon="friends" class="main-icon mr5" width="24px" height="24px"}
+          <span class="ml5 d-none d-xxl-inline-block">{__("Members")}</span>
+        </a>
+        {/if}
         <a href="{$system['system_url']}/{$profile['user_name']}/photos" {if $view == "photos" || $view == "albums" || $view == "album"}class="active" {/if}>
           {include file='__svg_icons.tpl' icon="photos" class="main-icon mr5" width="24px" height="24px"}
           <span class="ml5 d-none d-xxl-inline-block">{__("Photos")}</span>
@@ -530,7 +538,7 @@
             <!-- tips -->
 
             <!-- gifts -->
-            {if $user->_logged_in && $user->_data['user_id'] != $profile['user_id'] && $system['gifts_enabled']}
+            {if $user->_logged_in && $user->_data['user_id'] != $profile['user_id'] && $system['gifts_enabled'] && !$profile['is_org']}
               {if $user->_data['can_send_gifts'] && ($profile['user_privacy_gifts'] == "public" || ($profile['user_privacy_gifts'] == "friends" && $profile['we_friends']))}
                 <div class="d-grid">
                   <button type="button" class="btn btn-primary rounded-pill mb20" data-toggle="modal" data-url="#gifts" data-options='{ "uid": {$profile["user_id"]} }'>
@@ -643,7 +651,7 @@
                       {/if}
                     {/if}
                   {/if}
-                  {if !$system['genders_disabled']}
+                  {if !$system['genders_disabled'] && !$profile['is_org']}
                     {if $profile['user_id'] == $user->_data['user_id'] || $profile['user_privacy_gender'] == "public" || ($profile['user_privacy_gender'] == "friends" && $profile['we_friends'])}
                       <li>
                         <div class="about-list-item">
@@ -691,6 +699,7 @@
                       </li>
                     {/if}
                   {/if}
+                  {if !$profile['is_org']}
                   <li>
                     <div class="about-list-item">
                       {include file='__svg_icons.tpl' icon="friends" class="main-icon" width="24px" height="24px"}
@@ -698,6 +707,16 @@
                       <a href="{$system['system_url']}/{$profile['user_name']}/followers">{$profile['followers_count']} {__("people")}</a>
                     </div>
                   </li>
+                  {/if}
+                  {if $profile['is_org']}
+                  <li>
+                    <div class="about-list-item">
+                      {include file='__svg_icons.tpl' icon="friends" class="main-icon" width="24px" height="24px"}
+                      {__("Has")}
+                      <a href="{$system['system_url']}/{$profile['user_name']}/members">{$profile['members_count']} {__("members")}</a>
+                    </div>
+                  </li>
+                  {/if}
                   <!-- info -->
                 </ul>
               </div>
@@ -1200,6 +1219,62 @@
             </div>
           </div>
           <!-- friends -->
+
+        {elseif $view == "members"}
+          <!-- members -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header with-icon with-nav">
+                <!-- panel title -->
+                <div class="mb20">
+                  {include file='__svg_icons.tpl' icon="friends" class="main-icon mr10" width="24px" height="24px"}
+                  {__("Members")}
+                </div>
+                <!-- panel title -->
+
+              </div>
+              <div class="card-body pb0">
+                {if $profile['members']}
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>{__("Name")}</th>
+                        <th>{__("Username")}</th>
+                        <th>{__("Role")}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {foreach $profile['members'] as $row}
+                      <tr>
+                        <td>
+                          <a target="_blank" href="{$system['system_url']}/{$row['user_name']}">
+                            <img class="tbl-image" src="{$row['user_picture']}">
+                            {$row['user_firstname']} {$row['user_lastname']}
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{$system['system_url']}/{$row['user_name']}" target="_blank">
+                            {$row['user_name']}
+                          </a>
+                        </td>
+                        <td>{$row['role']|format_org_role}</td>
+                      </tr>
+                      {/foreach}
+                    </tbody>
+                  </table>
+                </div>
+                {$pager}
+              </div>
+                {else}
+                  <p class="text-center text-muted mt10">
+                    {$profile['name']} {__("doesn't have followers")}
+                  </p>
+                {/if}
+              </div>
+            </div>
+          </div>
+          <!-- followers -->
 
         {elseif $view == "followers"}
           <!-- followers -->

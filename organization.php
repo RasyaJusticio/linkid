@@ -202,6 +202,18 @@ try {
       }
       break;
 
+    case 'all-transactions':
+      // page header
+      page_header($organization['name'] . ' &rsaquo; ' . __("All Transactions") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
+
+      // get all transactions
+      $transactions = $user->org_get_all_transactions($organization['id']);
+
+      /* assign variables */
+      $smarty->assign('transactions', $transactions);
+
+      break;
+
     default:
       _error(404);
       break;

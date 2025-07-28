@@ -25720,37 +25720,97 @@ class User
     return $result->getDataUri();
   }
 
-/**
+  /**
  * org_get_transactions
  *
  * @param integer $org_id
  * @return array
  */
-public function org_get_transactions($org_id)
+  public function org_get_transactions($org_id)
+  {
+    global $db;
+    $transactions = [];
+
+    $org_id = secure($org_id, 'int');
+    $user_id = secure($this->_data['user_id'], 'int');
+
+    $get_transactions = $db->query("
+      SELECT org_transactions.*, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture
+      FROM org_transactions
+      LEFT JOIN org_members ON org_transactions.target_user_id = org_members.id
+      LEFT JOIN users ON org_members.user_id = users.user_id
+      WHERE org_members.organization_id = {$org_id}
+      AND (
+      org_transactions.user_id IN (
+      SELECT id FROM org_members WHERE user_id = {$user_id}
+      )
+      )
+      ORDER BY org_transactions.id DESC
+      ");
+
+    if ($get_transactions->num_rows > 0) {
+      while ($transaction = $get_transactions->fetch_assoc()) {
+        $transaction['user_picture'] = get_picture($transaction['user_picture'], $transaction['user_gender']);
+        $transactions[] = $transaction;
+      }
+    }
+
+    return $transactions;
+  }
+
+  /**
+ * org_get_all_transactions
+ *
+ * @param integer $org_id
+ * @return array
+ */
+public function org_get_all_transactions($org_id)
 {
   global $db;
   $transactions = [];
 
   $org_id = secure($org_id, 'int');
-  $user_id = secure($this->_data['user_id'], 'int');
 
   $get_transactions = $db->query("
-    SELECT org_transactions.*, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture
+    SELECT 
+      org_transactions.*,
+
+      -- From user
+      from_user.user_name AS from_user_name,
+      from_user.user_firstname AS from_user_firstname,
+      from_user.user_lastname AS from_user_lastname,
+      from_user.user_gender AS from_user_gender,
+      from_user.user_picture AS from_user_picture,
+
+      -- To user
+      to_user.user_name AS to_user_name,
+      to_user.user_firstname AS to_user_firstname,
+      to_user.user_lastname AS to_user_lastname,
+      to_user.user_gender AS to_user_gender,
+      to_user.user_picture AS to_user_picture
+
     FROM org_transactions
-    LEFT JOIN org_members ON org_transactions.target_user_id = org_members.id
-    LEFT JOIN users ON org_members.user_id = users.user_id
-    WHERE org_members.organization_id = {$org_id}
-      AND (
-        org_transactions.user_id IN (
-          SELECT id FROM org_members WHERE user_id = {$user_id}
-        )
+
+    LEFT JOIN org_members AS from_member ON org_transactions.user_id = from_member.id
+    LEFT JOIN users AS from_user ON from_member.user_id = from_user.user_id
+
+    LEFT JOIN org_members AS to_member ON org_transactions.target_user_id = to_member.id
+    LEFT JOIN users AS to_user ON to_member.user_id = to_user.user_id
+
+    WHERE (
+      from_member.organization_id = {$org_id}
+      OR to_member.organization_id = {$org_id}
       )
+    AND org_transactions.type = 'out'
+
     ORDER BY org_transactions.id DESC
   ");
 
   if ($get_transactions->num_rows > 0) {
     while ($transaction = $get_transactions->fetch_assoc()) {
-      $transaction['user_picture'] = get_picture($transaction['user_picture'], $transaction['user_gender']);
+      // Replace picture URLs
+      $transaction['from_user_picture'] = get_picture($transaction['from_user_picture'], $transaction['from_user_gender']);
+      $transaction['to_user_picture'] = get_picture($transaction['to_user_picture'], $transaction['to_user_gender']);
       $transactions[] = $transaction;
     }
   }

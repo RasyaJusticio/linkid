@@ -25205,7 +25205,7 @@ class User
     $query = $db->query(sprintf("
       SELECT 
       m.*, 
-      va.va_number, va.balance,
+      va.va_number, va.balance, va.transfer_pin,
       u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_gender, u.user_picture
       FROM org_members AS m
       INNER JOIN org_virtual_accounts AS va ON m.virtual_account_id = va.id
@@ -25238,7 +25238,7 @@ class User
     $member_result = $db->query(sprintf(
       "SELECT
         m.*,
-        va.va_number, va.balance,
+        va.va_number, va.balance, va.transfer_pin,
         u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture, u.user_gender
       FROM org_members m 
       JOIN users u on m.user_id = u.user_id
@@ -25275,7 +25275,7 @@ class User
     $member_result = $db->query(sprintf(
       "SELECT
         m.*,
-        va.va_number, va.balance,
+        va.va_number, va.balance, va.transfer_pin,
         u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture, u.user_gender
       FROM org_members m 
       JOIN users u on m.user_id = u.user_id
@@ -25318,7 +25318,7 @@ class User
     $member_result = $db->query(sprintf(
       "SELECT
         m.*,
-        va.va_number, va.balance,
+        va.va_number, va.balance, va.transfer_pin,
         u.user_id, u.user_firstname, u.user_lastname, u.user_name, u.user_email, u.user_picture
       FROM org_members m 
       JOIN users u on m.user_id = u.user_id
@@ -25351,7 +25351,7 @@ class User
     $member_result = $db->query(sprintf(
       "SELECT
         m.*,
-        va.va_number, va.balance,
+        va.va_number, va.balance, va.transfer_pin,
         u.user_id, u.user_name, u.user_email, u.user_firstname, u.user_lastname, u.user_gender, u.user_picture, u.user_verified
       FROM org_members m 
       JOIN users u on m.user_id = u.user_id
@@ -25596,6 +25596,54 @@ class User
 
     return true;
   }
+  
+  /**
+   * org_user_settings
+   * 
+   * @param number $member_id
+   * @param string $edit
+   * @param array $args
+   * @return void
+   */
+  public function org_user_settings($member_id, $edit, $args)
+  {
+    global $db, $system;
+
+    $member = $this->org_get_member($member_id);
+
+    if ($member['user_id'] != $this->_data['user_id']) {
+        throw new ValidationException(__("You can't edit a member that is not assigned to you"));
+    }
+
+    switch ($edit) {
+      case 'transfer-pin':
+        /* validate all fields */
+        if (!is_empty($member['transfer_pin'])) {
+          if (is_empty($args['current']) || is_empty($args['new']) || is_empty($args['confirm'])) {
+            throw new ValidationException(__("You must fill in all of the fields"));
+          }
+
+          /* validate current pin (MD5 check for versions < v2.5) */
+          if (md5($args['current']) != $member['transfer_pin'] && !password_verify($args['current'], $member['transfer_pin'])) {
+            throw new ValidationException(__("Your current transfer PIN is incorrect"));
+          }
+        } else {
+          if (is_empty($args['new']) || is_empty($args['confirm'])) {
+            throw new ValidationException(__("You must fill in all of the fields"));
+          }
+        }
+        /* validate new pin */
+        if ($args['new'] != $args['confirm']) {
+          throw new ValidationException(__("Your transfer PINs do not match"));
+        }
+        /* check password */
+        $this->check_pin($args['new']);
+        /* update user */
+        $db->query(sprintf("UPDATE org_virtual_accounts SET transfer_pin = %s WHERE user_id = %s AND organization_id = %s", secure(_password_hash($args['new'])), secure($member['id'], 'int'), secure($member['organization_id'], 'int')));
+        break;
+    }
+  }
+
 
   /**
    * org_va_transfer ✅

@@ -12,7 +12,7 @@
       <div class="card">
         <div class="card-body with-nav">
           <ul class="side-nav">
-            <li {if $view == ""}class="active" {/if}>
+            <li {if $view == "me"}class="active" {/if}>
               <a href="{$org_url}">
                 <i class="fa fa-user fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Me")}
               </a>
@@ -48,12 +48,16 @@
         </small>
       </div>
       <div class="card">
-        {if $view == ""}
-        {include file='organization.me.tpl'}
+        {if $view == "me"}
+          {if $sub_view == ""}
+            {include file='organization.me.tpl'}
+          {elseif $sub_view == "transfer-pin"}
+            {include file='organization.transfer-pin.tpl'}
+          {/if}
         {elseif $view == "dashboard"}
-        {include file='organization.dashboard.tpl'}
+          {include file='organization.dashboard.tpl'}
         {elseif $view == "members"}
-        {include file='organization.members.tpl'}
+          {include file='organization.members.tpl'}
         {/if}
       </div>
     </div>

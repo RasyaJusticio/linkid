@@ -30,6 +30,12 @@
   </div>
 </div>
 <div class="card-body page-content">
+  {if is_empty($data['transfer_pin'])}
+    <div class="alert alert-warning">
+      {__("You don't have a transfer PIN yet. Please make one.")}
+    </div>
+  {/if}
+
   <div class="row">
     <!-- credit -->
     <div class="col-md-5">
@@ -56,21 +62,28 @@
         {__("Send & Recieve Money")}
       </div>
       <div class="d-grid">
-        {if $system['wallet_transfer_enabled']}
         <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-transfer">
           {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
           {__("Send Money")}
         </button>
-        {/if}
       </div>
 
       <div class="d-grid">
-        {if $system['wallet_transfer_enabled']}
         <button class="btn btn-outline-primary" data-toggle="modal" data-url="#wallet-receive">
           {include file='__svg_icons.tpl' icon="money_receive" class="mr10" width="24px" height="24px"}
           {__("Receive Money")}
         </button>
-        {/if}
+      </div>
+
+      <div class="d-grid">
+        <a href="{$org_url}/me/transfer-pin" class="btn btn-outline-primary">
+          {include file='__svg_icons.tpl' icon="security" class="mr10" width="24px" height="24px"}
+          {if is_empty($data['transfer_pin'])}
+            {__("Set Transfer Pin")}
+          {else}
+            {__("Change Transfer Pin")}
+          {/if}
+        </a>
       </div>
     </div>
     <!-- send & recieve money -->

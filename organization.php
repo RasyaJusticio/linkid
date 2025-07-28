@@ -29,28 +29,54 @@ try {
   }
 
   $connection = $user->org_get_connection($organization['id']);
+  $org_url = '/org/' . $_GET['username'];
 
   // get view content
   switch ($_GET['view']) {
     case '':
-      // page header
-      page_header($organization['name'] . ' &rsaquo; ' . __("Me") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
-
-      $member = $user->org_get_member_by_user($organization['id']);
-
-      // get qrcode image
-      $qrcode = $user->org_generate_va_qrcode($member['va_number']);
-
-      // get account transactions
-      $transactions = $user->org_get_transactions($organization['id']);
-
-      /* assign variables */
-      $smarty->assign('data', $member);
-      $smarty->assign('transactions', $transactions);
-      $smarty->assign('qrcode_uri', $qrcode);
+      redirect($org_url . '/me');
 
       break;
 
+    case 'me':
+      switch ($_GET['sub_view']) {
+        case '':
+          // page header
+          page_header($organization['name'] . ' &rsaquo; ' . __("Me") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
+
+          $member = $user->org_get_member_by_user($organization['id']);
+
+          // get qrcode image
+          $qrcode = $user->org_generate_va_qrcode($member['va_number']);
+
+          // get account transactions
+          $transactions = $user->org_get_transactions($organization['id']);
+
+          /* assign variables */
+          $smarty->assign('data', $member);
+          $smarty->assign('transactions', $transactions);
+          $smarty->assign('qrcode_uri', $qrcode);
+
+          break;
+
+        case 'transfer-pin':
+          // page header
+          page_header($organization['name'] . ' &rsaquo; ' . __("Me") . ' &rsaquo; ' . __("Transfer PIN") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
+
+          $member = $user->org_get_member_by_user($organization['id']);
+
+          /* assign variables */
+          $smarty->assign('data', $member);
+
+          break;
+
+        default:
+          _error(404);
+          break;
+      }
+
+      break;
+      
     case 'dashboard':
       // page header
       page_header($organization['name'] . ' &rsaquo; ' . __("Dashboard") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
@@ -168,6 +194,10 @@ try {
           $smarty->assign('rows', $rows);
           $smarty->assign('pager', $pager->getPager());
           $smarty->assign('query', $_GET['query']);
+          break;
+
+        default:
+          _error(404);
           break;
       }
       break;

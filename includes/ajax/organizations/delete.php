@@ -57,6 +57,46 @@ try {
       // TODO: Allocate money (VA) from deleted member to the owner of the organization
       $db->query(sprintf("DELETE FROM org_members WHERE id = %s", secure($_POST['id'], 'int')));
       break;
+
+    case 'bill':
+      $bill = $user->org_get_bill($_POST['id']);
+      if (empty($bill)) {
+          throw new ValidationException(__("Bill not found"));
+      } 
+
+      $member = $user->org_get_member($bill['user_id']);
+      if (empty($member)) {
+          throw new ValidationException(__("Member not found"));
+      } 
+
+      $organization = $user->get_org($bill['organization_id']);
+      if (empty($organization)) {
+          throw new ValidationException(__("Organization not found"));
+      } 
+
+      if (!$user->org_is_member($organization['id'])) {
+          throw new ValidationException(__("You are not a member of this organization"));
+      }
+
+      $connection = $user->org_get_connection($organization['id']);
+
+      // permission check 
+      if (!in_array($connection, ['owner', 'admin', 'staff'])) {
+        throw new ValidationException(__("You don't have enough privilege to do this action"));
+      }
+      if ($member['role'] == 'admin' && !in_array($connection, ['owner'])) {
+        throw new ValidationException(__("You don't have enough privilege to do this action"));
+      }
+      if ($member['role'] == 'staff' && !in_array($connection, ['owner', 'admin'])) {
+        throw new ValidationException(__("You don't have enough privilege to do this action"));
+      }
+      if (in_array($member['role'], ['account', 'sub-account']) && !in_array($connection, ['owner', 'admin', 'staff'])) {
+        throw new ValidationException(__("You don't have enough privilege to do this action"));
+      }
+
+      // TODO: Allocate money (VA) from deleted member to the owner of the organization
+      $db->query(sprintf("DELETE FROM org_bills WHERE id = %s", secure($_POST['id'], 'int')));
+      break;
   }
   // return & exist
   return_json();

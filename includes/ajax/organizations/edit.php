@@ -39,7 +39,7 @@ try {
 
   switch ($_REQUEST['type']) {
     case 'bill':
-      $bill = $user->org_get_bill($organization['id'], $_REQUEST['bill_id']);
+      $bill = $user->org_get_bill_with_org($organization['id'], $_REQUEST['bill_id']);
 
       if (empty($bill)) {
         throw new ValidationException(__("Bill not found"));

@@ -25863,11 +25863,35 @@ public function org_get_all_transactions($org_id)
   /**
    * org_get_bill 
    *
+   * @param integer $bill_id
+   * @return array
+   */
+  public function org_get_bill($bill_id)
+  {
+    global $db;
+
+    $bills = [];
+
+    $bill_id = secure($bill_id, 'int');
+
+    $get_bill = $db->query("
+      SELECT *
+      FROM org_bills
+      WHERE org_bills.id = {$bill_id}
+      LIMIT 1
+    ");
+
+    return $get_bill->fetch_assoc(); 
+  }
+
+  /**
+   * org_get_bill_with_org 
+   *
    * @param integer $org_id
    * @param integer $bill_id
    * @return array
    */
-  public function org_get_bill($org_id, $bill_id)
+  public function org_get_bill_with_org($org_id, $bill_id)
   {
     global $db;
 
@@ -26064,7 +26088,7 @@ public function org_get_all_transactions($org_id)
         throw new ValidationException(__("You are not a member of this organization"));
     }
 
-    $bill = $this->org_get_bill($org_id, $bill_id);
+    $bill = $this->org_get_bill_with_org($org_id, $bill_id);
     if (empty($bill)) {
         throw new ValidationException(__("Bill not found"));
     } 

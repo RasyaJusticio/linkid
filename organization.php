@@ -108,7 +108,13 @@ try {
           // get data
           $member = $user->org_get_member_with_org($organization['id'], $_GET['id']);
 
+          if (in_array($member['role'], ['account', 'sub-account'])) {
+            $bills = $user->org_get_bills($organization['id'], $member['id']);
+          }
+
+          // assign variables
           $smarty->assign('data', $member);
+          $smarty->assign('rows', $bills);
 
           break;
 
@@ -196,6 +202,20 @@ try {
           $smarty->assign('query', $_GET['query']);
           break;
 
+        default:
+          _error(404);
+          break;
+      }
+      break;
+
+    case 'bills':
+      switch ($_POST['sub_view']) {
+        case '':
+          // page header
+          page_header($organization['name'] . ' &rsaquo; ' . __("Bills") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
+
+          break;
+      
         default:
           _error(404);
           break;

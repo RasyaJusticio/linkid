@@ -379,12 +379,14 @@ function modal() {
     initialize_modal();
   }
 
-  AutoNumeric.multiple('.input_money-IDR', {
-    digitGroupSeparator: '.',
-    decimalCharacter: ',',
-    decimalPlaces: 0,
-    unformatOnSubmit: true,
-  });
+  setTimeout(() => {
+    AutoNumeric.multiple('.input_money-IDR', {
+      digitGroupSeparator: '.',
+      decimalCharacter: ',',
+      decimalPlaces: 0,
+      unformatOnSubmit: true,
+    });
+  }, 500)
 }
 
 

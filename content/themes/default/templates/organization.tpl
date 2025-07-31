@@ -33,6 +33,12 @@
                 </a>
               </li>
 
+              <li {if $view == "bills"}class="active" {/if}>
+                <a href="{$org_url}/bills">
+                  <i class="fa fa-credit-card fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Bills")}
+                </a>
+              </li>
+
               <li {if $view == "all-transactions"}class="active" {/if}>
                 <a href="{$org_url}/all-transactions">
                   <i class="fa fa-dollar fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("All Transactions")}
@@ -64,6 +70,8 @@
           {include file='organization.dashboard.tpl'}
         {elseif $view == "members"}
           {include file='organization.members.tpl'}
+        {elseif $view == "bills"}
+          {include file='organization.bills.tpl'}
         {elseif $view == "all-transactions"}
           {include file='organization.all-transactions.tpl'}
         {/if}

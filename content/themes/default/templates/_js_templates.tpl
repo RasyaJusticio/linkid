@@ -2167,6 +2167,7 @@
     
     <!-- Organization -->
     {if in_array($page, ["organization", "organizations"])}
+
       <script id="org-va-transfer" type="text/template">
         <div class="modal-header">
           <h6 class="modal-title">

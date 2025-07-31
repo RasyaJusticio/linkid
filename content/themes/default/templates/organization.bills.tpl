@@ -1,21 +1,20 @@
 <div class="card-header with-icon">
   {if $sub_view == ""}
   <div class="float-end">
-    <a href="{$org_url}/members/add" class="btn btn-md btn-primary d-none d-lg-block">
+    <a href="{$org_url}/bills/add" class="btn btn-md btn-primary d-none d-lg-block">
       <i class="fa fa-plus-circle mr5"></i>{__("Add")}
     </a>
   </div>
-  {elseif in_array($sub_view, ['add', 'edit', 'find'])}
+  {elseif in_array($sub_view, ['add', 'edit'])}
   <div class="float-end">
-    <a href="{$org_url}/members" class="btn btn-md btn-light">
+    <a href="{$org_url}/bills" class="btn btn-md btn-light">
       <i class="fa fa-arrow-circle-left"></i><span class="ml5 d-none d-lg-inline-block">{__("Go Back")}</span>
     </a>
   </div>
   {/if}
-  <i class="fa fa-users fa-lg fa-fw mr10"></i>{__("Members")}
-  {if $sub_view == "find"} &rsaquo; <span>{__("Find")}</span>{/if}
+  <i class="fa fa-credit-card fa-lg fa-fw mr10"></i>{__("Bills")}
   {if $sub_view == "add"} &rsaquo; <span>{__("Add")}</span>{/if}
-  {if $sub_view == "edit"} &rsaquo; <a href="{$system['system_url']}/{$data['user_name']}">{$data['user_fullname']}</a>{/if}
+  {if $sub_view == "edit"} &rsaquo; <a href="{$org_url}/members/edit/{$data['id']}">{$data['user_fullname']}</a>{/if}
 </div>
 
 {if $sub_view == "" || $sub_view == "find"}
@@ -77,14 +76,14 @@
                  data-bs-toggle="tooltip"
                  title='{__("Transfer")}'
                  class="btn btn-sm btn-icon btn-rounded btn-primary" 
-
-                 data-toggle="modal"
-                 data-url="#org-transfer-quick"
-                 data-options='{
-                 "id": "{$row['id']}"
-                  }'
-                 >
-                 <i class="fa fa-credit-card"></i>
+                                                                 
+                data-toggle="modal"
+                data-url="#org-transfer-quick"
+                data-options='{
+                  "id": "{$row['id']}"
+                }'
+              >
+              <i class="fa fa-credit-card"></i>
             </a>
             <a
                 data-bs-toggle="tooltip"
@@ -93,14 +92,14 @@
                 data-toggle="modal"
                 data-url="#org-my-qr"
                 data-options='{
-                "full_name": "{$row['user_firstname']} {$user->_data['user_lastname']}",
-                 "user_name": "{$row['user_name']}",
+                  "full_name": "{$row['user_firstname']} {$user->_data['user_lastname']}",
+                  "user_name": "{$row['user_name']}",
                   "user_verified": "{$row['user_verified']}",
-                   "qrcode_uri": "{$row['qrcode_uri']}",
-                    "va_number": "{$row['va_number']|format_va_number}"
-                     }'
-                >
-                <i class="fa fa-qrcode"></i>
+                  "qrcode_uri": "{$row['qrcode_uri']}",
+                  "va_number": "{$row['va_number']|format_va_number}"
+                }'
+            >
+              <i class="fa fa-qrcode"></i>
             </a>
             <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_org-deleter" data-handle="member" data-id="{$row['id']}">
               <i class="fa fa-trash-alt"></i>
@@ -199,142 +198,54 @@
     </div>
   </div>
 
-  <!-- tabs nav -->
-  <ul class="nav nav-tabs mb20">
-    <li class="nav-item">
-      <a class="nav-link active" href="#account" data-bs-toggle="tab">
-        <i class="fa fa-cog fa-fw mr5"></i><strong class="mr5">{__("Account")}</strong>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#bills" data-bs-toggle="tab">
-        <i class="fa fa-credit-card fa-fw mr5"></i><strong class="mr5">{__("Bills")}</strong>
-      </a>
-    </li>
-  </ul>
-  <!-- tabs nav -->
-
 
   <!-- tabs content -->
   <div class="tab-content">
-    <!-- account tab -->
-    <div class="tab-pane active" id="account">
-      <form class="js_ajax-forms" data-url="organizations/members.php?do=edit">
-        <div class="row">
-          <div class="form-group col-12">
-            <label class="form-label" for="va_number">{__("VA Number")}</label>
-            <input type="text" class="form-control js_digit-only js_auto-va-output" value="{$data['va_number']}" name="va_number">
-            <div class="form-text">
-              {__("Assign this member a unique virtual account number")}
-            </div>
+    <form class="js_ajax-forms" data-url="organizations/members.php?do=edit">
+      <div class="row">
+        <div class="form-group col-12">
+          <label class="form-label" for="va_number">{__("VA Number")}</label>
+          <input type="text" class="form-control js_digit-only js_auto-va-output" value="{$data['va_number']}" name="va_number">
+          <div class="form-text">
+            {__("Assign this member a unique virtual account number")}
           </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group">
-            <label class="form-label">{__("Role")}</label>
-            <select class="form-select" name="role">
-              <option value="none">{__("Select Role")}</option>
-              <option {if $data['role'] == "admin"}selected{/if} value="admin">{__("Admin")}</option>
-              <option {if $data['role'] == "staff"}selected{/if} value="staff">{__("Staff")}</option>
-              <option {if $data['role'] == "account"}selected{/if} value="account">{__("Account")}</option>
-              <option {if $data['role'] == "sub-account"}selected{/if} value="sub-account">{__("Sub-Account")}</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- hidden -->
-        <input type="hidden" name="org_username" value="{$username}">
-        <input type="hidden" name="member_id" value="{$id}">
-        <!-- hidden -->
-
-        <!-- success -->
-        <div class="alert alert-success mb0 mt20 x-hidden"></div>
-        <!-- success -->
-
-        <!-- error -->
-        <div class="alert alert-danger mb0 mt20 x-hidden"></div>
-        <!-- error -->
-
-        <div class="card-footer-fake text-end">
-          <button type="button" class="btn btn-danger js_org-deleter" data-handle="member" data-id="{$data['id']}" data-redirect="{$org_url}/members">
-            <i class="fa fa-trash-alt mr5"></i>{__("Delete Member")}
-          </button>
-          <button type="submit" class="btn btn-primary">{__("Save Changes")}</button>
-        </div>
-      </form>
-    </div>
-    <!-- account tab -->
-
-    <!-- bills tab -->
-    <div class="tab-pane" id="bills">
-      <div class="mb20">
-        <div style="margin-left: auto; width: fit-content;">
-          <button class="btn btn-md btn-primary d-none d-lg-block" data-toggle="modal" data-url="organizations/add.php?org_id={$organization['id']}&user_id={$data['user_id']}&type=bill">
-            <i class="fa fa-plus-circle mr5"></i>{__("Add")}
-          </button>
         </div>
       </div>
 
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover js_datatable">
-          <thead>
-            <tr>
-              <th>{__("ID")}</th>
-              <th>{__("Amount")}</th>
-              <th>{__("Description")}</th>
-              <th>{__("Due Date")}</th>
-              <th>{__("Status")}</th>
-              <th>{__("Actions")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {if $rows}
-            {foreach $rows as $row}
-            <tr>
-              <td>
-                {$row['id']}
-              </td>
-              <td>
-                {print_money($row['amount']|format_number)}
-              </td>
-              <td>
-                {$row['description']}
-              </td>
-              <td>{$row['due_date']|date_format:"%e %B %Y"}</td>
-              <td>
-                {if $row['status'] == "paid"}
-                <span class="badge rounded-pill badge-lg bg-success">{__("Paid")}</span>
-                {elseif $row['status'] == "unpaid"}
-                <span class="badge rounded-pill badge-lg bg-gradient-gray">{__("Unpaid")}</span>
-                {elseif $row['status'] == "overdue"}
-                <span class="badge rounded-pill badge-lg bg-danger">{__("Overdue")}</span>
-                {/if}
-              </td>
-              <td>
-                <button data-bs-toggle="tooltip" title='{__("Edit")}' class="btn btn-sm btn-icon btn-rounded btn-primary">
-                  <i class="fa fa-pencil-alt"></i>
-                </button>
-                <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_org-deleter" data-handle="bill" data-id="{$row['id']}">
-                  <i class="fa fa-trash-alt"></i>
-                </button>
-              </td>
-            </tr>
-            {/foreach}
-            {else}
-            <tr>
-              <td colspan="7" class="text-center">
-                {__("No data to show")}
-              </td>
-            </tr>
-            {/if}
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="form-group">
+          <label class="form-label">{__("Role")}</label>
+          <select class="form-select" name="role">
+            <option value="none">{__("Select Role")}</option>
+            <option {if $data['role'] == "admin"}selected{/if} value="admin">{__("Admin")}</option>
+            <option {if $data['role'] == "staff"}selected{/if} value="staff">{__("Staff")}</option>
+            <option {if $data['role'] == "account"}selected{/if} value="account">{__("Account")}</option>
+            <option {if $data['role'] == "sub-account"}selected{/if} value="sub-account">{__("Sub-Account")}</option>
+          </select>
+        </div>
       </div>
-    </div>
+
+      <!-- hidden -->
+      <input type="hidden" name="org_username" value="{$username}">
+      <input type="hidden" name="member_id" value="{$id}">
+      <!-- hidden -->
+
+      <!-- success -->
+      <div class="alert alert-success mb0 mt20 x-hidden"></div>
+      <!-- success -->
+
+      <!-- error -->
+      <div class="alert alert-danger mb0 mt20 x-hidden"></div>
+      <!-- error -->
+
+      <div class="card-footer-fake text-end">
+        <button type="button" class="btn btn-danger js_org-deleter" data-handle="member" data-id="{$data['id']}" data-redirect="{$org_url}/members">
+          <i class="fa fa-trash-alt mr5"></i>{__("Delete Member")}
+        </button>
+        <button type="submit" class="btn btn-primary">{__("Save Changes")}</button>
+      </div>
+    </form>
   </div>
-  <!-- account tab -->
-</div>
 </div>
 <!-- tabs content -->
 </div>

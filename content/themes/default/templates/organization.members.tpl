@@ -312,7 +312,7 @@
                 {/if}
               </td>
               <td>
-                <button data-bs-toggle="tooltip" title='{__("Edit")}' class="btn btn-sm btn-icon btn-rounded btn-primary">
+                <button data-bs-toggle="tooltip" title='{__("Edit")}' class="btn btn-sm btn-icon btn-rounded btn-primary" data-toggle="modal" data-url="organizations/edit.php?org_id={$organization['id']}&bill_id={$row['id']}&type=bill">
                   <i class="fa fa-pencil-alt"></i>
                 </button>
                 <button data-bs-toggle="tooltip" title='{__("Delete")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_org-deleter" data-handle="bill" data-id="{$row['id']}">

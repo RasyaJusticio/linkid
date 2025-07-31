@@ -48,9 +48,9 @@ try {
 
     case 'edit':
 
-      $user->org_update_member($_POST['member_id'], $organization['id'], $_POST['role'], $_POST['va_number']);
+      $user->org_update_bill($organization['id'], $_GET['bill_id'], $_POST);
 
-      return_json(['callback' => 'window.location = site_path + "/org/' . $organization['slug'] . '/members"']);
+      return_json(['callback' => 'window.location.reload();']);
 
       break;
     default:

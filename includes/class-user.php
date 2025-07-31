@@ -25763,7 +25763,7 @@ public function org_get_members_count($org_id)
     $get_transactions = $db->query("
       SELECT org_transactions.*, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture
       FROM org_transactions
-      LEFT JOIN org_members ON org_transactions.target_user_id = org_members.id
+      LEFT JOIN org_members ON org_transactions.node_id = org_members.id
       LEFT JOIN users ON org_members.user_id = users.user_id
       WHERE org_members.organization_id = {$org_id}
       AND (
@@ -25820,7 +25820,7 @@ public function org_get_all_transactions($org_id)
     LEFT JOIN org_members AS from_member ON org_transactions.user_id = from_member.id
     LEFT JOIN users AS from_user ON from_member.user_id = from_user.user_id
 
-    LEFT JOIN org_members AS to_member ON org_transactions.target_user_id = to_member.id
+    LEFT JOIN org_members AS to_member ON org_transactions.node_id = to_member.id
     LEFT JOIN users AS to_user ON to_member.user_id = to_user.user_id
 
     WHERE (
@@ -25848,16 +25848,43 @@ public function org_get_all_transactions($org_id)
    * org_set_transaction
    * 
    * @param integer $user_id
-   * @param integer $target_user_id
+   * @param integer $node_id
    * @param string $node_type
    * @param integer $amount
    * @param string $type
    * @return void
    */
-  public function org_set_transaction($user_id, $target_user_id, $node_type, $amount, $type)
+  public function org_set_transaction($user_id, $node_id, $node_type, $amount, $type)
   {
     global $db, $system, $date;
-    $db->query(sprintf("INSERT INTO org_transactions (user_id, target_user_id, node_type, amount, type) VALUES (%s, %s, %s, %s, %s)", secure($user_id, 'int'), secure($target_user_id, 'int'), secure($node_type), secure($amount), secure($type)));
+    $db->query(sprintf("INSERT INTO org_transactions (user_id, node_id, node_type, amount, type) VALUES (%s, %s, %s, %s, %s)", secure($user_id, 'int'), secure($node_id, 'int'), secure($node_type), secure($amount), secure($type)));
+  }
+
+  /**
+   * org_get_bill 
+   *
+   * @param integer $org_id
+   * @param integer $bill_id
+   * @return array
+   */
+  public function org_get_bill($org_id, $bill_id)
+  {
+    global $db;
+
+    $bills = [];
+
+    $org_id = secure($org_id, 'int');
+    $bill_id = secure($bill_id, 'int');
+
+    $get_bill = $db->query("
+      SELECT *
+      FROM org_bills
+      WHERE org_bills.organization_id = {$org_id}
+      AND org_bills.id = {$bill_id}
+      LIMIT 1
+    ");
+
+    return $get_bill->fetch_assoc(); 
   }
 
   /**
@@ -26007,6 +26034,99 @@ public function org_get_all_transactions($org_id)
 
       if ($db->error) {
         throw new Exception("Failed to create org_bills: " . $db->error);
+      }
+
+      $db->query("COMMIT");
+    } catch (Exception $e) {
+      $db->query("ROLLBACK");
+      throw $e;
+    }
+  }
+
+  /**
+   * org_update_bill ✅
+   * 
+   * @param number $org_id
+   * @param number $bill_id
+   * @param array $args
+   * @return void 
+   */
+  public function org_update_bill($org_id, $bill_id, $args)
+  {
+    global $db;
+
+    $organization = $this->get_org($org_id);
+    if (empty($organization)) {
+        throw new ValidationException(__("Organization not found"));
+    } 
+
+    if (!$this->org_is_member($organization['id'])) {
+        throw new ValidationException(__("You are not a member of this organization"));
+    }
+
+    $bill = $this->org_get_bill($org_id, $bill_id);
+    if (empty($bill)) {
+        throw new ValidationException(__("Bill not found"));
+    } 
+
+    $connection = $this->org_get_connection($organization['id']);
+
+    // valid inputs
+    /* check bill amount */
+    if (!isset($args['amount']) || !is_numeric($args['amount'])) {
+      throw new ValidationException(__("Please insert a valid VA number"));
+    }
+    /* check bill due date */
+    if (is_empty($args['due_date'])) {
+      throw new ValidationException(__("Add due date for this bill"));
+    }
+    if (strtotime($args['due_date']) < time()) {
+      throw new ValidationException(__("Due date must be after today"));
+    }
+    /* check bill description */
+    if (is_empty($args['description'])) {
+      throw new ValidationException(__("Please add a description to this bill"));
+    }
+    if (strlen($args['description']) < 4) {
+      throw new ValidationException(__("Minimum bill description is 4 characters"));
+    }
+    if (strlen($args['description']) > 1000) {
+      throw new ValidationException(__("Maximum bill description is 1000 characters"));
+    }
+
+    // get member 
+    $target_member = $this->org_get_member_with_org($organization['id'], $bill['user_id']);
+    if (empty($target_member)) {
+        throw new ValidationException(__("This member are not of this organization"));
+    }
+
+    // permission check
+    if (!in_array($connection, ['owner', 'admin', 'staff'])) {
+      throw new ValidationException(__("You don't have enough privilege to do this action"));
+    }
+    if ($target_member['user_id'] == $this->_data['user_id'] && !in_array($connection, ['owner'])) {
+      throw new ValidationException(__("You are not allowed modify your own bills"));
+    }
+    if (!in_array($target_member['role'], ['account', 'sub-account'])) {
+      throw new ValidationException(__("Only accounts and sub-accounts are allowed to own bills"));
+    }
+
+    // processing
+    $db->query("START TRANSACTION");
+
+    try {
+      $db->query(sprintf(
+        "UPDATE org_bills SET amount = %s, description = %s, due_date = %s, status = %s WHERE organization_id = %s AND id = %s",
+        secure($args['amount']),
+        secure($args['description']),
+        secure($args['due_date']),
+        secure($args['status']),
+        secure($org_id, 'int'),
+        secure($bill_id, 'int'),
+      ));
+
+      if ($db->error) {
+        throw new Exception("Failed to update org_bills: " . $db->error);
       }
 
       $db->query("COMMIT");

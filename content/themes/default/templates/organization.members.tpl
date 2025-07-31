@@ -270,7 +270,7 @@
     <div class="tab-pane" id="bills">
       <div class="mb20">
         <div style="margin-left: auto; width: fit-content;">
-          <button class="btn btn-md btn-primary d-none d-lg-block" data-toggle="modal" data-url="organizations/add.php?org_id={$organization['id']}&user_id={$data['user_id']}&type=bill">
+          <button class="btn btn-md btn-primary" data-toggle="modal" data-url="organizations/add.php?org_id={$organization['id']}&user_id={$data['user_id']}&type=bill">
             <i class="fa fa-plus-circle mr5"></i>{__("Add")}
           </button>
         </div>

@@ -25761,22 +25761,53 @@ public function org_get_members_count($org_id)
     $user_id = secure($this->_data['user_id'], 'int');
 
     $get_transactions = $db->query("
-      SELECT org_transactions.*, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture
+      SELECT 
+      org_transactions.*,
+
+      -- Member transaction details
+      m_user.user_name AS member_user_name,
+      m_user.user_firstname AS member_firstname,
+      m_user.user_lastname AS member_lastname,
+      m_user.user_gender AS member_gender,
+      m_user.user_picture AS member_picture,
+
+      -- Bill transaction details
+      org_bills.description AS bill_description,
+      org_bills.amount AS bill_amount,
+      org_bills.status AS bill_status
+
       FROM org_transactions
-      LEFT JOIN org_members ON org_transactions.node_id = org_members.id
-      LEFT JOIN users ON org_members.user_id = users.user_id
-      WHERE org_members.organization_id = {$org_id}
-      AND (
-      org_transactions.user_id IN (
+
+      -- Join if node_type = 'member'
+      LEFT JOIN org_members AS m_node 
+      ON org_transactions.node_type = 'member' 
+      AND org_transactions.node_id = m_node.id
+      LEFT JOIN users AS m_user 
+      ON m_node.user_id = m_user.user_id
+
+      -- Join if node_type = 'bill'
+      LEFT JOIN org_bills 
+      ON org_transactions.node_type = 'bill' 
+      AND org_transactions.node_id = org_bills.id
+
+      -- Only show transactions from members in this org
+      WHERE (
+      (org_transactions.node_type = 'member' AND m_node.organization_id = {$org_id})
+      OR
+      (org_transactions.node_type = 'bill' AND org_bills.organization_id = {$org_id})
+      )
+
+      -- Only for current user’s org_membership
+      AND org_transactions.user_id IN (
       SELECT id FROM org_members WHERE user_id = {$user_id}
       )
-      )
+
       ORDER BY org_transactions.id DESC
       ");
 
     if ($get_transactions->num_rows > 0) {
       while ($transaction = $get_transactions->fetch_assoc()) {
-        $transaction['user_picture'] = get_picture($transaction['user_picture'], $transaction['user_gender']);
+        $transaction['user_picture'] = get_picture($transaction['member_picture'], $transaction['member_gender']);
         $transactions[] = $transaction;
       }
     }
@@ -25949,9 +25980,10 @@ public function org_get_all_transactions($org_id)
    *
    * @param integer $org_id
    * @param integer $user_id
+   * @param array $filters
    * @return array
    */
-  public function org_get_bills_by_user($org_id, $user_id)
+  public function org_get_bills_by_user($org_id, $user_id, $filters)
   {
     global $db;
     $bills = [];
@@ -25959,22 +25991,28 @@ public function org_get_all_transactions($org_id)
     $org_id = secure($org_id, 'int');
     $user_id = secure($user_id, 'int');
 
+    if (isset($filters['unpaid'])) {
+      $filtersClause = "AND org_bills.status != 'paid'";
+    }
+
     $get_bills = $db->query("
-      SELECT *
+      SELECT org_bills.*
       FROM org_bills
       LEFT JOIN org_members on org_bills.user_id = org_members.id
       WHERE org_bills.organization_id = {$org_id}
-      WHERE org_members.user_id = {$user_id}
+      AND org_members.user_id = {$user_id}
+      {$filtersClause}
       ORDER BY org_bills.due_date DESC
     ");
 
     if ($get_bills->num_rows > 0) {
       while ($bill = $get_bills->fetch_assoc()) {
+        $bill['paid'] = $this->org_get_bill_total_paid($bill['id'], $bill['user_id']);
         $bills[] = $bill;
       }
     }
 
-    return bills;
+    return $bills;
   }
 
   /**
@@ -26158,6 +26196,148 @@ public function org_get_all_transactions($org_id)
       $db->query("ROLLBACK");
       throw $e;
     }
+  }
+
+  public function org_get_bill_total_paid($bill_id, $member_id)
+  {
+    global $db;
+
+    $total_paid = 0;
+
+    $bill_id = secure($bill_id);
+    $member_id = secure($member_id);
+
+    $get_paid = $db->query("
+      SELECT SUM(amount) AS total 
+      FROM org_transactions 
+      WHERE node_id = {$bill_id} 
+      AND node_type = 'bill' 
+      AND user_id = {$member_id} 
+      AND type = 'out'
+      ");
+
+    if ($get_paid && $row = $get_paid->fetch_assoc()) {
+      $total_paid = (float) $row['total'];
+    }
+
+    return $total_paid;
+  }
+
+  /**
+   * org_pay_bill ✅
+   * 
+   * @param array $args
+   * @return string
+   */
+  public function org_pay_bill($args)
+  {
+    global $db, $system;
+
+    /* validate amount */
+    if (is_empty($args['amount']) || !is_numeric($args['amount']) || $args['amount'] <= 0) {
+      throw new Exception(__("You must enter valid amount of money"));
+    }
+    if (!isset($args['bill_id']) || !is_numeric($args['bill_id'])) {
+      throw new ValidationException(__("Invalid bill ID"));
+    }
+
+    $bill_id = secure($args['bill_id'], 'int');
+    $org_id = secure($args['org_id'], 'int');
+    $amount = $args['amount'];
+
+    // Fetch the bill
+    $bill = $this->org_get_bill_with_org($args['org_id'], $args['bill_id']);
+    if (!$bill) {
+      throw new ValidationException(__("Bill not found"));
+    }
+
+    // Check bill status
+    if ($bill['status'] === 'paid') {
+      throw new ValidationException(__("This bill is already paid"));
+    }
+
+    $member = $this->org_get_member_by_user($bill['organization_id'], $this->_data['user_id']);
+    if (empty($member)) {
+      throw new ValidationException(__("You are not a member of this organization"));
+    }
+
+    // Ensure user is the owner of the bill
+    if ($member['id'] != (int)$bill['user_id']) {
+      throw new ValidationException(__("This bill is not assigned to you"));
+    }
+
+    // Get organization info and its VA owner member
+    $organization = $this->get_org($bill['organization_id']);
+    if (empty($organization)) {
+      throw new ValidationException(__("Organization not found"));
+    }
+
+    $org_owner_member = $this->org_get_member_by_user($organization['id'], $organization['created_by']);
+    if (empty($org_owner_member)) {
+      throw new ValidationException(__("Organization VA account not found"));
+    }
+
+    /* check viewer balance */
+    if ($member['balance'] < $amount) {
+      throw new Exception(__("There is no enough credit in your account"));
+    }
+
+    $total_paid = $this->org_get_bill_total_paid($bill['id'], $member['id']);
+
+    if ($total_paid + $amount > $bill['amount']) {
+      throw new Exception(__("You can't pay more than the bill amount"));
+    }
+
+    // Start transaction
+    $db->query("START TRANSACTION");
+
+    try {
+      // Deduct from user's VA balance
+      $db->query(sprintf(
+        'UPDATE org_virtual_accounts 
+        SET balance = IF(balance-%1$s<=0,0,balance-%1$s) 
+        WHERE va_number = %2$s',
+        secure($amount, 'int'),
+        secure($member['va_number'], 'int')
+      ));
+
+      $db->query(sprintf(
+        "UPDATE org_virtual_accounts 
+        SET balance = balance + %1\$s 
+        WHERE user_id = %2\$s",
+        secure($amount, 'int'),
+        secure($org_owner_member['id'], 'int')
+      ));
+
+      // Update bill status
+      if ($total_paid + $amount >= $bill['amount']) {
+        $db->query(sprintf(
+          "UPDATE org_bills 
+          SET status = 'paid' 
+          WHERE id = %s",
+          $bill_id
+        ));
+      }
+
+      // Log transaction
+      $this->org_set_transaction(
+        $member['id'],            // user_id
+        $bill['id'],
+        'bill',                    // node_type
+        $amount,
+        'out'
+      );
+
+      // Commit
+      $db->query("COMMIT");
+
+      $_SESSION['org_bill_pay_amount'] = $amount;
+
+    } catch (Exception $e) {
+      $db->query("ROLLBACK");
+      throw $e;
+    }
+
   }
 }
 

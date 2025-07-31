@@ -33,11 +33,6 @@
                 </a>
               </li>
 
-              <li {if $view == "bills"}class="active" {/if}>
-                <a href="{$org_url}/bills">
-                  <i class="fa fa-credit-card fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Bills")}
-                </a>
-              </li>
 
               <li {if $view == "all-transactions"}class="active" {/if}>
                 <a href="{$org_url}/all-transactions">
@@ -46,6 +41,14 @@
               </li>
             {/if}
 
+            {if in_array($connection, ['account', 'sub-account'])}
+              <div class="divider mtb5"></div>
+              <li {if $view == "bills"}class="active" {/if}>
+                <a href="{$org_url}/bills">
+                  <i class="fa fa-credit-card fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Bills")}
+                </a>
+              </li>
+            {/if}
           </ul>
         </div>
       </div>

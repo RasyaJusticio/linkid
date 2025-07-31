@@ -115,14 +115,19 @@
                 <span class="badge rounded-pill badge-lg bg-success mr10">{__("From")}</span>
                 {/if}
                 {if $transaction['node_type'] == "member"}
-                <a target="_blank" href="{$org_url}/members/find?query={$transaction['user_name']}">
+                <a target="_blank" href="{$org_url}/members/find?query={$transaction['member_user_name']}">
                   <img class="tbl-image" src="{$transaction['user_picture']}" style="float: none;">
                   {if $system['show_usernames_enabled']}
-                  {$transaction['user_name']}
+                  {$transaction['member_user_name']}
                   {else}
-                  {$transaction['user_firstname']} {$transaction['user_lastname']}
+                  {$transaction['member_firstname']} {$transaction['member_lastname']}
                   {/if}
                 </a>
+                {elseif $transaction['node_type'] == "bill"}
+                  Bill of 
+                  {print_money($transaction['bill_amount']|format_number)}
+                  -
+                  {$transaction['bill_description']}
                 {/if}
               </td>
               <td>

@@ -31,6 +31,19 @@ try {
         // return
         return_json(['callback' => 'window.location.reload()']);
         break;
+
+    case 'pay_bill':
+        // valid inputs
+        if (!isset($_POST['amount']) || !is_numeric($_POST['amount']) || $_POST['amount'] < 0) {
+            throw new Exception(__("Enter valid amount of money"));
+        }
+
+        // process
+        $user->org_pay_bill($_POST);
+
+        // return
+        return_json(['callback' => 'window.location.reload()']);
+        break;
     default:
         _error(400);
         break;

@@ -214,6 +214,15 @@ try {
           // page header
           page_header($organization['name'] . ' &rsaquo; ' . __("Bills") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
 
+          $bills = $user->org_get_bills_by_user($organization['id'], $user->_data['user_id'], ['unpaid' => true]);
+          
+          // assign variables
+          $smarty->assign('rows', $bills);
+          if (isset($_SESSION['org_bill_pay_amount'])) {
+            $smarty->assign('bill_pay_amount', $_SESSION['org_bill_pay_amount']);
+            unset($_SESSION['org_bill_pay_amount']);
+          }
+
           break;
       
         default:

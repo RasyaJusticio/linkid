@@ -2373,28 +2373,28 @@
         <div class="modal-header">
           <h6 class="modal-title">
             {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
-            {__("QR Pay")}
+            {__("qr pay")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
         </div>
-        <form onsubmit="openWalletQRConfirmation(event, { user_id: '{literal}{{user_id}}{/literal}', user_name: '{literal}{{user_name}}{/literal}', user_fullname: '{literal}{{user_fullname}}{/literal}', user_verified: '{literal}{{user_verified}}{/literal}', user_picture: '{literal}{{user_picture}}{/literal}' }, '#wallet-qr-send-confirm')">
+        <form onsubmit="openwalletqrconfirmation(event, { user_id: '{literal}{{user_id}}{/literal}', user_name: '{literal}{{user_name}}{/literal}', user_fullname: '{literal}{{user_fullname}}{/literal}', user_verified: '{literal}{{user_verified}}{/literal}', user_picture: '{literal}{{user_picture}}{/literal}' }, '#wallet-qr-send-confirm')">
           <div class="modal-body">
             {if $system['wallet_max_transfer'] != "0"}
               <div class="alert alert-info mb20">
                 <i class="fas fa-info-circle mr5"></i>
-                {__("The maximum amount you can transfer is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer']|format_number)}</span>
+                {__("the maximum amount you can transfer is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer']|format_number)}</span>
               </div>
             {/if}
             <div class="form-group">
-              <label class="form-label">{__("Amount")}</label>
+              <label class="form-label">{__("amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-idr" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
             <div class="form-group">
-              <label class="form-label" for="send_to">{__("Send To")}</label>
+              <label class="form-label" for="send_to">{__("send to")}</label>
               <div class="data-container small user-target-container">
                 <div class="data-avatar">
                     <img class="data-avatar" src="{literal}{{user_picture}}{/literal}" alt="" >
@@ -2416,7 +2416,7 @@
             <!-- error -->
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">{__("Confirm")}</button>
+            <button type="submit" class="btn btn-primary">{__("confirm")}</button>
           </div>
         </form>
       </script>
@@ -2486,6 +2486,43 @@
           })();
         </script>
       </script>
+
+      <!-- Organization Bills -->
+      <script id="org-bill-pay" type="text/template">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
+            {__("Pay Bill")}
+          </h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="js_ajax-forms" data-url="payments/organizations.php?do=pay_bill">
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label">{__("Amount")}</label>
+              <div class="input-money {$system['system_currency_dir']}">
+                <span>{$system['system_currency_symbol']}</span>
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount" value="{literal}{{bill_amount}}{/literal}">
+              </div>
+              {include file="__money_amounts.tpl"}
+            </div>
+
+            <!-- hidden -->
+            <input type="hidden" name="org_id" value="{literal}{{org_id}}{/literal}">
+            <input type="hidden" name="bill_id" value="{literal}{{bill_id}}{/literal}">
+            <!-- hidden -->
+
+            <!-- error -->
+            <div class="alert alert-danger mb0 mt10 x-hidden"></div>
+            <!-- error -->
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{__("Pay")}</button>
+          </div>
+        </form>
+      </script>
+
+      <!-- Organization Bills -->
     {/if}
     <!-- Organization -->
 

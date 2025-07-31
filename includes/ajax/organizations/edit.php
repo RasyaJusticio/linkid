@@ -42,7 +42,7 @@ try {
       $bill = $user->org_get_bill_with_org($organization['id'], $_REQUEST['bill_id']);
 
       if (empty($bill)) {
-        throw new ValidationException(__("Bill not found"));
+        throw new ValidationException(__("Bill not found") . $_REQUEST['bill_id']);
       }
 
       /* assign variables */

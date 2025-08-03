@@ -19,17 +19,28 @@ user_access(true);
 try {
   $organization = $user->get_org_by_slug($_POST['org_username']);
   if (empty($organization)) {
-      throw new ValidationException(__("Organization not found"));
+    $organization = $user->get_org($_POST['org_id']);
+  } 
+  if (empty($organization)) {
+    throw new ValidationException(__("Organization not found"));
   } 
 
   if (!$user->org_is_member($organization['id'])) {
-      throw new ValidationException(__("You are not a member of this organization"));
+    throw new ValidationException(__("You are not a member of this organization"));
   }
 
   $member = $user->org_get_member_by_user($organization['id']);
   $org_url = '/org/' . $organization['slug'];
 
   switch ($_GET['edit']) {
+    case 'organization-info':
+      // change settings
+      $user->org_settings($organization['id'], $_GET['edit'], $_POST);
+
+      // return
+      return_json(['callback' => 'window.location = site_path + "' . $org_url . '/settings"']);
+      break;
+
     case 'transfer-pin':
       // valid inputs
       if (!is_empty($member['transfer_pin'])) {

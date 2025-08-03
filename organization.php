@@ -79,7 +79,12 @@ try {
       
     case 'dashboard':
       // page header
-      page_header($organization['name'] . ' &rsaquo; ' . __("Dashboard") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
+      page_header($organization['name'] . ' &rsaquo; ' . __("Dashboard") . ' | ' . __($system['system_title']));
+      break;
+
+    case 'settings':
+      // page header
+      page_header($organization['name'] . ' &rsaquo; ' . __("Settings") . ' | ' . __($system['system_title']));
       break;
 
     case 'members':

@@ -25,6 +25,12 @@
                 </a>
               </li>
 
+              <li {if $view == "settings"}class="active" {/if}>
+                <a href="{$org_url}/settings">
+                  <i class="fa fa-gear fa-lg fa-fw mr10" style="color: #5e72e4"></i>{__("Settings")}
+                </a>
+              </li>
+
               <div class="divider mtb5"></div>
 
               <li {if $view == "members"}class="active" {/if}>
@@ -71,6 +77,8 @@
           {/if}
         {elseif $view == "dashboard"}
           {include file='organization.dashboard.tpl'}
+        {elseif $view == "settings"}
+          {include file='organization.settings.tpl'}
         {elseif $view == "members"}
           {include file='organization.members.tpl'}
         {elseif $view == "bills"}

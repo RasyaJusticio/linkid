@@ -2619,6 +2619,24 @@ $(function () {
     }
   });
 
+  // sluggify
+  $('body').on('input', '.slugify-source', function () {
+    var $this = $(this);
+    const slugifyId = $this.data('slug-id');
+    const slugifyOutput = $this
+      .closest('form')
+      .find(`.slugify-output[data-slug-id="${slugifyId}"]`);
+
+    if (slugifyOutput) {
+      slugifyOutput.val(slugify($this.val(), {
+        lower: true,
+        remove: /[^a-zA-Z0-9. ]/g 
+      }));
+    } else {
+      console.error("`slugify` method is not found, please import the script first!");
+    }
+  });
+
   // keypad
   $('body').on('click', '.keypad-buttons button', function () {
     var $button = $(this);

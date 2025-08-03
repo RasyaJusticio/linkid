@@ -25652,6 +25652,79 @@ public function org_get_members_count($org_id)
 
     return true;
   }
+
+  /**
+   * org_settings
+   * 
+   * @param number $org_id
+   * @param string $edit
+   * @param array $args
+   * @return void
+   */
+  public function org_settings($org_id, $edit, $args)
+  {
+    global $db, $system;
+
+    $organization = $this->get_org($org_id);
+
+    if (empty($organization)) {
+      throw new ValidationException(__("Organization not found"));
+    } 
+
+    if (!$this->org_is_member($organization['id'])) {
+      throw new ValidationException(__("You are not a member of this organization"));
+    }
+
+    $connection = $this->org_get_connection($organization['id']);
+
+    switch ($edit) {
+      case 'organization-info':
+        /* validate all fields */
+        /* validate name */
+        if (trim($args['name']) != trim($organization['name'])) {
+          if (is_empty($args['name'])) {
+            throw new Exception(__("You must enter a name for your organization"));
+          }
+          if (strlen($args['name']) < 3) {
+            throw new Exception(__("Organization name must be at least 3 characters long. Please try another"));
+          }
+        }
+        /* validate slug */
+        if (trim($args['slug']) != trim($organization['slug'])) {
+            if (is_empty($args['slug'])) {
+              throw new Exception(__("You must enter a username for your organization"));
+            }
+            if (!valid_username($args['slug'], '.-')) {
+              throw new Exception(__("Please enter a valid username (a-z0-9.-) with minimum 3 characters long"));
+            }
+            if ($this->reserved_username($args['slug'])) {
+              throw new Exception(__("You can't use") . " " . $args['slug'] . " " . __("as username"));
+            }
+            if (!$this->check_org_by_slug($args['slug'])) {
+              throw new Exception(__("Sorry, it looks like this username") . " " . $args['slug'] . " " . __("belongs to an existing organization"));
+            }
+        }
+        /* validate image */
+        if (trim($args['picture'] ?? "") != trim($organization['picture'] ?? "")) {
+          if (is_empty($args['name'])) {
+            throw new Exception(__("You must enter a picture for your organization"));
+          }
+        }
+
+        /* check permission */
+        if (!in_array($connection, ['owner', 'admin'])) {
+          throw new ValidationException(__("You don't have enough privilege to do this action"));
+        }
+
+        /* update organization */
+        $db->query(sprintf("UPDATE org_organizations SET name = %s, slug = %s, picture = %s WHERE id = %s", secure($args['name']), secure($args['slug']), secure($args['picture']), secure($org_id, 'int')));
+
+        break;
+    default:
+      _error(400);
+      break;
+    }
+  }
   
   /**
    * org_user_settings
@@ -25668,7 +25741,7 @@ public function org_get_members_count($org_id)
     $member = $this->org_get_member($member_id);
 
     if ($member['user_id'] != $this->_data['user_id']) {
-        throw new ValidationException(__("You can't edit a member that is not assigned to you"));
+      throw new ValidationException(__("You can't edit a member that is not assigned to you"));
     }
 
     switch ($edit) {
@@ -25697,6 +25770,9 @@ public function org_get_members_count($org_id)
         /* update user */
         $db->query(sprintf("UPDATE org_virtual_accounts SET transfer_pin = %s WHERE user_id = %s AND organization_id = %s", secure(_password_hash($args['new'])), secure($member['id'], 'int'), secure($member['organization_id'], 'int')));
         break;
+    default:
+      _error(400);
+      break;
     }
   }
 

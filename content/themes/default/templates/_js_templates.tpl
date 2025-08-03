@@ -2373,28 +2373,28 @@
         <div class="modal-header">
           <h6 class="modal-title">
             {include file='__svg_icons.tpl' icon="money_send" class="mr10" width="24px" height="24px"}
-            {__("qr pay")}
+            {__("QR Pay")}
           </h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
         </div>
-        <form onsubmit="openwalletqrconfirmation(event, { user_id: '{literal}{{user_id}}{/literal}', user_name: '{literal}{{user_name}}{/literal}', user_fullname: '{literal}{{user_fullname}}{/literal}', user_verified: '{literal}{{user_verified}}{/literal}', user_picture: '{literal}{{user_picture}}{/literal}' }, '#wallet-qr-send-confirm')">
+        <form onsubmit="openWalletQRConfirmation(event, { user_id: '{literal}{{user_id}}{/literal}', user_name: '{literal}{{user_name}}{/literal}', user_fullname: '{literal}{{user_fullname}}{/literal}', user_verified: '{literal}{{user_verified}}{/literal}', user_picture: '{literal}{{user_picture}}{/literal}' }, '#wallet-qr-send-confirm')">
           <div class="modal-body">
             {if $system['wallet_max_transfer'] != "0"}
               <div class="alert alert-info mb20">
                 <i class="fas fa-info-circle mr5"></i>
-                {__("the maximum amount you can transfer is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer']|format_number)}</span>
+                {__("The maximum amount you can transfer is")} <span class="badge rounded-pill badge-lg bg-light text-primary">{print_money($system['wallet_max_transfer']|format_number)}</span>
               </div>
             {/if}
             <div class="form-group">
-              <label class="form-label">{__("amount")}</label>
+              <label class="form-label">{__("Amount")}</label>
               <div class="input-money {$system['system_currency_dir']}">
                 <span>{$system['system_currency_symbol']}</span>
-                <input class="form-control input_money-idr" type="text" placeholder="0" min="1.00" max="1000" name="amount">
+                <input class="form-control input_money-IDR" type="text" placeholder="0" min="1.00" max="1000" name="amount">
               </div>
               {include file="__money_amounts.tpl"}
             </div>
             <div class="form-group">
-              <label class="form-label" for="send_to">{__("send to")}</label>
+              <label class="form-label" for="send_to">{__("Send To")}</label>
               <div class="data-container small user-target-container">
                 <div class="data-avatar">
                     <img class="data-avatar" src="{literal}{{user_picture}}{/literal}" alt="" >
@@ -2416,7 +2416,7 @@
             <!-- error -->
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">{__("confirm")}</button>
+            <button type="submit" class="btn btn-primary">{__("Confirm")}</button>
           </div>
         </form>
       </script>

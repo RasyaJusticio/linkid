@@ -24886,6 +24886,36 @@ class User
   /* ------------------------------- */
 
   /**
+   * get_orgs ✅
+   * 
+   * @param number $user_id
+   * @return array|null
+   */
+  public function get_orgs($user_id)
+  {
+    global $db;
+
+    $get_orgs = $db->query(sprintf("SELECT 
+      org.*, member.role
+      FROM org_organizations org
+      LEFT JOIN org_members member ON member.organization_id = org.id
+      WHERE member.user_id = %s",
+      secure($user_id, 'int')
+    ));
+
+    $orgs = [];
+
+    while ($row = $get_orgs->fetch_assoc()) {
+      $row['connection'] = $row['role'];
+      $orgs[] = $row;
+    }
+
+
+
+    return $orgs;
+  }
+
+  /**
    * get_org ✅
    * 
    * @param number $id

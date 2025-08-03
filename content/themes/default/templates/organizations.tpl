@@ -53,18 +53,27 @@
         {if $organizations}
         <ul class="row">
           {foreach $organizations as $_organization}
-          {include file='__feeds_group.tpl' _tpl='box'}
+          <li class="col-md-6 col-lg-3">
+            <div class="ui-box">
+              <div class="img">
+                <a href="{$system['system_url']}/org/{$_organization['slug']}">
+                  <img alt="{$_organization['name']}" src="{$_organization['picture']}" />
+                </a>
+              </div>
+
+              <div class="mt10">
+                <a class="h6" href="{$system['system_url']}/org/{$_organization['slug']}">{$_organization['name']|truncate:30}</a>
+                <div>{$_organization['connection']|format_org_role}</div>
+              </div>
+              <div class="mt10">
+                <button type="button" class="btn btn-sm btn-success js_leave-org-plan" data-id="{$_group['id']}">
+                  <i class="fa fa-check mr5"></i> {__("Joined")}
+                </button>
+              </div>
+            </div>
+          </li>
           {/foreach}
         </ul>
-
-        <!-- see-more -->
-        {if count($groups) >= $system['groups_results']}
-        <div class="alert alert-post see-more js_see-more" data-get="{$get}" {if $view == "category"}data-id="{$current_category['category_id']}" {/if} {if $view == "joined" || $view == "manage"}data-uid="{$user->_data['user_id']}" {/if} data-country="{if $selected_country}{$selected_country['country_id']}{else}all{/if}">
-          <span>{__("See More")}</span>
-          <div class="loader loader_small x-hidden"></div>
-        </div>
-        {/if}
-        <!-- see-more -->
         {else}
         {include file='_no_data.tpl'}
         {/if}

@@ -27,6 +27,12 @@ try {
         redirect('/');
       }
 
+      // get data
+      $orgs = $user->get_orgs($user->_data['user_id']);
+
+      /* assign variables */
+      $smarty->assign('organizations', $orgs);
+
       // page header
       page_header(__("Organizations") . ' | ' . __($system['system_title']), __($system['system_description_groups']));
       break;

@@ -57,7 +57,7 @@
             <div class="ui-box">
               <div class="img">
                 <a href="{$system['system_url']}/org/{$_organization['slug']}">
-                  <img alt="{$_organization['name']}" src="{$_organization['picture']}" />
+                  <img alt="{$_organization['name']}" src="{$system['system_uploads']}/{$_organization['picture']}" />
                 </a>
               </div>
 
